@@ -543,15 +543,15 @@
     </div>
 
     <script>
-        // --- 1. FIREBASE CONFIGURATION ---
-        // REPLACE THE OBJECT BELOW WITH YOUR FIREBASE KEYS FROM PASSO 2
+        // --- 1. FIREBASE CONFIGURATION (COMMITTED CONFIG) ---
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyBHNpWtZ0l4WpFlGHkTtakBuVK-iHvyIgw",
+            authDomain: "bcg-hub-1a904.firebaseapp.com",
+            projectId: "bcg-hub-1a904",
+            storageBucket: "bcg-hub-1a904.firebasestorage.app",
+            messagingSenderId: "81367645018",
+            appId: "1:81367645018:web:a91a17145047cfc4b7d163",
+            measurementId: "G-ETCZPR7CBJ"
         };
 
         // Initialize Firebase
@@ -566,7 +566,7 @@
 
         let currentUser = JSON.parse(localStorage.getItem('bcg_cloud_user')) || null;
 
-        // --- 2. REALTIME LISTENERS (TEMPO REAL) ---
+        // --- 2. REALTIME LISTENERS ---
         
         // Listen to Announcement
         db.collection('settings').doc('announcement').onSnapshot(doc => {
@@ -685,7 +685,6 @@
             const u = document.getElementById('loginUser').value.trim();
             const p = document.getElementById('loginPass').value.trim();
 
-            // Admin Login Check
             if (u.toLowerCase() === ADMIN_USER && p === ADMIN_PASS) {
                 currentUser = { username: ADMIN_USER, isAdmin: true };
                 localStorage.setItem('bcg_cloud_user', JSON.stringify(currentUser));
@@ -695,7 +694,6 @@
                 return;
             }
 
-            // Regular User Cloud Check
             try {
                 const userDoc = await db.collection('users').doc(u.toLowerCase()).get();
                 if (userDoc.exists && userDoc.data().password === p) {
@@ -744,8 +742,6 @@
         }
 
         // --- 6. ADMIN CONTROL ACTIONS ---
-        
-        // Update Announcement
         document.getElementById('adminAnnounceForm').onsubmit = async (e) => {
             e.preventDefault();
             const text = document.getElementById('adminAnnounceText').value;
@@ -759,7 +755,6 @@
             }
         };
 
-        // Upload Episode MP4 to Firebase Storage & Save to Firestore
         document.getElementById('adminEpisodeForm').onsubmit = async function(e) {
             e.preventDefault();
             const title = document.getElementById('epTitle').value;
@@ -781,14 +776,12 @@
             let finalVideoUrl = videoUrlInput;
 
             try {
-                // If user selected an MP4 file from gallery
                 if (videoFile) {
                     const fileRef = storage.ref(`episodes/${Date.now()}_${videoFile.name}`);
                     await fileRef.put(videoFile);
                     finalVideoUrl = await fileRef.getDownloadURL();
                 }
 
-                // Save Episode Metadata to Firestore
                 await db.collection('episodes').add({
                     title: title,
                     tag: tag,
@@ -808,7 +801,6 @@
             }
         };
 
-        // Post Leak to Firebase
         document.getElementById('adminLeakForm').onsubmit = async function(e) {
             e.preventDefault();
             const title = document.getElementById('leakTitle').value;
@@ -847,11 +839,9 @@
             }
         };
 
-        // Modal Helpers
         function openModal(id) { document.getElementById(id).classList.add('active'); }
         function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-        // Start
         renderNav();
     </script>
 </body>
