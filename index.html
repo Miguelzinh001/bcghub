@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noir Streaming </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0b0f0c;
+            --bg-card: #121914;
+            --bg-card-hover: #1a241d;
+            --accent-green: #00e652;
+            --accent-green-dark: #00b33c;
+            --text-main: #ffffff;
+            --text-muted: #9aa89e;
+            --border-color: #1f2b22;
+            --danger: #ff4d4d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            padding-bottom: 75px;
+            min-height: 100vh;
+        }
+
+        /* Top Header Navigation */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(11, 15, 12, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .brand-logo i {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-icon {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .btn-icon:hover {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .badge-count {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: var(--accent-green);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: bold;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Container & Layout */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Banner Card */
+        .hero-banner {
+            background: linear-gradient(135deg, #142117 0%, #0c140e 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner h2 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .hero-banner p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .btn-green {
+            background-color: var(--accent-green);
+            color: #000;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            transition: background 0.2s, transform 0.1s;
+            text-decoration: none;
+        }
+
+        .btn-green:hover {
+            background-color: var(--accent-green-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Countdown Widget */
+        .countdown-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .countdown-header {
+            color: var(--accent-green);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            background: #090d0a;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(0,230,82,0.15);
+        }
+
+        .time-box .num {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .time-box .unit {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Section Titles */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 24px 0 14px 0;
+        }
+
+        .section-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* Horizontal Scroll Lists */
+        .horizontal-scroll {
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: thin;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        /* Media / Episode Cards */
+        .ep-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            width: 220px;
+            flex-shrink: 0;
+            transition: border-color 0.2s, transform 0.2s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .ep-card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-3px);
+        }
+
+        .ep-thumb {
+            width: 100%;
+            height: 125px;
+            background-color: #1a221c;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .badge-recent {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: var(--accent-green);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .btn-bookmark {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .progress-bar-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--accent-green);
+        }
+
+        .time-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .ep-info {
+            padding: 12px;
+        }
+
+        .ep-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ep-num {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Vertical Episode List */
+        .ep-list-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .ep-row-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            padding: 10px;
+            gap: 12px;
+            align-items: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .ep-row-card:hover {
+            border-color: var(--accent-green);
+        }
+
+        .ep-row-thumb {
+            width: 110px;
+            height: 70px;
+            border-radius: 8px;
+            background-color: #1a221c;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .ep-row-details {
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .ep-row-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ep-row-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Tags de Áudio/Idioma */
+        .lang-tag {
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .tag-dub { background: #0088ff; color: #fff; }
+        .tag-sub { background: #ffaa00; color: #000; }
+
+        /* Filter Controls */
+        .controls-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .select-dark {
+            background-color: var(--bg-card);
+            color: #fff;
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+            flex-grow: 1;
+        }
+
+        .select-dark:focus {
+            border-color: var(--accent-green);
+        }
+
+        .search-input {
+            background-color: var(--bg-card);
+            color: #fff;
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            outline: none;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-green);
+        }
+
+        /* Watch Party Bar */
+        .watch-party-box {
+            background: linear-gradient(90deg, #132217 0%, #0f1a12 100%);
+            border: 1px solid var(--accent-green);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .watch-party-info h4 {
+            color: var(--accent-green);
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .watch-party-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .btn-small-outline {
+            background: transparent;
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .btn-small-outline:hover {
+            background: var(--accent-green);
+            color: #000;
+        }
+
+        /* Staff / Equipe Page */
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .staff-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .staff-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 16px;
+            object-fit: cover;
+            margin: 0 auto 12px auto;
+            border: 2px solid var(--accent-green);
+            background-color: #1a241d;
+        }
+
+        .staff-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .staff-handle {
+            color: var(--accent-green);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .staff-quote {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Admin & Settings Forms */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 12px;
+            border-radius: 10px;
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-green);
+        }
+
+        /* Bottom Mobile Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(11, 15, 12, 0.98);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.72rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 16.6667%;
+        }
+
+        .nav-item i {
+            font-size: 1.25rem;
+        }
+
+        .nav-item.active {
+            color: var(--accent-green);
+        }
+
+        /* Modals & Overlays */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            transition: background 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--bg-card);
+            border: none;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .video-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        video {
+            width: 100%;
+            display: block;
+            max-height: 350px;
+        }
+
+        /* Controles do Player Avançado */
+        .player-controls-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .player-controls-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-player-ctrl {
+            background: rgba(255,255,255,0.08);
+            border: none;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-player-ctrl:hover {
+            background: var(--accent-green);
+            color: #000;
+        }
+
+        .select-player {
+            background: rgba(255,255,255,0.08);
+            border: none;
+            color: #fff;
+            padding: 6px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .select-player option {
+            background: var(--bg-card);
+            color: #fff;
+        }
+
+        /* MODO CINEMA STYLES */
+        body.cinema-mode-active .top-nav,
+        body.cinema-mode-active .bottom-nav,
+        body.cinema-mode-active .container {
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .modal-overlay.cinema-mode {
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(15px);
+        }
+
+        .modal-overlay.cinema-mode .modal-box {
+            max-width: 900px;
+            background: #000;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 30px rgba(0, 230, 82, 0.2);
+        }
+
+        .modal-overlay.cinema-mode video {
+            max-height: 70vh;
+        }
+
+        .inbox-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .inbox-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-accept {
+            background: var(--accent-green);
+            color: #000;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .btn-decline {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .badge-admin {
+            background: #ffaa00;
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+        }
+
+        /* Live Chat in Watch Party Modal */
+        .chat-box {
+            background: #080c09;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            height: 150px;
+            overflow-y: auto;
+            padding: 10px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .chat-msg {
+            word-break: break-word;
+        }
+
+        .chat-msg strong {
+            color: var(--accent-green);
+        }
+
+        .chat-input-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-input-row input {
+            flex-grow: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            outline: none;
+        }
+    
+        /* ===== BCG/Miraculous Hub Upgrade ===== */
+        .admin-tabs{display:flex;gap:8px;overflow-x:auto;margin:0 0 14px;padding-bottom:4px}
+        .admin-tab{border:1px solid var(--border-color);background:var(--bg-card);color:#fff;padding:9px 12px;border-radius:9px;cursor:pointer;white-space:nowrap;font-weight:700}
+        .admin-tab.active{background:var(--accent-green);color:#000;border-color:var(--accent-green)}
+        .admin-tab-panel{display:none}.admin-tab-panel.active{display:block}
+        .notice-card,.poll-card,.profile-card,.status-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:16px;margin-bottom:12px}
+        .notice-card .notice-author,.poll-card .poll-author{font-size:.8rem;color:var(--accent-green);font-weight:800;margin-bottom:5px}
+        .notice-card .notice-text,.poll-question{font-size:1rem;line-height:1.45}
+        .poll-option{width:100%;margin-top:8px;text-align:left;background:#0c120e;border:1px solid var(--border-color);color:#fff;padding:11px;border-radius:10px;cursor:pointer;position:relative;overflow:hidden}
+        .poll-option:hover{border-color:var(--accent-green)}
+        .poll-option .poll-fill{position:absolute;inset:0 auto 0 0;background:rgba(0,230,82,.13);width:0;pointer-events:none}
+        .poll-option .poll-label{position:relative;z-index:1;display:flex;justify-content:space-between;gap:8px}
+        .poll-meta{margin-top:10px;color:var(--text-muted);font-size:.78rem}
+        .profile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+        .user-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:14px;cursor:pointer}
+        .user-card:hover{border-color:var(--accent-green)}
+        .avatar-lg{width:84px;height:84px;border-radius:50%;object-fit:cover;background:#182018;border:2px solid var(--accent-green);display:block;margin:0 auto 10px}
+        .avatar-sm{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#182018;border:1px solid var(--border-color)}
+        .user-card .user-name{font-weight:800;text-align:center}.status-line{display:flex;align-items:center;justify-content:center;gap:6px;color:var(--text-muted);font-size:.78rem;margin-top:4px}.status-dot{width:9px;height:9px;border-radius:50%;background:#777}.status-dot.online{background:#00e652;box-shadow:0 0 8px rgba(0,230,82,.65)}.status-dot.watching{background:#00a8ff}.status-dot.offline{background:#666}
+        .profile-hero{text-align:center;background:linear-gradient(135deg,#122018,#0b100d);border:1px solid var(--border-color);border-radius:18px;padding:20px;margin-bottom:14px}
+        .profile-quote{color:var(--text-muted);font-style:italic;line-height:1.5;margin:10px 0}.profile-instagram{display:inline-flex;align-items:center;gap:6px;color:var(--accent-green);text-decoration:none;font-weight:800}
+        .form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.small-note{font-size:.76rem;color:var(--text-muted);line-height:1.4}
+        .player-error{display:none;margin:10px 0;padding:10px;border-radius:9px;background:rgba(255,77,77,.12);border:1px solid rgba(255,77,77,.35);color:#ffb1b1;font-size:.82rem}.player-error.active{display:block}
+        .admin-media-status{display:none;margin-top:10px;padding:10px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--border-color);font-size:.82rem;color:var(--text-muted)} .admin-media-status.active{display:block}.admin-media-status.success{border-color:rgba(0,230,82,.45);color:#7dffa6}.admin-media-status.error{border-color:rgba(255,77,77,.45);color:#ffb1b1}
+        @media(max-width:520px){.form-row-2{grid-template-columns:1fr}.bottom-nav .nav-item{font-size:.62rem}.bottom-nav .nav-item i{font-size:1.05rem}}
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a href="#" class="brand-logo" onclick="switchPage('home')">
+            <i class="fa-solid fa-paw"></i>
+            <span>Noir Streaming</span>
+        </a>
+        <div class="nav-actions">
+            <button class="btn-icon" onclick="openInboxModal()" title="Caixa de Entrada / Convites">
+                <i class="fa-solid fa-bell"></i>
+                <span class="badge-count" id="inboxBadge">0</span>
+            </button>
+            <button class="btn-icon" onclick="switchPage('profile')" title="Conta / Perfil">
+                <i class="fa-solid fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <section id="page-home" class="page-section active">
+            <div class="hero-banner">
+                <h2 id="bannerTitle">Sexta e Sétima Temporada</h2>
+                <p id="bannerDesc">Todos os episódios atualizados com dublagem e legendas em Português. Acompanhe as novidades com a gente!</p>
+                <a href="#episodes" onclick="switchPage('episodes')" class="btn-green">
+                    <i class="fa-solid fa-play"></i> Assistir Agora
+                </a>
+            </div>
+
+            <div class="countdown-card">
+                <div class="countdown-header">
+                    <i class="fa-solid fa-clock"></i> Estreia em breve!
+                </div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Próxima estreia — 20 de novembro de 2026</div>
+                <div class="countdown-timer">
+                    <div class="time-box"><div class="num" id="cd-days">0</div><div class="unit">dias</div></div>
+                    <div class="time-box"><div class="num" id="cd-hours">0</div><div class="unit">horas</div></div>
+                    <div class="time-box"><div class="num" id="cd-mins">0</div><div class="unit">min</div></div>
+                    <div class="time-box"><div class="num" id="cd-secs">0</div><div class="unit">seg</div></div>
+                </div>
+            </div>
+
+            <div class="section-header"><h3><i class="fa-solid fa-bullhorn" style="color:var(--accent-green);margin-right:6px"></i> Anúncios</h3></div>
+            <div id="announcementsContainer"></div>
+
+            <div class="section-header"><h3><i class="fa-solid fa-square-poll-horizontal" style="color:var(--accent-green);margin-right:6px"></i> Votações</h3></div>
+            <div id="pollsContainer"></div>
+
+            <div class="section-header">
+                <h3><i class="fa-solid fa-rotate-left" style="color:var(--accent-green); margin-right:6px;"></i> Continuar a ver</h3>
+            </div>
+            <div class="horizontal-scroll" id="continueWatchingContainer"></div>
+
+            <div class="section-header">
+                <h3><i class="fa-solid fa-fire" style="color:var(--accent-green); margin-right:6px;"></i> Episódios mais recentes</h3>
+            </div>
+            <div class="horizontal-scroll" id="recentEpisodesContainer"></div>
+        </section>
+
+
+        <section id="page-episodes" class="page-section">
+            <h2 style="margin-bottom: 16px;">Catálogo de Episódios</h2>
+
+            <div class="watch-party-box">
+                <div class="watch-party-info">
+                    <h4><i class="fa-solid fa-users"></i> Ver Juntos (Watch Party)</h4>
+                    <p>Convide um amigo para assistir em tempo real com chat ao vivo!</p>
+                </div>
+                <button class="btn-small-outline" onclick="openCreateRoomModal()">Criar Sala</button>
+            </div>
+
+            <div class="controls-bar">
+                <select class="select-dark" id="seasonSelect" onchange="renderEpisodesList()">
+                    <option value="1">1ª Temporada</option>
+                    <option value="2">2ª Temporada</option>
+                    <option value="3">3ª Temporada</option>
+                    <option value="4">4ª Temporada</option>
+                    <option value="5">5ª Temporada</option>
+                    <option value="6" selected>6ª Temporada</option>
+                    <option value="7">7ª Temporada</option>
+                    <option value="specials">Especiais (Miraculous World)</option>
+                </select>
+
+                <select class="select-dark" id="langFilterSelect" onchange="renderEpisodesList()">
+                    <option value="all">Todos os Áudios</option>
+                    <option value="dub">Apenas Dublado (PT)</option>
+                    <option value="sub">Apenas Legendado</option>
+                </select>
+            </div>
+
+            <input type="text" id="epSearchInput" class="search-input" placeholder="🔍 Pesquisar por nome ou número do episódio..." oninput="renderEpisodesList()">
+
+            <div class="ep-list-vertical" id="episodesListVertical"></div>
+        </section>
+
+
+        <section id="page-staff" class="page-section">
+            <h2>Equipe do Site</h2>
+            <p style="color: var(--text-muted); margin-top: 4px; margin-bottom: 16px;">Conheça os administradores e criadores da plataforma.</p>
+            <div class="staff-grid" id="staffGrid"></div>
+        </section>
+
+
+        <section id="page-search" class="page-section">
+            <h2>Pesquisa Global</h2>
+            <input type="text" id="globalSearchInput" class="search-input" style="margin-top:16px;" placeholder="Digite o título do episódio, temporada ou personagem..." oninput="handleGlobalSearch()">
+            <div class="ep-list-vertical" id="globalSearchResults"></div>
+        </section>
+
+
+        <section id="page-community" class="page-section">
+            <h2>Comunidade</h2>
+            <p style="color:var(--text-muted);margin:4px 0 16px">Vê perfis, frases e o estado dos utilizadores.</p>
+            <input id="communitySearch" class="search-input" placeholder="🔍 Procurar utilizador..." oninput="renderCommunity()">
+            <div id="communityGrid" class="profile-grid"></div>
+        </section>
+
+
+        <section id="page-profile" class="page-section">
+            <div class="profile-hero">
+                <img id="profileAvatarPreview" class="avatar-lg" src="" alt="Perfil">
+                <h3 id="currentUserName">Visitante</h3>
+                <div id="profileStatusLine" class="status-line"><span class="status-dot offline"></span> Modo Fantasma</div>
+                <p id="profileQuotePreview" class="profile-quote">Estás a navegar como visitante.</p>
+                <a id="profileInstagramLink" class="profile-instagram" href="#" target="_blank" rel="noopener" style="display:none"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                <div id="currentUserEmail" class="small-note" style="margin-top:8px;">Modo Visitante (Sem Sessão Iniciada)</div>
+                <button id="logoutBtn" onclick="logout()" style="display:none;margin-top:14px;background:rgba(255,77,77,.15);border:1px solid var(--danger);color:var(--danger);padding:8px 18px;border-radius:8px;font-weight:600;cursor:pointer;">Terminar Sessão</button>
+            </div>
+
+            <div id="authSection" style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:20px;margin-bottom:20px;">
+                <h3>Iniciar Sessão ou Criar Conta</h3>
+                <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:14px;">Inicia sessão para teres acesso ao teu perfil guardado ou permissões de administração.</p>
+                <div class="form-group"><label>Utilizador</label><input type="text" id="authUsername" class="form-control" placeholder="Ex.: miguel"></div>
+                <div class="form-group"><label>Palavra-passe</label><input type="password" id="authPassword" class="form-control" placeholder="••••••••"></div>
+                <div style="display:flex;gap:10px"><button class="btn-green" style="flex:1;justify-content:center" onclick="login()">Entrar</button><button class="btn-small-outline" style="flex:1" onclick="register()">Criar Conta</button></div>
+            </div>
+
+            <div id="profileEditSection" style="display:none;background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:16px;margin-bottom:14px;">
+                <h3 style="margin-bottom:12px"><i class="fa-solid fa-pen"></i> Editar o meu perfil</h3>
+                <div class="form-row-2">
+                    <div class="form-group"><label>Foto de perfil (URL)</label><input id="profileAvatarInput" class="form-control" placeholder="https://..."></div>
+                    <div class="form-group"><label>Instagram (link do perfil)</label><input id="profileInstagramInput" class="form-control" placeholder="https://instagram.com/teunome"></div>
+                </div>
+                <div class="form-group"><label>Frase do perfil</label><input id="profileQuoteInput" class="form-control" maxlength="160" placeholder="A minha frase..."></div>
+                <div class="form-group"><label>Estado</label><select id="profileStatusInput" class="form-control"><option value="online">Online</option><option value="watching">A ver um episódio</option><option value="offline">Offline</option></select></div>
+                <button class="btn-green" style="width:100%;justify-content:center" onclick="saveMyProfile()">Guardar perfil</button>
+            </div>
+
+            <div id="adminPanelSection" style="display:none;background:#131d16;border:1px solid var(--accent-green);border-radius:16px;padding:20px;">
+                <h3 style="color:var(--accent-green);display:flex;align-items:center;gap:8px;margin-bottom:8px"><i class="fa-solid fa-shield-halved"></i> Painel de Administração</h3>
+                <p class="small-note" style="margin-bottom:14px">Vídeos, equipa, anúncios e votações.</p>
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-admin-tab="media" onclick="switchAdminTab('media')">Vídeos</button>
+                    <button class="admin-tab" data-admin-tab="staff" onclick="switchAdminTab('staff')">Equipa</button>
+                    <button class="admin-tab" data-admin-tab="announcements" onclick="switchAdminTab('announcements')">Anúncios</button>
+                    <button class="admin-tab" data-admin-tab="polls" onclick="switchAdminTab('polls')">Votações</button>
+                </div>
+
+                <div id="admin-tab-media" class="admin-tab-panel active">
+                    <div style="background:var(--bg-card);padding:14px;border-radius:12px;border:1px solid var(--border-color)">
+                        <h4 style="margin-bottom:10px">Gerir vídeo e legendas</h4>
+                        <div class="form-group"><label>Seleciona o episódio</label><select id="adminEpDropdown" class="form-control"></select></div>
+                        <div class="form-group"><label>Qualidade</label><select id="adminQuality" class="form-control"><option value="1080p">1080p (Full HD)</option><option value="720p">720p (HD)</option><option value="480p">480p (SD)</option></select></div>
+                        <div class="form-group"><label>Tipo de Áudio / Idioma</label><select id="adminLangType" class="form-control"><option value="dub">Dublado (PT)</option><option value="sub">Legendado (PT)</option><option value="both">Dublado + Legendado</option></select></div>
+                        <div class="form-group"><label>URL Direta do Vídeo MP4 (opcional)</label><input id="adminVideoUrl" class="form-control" placeholder="https://exemplo.com/video.mp4"></div>
+                        <div class="form-group"><label>Ou carregar ficheiro MP4 do PC</label><input type="file" id="adminVideoFile" accept="video/mp4,video/*" class="form-control"></div>
+                        <div class="form-group"><label>URL Direta de Legendas (.vtt ou .srt)</label><input id="adminSubUrl" class="form-control" placeholder="https://exemplo.com/legendas.vtt"></div>
+                        <div class="form-group"><label>Ou carregar ficheiro de Legendas (.vtt/.srt)</label><input type="file" id="adminSubFile" accept=".vtt,.srt" class="form-control"></div>
+                        <button class="btn-green" style="width:100%;justify-content:center" onclick="saveAdminVideo()">Guardar Alterações do Vídeo</button>
+                        <div id="adminMediaStatus" class="admin-media-status"></div>
+                    </div>
+                </div>
+
+                <div id="admin-tab-staff" class="admin-tab-panel">
+                    <div style="background:var(--bg-card);padding:14px;border-radius:12px;border:1px solid var(--border-color)">
+                        <h4 style="margin-bottom:10px">Adicionar/Editar Membro da Equipa</h4>
+                        <div class="form-group"><label>Link do Perfil do Instagram</label><input id="staffInstagramInput" class="form-control" placeholder="https://www.instagram.com/teunome"></div>
+                        <div id="staffResolvedName" class="small-note" style="margin-bottom:10px;color:var(--accent-green)">O nome será obtido automaticamente do link.</div>
+                        <div class="form-group"><label>Nome de Exibição (opcional se usares Instagram)</label><input id="staffNameInput" class="form-control" placeholder="Ex.: Miguel"></div>
+                        <div class="form-group"><label>Foto de Perfil (URL da Imagem)</label><input id="staffAvatarInput" class="form-control" placeholder="https://..."></div>
+                        <div class="form-group"><label>Frase Personalizada</label><input id="staffQuoteInput" class="form-control" placeholder="Ex.: Bom dia"></div>
+                        <button class="btn-green" style="width:100%;justify-content:center" onclick="saveStaffMember()">Salvar Membro na Equipa</button>
+                    </div>
+                </div>
+
+                <div id="admin-tab-announcements" class="admin-tab-panel">
+                    <div style="background:var(--bg-card);padding:14px;border-radius:12px;border:1px solid var(--border-color)">
+                        <h4 style="margin-bottom:10px">Criar Anúncio Oficial</h4>
+                        <div class="form-group"><label>Texto do Anúncio</label><textarea id="announcementText" class="form-control" rows="3" placeholder="Escreve o comunicado para a comunidade..."></textarea></div>
+                        <button class="btn-green" style="width:100%;justify-content:center" onclick="createAnnouncement()">Publicar Anúncio</button>
+                    </div>
+                </div>
+
+                <div id="admin-tab-polls" class="admin-tab-panel">
+                    <div style="background:var(--bg-card);padding:14px;border-radius:12px;border:1px solid var(--border-color)">
+                        <h4 style="margin-bottom:10px">Criar Votação / Enquete</h4>
+                        <div class="form-group"><label>Pergunta da Votação</label><input id="pollQuestion" class="form-control" placeholder="Ex.: Qual episódio queres ver a seguir?"></div>
+                        <div class="form-group"><label>Opções (2 a 5)</label>
+                            <input id="pollOption1" class="form-control" placeholder="Opção 1" style="margin-bottom:7px">
+                            <input id="pollOption2" class="form-control" placeholder="Opção 2" style="margin-bottom:7px">
+                            <input id="pollOption3" class="form-control" placeholder="Opção 3" style="margin-bottom:7px">
+                            <input id="pollOption4" class="form-control" placeholder="Opção 4" style="margin-bottom:7px">
+                            <input id="pollOption5" class="form-control" placeholder="Opção 5 (opcional)">
+                        </div>
+                        <button class="btn-green" style="width:100%;justify-content:center" onclick="createPoll()">Publicar votação</button>
+                    </div>
+                    <div style="margin-top:12px" id="adminPollsList"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="bottom-nav">
+        <button class="nav-item active" id="nav-home" onclick="switchPage('home')">
+            <i class="fa-solid fa-house"></i> <span>Início</span>
+        </button>
+        <button class="nav-item" id="nav-episodes" onclick="switchPage('episodes')">
+            <i class="fa-solid fa-film"></i> <span>Episódios</span>
+        </button>
+        <button class="nav-item" id="nav-staff" onclick="switchPage('staff')">
+            <i class="fa-solid fa-user-group"></i> <span>Equipe</span>
+        </button>
+        <button class="nav-item" id="nav-community" onclick="switchPage('community')">
+            <i class="fa-solid fa-globe"></i> <span>Comunidade</span>
+        </button>
+        <button class="nav-item" id="nav-search" onclick="switchPage('search')">
+            <i class="fa-solid fa-magnifying-glass"></i> <span>Pesquisar</span>
+        </button>
+        <button class="nav-item" id="nav-profile" onclick="switchPage('profile')">
+            <i class="fa-solid fa-circle-user"></i> <span id="navProfileName">Conta</span>
+        </button>
+    </div>
+
+    <div class="modal-overlay" id="playerModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closePlayerModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="modalEpTitle" style="margin-bottom: 12px; font-size: 1.1rem; padding-right: 30px;">Episódio</h3>
+            <div class="video-container">
+                <video id="mainVideoPlayer" controls controlsList="nodownload" playsinline>
+                    <source src="" type="video/mp4" id="videoSource">
+                    <track id="videoTrack" kind="subtitles" srclang="pt" label="Português" default>
+                    Seu navegador não suporta a reprodução deste vídeo.
+                </video>
+            </div>
+            <div id="playerError" class="player-error"></div>
+
+            <div class="player-controls-bar">
+                <div class="player-controls-group">
+                    <button class="btn-player-ctrl" onclick="skipVideoTime(-10)" title="Voltar 10s"><i class="fa-solid fa-rotate-left"></i> -10s</button>
+                    <button class="btn-player-ctrl" onclick="skipVideoTime(10)" title="Avançar 10s">+10s <i class="fa-solid fa-rotate-right"></i></button>
+                </div>
+                <div class="player-controls-group">
+                    <select class="select-player" onchange="changeVideoSpeed(this.value)" title="Velocidade">
+                        <option value="0.5">0.5x</option>
+                        <option value="0.75">0.75x</option>
+                        <option value="1" selected>1.0x (Normal)</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2">2.0x</option>
+                    </select>
+                    <select class="select-player" id="playerQualitySelect" onchange="changeVideoQuality(this.value)" title="Qualidade">
+                        <option value="auto">Auto</option>
+                        <option value="1080p">1080p</option>
+                        <option value="720p">720p</option>
+                        <option value="480p">480p</option>
+                    </select>
+                    <button class="btn-player-ctrl" id="btnCinemaMode" onclick="toggleCinemaMode()"><i class="fa-solid fa-tv"></i> Modo Cinema</button>
+                </div>
+            </div>
+
+            <div id="watchPartyChatSection" style="display: none; margin-top: 14px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+                <h4 style="color: var(--accent-green); margin-bottom: 8px; font-size: 0.9rem;"><i class="fa-solid fa-comments"></i> Chat Ver Juntos</h4>
+                <div class="chat-box" id="chatBox"></div>
+                <div class="chat-input-row">
+                    <input type="text" id="chatInput" placeholder="Escreve uma mensagem..." onkeydown="if(event.key==='Enter')sendChatMessage()">
+                    <button class="btn-green" style="padding: 8px 14px;" onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+            <div style="margin-top: 12px; display: flex; justify-content: flex-end;">
+                <button class="btn-small-outline" onclick="triggerWatchPartyInviteFromPlayer()"><i class="fa-solid fa-user-plus"></i> Convidar Amigo</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="inboxModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeInboxModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="margin-bottom: 14px;"><i class="fa-solid fa-bell"></i> Caixa de Entrada</h3>
+            <div id="inboxList"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="genericModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeGenericModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="genericModalTitle" style="margin-bottom:14px"></h3>
+            <div id="genericModalBody"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="createRoomModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeCreateRoomModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="margin-bottom: 14px;"><i class="fa-solid fa-users"></i> Criar Sala Ver Juntos</h3>
+            <div class="form-group">
+                <label>Selecione o Episódio</label>
+                <select id="roomEpSelect" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label>Nome do Amigo (Username no site)</label>
+                <input type="text" id="friendUsernameInput" class="form-control" placeholder="Ex: joao">
+            </div>
+            <button class="btn-green" style="width: 100%; justify-content: center;" onclick="sendWatchPartyInvite()"> Enviar Convite </button>
+        </div>
+    </div>
+
+    <script>
+    const EPISODES_DATA = window.EPISODES_DATA || {};
+    const EPISODES = {
+        1:["Stormy Weather","The Bubbler","The Pharaoh","Lady Wifi","Timebreaker","Mr. Pigeon","The Evillustrator","Rogercop","Copycat","Dark Cupid","Horrificator","Darkblade","The Mime","Kung Food","Gamer","Animan","Antibug","Puppeteer","Reflekta","Guitar Villain","Pixelator","Princess Fragrance","Simon Says","Volpina","Origins: Ladybug & Cat Noir","Origins: Stoneheart"],
+        2:["The Collector","Prime Queen","Glaciator","Despair Bear","Riposte","Robostus","Gigantitan","Dark Owl","Sapotis","Gorizilla","Queen Wasp","Anansi","Malediktator","Sandboy","Catalyst","Mayura","Frozer","Trouble Maker","Style Queen","Queen Bee","Reverser","Captain Hardrock","Zombizou","Syren","Heroes' Day (Part 1)","Heroes' Day (Part 2)"],
+        3:["Chameleon","Animaestro","Bakerix","Backwarder","Reflekdoll","Weredad","Silencer","Oni-Chan","Oblivio","Desperada","Chris Master","Startrain","Kwami Buster","Feast","Gamer 2.0","Ikari Gozen","Timetagger","Party Crasher","Puppeteer 2","Cat Blanc","Felix","Ladybug","Heart Hunter","Miracle Queen","Master Fu","The Battle of the Miraculous"],
+        4:["Truth","Lies","Gang of Secrets","Mr. Pigeon 72","Psycomedian","Furious Fu","Sole Crusher","Queen Banana","Gabriel Agreste","Mega Leech","Guiltrip","Crocoduel","Optigami","Sentibubbler","Glaciator 2","Hack-San","Rocketear","Wishmaker","Simpleman","Qilin","Dearest Family","Ephemeral","Kuro Neko","Penalteam","Risk","Strikeback"],
+        5:["Evolution","Multiplication","Destruction","Jubilation","Illusion","Determination","Passion","Reunion","Elation","Transmission","Deflagration","Perfection","Migration","Derision","Intuition","Protection","Adoration","Emotion","Pretension","Revelation","Confrontation","Collusion","Revolution","Representation","Conformation","Re-creation"],
+        6:["Climatiqueen","Dessinatriste","Sublimation","Daddycop","Papys Garous","Princesse Syren","El Toro De Piedra","Vampigami","Monsieur Agreste","Le Château Noir","Revelator","Psyconductrice","Yaksi Gozen","Couchorak","La Redresseuse","Noe","La Fée de Beaux Rêves","Les Crassetastrophes","Riginarazione","Renverse-cœurs","Les Titans Chaînes","Lady Chaos","Tristanansi","La Reine de Frayeurville","Protocole Secret","Nemesis"],
+        7:Array.from({length:26},(_,i)=>`Episódio ${i+1} — título ainda não anunciado oficialmente`),
+        specials:["Miraculous World: New York, United HeroeZ","Miraculous World: Shanghai, The Legend of Ladydragon","Miraculous World: Paris, Tales of Shadybug and Claw Noir","Miraculous World: London, At the Edge of Time","Miraculous World: Tokyo, Stellar Force"]
+    };
+
+    function episodeTitle(season,idx){
+        return (EPISODES[season]&&EPISODES[season][idx])?EPISODES[season][idx]:`Episódio ${Number(idx)+1}`;
+    }
+
+    function load(key,def){
+        try{const v=localStorage.getItem(key);return v?JSON.parse(v):def;}catch(e){return def;}
+    }
+    function save(key,val){
+        try{localStorage.setItem(key,JSON.stringify(val));}catch(e){}
+    }
+    function esc(s){
+        return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+    }
+
+    // STATE INITIALIZATION (CONTA FANTASMA POR DEFEITO)
+    let currentUser = load('cn_user_session', null); 
+    let accounts = load('cn_accounts', [
+        {username:'miguel',password:'1234',isAdmin:true,avatar:'https://www.image2url.com/r2/default/images/1787841130285-43e1a521-871c-46c5-b414-e338fae547ee.webp',quote:'Bom dia',instagram:'https://www.instagram.com/x_x._.miguel?igsi=MWwxdHJoYm56NW9naA==',status:'online',watchingTitle:'',lastSeen:Date.now()}
+    ]);
+    let customVideos = load('cn_custom_videos_v2',{});
+    let staffMembers = load('cn_staff_v2',[]);
+    let announcements = load('cn_announcements',[]);
+    let polls = load('cn_polls',[]);
+    let continueWatching = load('cn_continue_watching',[]);
+    let invites = load('cn_invites',[]);
+    let isCinemaMode = false;
+    let currentPlayingEp = null;
+    let activeWatchParty = null;
+    let playerObjectUrl = null;
+    let subtitleObjectUrl = null;
+
+    // STORAGE APIS
+    const DB_NAME='MiraculousStreamDB', DB_VERSION=1, STORE='mediaBlobs', CACHE_NAME='miraculous-media-v1';
+    function openDB(){
+        return new Promise((res,rej)=>{
+            const req=indexedDB.open(DB_NAME,DB_VERSION);
+            req.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains(STORE))db.createObjectStore(STORE);};
+            req.onsuccess=()=>res(req.result);
+            req.onerror=()=>rej(req.error||new Error('Falha ao abrir IndexedDB.'));
+        });
+    }
+    async function idbPut(key,blob){
+        const db=await openDB();
+        return new Promise((res,rej)=>{
+            const tx=db.transaction(STORE,'readwrite');
+            tx.objectStore(STORE).put(blob,key);
+            tx.oncomplete=()=>{db.close();res();};
+            tx.onerror=()=>{db.close();rej(tx.error);};
+        });
+    }
+    async function idbGet(key){
+        if(!key)return null;
+        const db=await openDB();
+        return new Promise((res,rej)=>{
+            const tx=db.transaction(STORE,'readonly');
+            const req=tx.objectStore(STORE).get(key);
+            req.onsuccess=()=>{const v=req.result||null;db.close();res(v);};
+            req.onerror=()=>{db.close();rej(req.error);};
+        });
+    }
+    async function idbDelete(key){
+        if(!key)return;
+        const db=await openDB();
+        return new Promise((res,rej)=>{
+            const tx=db.transaction(STORE,'readwrite');
+            tx.objectStore(STORE).delete(key);
+            tx.oncomplete=()=>{db.close();res();};
+            tx.onerror=()=>{db.close();rej(tx.error);};
+        });
+    }
+    async function cachePut(key,blob){
+        if(!('caches' in window))return false;
+        try{
+            const cache=await caches.open(CACHE_NAME);
+            await cache.put(new Request(`https://media.miraculous-hub.local/${encodeURIComponent(key)}`),new Response(blob,{headers:{'Content-Type':blob.type||'application/octet-stream'}}));
+            return true;
+        }catch(e){return false;}
+    }
+    async function cacheGet(key){
+        if(!('caches' in window))return null;
+        try{
+            const cache=await caches.open(CACHE_NAME);
+            const r=await cache.match(new Request(`https://media.miraculous-hub.local/${encodeURIComponent(key)}`));
+            return r?await r.blob():null;
+        }catch(e){return null;}
+    }
+    async function cacheDelete(key){
+        if(!('caches' in window))return;
+        try{const cache=await caches.open(CACHE_NAME);await cache.delete(new Request(`https://media.miraculous-hub.local/${encodeURIComponent(key)}`));}catch(e){}
+    }
+    async function storeMedia(key,blob){
+        let cacheOK=await cachePut(key,blob);
+        try{await idbPut(key,blob);return {cacheOK,idbOK:true};}
+        catch(err){if(!cacheOK)throw err;return {cacheOK:true,idbOK:false};}
+    }
+    async function getMedia(key){
+        const b=await cacheGet(key);
+        if(b)return b;
+        return await idbGet(key);
+    }
+    async function deleteMedia(key){
+        await Promise.allSettled([cacheDelete(key),idbDelete(key)]);
+    }
+    function dbKey(type,key){return `${type}:${key}`;}
+
+    window.addEventListener('DOMContentLoaded',()=>{
+        migrateLegacyState();
+        updateUserUI();
+        renderContinueWatching();
+        renderRecentEpisodes();
+        renderEpisodesList();
+        renderStaffList();
+        renderCommunity();
+        renderHomeExtras();
+        populateAdminEpDropdown();
+        populateRoomEpDropdown();
+        startCountdownTimer();
+        startPresence();
+        document.getElementById('staffInstagramInput')?.addEventListener('input',()=>{
+            const i=instagramInfo(document.getElementById('staffInstagramInput').value.trim());
+            document.getElementById('staffResolvedName').textContent=i?`Nome detetado: @${i.username}`:'O nome será obtido automaticamente do link (ex.: @utilizador).';
+        });
+    });
+
+    function migrateLegacyState(){
+        if(staffMembers.length===0){
+            staffMembers=[
+                { name: 'Miguel', instagram: 'https://www.instagram.com/x_x._.miguel?igsi=MWwxdHJoYm56NW9naA==', quote: 'Bom dia', avatar: 'https://www.image2url.com/r2/default/images/1787841130285-43e1a521-871c-46c5-b414-e338fae547ee.webp' }
+            ];
+            save('cn_staff_v2',staffMembers);
+        }
+        if(!announcements.length){
+            announcements=[{id:1,createdBy:'miguel',text:'Bem-vindo ao site! As novidades aparecem aqui.',createdAt:Date.now()}];
+            save('cn_announcements',announcements);
+        }
+    }
+
+    function switchPage(id){
+        document.querySelectorAll('.page-section').forEach(x=>x.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
+        document.getElementById(`page-${id}`)?.classList.add('active');
+        document.getElementById(`nav-${id}`)?.classList.add('active');
+        window.scrollTo({top:0,behavior:'smooth'});
+        if(id==='community')renderCommunity();
+        if(id==='profile')updateUserUI();
+    }
+
+    function getAccount(username){
+        return accounts.find(a=>a.username.toLowerCase()===String(username).toLowerCase())||null;
+    }
+
+    function currentProfile(){
+        return currentUser ? getAccount(currentUser) : null;
+    }
+
+    function updateUserUI(){
+        const acc = currentProfile();
+        const navName = document.getElementById('navProfileName');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const authSec = document.getElementById('authSection');
+        const profEdit = document.getElementById('profileEditSection');
+        const adminSec = document.getElementById('adminPanelSection');
+        
+        if(acc){
+            if(navName) navName.textContent = acc.username;
+            document.getElementById('currentUserName').textContent = acc.username;
+            document.getElementById('profileAvatarPreview').src = acc.avatar || `https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(acc.username)}`;
+            document.getElementById('profileQuotePreview').textContent = acc.quote || 'Ainda não tens uma frase de perfil.';
+            document.getElementById('currentUserEmail').textContent = acc.isAdmin ? 'Sessão ativa (Administrador)' : 'Sessão ativa';
+            
+            const statusDotClass = acc.status === 'online' ? 'online' : (acc.status === 'watching' ? 'watching' : 'offline');
+            document.getElementById('profileStatusLine').innerHTML = `<span class="status-dot ${statusDotClass}"></span> ${acc.status.toUpperCase()}`;
+            
+            if(acc.instagram){
+                const link = document.getElementById('profileInstagramLink');
+                link.href = acc.instagram;
+                link.style.display = 'inline-flex';
+            } else {
+                document.getElementById('profileInstagramLink').style.display = 'none';
+            }
+
+            if(logoutBtn) logoutBtn.style.display = 'inline-block';
+            if(authSec) authSec.style.display = 'none';
+            if(profEdit) profEdit.style.display = 'block';
+            if(adminSec) adminSec.style.display = acc.isAdmin ? 'block' : 'none';
+
+            // pre-fill form
+            document.getElementById('profileAvatarInput').value = acc.avatar || '';
+            document.getElementById('profileInstagramInput').value = acc.instagram || '';
+            document.getElementById('profileQuoteInput').value = acc.quote || '';
+            document.getElementById('profileStatusInput').value = acc.status || 'online';
+        } else {
+            // Conta Fantasma / Visitante
+            if(navName) navName.textContent = 'Conta';
+            document.getElementById('currentUserName').textContent = 'Visitante (Fantasma)';
+            document.getElementById('profileAvatarPreview').src = 'https://api.dicebear.com/9.x/initials/svg?seed=Visitante';
+            document.getElementById('profileQuotePreview').textContent = 'Estás a navegar como visitante.';
+            document.getElementById('currentUserEmail').textContent = 'Modo Visitante (Sem Sessão Iniciada)';
+            document.getElementById('profileStatusLine').innerHTML = `<span class="status-dot offline"></span> Modo Fantasma`;
+            document.getElementById('profileInstagramLink').style.display = 'none';
+
+            if(logoutBtn) logoutBtn.style.display = 'none';
+            if(authSec) authSec.style.display = 'block';
+            if(profEdit) profEdit.style.display = 'none';
+            if(adminSec) adminSec.style.display = 'none';
+        }
+        updateInboxBadge();
+    }
+
+    function login(){
+        const u = document.getElementById('authUsername').value.trim();
+        const p = document.getElementById('authPassword').value.trim();
+        if(!u || !p){ alert('Preenche o utilizador e a palavra-passe.'); return; }
+        const acc = getAccount(u);
+        if(!acc || acc.password !== p){ alert('Utilizador ou palavra-passe incorretos.'); return; }
+        
+        currentUser = acc.username;
+        save('cn_user_session', currentUser);
+        setUserStatus('online');
+        updateUserUI();
+        alert(`Bem-vindo de volta, ${acc.username}!`);
+    }
+
+    function register(){
+        const u = document.getElementById('authUsername').value.trim();
+        const p = document.getElementById('authPassword').value.trim();
+        if(!u || !p){ alert('Preenche o utilizador e a palavra-passe para registar.'); return; }
+        if(getAccount(u)){ alert('Este utilizador já existe!'); return; }
+        
+        const newAcc = {username:u, password:p, isAdmin:false, avatar:'', quote:'', instagram:'', status:'online', watchingTitle:'', lastSeen:Date.now()};
+        accounts.push(newAcc);
+        save('cn_accounts', accounts);
+        
+        currentUser = u;
+        save('cn_user_session', currentUser);
+        updateUserUI();
+        alert(`Conta criada com sucesso! Bem-vindo, ${u}!`);
+    }
+
+    function logout(){
+        if(currentUser) setUserStatus('offline');
+        currentUser = null;
+        save('cn_user_session', null);
+        updateUserUI();
+        alert('Sessão terminada. Entraste no modo Visitante (Fantasma).');
+    }
+
+    function saveMyProfile(){
+        const acc = currentProfile();
+        if(!acc) return;
+        acc.avatar = document.getElementById('profileAvatarInput').value.trim();
+        acc.instagram = document.getElementById('profileInstagramInput').value.trim();
+        acc.quote = document.getElementById('profileQuoteInput').value.trim();
+        acc.status = document.getElementById('profileStatusInput').value;
+        save('cn_accounts', accounts);
+        updateUserUI();
+        renderCommunity();
+        alert('Perfil atualizado com sucesso!');
+    }
+
+    function setUserStatus(st, watching=''){
+        const acc = currentProfile();
+        if(!acc) return;
+        acc.status = st;
+        acc.watchingTitle = watching;
+        acc.lastSeen = Date.now();
+        save('cn_accounts', accounts);
+    }
+
+    function startPresence(){
+        setInterval(()=>{
+            if(currentUser){
+                const acc = currentProfile();
+                if(acc){ acc.lastSeen = Date.now(); save('cn_accounts', accounts); }
+            }
+        }, 30000);
+    }
+
+    function statusLabel(a, isStale){
+        if(isStale || a.status==='offline') return {type:'offline', label:'Offline'};
+        if(a.status==='watching') return {type:'watching', label:`A ver: ${a.watchingTitle || 'um episódio'}`};
+        return {type:'online', label:'Online'};
+    }
+
+    function renderCommunity(){
+        const c = document.getElementById('communityGrid');
+        if(!c) return;
+        const q = (document.getElementById('communitySearch')?.value || '').toLowerCase();
+        const list = [...accounts].filter(a => !q || a.username.toLowerCase().includes(q)).sort((a,b)=>a.username.localeCompare(b.username));
+        c.innerHTML = list.length ? list.map(a => {
+            const isStale = !a.lastSeen || (Date.now() - a.lastSeen > 120000);
+            const st = statusLabel(a, isStale);
+            return `<div class="user-card" onclick="openProfile('${esc(a.username)}')">
+                <img class="avatar-sm" style="margin:0 auto 8px;display:block" src="${esc(a.avatar || `https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(a.username)}`)}">
+                <div class="user-name">${esc(a.username)}${a.isAdmin ? ' <span class="badge-admin">ADMIN</span>' : ''}</div>
+                <div class="status-line"><span class="status-dot ${st.type}"></span>${esc(st.label)}</div>
+                <div class="small-note" style="text-align:center;margin-top:8px">${esc(a.quote || 'Sem frase de perfil.')}</div>
+            </div>`;
+        }).join('') : '<p style="color:var(--text-muted)">Ainda não existem outros perfis.</p>';
+    }
+
+    function openProfile(username){
+        const a = getAccount(username);
+        if(!a) return;
+        document.getElementById('genericModalTitle').textContent = `Perfil de @${a.username}`;
+        document.getElementById('genericModalBody').innerHTML = `
+            <div style="text-align:center">
+                <img class="avatar-lg" src="${esc(a.avatar || `https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(a.username)}`)}">
+                <h3>${esc(a.username)}${a.isAdmin ? ' <span class="badge-admin">ADMIN</span>' : ''}</h3>
+                <div class="status-line"><span class="status-dot ${statusLabel(a,false).type}"></span>${esc(statusLabel(a,false).label)}</div>
+                <p class="profile-quote">${esc(a.quote || 'Sem frase de perfil.')}</p>
+                ${a.instagram ? `<a class="profile-instagram" target="_blank" rel="noopener" href="${esc(a.instagram)}"><i class="fa-brands fa-instagram"></i> Abrir Instagram</a>` : ''}
+            </div>`;
+        document.getElementById('genericModal').classList.add('active');
+    }
+    function closeGenericModal(){ document.getElementById('genericModal').classList.remove('active'); }
+
+    function renderEpisodesList(){
+        const season = String(document.getElementById('seasonSelect').value);
+        const lang = document.getElementById('langFilterSelect').value;
+        const q = (document.getElementById('epSearchInput').value || '').toLowerCase();
+        const c = document.getElementById('episodesListVertical');
+        c.innerHTML = '';
+        (EPISODES[season] || []).forEach((title, idx) => {
+            const full = `${idx+1} - ${title}`;
+            const key = `${season}_${idx}`;
+            const d = customVideos[key] || {};
+            const lt = d.langType || 'dub';
+            if(q && !full.toLowerCase().includes(q)) return;
+            if(lang !== 'all' && lt !== lang && lt !== 'both') return;
+            
+            const card = document.createElement('div');
+            card.className = 'ep-row-card';
+            card.onclick = () => openPlayerModal(season, idx, full);
+            card.innerHTML = `
+                <div class="ep-row-thumb" style="background-image:url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300&auto=format&fit=crop&q=80')">
+                    ${d.videoUrl || d.blobKey ? '<span class="badge-recent"><i class="fa-solid fa-circle-play"></i> MP4</span>' : ''}
+                </div>
+                <div class="ep-row-details">
+                    <div class="ep-row-title">${esc(full)}</div>
+                    <div class="ep-row-meta">
+                        <span>Temp. ${esc(season)}</span> · 
+                        ${lt==='dub'||lt==='both'?'<span class="lang-tag tag-dub">DUB</span>':''}
+                        ${lt==='sub'||lt==='both'?'<span class="lang-tag tag-sub">LEG</span>':''}
+                        ${d.quality ? `<span style="font-size:.75rem;color:var(--text-muted)">(${esc(d.quality)})</span>` : ''}
+                    </div>
+                </div>
+                <button class="btn-bookmark" onclick="event.stopPropagation();alert('Adicionado à Lista!')"><i class="fa-solid fa-bookmark"></i></button>`;
+            c.appendChild(card);
+        });
+    }
+
+    function renderRecentEpisodes(){
+        const c = document.getElementById('recentEpisodesContainer');
+        if(!c) return;
+        c.innerHTML = '';
+        (EPISODES[6] || []).slice(0,4).forEach((title, idx) => {
+            const card = document.createElement('div');
+            card.className = 'ep-card';
+            card.onclick = () => openPlayerModal(6, idx, `${idx+1} - ${title}`);
+            card.innerHTML = `
+                <div class="ep-thumb" style="background-image:url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&auto=format&fit=crop&q=80')"><span class="badge-recent">S6</span></div>
+                <div class="ep-info"><div class="ep-title">${esc(title)}</div><div class="ep-num">Temporada 6</div></div>`;
+            c.appendChild(card);
+        });
+    }
+
+    function renderContinueWatching(){
+        const c = document.getElementById('continueWatchingContainer');
+        if(!c) return;
+        c.innerHTML = '';
+        continueWatching.slice(-10).forEach(i => {
+            const card = document.createElement('div');
+            card.className = 'ep-card';
+            card.onclick = () => openPlayerModal(i.season, i.epIndex, `${i.epIndex+1} - ${episodeTitle(i.season, i.epIndex)}`);
+            card.innerHTML = `
+                <div class="ep-thumb" style="background-image:url('https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&auto=format&fit=crop&q=80')">
+                    <div class="progress-bar-container"><div class="progress-bar-fill" style="width:${Number(i.progressPercent||0)}%"></div></div>
+                    <span class="time-badge">${esc(i.progress||'')}</span>
+                </div>
+                <div class="ep-info"><div class="ep-title">${esc(i.title)}</div><div class="ep-num">Temp. ${esc(i.season)}</div></div>`;
+            c.appendChild(card);
+        });
+    }
+
+    async function openPlayerModal(season, idx, title){
+        currentPlayingEp = {season, idx, title};
+        document.getElementById('modalEpTitle').textContent = title;
+        const key = `${season}_${idx}`;
+        const d = customVideos[key] || {};
+        const p = document.getElementById('mainVideoPlayer');
+        const src = document.getElementById('videoSource');
+        const track = document.getElementById('videoTrack');
+
+        if(playerObjectUrl){ URL.revokeObjectURL(playerObjectUrl); playerObjectUrl = null; }
+        if(subtitleObjectUrl){ URL.revokeObjectURL(subtitleObjectUrl); subtitleObjectUrl = null; }
+
+        let vUrl = d.videoUrl || '';
+        if(!vUrl && d.blobKey){
+            try{ const blob = await getMedia(d.blobKey); if(blob){ playerObjectUrl = URL.createObjectURL(blob); vUrl = playerObjectUrl; } }catch(e){}
+        }
+        if(!vUrl) vUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"; // video demonstrativo padrão
+
+        src.src = vUrl;
+        
+        let subUrl = d.subUrl || '';
+        if(!subUrl && d.subBlobKey){
+            try{ const blob = await getMedia(d.subBlobKey); if(blob){ subtitleObjectUrl = URL.createObjectURL(blob); subUrl = subtitleObjectUrl; } }catch(e){}
+        }
+
+        if(subUrl){ track.src = subUrl; track.default = true; }
+        document.getElementById('playerModal').classList.add('active');
+        p.load();
+        if(currentUser) setUserStatus('watching', title);
+    }
+
+    function closePlayerModal(){
+        const p = document.getElementById('mainVideoPlayer');
+        p.pause(); p.removeAttribute('src'); p.load();
+        if(playerObjectUrl){ URL.revokeObjectURL(playerObjectUrl); playerObjectUrl = null; }
+        if(subtitleObjectUrl){ URL.revokeObjectURL(subtitleObjectUrl); subtitleObjectUrl = null; }
+        if(currentUser) setUserStatus('online');
+        if(isCinemaMode) toggleCinemaMode();
+        document.getElementById('playerModal').classList.remove('active');
+        document.getElementById('watchPartyChatSection').style.display = 'none';
+    }
+
+    function skipVideoTime(sec){
+        const p = document.getElementById('mainVideoPlayer');
+        p.currentTime = Math.max(0, Math.min(p.duration||Infinity, p.currentTime+sec));
+    }
+    function changeVideoSpeed(v){ document.getElementById('mainVideoPlayer').playbackRate = parseFloat(v); }
+    function changeVideoQuality(q){ alert(`Qualidade selecionada: ${q}`); }
+    
+    function toggleCinemaMode(){
+        isCinemaMode = !isCinemaMode;
+        document.body.classList.toggle('cinema-mode-active', isCinemaMode);
+        document.getElementById('playerModal').classList.toggle('cinema-mode', isCinemaMode);
+        document.getElementById('btnCinemaMode').innerHTML = isCinemaMode ? '<i class="fa-solid fa-compress"></i> Sair do Cinema' : '<i class="fa-solid fa-tv"></i> Modo Cinema';
+    }
+
+    function instagramInfo(url){
+        if(!url) return null;
+        const m = url.match(/(?:instagram\.com\/)([a-zA-Z0-9_\.]+)/);
+        return m ? {username:m[1]} : null;
+    }
+
+    function renderStaffList(){
+        const g = document.getElementById('staffGrid');
+        if(!g) return;
+        g.innerHTML = staffMembers.length ? staffMembers.map(m => {
+            const info = instagramInfo(m.instagram||'');
+            const name = m.name || (info ? `@${info.username}` : 'Membro');
+            return `<div class="staff-card">
+                <img src="${esc(m.avatar || `https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(name)}`)}" class="staff-avatar">
+                <div class="staff-name">${esc(name)}</div>
+                ${m.instagram ? `<a href="${esc(m.instagram)}" target="_blank" rel="noopener" class="staff-handle"><i class="fa-brands fa-instagram"></i> @${esc(info ? info.username : 'instagram')}</a>` : ''}
+                <div class="staff-quote">${esc(m.quote || '')}</div>
+            </div>`;
+        }).join('') : '<p style="color:var(--text-muted)">Sem membros na equipa.</p>';
+    }
+
+    function renderHomeExtras(){
+        const ac = document.getElementById('announcementsContainer');
+        if(ac){
+            ac.innerHTML = announcements.length ? announcements.map(a => `<div class="notice-card"><div class="notice-author">Por @${esc(a.createdBy)}</div><div class="notice-text">${esc(a.text)}</div></div>`).join('') : '<p style="color:var(--text-muted)">Sem anúncios.</p>';
+        }
+        const pc = document.getElementById('pollsContainer');
+        if(pc){
+            pc.innerHTML = polls.length ? polls.map(p => `
+                <div class="poll-card">
+                    <div class="poll-author">Votação por @${esc(p.createdBy)}</div>
+                    <div class="poll-question">${esc(p.question)}</div>
+                    ${p.options.map((opt, i) => `<button class="poll-option" onclick="votePoll(${p.id}, ${i})"><div class="poll-label"><span>${esc(opt.text)}</span><span>${opt.votes||0} votos</span></div></button>`).join('')}
+                </div>`).join('') : '<p style="color:var(--text-muted)">Sem votações ativas.</p>';
+        }
+    }
+
+    function votePoll(pollId, optionIndex){
+        const poll = polls.find(p => p.id === pollId);
+        if(!poll) return;
+        poll.options[optionIndex].votes = (poll.options[optionIndex].votes || 0) + 1;
+        save('cn_polls', polls);
+        renderHomeExtras();
+    }
+
+    function handleGlobalSearch(){
+        const q = (document.getElementById('globalSearchInput').value || '').toLowerCase();
+        const res = document.getElementById('globalSearchResults');
+        res.innerHTML = '';
+        if(!q.trim()) return;
+
+        Object.keys(EPISODES).forEach(s => {
+            EPISODES[s].forEach((title, idx) => {
+                if(title.toLowerCase().includes(q) || `temporada ${s}`.includes(q)){
+                    const card = document.createElement('div');
+                    card.className = 'ep-row-card';
+                    card.onclick = () => openPlayerModal(s, idx, `${idx+1} - ${title}`);
+                    card.innerHTML = `<div class="ep-row-details"><div class="ep-row-title">${esc(idx+1)} - ${esc(title)}</div><div class="ep-row-meta">Temporada ${esc(s)}</div></div>`;
+                    res.appendChild(card);
+                }
+            });
+        });
+    }
+
+    function populateAdminEpDropdown(){
+        const sel = document.getElementById('adminEpDropdown');
+        if(!sel) return;
+        sel.innerHTML = '';
+        Object.keys(EPISODES).forEach(s => {
+            const grp = document.createElement('optgroup');
+            grp.label = `Temporada ${s}`;
+            EPISODES[s].forEach((t, i) => {
+                const opt = document.createElement('option');
+                opt.value = `${s}_${i}`;
+                opt.textContent = `${i+1} - ${t}`;
+                grp.appendChild(opt);
+            });
+            sel.appendChild(grp);
+        });
+    }
+
+    function populateRoomEpDropdown(){
+        const sel = document.getElementById('roomEpSelect');
+        if(!sel) return;
+        sel.innerHTML = '';
+        Object.keys(EPISODES).forEach(s => {
+            EPISODES[s].forEach((t, i) => {
+                const opt = document.createElement('option');
+                opt.value = `${s}_${i}`;
+                opt.textContent = `S${s} E${i+1} - ${t}`;
+                sel.appendChild(opt);
+            });
+        });
+    }
+
+    async function saveAdminVideo(){
+        const key = document.getElementById('adminEpDropdown').value;
+        const quality = document.getElementById('adminQuality').value;
+        const langType = document.getElementById('adminLangType').value;
+        const videoUrl = document.getElementById('adminVideoUrl').value.trim();
+        const subUrl = document.getElementById('adminSubUrl').value.trim();
+        const videoFile = document.getElementById('adminVideoFile').files[0];
+        const subFile = document.getElementById('adminSubFile').files[0];
+
+        let blobKey = customVideos[key]?.blobKey || null;
+        let subBlobKey = customVideos[key]?.subBlobKey || null;
+
+        if(videoFile){
+            blobKey = dbKey('video', key);
+            await storeMedia(blobKey, videoFile);
+        }
+        if(subFile){
+            subBlobKey = dbKey('sub', key);
+            await storeMedia(subBlobKey, subFile);
+        }
+
+        customVideos[key] = { quality, langType, videoUrl, subUrl, blobKey, subBlobKey };
+        save('cn_custom_videos_v2', customVideos);
+        renderEpisodesList();
+        alert('Vídeo guardado com sucesso!');
+    }
+
+    function saveStaffMember(){
+        const instagram = document.getElementById('staffInstagramInput').value.trim();
+        const info = instagramInfo(instagram);
+        const name = document.getElementById('staffNameInput').value.trim() || (info ? `@${info.username}` : 'Membro');
+        const avatar = document.getElementById('staffAvatarInput').value.trim();
+        const quote = document.getElementById('staffQuoteInput').value.trim();
+
+        staffMembers.push({ name, instagram, avatar, quote });
+        save('cn_staff_v2', staffMembers);
+        renderStaffList();
+        alert('Membro adicionado à equipa!');
+    }
+
+    function createAnnouncement(){
+        const text = document.getElementById('announcementText').value.trim();
+        if(!text) return;
+        announcements.unshift({ id: Date.now(), createdBy: currentUser || 'Admin', text, createdAt: Date.now() });
+        save('cn_announcements', announcements);
+        renderHomeExtras();
+        document.getElementById('announcementText').value = '';
+        alert('Anúncio publicado!');
+    }
+
+    function createPoll(){
+        const question = document.getElementById('pollQuestion').value.trim();
+        if(!question) return;
+        const opts = [
+            document.getElementById('pollOption1').value.trim(),
+            document.getElementById('pollOption2').value.trim(),
+            document.getElementById('pollOption3').value.trim(),
+            document.getElementById('pollOption4').value.trim(),
+            document.getElementById('pollOption5').value.trim()
+        ].filter(Boolean).map(t => ({ text: t, votes: 0 }));
+
+        if(opts.length < 2){ alert('Cria pelo menos 2 opções para a votação.'); return; }
+
+        polls.unshift({ id: Date.now(), createdBy: currentUser || 'Admin', question, options: opts });
+        save('cn_polls', polls);
+        renderHomeExtras();
+        alert('Votação criada!');
+    }
+
+    function switchAdminTab(tab){
+        document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.admin-tab-panel').forEach(p => p.classList.remove('active'));
+        document.querySelector(`[data-admin-tab="${tab}"]`)?.classList.add('active');
+        document.getElementById(`admin-tab-${tab}`)?.classList.add('active');
+    }
+
+    // WATCH PARTY & INBOX
+    function openCreateRoomModal(){ document.getElementById('createRoomModal').classList.add('active'); }
+    function closeCreateRoomModal(){ document.getElementById('createRoomModal').classList.remove('active'); }
+    function openInboxModal(){ document.getElementById('inboxModal').classList.add('active'); renderInbox(); }
+    function closeInboxModal(){ document.getElementById('inboxModal').classList.remove('active'); }
+
+    function sendWatchPartyInvite(){
+        const epKey = document.getElementById('roomEpSelect').value;
+        const friend = document.getElementById('friendUsernameInput').value.trim();
+        if(!friend){ alert('Introduz o nome do teu amigo.'); return; }
+
+        invites.push({ id: Date.now(), from: currentUser || 'Visitante', to: friend, epKey, status: 'pending' });
+        save('cn_invites', invites);
+        closeCreateRoomModal();
+        alert(`Convite enviado para ${friend}!`);
+    }
+
+    function triggerWatchPartyInviteFromPlayer(){
+        if(currentPlayingEp){
+            openCreateRoomModal();
+        }
+    }
+
+    function updateInboxBadge(){
+        const myInvites = invites.filter(i => currentUser && i.to.toLowerCase() === currentUser.toLowerCase() && i.status === 'pending');
+        const badge = document.getElementById('inboxBadge');
+        if(badge) badge.textContent = myInvites.length;
+    }
+
+    function renderInbox(){
+        const list = document.getElementById('inboxList');
+        if(!list) return;
+        const myInvites = invites.filter(i => currentUser && i.to.toLowerCase() === currentUser.toLowerCase() && i.status === 'pending');
+        list.innerHTML = myInvites.length ? myInvites.map(inv => `
+            <div class="inbox-item">
+                <div><strong>@${esc(inv.from)}</strong> convidou-te para ver o episódio!</div>
+                <div class="inbox-actions">
+                    <button class="btn-accept" onclick="acceptInvite(${inv.id})">Aceitar</button>
+                    <button class="btn-decline" onclick="declineInvite(${inv.id})">Recusar</button>
+                </div>
+            </div>`).join('') : '<p style="color:var(--text-muted)">Sem convites pendentes.</p>';
+    }
+
+    function acceptInvite(id){
+        const inv = invites.find(i => i.id === id);
+        if(!inv) return;
+        inv.status = 'accepted';
+        save('cn_invites', invites);
+        closeInboxModal();
+        const parts = inv.epKey.split('_');
+        openPlayerModal(parts[0], parts[1], `Episódio Ver Juntos`);
+        document.getElementById('watchPartyChatSection').style.display = 'block';
+    }
+
+    function declineInvite(id){
+        invites = invites.filter(i => i.id !== id);
+        save('cn_invites', invites);
+        renderInbox();
+        updateInboxBadge();
+    }
+
+    function sendChatMessage(){
+        const input = document.getElementById('chatInput');
+        const msg = input.value.trim();
+        if(!msg) return;
+        const box = document.getElementById('chatBox');
+        const name = currentUser || 'Visitante';
+        box.innerHTML += `<div class="chat-msg"><strong>${esc(name)}:</strong> ${esc(msg)}</div>`;
+        box.scrollTop = box.scrollHeight;
+        input.value = '';
+    }
+
+    function startCountdownTimer(){
+        const target = new Date('2026-11-20T00:00:00').getTime();
+        setInterval(()=>{
+            const now = Date.now();
+            const diff = Math.max(0, target - now);
+            document.getElementById('cd-days').textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('cd-hours').textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            document.getElementById('cd-mins').textContent = Math.floor((diff / 1000 / 60) % 60);
+            document.getElementById('cd-secs').textContent = Math.floor((diff / 1000) % 60);
+        }, 1000);
+    }
+
+    document.addEventListener('keydown', e => {
+        if(e.key === 'Escape'){
+            ['playerModal','inboxModal','createRoomModal','genericModal'].forEach(id => document.getElementById(id)?.classList.remove('active'));
+        }
+    });
+
+    // Make functions globally available
+    window.switchPage = switchPage;
+    window.openPlayerModal = openPlayerModal;
+    window.closePlayerModal = closePlayerModal;
+    window.skipVideoTime = skipVideoTime;
+    window.changeVideoSpeed = changeVideoSpeed;
+    window.changeVideoQuality = changeVideoQuality;
+    window.toggleCinemaMode = toggleCinemaMode;
+    window.login = login;
+    window.register = register;
+    window.logout = logout;
+    window.saveMyProfile = saveMyProfile;
+    window.openProfile = openProfile;
+    window.closeGenericModal = closeGenericModal;
+    window.renderEpisodesList = renderEpisodesList;
+    window.handleGlobalSearch = handleGlobalSearch;
+    window.openCreateRoomModal = openCreateRoomModal;
+    window.closeCreateRoomModal = closeCreateRoomModal;
+    window.sendWatchPartyInvite = sendWatchPartyInvite;
+    window.triggerWatchPartyInviteFromPlayer = triggerWatchPartyInviteFromPlayer;
+    window.openInboxModal = openInboxModal;
+    window.closeInboxModal = closeInboxModal;
+    window.acceptInvite = acceptInvite;
+    window.declineInvite = declineInvite;
+    window.sendChatMessage = sendChatMessage;
+    window.populateAdminEpDropdown = populateAdminEpDropdown;
+    window.saveAdminVideo = saveAdminVideo;
+    window.saveStaffMember = saveStaffMember;
+    window.createAnnouncement = createAnnouncement;
+    window.createPoll = createPoll;
+    window.votePoll = votePoll;
+    window.switchAdminTab = switchAdminTab;
+    </script>
+</body>
+</html>
