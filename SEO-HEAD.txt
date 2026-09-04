@@ -1,0 +1,9 @@
+<!-- Add these tags inside <head> in index.html -->
+<title>Watch Miraculous Online — Miraculous Ladybug Episodes</title>
+<meta name="description" content="Watch Miraculous Ladybug episodes online. Explore Miraculous episodes and watch your favorite adventures.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://bcghub.vercel.app/">
+<meta property="og:title" content="Watch Miraculous Online — Miraculous Ladybug Episodes">
+<meta property="og:description" content="Watch Miraculous Ladybug episodes online. Explore Miraculous episodes and watch your favorite adventures.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bcghub.vercel.app/">
