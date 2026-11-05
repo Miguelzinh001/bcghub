@@ -3293,7 +3293,7 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                     <div class="liquid-clip-help">Escolhe o início e o fim no formato <b>minutos:segundos</b>. O vídeo será reproduzido nesse intervalo e o clip será exportado em 1080p com áudio sincronizado quando o navegador permitir.</div>
                     <div class="liquid-clip-field" style="margin:0 0 12px">
                         <label for="liquidClipAudioSelect">Áudio do clip</label>
-                        <select id="liquidClipAudioSelect" class="liquid-clip-input" style="min-height:42px" onchange="selectEpisodePlayerAudio(this.value)">
+                        <select id="liquidClipAudioSelect" class="liquid-clip-input" style="min-height:42px" onchange="selectLiquidClipAudio(this.value)">
                             <option value="original">Áudio original</option>
                         </select>
                     </div>
@@ -6514,6 +6514,55 @@ async function applyProfileMusicSelection(track){
       select.value=opts.some(o=>o.value===current)?current:'original';
     }
 
+    function waitForLiquidClipMediaReady(media,timeout=12000){
+      return new Promise((resolve,reject)=>{
+        if(!media)return reject(new Error('Elemento de áudio/vídeo indisponível.'));
+        if(media.readyState>=2)return resolve();
+        let timer;
+        const cleanup=()=>{clearTimeout(timer);media.removeEventListener('canplay',ready);media.removeEventListener('error',failed);};
+        const ready=()=>{cleanup();resolve();};
+        const failed=()=>{cleanup();reject(new Error('Não foi possível carregar a faixa selecionada. Confirma o URL e o formato do ficheiro.'));};
+        media.addEventListener('canplay',ready,{once:true});
+        media.addEventListener('error',failed,{once:true});
+        timer=setTimeout(()=>{cleanup();reject(new Error('A faixa demorou demasiado tempo a carregar. Espera que o vídeo esteja pronto e tenta novamente.'));},timeout);
+      });
+    }
+
+    async function selectLiquidClipAudio(value){
+      const wanted=String(value||'original');
+      const select=document.getElementById('liquidClipAudioSelect');
+      const p=document.getElementById('mainVideoPlayer');
+      const a=document.getElementById('episodeAudioPlayer');
+      if(select)select.value=wanted;
+      try{
+        await selectEpisodePlayerAudio(wanted);
+        if(wanted.startsWith('audio:')){
+          const code=wanted.slice(6);
+          await waitForLiquidClipMediaReady(a);
+          if(!activeAudioTrack||String(activeAudioTrack.code)!==code)throw new Error('A faixa escolhida não ficou ativa.');
+          if(Number.isFinite(p?.currentTime)&&Number.isFinite(a.duration))a.currentTime=Math.min(p.currentTime,a.duration);
+          a.volume=p?.volume??1;a.muted=false;
+          if(p&&!p.paused)await a.play().catch(()=>{throw new Error('O navegador bloqueou a reprodução da faixa de áudio.');});
+          else a.pause();
+          if(p)p.muted=true;
+        }else if(wanted.startsWith('episode:')){
+          await waitForLiquidClipMediaReady(p);
+          if(String(currentEpisodeVersionCode)!==wanted.slice(8))throw new Error('A versão de episódio escolhida não ficou ativa.');
+        }else{
+          await waitForLiquidClipMediaReady(p);
+          if(p)p.muted=false;
+          if(a)a.pause();
+        }
+        if(select)select.value=wanted;
+        return true;
+      }catch(err){
+        console.error('selectLiquidClipAudio:',err);
+        liquidStatus(err?.message||'Não foi possível selecionar o áudio.',2600);
+        populateLiquidClipAudioOptions();
+        return false;
+      }
+    }
+
     function closeLiquidClipCreator(){
       if(liquidClipRecording)return;
       const modal=document.getElementById('liquidClipModal');if(modal){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}
@@ -6580,6 +6629,8 @@ async function applyProfileMusicSelection(track){
       const start=parseLiquidClipTime(document.getElementById('liquidClipStart')?.value),end=parseLiquidClipTime(document.getElementById('liquidClipEnd')?.value);
       if(!Number.isFinite(start)||!Number.isFinite(end)||start<0||end<=start||end>p.duration+0.05)return alert(`Intervalo inválido. Usa 0:00 até ${fmtPlayerTime(p.duration)}.`);
       if(liquidClipRecording)return;
+      const clipAudioChoice=document.getElementById('liquidClipAudioSelect')?.value||'original';
+      if(!await selectLiquidClipAudio(clipAudioChoice))return;
       resetLiquidClipPreview();
 
       const selectedMimeType=liquidClipMimeType();
@@ -6604,7 +6655,7 @@ async function applyProfileMusicSelection(track){
           try{
             const ac=(audioEl.captureStream||audioEl.mozCaptureStream)?.call(audioEl);
             const tracks=ac?.getAudioTracks?.()||[];
-            tracks.forEach(t=>{stream.addTrack(t);added=true});
+            tracks.forEach(t=>{t.enabled=true;stream.addTrack(t);added=true});
           }catch(e){console.warn('captura direta áudio:',e)}
           if(!added){
             try{
@@ -6614,12 +6665,13 @@ async function applyProfileMusicSelection(track){
               audioSource=audioEl.__noirClipAudioSource;
               if(!audioSource){audioSource=audioContext.createMediaElementSource(audioEl);audioEl.__noirClipAudioSource=audioSource}
               audioSource.connect(audioDestination);
-              audioDestination.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
+              audioDestination.stream.getAudioTracks().forEach(t=>{t.enabled=true;stream.addTrack(t);added=true});
             }catch(e){console.warn('fallback áudio:',e)}
           }
+          if(!added)throw new Error('Não foi possível capturar a faixa de áudio selecionada. Verifica se o URL permite reprodução e captura de áudio (CORS).');
         }else{
           const ats=videoCapture?.getAudioTracks?.()||[];
-          ats.forEach(t=>stream.addTrack(t));
+          ats.forEach(t=>{t.enabled=true;stream.addTrack(t)});
         }
 
         p.pause();
@@ -6643,7 +6695,8 @@ async function applyProfileMusicSelection(track){
         await waitForLiquidVideoFrames(p,3,1600);
 
         const sourceWidth=p.videoWidth||1920,sourceHeight=p.videoHeight||1080;
-        const targetVideoBitrate=Math.min(10000000,Math.max(4500000,Math.round(sourceWidth*sourceHeight*0.0045)));
+        // Bitrate mais equilibrado para evitar engasgos do MediaRecorder em telemóveis.
+        const targetVideoBitrate=Math.min(8000000,Math.max(4000000,Math.round(sourceWidth*sourceHeight*0.0038)));
         recorder=new MediaRecorder(stream,{mimeType:selectedMimeType,videoBitsPerSecond:targetVideoBitrate,audioBitsPerSecond:192000});
         liquidClipRecorder=recorder;
         recorder.ondataavailable=e=>{if(e.data&&e.data.size)liquidClipChunks.push(e.data)};
