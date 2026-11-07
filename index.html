@@ -997,8 +997,7 @@
         }
 
         .modal-overlay.cinema-mode video {
-            max-height: 70vh;
-        }
+            max-height: 70vh;        }
 
         .inbox-item {
             background: var(--bg-card);
@@ -1997,8 +1996,7 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
                 <path d="M108 172c28 18 51 20 85 5M96 193c38 21 83 22 126 1M105 214c37 19 73 18 109 2" fill="none" stroke="#fff" stroke-opacity=".23" stroke-width="7" stroke-linecap="round"/>
                 <g transform="translate(0,-4)">
                     <path d="M111 132c0-42 22-75 49-75s49 33 49 75c0 28-18 48-49 48s-49-20-49-48Z" fill="#d8dbe1"/>
-                    <path d="M114 75 106 40l30 23M206 75l8-35-30 23" fill="#d8dbe1"/>
-                    <path d="M115 76 110 49l23 18M205 76l5-27-23 18" fill="#aeb4bf"/>
+                    <path d="M114 75 106 40l30 23M206 75l8-35-30 23" fill="#d8dbe1"/>                    <path d="M115 76 110 49l23 18M205 76l5-27-23 18" fill="#aeb4bf"/>
                     <ellipse cx="142" cy="120" rx="6" ry="9" fill="#111"/><ellipse cx="178" cy="120" rx="6" ry="9" fill="#111"/>
                     <path d="M154 135q6 6 12 0" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>
                     <path d="M108 158q-22 16-26 32M212 158q22 16 26 32" fill="none" stroke="#d8dbe1" stroke-width="16" stroke-linecap="round"/>
@@ -2997,8 +2995,7 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
             <stop offset="0" stop-color="#f5d6e7" stop-opacity=".62"/>
             <stop offset="1" stop-color="#c5b3dc" stop-opacity="0"/>
           </radialGradient>
-          <filter id="snowLeopardFrameShadow" x="-25%" y="-25%" width="150%" height="160%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3.1" result="blur"/>
+          <filter id="snowLeopardFrameShadow" x="-25%" y="-25%" width="150%" height="160%">            <feGaussianBlur in="SourceAlpha" stdDeviation="3.1" result="blur"/>
             <feOffset dy="3" dx="1" result="offset"/>
             <feComponentTransfer><feFuncA type="linear" slope=".48"/></feComponentTransfer>
             <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -3997,8 +3994,7 @@ function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_
         throw new Error(`Falha no upload. SDK: ${primary}. REST: ${fallbackError?.message||fallbackError}`);
       }
     }
-    async function deleteCloudMedia(path){
-      if(!path||!supabaseClient)return;
+    async function deleteCloudMedia(path){      if(!path||!supabaseClient)return;
       let sdkError=null;
       try{
         const {error}=await supabaseClient.storage.from(SUPABASE_MEDIA_BUCKET).remove([path]);
@@ -4997,8 +4993,7 @@ function discordAssetUrls(d){
   const avatarHash=String(d?.avatar||'');
   const bannerHash=String(d?.banner||'');
   const decoAsset=String(d?.avatar_decoration_data?.asset||'');
-  const avatarExt=avatarHash.startsWith('a_')?'gif':'png';
-  const bannerExt=bannerHash.startsWith('a_')?'gif':'png';
+  const avatarExt=avatarHash.startsWith('a_')?'gif':'png';  const bannerExt=bannerHash.startsWith('a_')?'gif':'png';
   return {
     avatarUrl:d?.avatar_url||(!avatarHash&&id?`https://cdn.discordapp.com/embed/avatars/0.png`:(id&&avatarHash?`https://cdn.discordapp.com/avatars/${id}/${avatarHash}.${avatarExt}?size=256`:'')),
     bannerUrl:d?.banner_url||(id&&bannerHash?`https://cdn.discordapp.com/banners/${id}/${bannerHash}.${bannerExt}?size=1024`:''),
@@ -5997,8 +5992,7 @@ async function applyProfileMusicSelection(track){
     function renderLeakCollection(container,posts,opts={}){
       if(!container)return;
       if(!posts.length){container.innerHTML=`<div class="small-note leak-empty-state">${opts.emptyText||'Ainda não existem publicações.'}</div>`;return}
-      container.innerHTML=posts.map(p=>leakCardMarkup(p,{reposted:!!opts.reposted})).join('');
-    }
+      container.innerHTML=posts.map(p=>leakCardMarkup(p,{reposted:!!opts.reposted})).join('');    }
     async function renderLeakPosts(){
       const container=document.getElementById('tweetsFeedContainer');if(!container)return;
       if(cloudReady&&supabaseClient)await loadLeakSocialData();
@@ -6998,7 +6992,6 @@ async function applyProfileMusicSelection(track){
         if(settings?.classList.contains('open')&&!settings.contains(e.target)&&!gear)settings.classList.remove('open');
       });
     }
-
     // ===== LIQUID GLASS — SELECTOR EM MODAL, COMPATÍVEL COM TOUCH =====
     // Mantém os <select> reais como fonte de dados, mas o utilizador toca num
     // botão normal. Assim não há conflitos de touch/pointer no Android.
@@ -7466,6 +7459,11 @@ function commentLikedByMe(id){return !!currentUser&&episodeCommentLikes.some(x=>
       p.ontimeupdate=()=>{if(activeAudioTrack){const ae=document.getElementById('episodeAudioPlayer');if(ae&&Number.isFinite(ae.duration)&&Math.abs(ae.currentTime-p.currentTime)>.45){try{ae.currentTime=Math.min(p.currentTime,ae.duration)}catch{}}if(!p.paused&&ae?.paused)ae.play().catch(()=>{});}syncLiquidPlayerUI();if(!getAdminFeatureState().rememberProgress)return;if(currentUser&&currentPlayingEp&&p.duration&&Number.isFinite(p.duration)){updateContinueWatchState(season,idx,title,p.currentTime,p.duration);queueWatchDataCloudSync(false);if(p.currentTime>1)setUserStatus('watching',title)}else if(currentPlayingEp&&p.duration&&Number.isFinite(p.duration)){const ep=Number(idx);const obj={season:Number(season),epIndex:ep,title,positionSeconds:p.currentTime,progress:`${fmtTime(p.currentTime)} / ${fmtTime(p.duration)}`,progressPercent:Math.round(p.currentTime/p.duration*100)};continueWatching=[...continueWatching.filter(x=>!(Number(x.season)===Number(season)&&Number(x.epIndex)===ep)),obj].slice(-20);localStorage.setItem('cn_continue_watching',JSON.stringify(continueWatching));}};
       if(subUrl){try{oldTrack.track.mode='disabled'}catch(e){}}
       syncLiquidPlayerUI();
+      // Carrega as legendas no próprio fluxo do player. A página de episódio
+      // chama esta função lexicalmente (não através de window.openPlayerModal).
+      if(typeof window.__bcgLoadEpisodeSubtitles==='function'){
+        window.__bcgLoadEpisodeSubtitles({...d,subUrl:subUrl||d.subUrl||''},key).catch(err=>console.warn('Legendas do episódio:',err));
+      }
     }
     function closePlayerModal(updateUrl=true){
       clearSeasonSevenCountdown();
@@ -7993,7 +7991,6 @@ async function renderAdminAccounts(){
         await renderLeakPosts(); renderAdminExtras();
       }catch(err){alert(`Não foi possível remover a publicação.\n\n${err?.message||err}`);}
     }
-
     async function deleteAnnouncement(id){
       if(!isAdminUser())return alert('Sem acesso de administrador.');
       const item=announcements.find(x=>String(x.id)===String(id)); if(!item)return alert('Anúncio não encontrado.');
@@ -8992,8 +8989,7 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
         const selected=selectedKeys.has(ep.key);
         const thumbSrc=ep.thumb||'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500&auto=format&fit=crop&q=80';
         return `<label class="room-picker-card ${selected?'selected':''}"><input class="room-picker-check" type="checkbox" data-room-ep="${esc(ep.key)}" ${selected?'checked':''} onchange="handleRoomPickerChange(this,${target})"><div class="room-picker-thumb"><img src="${esc(thumbSrc)}" alt="Thumbnail de ${esc(ep.fullTitle)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500&auto=format&fit=crop&q=80'"></div><div class="room-picker-body"><div class="room-picker-title">${esc(ep.fullTitle)}</div><div class="room-picker-meta">${ep.season==='specials'?'Especial':`T${esc(ep.season)}`} · com mídia</div></div></label>`;
-      }).join('');
-      const selectedCount=box.querySelectorAll('input[data-room-ep]:checked').length;
+      }).join('');      const selectedCount=box.querySelectorAll('input[data-room-ep]:checked').length;
       if(countEl)countEl.textContent=`${selectedCount}/${target} selecionados`;
     }
     function handleRoomPickerChange(input,target){
@@ -9992,8 +9988,7 @@ window.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>initSpotifyIntegr
 .dm-reply-bar,.dm-typing-bar,.dm-search-bar{margin:0 10px 8px;padding:8px 10px;border-radius:11px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);font-size:.68rem;color:var(--text-muted);display:none;align-items:center;gap:8px}
 .dm-reply-bar.active,.dm-typing-bar.active,.dm-search-bar.active{display:flex}
 .dm-reply-bar .dm-reply-text{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dm-search-bar input{flex:1;border:0;outline:0;background:transparent;color:#fff;font:inherit}
-.dm-msg-row{position:relative}
+.dm-search-bar input{flex:1;border:0;outline:0;background:transparent;color:#fff;font:inherit}.dm-msg-row{position:relative}
 .dm-msg-actions{display:none;gap:4px;position:absolute;top:-16px;right:8px;padding:3px;border-radius:9px;background:rgba(12,16,13,.94);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(12px);z-index:4}
 .dm-msg-row:hover .dm-msg-actions{display:flex}
 .dm-msg-action{width:25px;height:25px;border:0;border-radius:7px;background:rgba(255,255,255,.07);color:#fff;cursor:pointer;font-size:.65rem}
@@ -10919,10 +10914,9 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   document.addEventListener('click',e=>{if(!e.target.closest('#episodeSubMenu,#liquidSubtitleBtn'))closeSubMenu()});
   window.toggleEpisodeSubtitles=toggleEpisodeSubtitles;
   let subtitleAnimationFrame=0;function subtitleFramePump(){updateEpisodeSubtitleOverlay();const p=$('mainVideoPlayer');if(p&&!p.paused&&!p.ended)subtitleAnimationFrame=requestAnimationFrame(subtitleFramePump);else subtitleAnimationFrame=0;}const player=$('mainVideoPlayer');if(player){['timeupdate','seeking','seeked','loadedmetadata','ratechange','play','pause'].forEach(name=>player.addEventListener(name,updateEpisodeSubtitleOverlay));player.addEventListener('play',()=>{if(!subtitleAnimationFrame)subtitleAnimationFrame=requestAnimationFrame(subtitleFramePump);});player.addEventListener('pause',()=>{if(subtitleAnimationFrame)cancelAnimationFrame(subtitleAnimationFrame);subtitleAnimationFrame=0;updateEpisodeSubtitleOverlay();});player.addEventListener('emptied',()=>{subtitleFetchToken++;if(subtitleAnimationFrame)cancelAnimationFrame(subtitleAnimationFrame);subtitleAnimationFrame=0;resetEpisodeSubtitleUi();});}
-  const originalOpenPlayer=window.openPlayerModal;
-  if(typeof originalOpenPlayer==='function'&&!originalOpenPlayer.__bcgSubtitleWrapped){
-    const wrapped=async function(season,idx,...args){const res=await originalOpenPlayer.call(this,season,idx,...args);const key=`${season}_${idx}`,d=(typeof customVideos!=='undefined'?customVideos?.[key]:{})||{};if(!d.videoUrl&&!d.blobKey){resetEpisodeSubtitleUi();return res;}await loadEpisodeSubtitleForPlayer(d,key);return res;};wrapped.__bcgSubtitleWrapped=true;window.openPlayerModal=wrapped;
-  }
+  // Ponte global chamada diretamente pela função lexical openPlayerModal.
+  window.__bcgLoadEpisodeSubtitles=loadEpisodeSubtitleForPlayer;
+  window.__bcgResetEpisodeSubtitleUi=resetEpisodeSubtitleUi;
   // Guardar/mostrar el desfase al seleccionar otro episodio en el panel de mídia.
   function loadSubtitleOffsetField(){const s=$('adminSeasonSelect')?.value,idx=$('adminEpSelect')?.value;if(s==null||idx==null)return;const d=(typeof customVideos!=='undefined'?customVideos?.[`${s}_${idx}`]:{})||{};if($('adminSubtitleOffsetInput'))$('adminSubtitleOffsetInput').value=String(Number(d.subtitleOffset)||0);}
   $('adminSeasonSelect')?.addEventListener('change',()=>setTimeout(loadSubtitleOffsetField,0));$('adminEpSelect')?.addEventListener('change',loadSubtitleOffsetField);
@@ -10993,8 +10987,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   async function changeAdminTrailer(id,action){if(typeof isAdminUser==='function'?!isAdminUser():!currentUser?.isAdmin)return alert('Sem acesso de administrador.');const current=allTrailers(),item=current.find(x=>String(x.id)===String(id));if(!item)return;if(action==='delete'&&!confirm(`Apagar o trailer “${item.title}”?`))return;const next=action==='delete'?current.filter(x=>String(x.id)!==String(id)):current.map(x=>String(x.id)===String(id)?{...x,published:x.published===false,updatedAt:Date.now()}:x);siteSettings={...siteSettings,trailerBoard:next};try{localStorage.setItem('cn_site_settings',JSON.stringify(siteSettings));}catch{}try{const result=typeof save==='function'?await save('cn_announcements',Array.isArray(announcements)?announcements:[]):{synced:false};renderTrailerBoard();renderAdminTrailerBoardList();const st=$('adminTrailerStatusMessage');if(st){st.className='admin-media-status active '+(result?.synced?'success':'');st.textContent=result?.synced?'Alteração guardada e sincronizada.':'Alteração guardada localmente; sincronização pendente.';}}catch(err){alert('Não foi possível atualizar o trailer: '+(err?.message||err));}}
   function playTrailerBoardItem(id){const item=allTrailers().find(x=>String(x.id)===String(id));if(!item)return alert('Este trailer já não existe.');if(item.published===false&&!(typeof isAdminUser==='function'&&isAdminUser()))return alert('Este trailer ainda não está publicado.');const url=safeHttpUrl(item.videoUrl);if(!url)return alert('O link do trailer é inválido.');let inlineMode=false;if(item.scope==='episode'&&typeof openEpisodeDetailRoute==='function'){openEpisodeDetailRoute(String(item.season||'1'),Math.max(0,Number(item.episodeIndex)||0));inlineMode=!!document.getElementById('episodeInlinePlayerMount');}const p=$('mainVideoPlayer'),modal=$('playerModal'),titleEl=$('modalEpTitle');if(!p||!modal)return alert('O player do BCG Hub não está disponível nesta página.');
     try{if(typeof activeHls!=='undefined'&&activeHls){activeHls.destroy();activeHls=null;}}catch{}try{p.pause();p.removeAttribute('src');$('videoSource')?.removeAttribute('src');p.load();}catch{}try{if(typeof clearEpisodeAudio==='function')clearEpisodeAudio();}catch{}try{if(typeof resetEpisodeSubtitleUi==='function')resetEpisodeSubtitleUi();}catch{}if(typeof currentPlayingEp!=='undefined')currentPlayingEp=null;window.__bcgPlayingTrailer=true;p.defaultPlaybackRate=1;p.playbackRate=1;p.onplay=p.onpause=p.onended=p.onseeked=p.ontimeupdate=null;p.onerror=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);if(typeof showPlayerError==='function')showPlayerError('O trailer não conseguiu carregar. Usa um link direto de vídeo MP4, WebM ou M3U8 e confirma as permissões/CORS do servidor.');};if(titleEl)titleEl.textContent=item.title||'Trailer';$('episodeAudioSelector')?.classList.add('hidden');$('seasonSevenReleaseCountdown')?.style.setProperty('display','none');const comments=$('playerCommentsMount');if(comments)comments.style.display='none';if(typeof hidePlayerError==='function')hidePlayerError();if(typeof setLiquidPlayerActive==='function')setLiquidPlayerActive(true);if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(true);if(inlineMode){modal.classList.remove('active');const mount=document.getElementById('episodeInlinePlayerMount');const shell=document.getElementById('videoShell');if(mount&&shell&&!mount.contains(shell))mount.appendChild(shell);const heading=mount?.querySelector('.episode-inline-placeholder');if(heading)heading.remove();}else{modal.classList.add('active');}modal.classList.remove('watch-room-active');
-    const play=()=>p.play().catch(()=>{if(typeof liquidStatus==='function')liquidStatus('Toca em reproduzir para iniciar o trailer');});if(/\.m3u8(?:[?#]|$)/i.test(url)&&typeof Hls!=='undefined'&&Hls&&Hls.isSupported()){activeHls=new Hls({enableWorker:true,lowLatencyMode:false,backBufferLength:30,maxBufferLength:30});activeHls.loadSource(url);activeHls.attachMedia(p);activeHls.on(Hls.Events.MANIFEST_PARSED,()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);play();});activeHls.on(Hls.Events.ERROR,(event,data)=>{if(data?.fatal){try{activeHls.destroy()}catch{}activeHls=null;p.onerror?.();}});}else{p.src=url;p.load();p.onloadedmetadata=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);};p.oncanplay=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);};p.onplaying=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);};play();}}
-  window.renderTrailerBoard=renderTrailerBoard;window.renderAdminTrailerBoardList=renderAdminTrailerBoardList;window.saveAdminTrailerBoardItem=saveAdminTrailerBoardItem;window.resetAdminTrailerBoardForm=resetAdminTrailerBoardForm;window.updateAdminTrailerAssociationFields=updateAdminTrailerAssociationFields;window.populateAdminTrailerEpisodeSelect=populateAdminTrailerEpisodeSelect;window.playTrailerBoardItem=playTrailerBoardItem;
+    const play=()=>p.play().catch(()=>{if(typeof liquidStatus==='function')liquidStatus('Toca em reproduzir para iniciar o trailer');});if(/\.m3u8(?:[?#]|$)/i.test(url)&&typeof Hls!=='undefined'&&Hls&&Hls.isSupported()){activeHls=new Hls({enableWorker:true,lowLatencyMode:false,backBufferLength:30,maxBufferLength:30});activeHls.loadSource(url);activeHls.attachMedia(p);activeHls.on(Hls.Events.MANIFEST_PARSED,()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);play();});activeHls.on(Hls.Events.ERROR,(event,data)=>{if(data?.fatal){try{activeHls.destroy()}catch{}activeHls=null;p.onerror?.();}});}else{p.src=url;p.load();p.onloadedmetadata=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);};p.oncanplay=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);};p.onplaying=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);};play();}}  window.renderTrailerBoard=renderTrailerBoard;window.renderAdminTrailerBoardList=renderAdminTrailerBoardList;window.saveAdminTrailerBoardItem=saveAdminTrailerBoardItem;window.resetAdminTrailerBoardForm=resetAdminTrailerBoardForm;window.updateAdminTrailerAssociationFields=updateAdminTrailerAssociationFields;window.populateAdminTrailerEpisodeSelect=populateAdminTrailerEpisodeSelect;window.playTrailerBoardItem=playTrailerBoardItem;
   $('adminTrailerBoardList')?.addEventListener('click',event=>{const b=event.target.closest('button');if(!b)return;const id=b.dataset.trailerEdit||b.dataset.trailerToggle||b.dataset.trailerDelete||b.dataset.trailerTest;if(!id)return;if(b.dataset.trailerEdit)editAdminTrailerBoardItem(id);else if(b.dataset.trailerToggle)changeAdminTrailer(id,'toggle');else if(b.dataset.trailerDelete)changeAdminTrailer(id,'delete');else if(b.dataset.trailerTest)playTrailerBoardItem(id);});
   $('adminTrailerCoverUrl')?.addEventListener('input',previewAdminTrailer);
   const oldSwitch=window.switchAdminTab;if(typeof oldSwitch==='function'&&!oldSwitch.__bcgTrailerWrapped){const wrapped=function(id,...args){const r=oldSwitch.call(this,id,...args);if(id==='trailers')renderAdminTrailerBoardList();return r;};wrapped.__bcgTrailerWrapped=true;window.switchAdminTab=wrapped;}
