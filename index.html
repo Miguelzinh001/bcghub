@@ -1811,6 +1811,13 @@ body.tv-navigation-active .tv-focus::after{content:'';position:absolute;pointer-
 .notification-list{display:flex;flex-direction:column;gap:9px}.notification-item{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:12px;cursor:pointer;transition:.16s}.notification-item:hover{border-color:var(--accent-green);transform:translateY(-1px)}.notification-item.unread{border-color:rgba(255,255,255,.55);box-shadow:0 0 0 1px rgba(255,255,255,.08)}.notification-head{display:flex;align-items:flex-start;gap:10px}.notification-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.25);color:var(--accent-green);flex:0 0 38px}.notification-main{min-width:0;flex:1}.notification-title{font-weight:850;font-size:.88rem}.notification-body{font-size:.78rem;color:var(--text-muted);line-height:1.4;margin-top:2px;white-space:pre-wrap;overflow-wrap:anywhere}.notification-meta{font-size:.67rem;color:rgba(255,255,255,.42);margin-top:6px}.notification-actions{display:flex;gap:7px;margin-top:9px}.notification-action{flex:1;border:1px solid var(--border-color);background:rgba(255,255,255,.05);color:#fff;border-radius:9px;padding:8px 10px;font-weight:800;cursor:pointer}.notification-action.primary{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.12);color:#baffcc}.notification-toolbar{display:flex;gap:7px;margin:-2px 0 12px}.notification-toolbar button{flex:1;border:1px solid var(--border-color);background:rgba(255,255,255,.04);color:#fff;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer}.notification-toolbar button:hover{border-color:var(--accent-green)}.notification-empty{padding:22px 12px;text-align:center;color:var(--text-muted);border:1px dashed var(--border-color);border-radius:13px}.realtime-toast{position:fixed;right:12px;top:68px;z-index:50000;width:min(360px,calc(100vw - 24px));background:rgba(18,25,20,.92);border:1px solid rgba(255,255,255,.48);box-shadow:0 18px 50px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-radius:15px;padding:12px;color:#fff;animation:rtToastIn .2s ease-out}.realtime-toast strong{display:block;font-size:.85rem}.realtime-toast span{display:block;margin-top:3px;font-size:.75rem;color:var(--text-muted);line-height:1.4}@keyframes rtToastIn{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}.room-directory-list{display:flex;flex-direction:column;gap:10px}.room-directory-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:12px}.room-directory-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.room-directory-title{font-weight:900}.room-directory-meta{font-size:.72rem;color:var(--text-muted);margin-top:3px;line-height:1.35}.room-directory-members{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.room-directory-user{font-size:.68rem;padding:4px 7px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--border-color)}.room-directory-action{width:100%;margin-top:10px}.admin-live-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:14px}.admin-live-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}.admin-live-head h4{margin:0 0 5px}.admin-live-head p{margin:0;color:var(--text-muted);font-size:.75rem;line-height:1.4}.admin-live-count{white-space:nowrap;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.10);color:#baffcc;border-radius:9px;padding:5px 8px;font-weight:900;font-size:.72rem}.admin-live-list{display:flex;flex-direction:column;gap:8px}.admin-live-user{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--border-color);background:rgba(255,255,255,.025);border-radius:12px}.admin-live-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid var(--border-color);background:#182018}.admin-live-main{min-width:0;flex:1}.admin-live-name{font-weight:850}.admin-live-status{font-size:.72rem;color:var(--text-muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.admin-live-room{font-size:.68rem;color:var(--accent-green);margin-top:3px}.admin-live-dot{width:8px;height:8px;border-radius:50%;background:var(--accent-green);box-shadow:0 0 12px rgba(255,255,255,.65);flex:0 0 8px}.admin-live-time{font-size:.65rem;color:rgba(255,255,255,.42);white-space:nowrap}.admin-live-empty{padding:18px 10px;text-align:center;color:var(--text-muted);border:1px dashed var(--border-color);border-radius:12px}.notification-badge-pulse{animation:notifPulse .7s ease-out}@keyframes notifPulse{0%{transform:scale(1)}45%{transform:scale(1.25)}100%{transform:scale(1)}}
 </style>
 <style id="subtitle-manager-styles">
+.liquid-top-actions{display:flex;align-items:center;gap:7px;flex:0 0 auto;position:relative;z-index:55;pointer-events:auto}
+.liquid-top .liquid-title{max-width:calc(100% - 100px);min-width:0}
+#liquidSubtitleBtn{display:inline-flex!important;min-width:46px;width:auto;height:38px;padding:0 9px;visibility:visible!important;opacity:1;pointer-events:auto}
+#liquidSubtitleBtn:disabled{opacity:.65;cursor:wait}
+.ep-sub-menu{top:56px;bottom:auto;right:10px;max-height:min(48vh,300px);overflow-y:auto;pointer-events:auto}
+.ep-sub-menu button{pointer-events:auto;min-height:40px}
+@media(max-width:600px){.liquid-top-actions{gap:6px}#liquidSubtitleBtn{min-width:42px;height:36px;padding:0 7px}.liquid-top .liquid-title{max-width:calc(100% - 91px)}.ep-sub-menu{top:50px;right:8px}}
 .sub-admin-card{background:rgba(255,255,255,.03);border:1px solid var(--border-color);border-radius:14px;padding:14px}
 .sub-admin-add{border-top:1px solid var(--border-color);padding-top:14px;margin-top:12px}
 .sub-admin-tag{font-size:.64rem;font-weight:900;color:#baffcc;border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:2px 6px;margin-left:6px}
@@ -1989,14 +1996,14 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
     <!-- OFFLINE PAGE -->
     <section id="offlinePage" class="offline-page" aria-live="polite">
         <div class="offline-inner">
-            <svg class="offline-illustration" viewBox="0 0 320 280" role="img" aria-label="Gato sentado em cima de uma bola de lã">
-                <defs><linearGradient id="yarnGrad" x1="0" x2="1"><stop offset="0" stop-color="#6ee7ff"/><stop offset="1" stop-color="#7c5cff"/></linearGradient></defs>
+            <svg class="offline-illustration" viewBox="0 0 320 280" role="img" aria-label="Gato sentado em cima de uma bola de lã">                <defs><linearGradient id="yarnGrad" x1="0" x2="1"><stop offset="0" stop-color="#6ee7ff"/><stop offset="1" stop-color="#7c5cff"/></linearGradient></defs>
                 <ellipse cx="160" cy="235" rx="95" ry="22" fill="rgba(0,0,0,.25)"/>
                 <path d="M83 212c0-45 35-78 77-78s77 33 77 78c0 22-15 34-77 34s-77-12-77-34Z" fill="url(#yarnGrad)" stroke="#fff" stroke-opacity=".2" stroke-width="3"/>
                 <path d="M108 172c28 18 51 20 85 5M96 193c38 21 83 22 126 1M105 214c37 19 73 18 109 2" fill="none" stroke="#fff" stroke-opacity=".23" stroke-width="7" stroke-linecap="round"/>
                 <g transform="translate(0,-4)">
                     <path d="M111 132c0-42 22-75 49-75s49 33 49 75c0 28-18 48-49 48s-49-20-49-48Z" fill="#d8dbe1"/>
-                    <path d="M114 75 106 40l30 23M206 75l8-35-30 23" fill="#d8dbe1"/>                    <path d="M115 76 110 49l23 18M205 76l5-27-23 18" fill="#aeb4bf"/>
+                    <path d="M114 75 106 40l30 23M206 75l8-35-30 23" fill="#d8dbe1"/>
+                    <path d="M115 76 110 49l23 18M205 76l5-27-23 18" fill="#aeb4bf"/>
                     <ellipse cx="142" cy="120" rx="6" ry="9" fill="#111"/><ellipse cx="178" cy="120" rx="6" ry="9" fill="#111"/>
                     <path d="M154 135q6 6 12 0" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>
                     <path d="M108 158q-22 16-26 32M212 158q22 16 26 32" fill="none" stroke="#d8dbe1" stroke-width="16" stroke-linecap="round"/>
@@ -2988,14 +2995,14 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
           <radialGradient id="snowLeopardOrb" cx="35%" cy="27%" r="80%">
             <stop offset="0" stop-color="#fcf7ff"/>
             <stop offset=".53" stop-color="#e9e3f1"/>
-            <stop offset=".8" stop-color="#d7ccdf"/>
-            <stop offset="1" stop-color="#b8adca"/>
+            <stop offset=".8" stop-color="#d7ccdf"/>            <stop offset="1" stop-color="#b8adca"/>
           </radialGradient>
           <radialGradient id="snowLeopardOrbGlow" cx="55%" cy="65%" r="62%">
             <stop offset="0" stop-color="#f5d6e7" stop-opacity=".62"/>
             <stop offset="1" stop-color="#c5b3dc" stop-opacity="0"/>
           </radialGradient>
-          <filter id="snowLeopardFrameShadow" x="-25%" y="-25%" width="150%" height="160%">            <feGaussianBlur in="SourceAlpha" stdDeviation="3.1" result="blur"/>
+          <filter id="snowLeopardFrameShadow" x="-25%" y="-25%" width="150%" height="160%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3.1" result="blur"/>
             <feOffset dy="3" dx="1" result="offset"/>
             <feComponentTransfer><feFuncA type="linear" slope=".48"/></feComponentTransfer>
             <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -3210,7 +3217,10 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                 <div class="liquid-player" id="liquidPlayer" aria-label="Player Liquid Glass">
                     <div class="liquid-top">
                         <div class="liquid-title" id="liquidPlayerTitle">Vídeo</div>
-                        <button class="glass-btn" type="button" onclick="toggleLiquidSettings(event)" title="Definições" aria-label="Definições"><i class="fa-solid fa-gear"></i></button>
+                        <div class="liquid-top-actions">
+                            <button class="glass-btn liquid-subtitle-btn" type="button" id="liquidSubtitleBtn" onclick="toggleEpisodeSubtitles()" title="Legendas (CC)" aria-label="Legendas (CC)" aria-pressed="false"><i class="fa-solid fa-closed-captioning"></i><span class="cc-label">CC</span></button>
+                            <button class="glass-btn" type="button" onclick="toggleLiquidSettings(event)" title="Definições" aria-label="Definições"><i class="fa-solid fa-gear"></i></button>
+                        </div>
                     </div>
                     <div class="liquid-status" id="liquidStatus"></div>
                     <div class="liquid-bottom">
@@ -3222,7 +3232,6 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                                 <button class="glass-btn" type="button" id="liquidMuteBtn" onclick="toggleLiquidMute()" title="Volume" aria-label="Volume"><i class="fa-solid fa-volume-high"></i></button>
                                 <input id="liquidVolume" type="range" min="0" max="1" value="1" step="0.01" aria-label="Volume" oninput="setLiquidVolume(this.value)">
                             </div>
-                            <button class="glass-btn" type="button" id="liquidSubtitleBtn" onclick="toggleEpisodeSubtitles()" title="Ativar/desativar legendas" aria-label="Ativar/desativar legendas" aria-pressed="false" style="display:none"><i class="fa-solid fa-closed-captioning"></i><span class="cc-label">CC</span></button>
                             <div class="liquid-time"><span id="liquidCurrentTime">0:00</span> / <span id="liquidDuration">0:00</span></div>
                             <div class="liquid-spacer"></div>
                             <button class="glass-btn" type="button" onclick="takeLiquidScreenshot()" title="Tirar print em alta qualidade" aria-label="Tirar print em alta qualidade"><i class="fa-solid fa-camera"></i></button>
@@ -3985,8 +3994,7 @@ function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_
           const body=await response.text().catch(()=> '');
           throw new Error(`HTTP ${response.status}${body?`: ${body}`:''}`);
         }
-        const {data}=bucket.getPublicUrl(path);
-        if(data?.publicUrl){await verifyPublicMediaUrl(data.publicUrl);return data.publicUrl;}
+        const {data}=bucket.getPublicUrl(path);        if(data?.publicUrl){await verifyPublicMediaUrl(data.publicUrl);return data.publicUrl;}
         throw new Error('Upload concluído, mas o URL público não foi obtido.');
       }catch(fallbackError){
         if(fallbackError?.code==='MEDIA_NOT_PUBLIC')throw fallbackError;
@@ -3994,7 +4002,8 @@ function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_
         throw new Error(`Falha no upload. SDK: ${primary}. REST: ${fallbackError?.message||fallbackError}`);
       }
     }
-    async function deleteCloudMedia(path){      if(!path||!supabaseClient)return;
+    async function deleteCloudMedia(path){
+      if(!path||!supabaseClient)return;
       let sdkError=null;
       try{
         const {error}=await supabaseClient.storage.from(SUPABASE_MEDIA_BUCKET).remove([path]);
@@ -4984,8 +4993,7 @@ function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_
   const identity=session?.user?.identities?.find(i=>i.provider==='discord')||{};
   const imeta=identity?.identity_data||{};
   const id=String(imeta.provider_id||imeta.id||imeta.sub||meta.provider_id||meta.sub||meta.discord_id||'');
-  const username=String(imeta.username||imeta.global_name||meta.full_name||meta.name||meta.preferred_username||meta.user_name||'');
-  const avatar=String(imeta.avatar_url||imeta.picture||meta.avatar_url||meta.picture||'');
+  const username=String(imeta.username||imeta.global_name||meta.full_name||meta.name||meta.preferred_username||meta.user_name||'');  const avatar=String(imeta.avatar_url||imeta.picture||meta.avatar_url||meta.picture||'');
   return id?{id,username,global_name:String(imeta.global_name||meta.full_name||meta.name||username),avatar}:null;
 }
 function discordAssetUrls(d){
@@ -4993,7 +5001,8 @@ function discordAssetUrls(d){
   const avatarHash=String(d?.avatar||'');
   const bannerHash=String(d?.banner||'');
   const decoAsset=String(d?.avatar_decoration_data?.asset||'');
-  const avatarExt=avatarHash.startsWith('a_')?'gif':'png';  const bannerExt=bannerHash.startsWith('a_')?'gif':'png';
+  const avatarExt=avatarHash.startsWith('a_')?'gif':'png';
+  const bannerExt=bannerHash.startsWith('a_')?'gif':'png';
   return {
     avatarUrl:d?.avatar_url||(!avatarHash&&id?`https://cdn.discordapp.com/embed/avatars/0.png`:(id&&avatarHash?`https://cdn.discordapp.com/avatars/${id}/${avatarHash}.${avatarExt}?size=256`:'')),
     bannerUrl:d?.banner_url||(id&&bannerHash?`https://cdn.discordapp.com/banners/${id}/${bannerHash}.${bannerExt}?size=1024`:''),
@@ -5983,8 +5992,7 @@ async function applyProfileMusicSelection(track){
     document.addEventListener('DOMContentLoaded',setupLeakMentionAutocomplete);
     function leakCardMarkup(post,opts={}){
       const id=String(post.id),user=String(post.author||String(post.handle||'').replace(/^@/, '')||'Utilizador'),avatar=post.avatar||commentAvatar(user);
-      let media='';const url=String(post.mediaUrl||leakMediaObjectUrls.get(id)||'');
-      if(url&&post.mediaType==='video')media=`<div class="tweet-media"><video src="${esc(url)}" controls playsinline preload="metadata"></video></div>`;
+      let media='';const url=String(post.mediaUrl||leakMediaObjectUrls.get(id)||'');      if(url&&post.mediaType==='video')media=`<div class="tweet-media"><video src="${esc(url)}" controls playsinline preload="metadata"></video></div>`;
       else if(url&&post.mediaType==='image')media=`<div class="tweet-media"><img src="${esc(url)}" alt="Multimédia da publicação" loading="lazy"></div>`;
       const liked=leakLikedByMe(id),reposted=leakRepostedByMe(id);
       return `<article class="tweet-card profile-leak-item" data-leak-id="${esc(id)}"><img class="tweet-avatar" src="${esc(avatar)}" alt="Foto de @${esc(user)}" onclick='openProfile(${JSON.stringify(user)})' loading="lazy"><div class="tweet-content"><div class="tweet-header"><button type="button" class="leak-author-button" onclick='openProfile(${JSON.stringify(user)})'>${esc(post.displayName||user)}</button>${post.isOfficial||post.authorIsAdmin?'<i class="fa-solid fa-circle-check tweet-badge-verified" title="Conta oficial"></i>':''}<span class="tweet-handle">@${esc(user)}</span><span class="tweet-handle">·</span><span class="tweet-time">${leakTimeLabel(post)}</span>${opts.reposted?'<span class="leak-reposted-label"><i class="fa-solid fa-retweet"></i> Republicou</span>':''}</div><div class="tweet-text">${leakTextMarkup(post.text||'')}</div>${media}<div class="tweet-actions"><button type="button" class="tweet-action-btn" onclick='openLeakComments(${JSON.stringify(id)})' title="Comentários"><i class="fa-regular fa-comment"></i><span>${leakCommentsCount(post)}</span></button><button type="button" class="tweet-action-btn ${reposted?'reposted':''}" onclick='toggleRepostLeak(${JSON.stringify(id)})' title="Republicar"><i class="fa-solid fa-retweet"></i><span>${leakRepostsCount(post)}</span></button><button type="button" class="tweet-action-btn ${liked?'liked':''}" onclick='toggleLikeLeak(${JSON.stringify(id)})' title="Gostar"><i class="${liked?'fa-solid':'fa-regular'} fa-heart"></i><span>${leakLikesCount(post)}</span></button><button type="button" class="tweet-action-btn" onclick='shareLeakPost(${JSON.stringify(id)})' title="Partilhar"><i class="fa-regular fa-share-from-square"></i></button></div></div></article>`;
@@ -5992,7 +6000,8 @@ async function applyProfileMusicSelection(track){
     function renderLeakCollection(container,posts,opts={}){
       if(!container)return;
       if(!posts.length){container.innerHTML=`<div class="small-note leak-empty-state">${opts.emptyText||'Ainda não existem publicações.'}</div>`;return}
-      container.innerHTML=posts.map(p=>leakCardMarkup(p,{reposted:!!opts.reposted})).join('');    }
+      container.innerHTML=posts.map(p=>leakCardMarkup(p,{reposted:!!opts.reposted})).join('');
+    }
     async function renderLeakPosts(){
       const container=document.getElementById('tweetsFeedContainer');if(!container)return;
       if(cloudReady&&supabaseClient)await loadLeakSocialData();
@@ -6982,8 +6991,7 @@ async function applyProfileMusicSelection(track){
     }
     function liquidPlayerEventBindings(){
       const p=document.getElementById('mainVideoPlayer');if(!p||p.dataset.liquidBound==='1')return;p.dataset.liquidBound='1';
-      ['play','pause','timeupdate','loadedmetadata','durationchange','volumechange','ratechange','progress','emptied'].forEach(ev=>p.addEventListener(ev,syncLiquidPlayerUI));
-      p.addEventListener('play',()=>showLiquidControls(true));
+      ['play','pause','timeupdate','loadedmetadata','durationchange','volumechange','ratechange','progress','emptied'].forEach(ev=>p.addEventListener(ev,syncLiquidPlayerUI));      p.addEventListener('play',()=>showLiquidControls(true));
       p.addEventListener('pause',()=>showLiquidControls(false));
       p.addEventListener('ended',()=>showLiquidControls(false));
       p.addEventListener('click',handleLiquidVideoTap);
@@ -6992,6 +7000,7 @@ async function applyProfileMusicSelection(track){
         if(settings?.classList.contains('open')&&!settings.contains(e.target)&&!gear)settings.classList.remove('open');
       });
     }
+
     // ===== LIQUID GLASS — SELECTOR EM MODAL, COMPATÍVEL COM TOUCH =====
     // Mantém os <select> reais como fonte de dados, mas o utilizador toca num
     // botão normal. Assim não há conflitos de touch/pointer no Android.
@@ -7981,8 +7990,7 @@ async function renderAdminAccounts(){
       if(!isAdminUser())return alert('Sem acesso de administrador.');
       const post=leakPosts.find(p=>String(p.id)===String(id)); if(!post)return alert('Publicação não encontrada.');
       if(!confirm(`Remover a publicação de ${post.author || post.handle || 'utilizador'}?`))return;
-      try{
-        if(post.mediaStoragePath) await deleteCloudMedia(post.mediaStoragePath);
+      try{        if(post.mediaStoragePath) await deleteCloudMedia(post.mediaStoragePath);
         if(post.mediaBlobKey) await deleteMedia(post.mediaBlobKey);
         await deleteCloudRow('leak_posts',post.id);
         leakPosts=leakPosts.filter(p=>String(p.id)!==String(id));
@@ -7991,6 +7999,7 @@ async function renderAdminAccounts(){
         await renderLeakPosts(); renderAdminExtras();
       }catch(err){alert(`Não foi possível remover a publicação.\n\n${err?.message||err}`);}
     }
+
     async function deleteAnnouncement(id){
       if(!isAdminUser())return alert('Sem acesso de administrador.');
       const item=announcements.find(x=>String(x.id)===String(id)); if(!item)return alert('Anúncio não encontrado.');
@@ -8980,8 +8989,7 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
       sel.innerHTML='';
       for(let i=1;i<=Math.min(30,available.length);i++){const o=document.createElement('option');o.value=String(i);o.textContent=`${i} ${i===1?'episódio':'episódios'}`;if(i===currentCount)o.selected=true;sel.appendChild(o)}
     }
-    function renderRoomEpisodePicker(){
-      const box=document.getElementById('roomEpisodePicker'),countEl=document.getElementById('roomPickerCount');if(!box)return;
+    function renderRoomEpisodePicker(){      const box=document.getElementById('roomEpisodePicker'),countEl=document.getElementById('roomPickerCount');if(!box)return;
       const target=Number(document.getElementById('roomEpisodeCount')?.value||1);
       const selectedKeys=new Set((activeWatchPartyRoom?.queue||[]).map(q=>`${q.season}_${q.idx}`));
       const available=getAvailableRoomEpisodes();
@@ -8989,7 +8997,8 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
         const selected=selectedKeys.has(ep.key);
         const thumbSrc=ep.thumb||'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500&auto=format&fit=crop&q=80';
         return `<label class="room-picker-card ${selected?'selected':''}"><input class="room-picker-check" type="checkbox" data-room-ep="${esc(ep.key)}" ${selected?'checked':''} onchange="handleRoomPickerChange(this,${target})"><div class="room-picker-thumb"><img src="${esc(thumbSrc)}" alt="Thumbnail de ${esc(ep.fullTitle)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500&auto=format&fit=crop&q=80'"></div><div class="room-picker-body"><div class="room-picker-title">${esc(ep.fullTitle)}</div><div class="room-picker-meta">${ep.season==='specials'?'Especial':`T${esc(ep.season)}`} · com mídia</div></div></label>`;
-      }).join('');      const selectedCount=box.querySelectorAll('input[data-room-ep]:checked').length;
+      }).join('');
+      const selectedCount=box.querySelectorAll('input[data-room-ep]:checked').length;
       if(countEl)countEl.textContent=`${selectedCount}/${target} selecionados`;
     }
     function handleRoomPickerChange(input,target){
@@ -9979,8 +9988,7 @@ window.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>initSpotifyIntegr
 .dm-nickname-chip{font-size:.65rem;color:var(--text-muted);margin-left:5px}.dm-nickname-btn{width:28px;height:28px;border-radius:9px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.05);color:#fff;cursor:pointer}.dm-nickname-btn:hover{border-color:var(--accent-green);color:var(--accent-green)}
 @media(max-width:620px){.dm-gif-picker{bottom:76px}.dm-gif-results{grid-template-columns:1fr 1fr}.dm-gif-item img{height:110px}}
 </style>
-<style id="noir-dm-upgrade-css">
-.dm-upgrade-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px 0}
+<style id="noir-dm-upgrade-css">.dm-upgrade-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px 0}
 .dm-tool-btn{width:34px;height:34px;border-radius:11px;border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.055);color:#fff;cursor:pointer;display:grid;place-items:center}
 .dm-tool-btn:hover{border-color:var(--accent-green);color:var(--accent-green);transform:translateY(-1px)}
 .dm-tool-btn.recording{border-color:rgba(255,77,77,.55);color:#ff9191;background:rgba(255,77,77,.1);animation:dmPulse 1s infinite}
@@ -9988,7 +9996,8 @@ window.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>initSpotifyIntegr
 .dm-reply-bar,.dm-typing-bar,.dm-search-bar{margin:0 10px 8px;padding:8px 10px;border-radius:11px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);font-size:.68rem;color:var(--text-muted);display:none;align-items:center;gap:8px}
 .dm-reply-bar.active,.dm-typing-bar.active,.dm-search-bar.active{display:flex}
 .dm-reply-bar .dm-reply-text{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dm-search-bar input{flex:1;border:0;outline:0;background:transparent;color:#fff;font:inherit}.dm-msg-row{position:relative}
+.dm-search-bar input{flex:1;border:0;outline:0;background:transparent;color:#fff;font:inherit}
+.dm-msg-row{position:relative}
 .dm-msg-actions{display:none;gap:4px;position:absolute;top:-16px;right:8px;padding:3px;border-radius:9px;background:rgba(12,16,13,.94);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(12px);z-index:4}
 .dm-msg-row:hover .dm-msg-actions{display:flex}
 .dm-msg-action{width:25px;height:25px;border:0;border-radius:7px;background:rgba(255,255,255,.07);color:#fff;cursor:pointer;font-size:.65rem}
@@ -10850,15 +10859,24 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
     const visible=[];for(const cue of subtitleCues){if(cue.start>time)break;if(cue.end>time)visible.push(cue.html||cue.text);}
     const text=visible.join('<br>');if(text!==subtitleLastText){subtitleLastText=text;el.innerHTML=text;el.classList.toggle('show',!!text);}
   }
-  function resetEpisodeSubtitleUi(){subtitleCues=[];subtitleLastText='';const el=$('episodeSubtitleOverlay');if(el){el.textContent='';el.classList.remove('show');}const btn=$('liquidSubtitleBtn');if(btn){btn.style.display='none';btn.classList.remove('active');btn.setAttribute('aria-pressed','false');btn.title='Sem legendas para este episódio';}const track=$('videoTrack');if(track){try{track.track.mode='disabled'}catch{}track.removeAttribute('src');track.default=false;}const p=$('mainVideoPlayer');if(p){p.querySelectorAll('track[data-bcg-episode-subtitle]').forEach(x=>x.remove());}}
+  function resetEpisodeSubtitleUi(){
+    subtitleCues=[];subtitleLastText='';
+    const el=$('episodeSubtitleOverlay');if(el){el.textContent='';el.classList.remove('show');}
+    const btn=$('liquidSubtitleBtn');if(btn){btn.style.display='inline-flex';btn.disabled=false;btn.classList.remove('active');btn.setAttribute('aria-pressed','false');btn.title='Legendas (CC) — a verificar disponibilidade';btn.setAttribute('aria-label','Legendas (CC)');}
+    const track=$('videoTrack');if(track){try{track.track.mode='disabled'}catch{}track.removeAttribute('src');track.default=false;}
+    const p=$('mainVideoPlayer');if(p){p.querySelectorAll('track[data-bcg-episode-subtitle]').forEach(x=>x.remove());}
+  }
   let subTracks=[],subActiveId='',subKey='';
   const subPref=()=>{try{return localStorage.getItem('cn_sub_pref')||''}catch{return ''}};
   const setSubPref=v=>{try{localStorage.setItem('cn_sub_pref',v)}catch{}};
   function paintSubButton(){
     const btn=$('liquidSubtitleBtn');if(!btn)return;
+    btn.style.display='inline-flex';btn.disabled=false;
+    if(!subTracks.length){btn.classList.remove('active');btn.setAttribute('aria-pressed','false');btn.title='Este episódio não tem legendas configuradas';btn.setAttribute('aria-label','Legendas (sem faixas disponíveis)');return;}
     const on=!!(subtitleCues.length?subtitleEnabled:$('videoTrack')?.track?.mode==='showing'),cur=subTracks.find(t=>t.id===subActiveId);
     btn.classList.toggle('active',on);btn.setAttribute('aria-pressed',String(on));
     btn.title=subTracks.length>1?`Legendas${on&&cur?': '+(cur.label||cur.lang):' desligadas'} — escolher idioma`:(on?'Legendas ativas — tocar para desativar':'Legendas desativadas — tocar para ativar');
+    btn.setAttribute('aria-label',btn.title);
     $('episodeSubMenu')?.querySelectorAll('button').forEach(b=>b.classList.toggle('active',on?b.dataset.sub===subActiveId:b.dataset.sub==='off'));
   }
   async function activateSubTrack(t,key){
@@ -10874,9 +10892,11 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   async function loadEpisodeSubtitleForPlayer(d,key){
     resetEpisodeSubtitleUi();subKey=key;subActiveId='';window.__activeSubOffset=0;closeSubMenu();
     subTracks=getEpisodeSubTracks(typeof d==='string'?{subUrl:d}:d);
-    const btn=$('liquidSubtitleBtn'),tr=$('videoTrack');if(!btn||!subTracks.length)return;
+    const btn=$('liquidSubtitleBtn'),tr=$('videoTrack');if(!btn)return;
+    btn.style.display='inline-flex';btn.disabled=false;
+    if(!subTracks.length){paintSubButton();return;}
     const pref=subPref(),t=subTracks.find(x=>x.lang===pref)||subTracks.find(x=>x.isDefault)||subTracks[0];
-    btn.style.display='inline-flex';btn.disabled=true;btn.title='A carregar legendas…';
+    btn.disabled=true;btn.title='A carregar legendas…';
     try{
       if(await activateSubTrack(t,key)===false)return;
       subtitleEnabled=pref!=='off';
@@ -10905,6 +10925,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   }
   function toggleEpisodeSubtitles(){
     const btn=$('liquidSubtitleBtn');if(!btn||btn.disabled)return;
+    if(!subTracks.length){if(typeof liquidStatus==='function')liquidStatus('Este episódio ainda não tem legendas disponíveis.');return;}
     if(subTracks.length>1){buildSubMenu().classList.toggle('open');paintSubButton();return}
     const track=$('videoTrack');
     if(subtitleCues.length){subtitleEnabled=!subtitleEnabled;setSubPref(subtitleEnabled?(subTracks[0]?.lang||''):'off');updateEpisodeSubtitleOverlay()}
@@ -10966,8 +10987,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
     const list=(typeof EPISODES!=='undefined'?(EPISODES[season]||[]):[]);select.innerHTML='';
     if(!list.length){const o=document.createElement('option');o.value='0';o.textContent='Episódio 1';select.appendChild(o);return;}
     list.forEach((_,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=`E${i+1} — ${trailerEpisodeTitle(season,i)}`;select.appendChild(o)});
-    if(selected!==undefined&&[...select.options].some(o=>o.value===String(selected)))select.value=String(selected);
-  }
+    if(selected!==undefined&&[...select.options].some(o=>o.value===String(selected)))select.value=String(selected);  }
   function updateAdminTrailerAssociationFields(){const episode=text($('adminTrailerScope')?.value)==='episode';const field=$('adminTrailerEpisodeField');if(field)field.style.display=episode?'':'none';}
   function previewAdminTrailer(){const box=$('adminTrailerPreview');if(!box)return;const url=safeHttpUrl($('adminTrailerCoverUrl')?.value||'');box.innerHTML=url?`<img src="${escapeHtml(url)}" alt="Pré-visualização da capa" onerror="this.parentElement.innerHTML='<span>Não foi possível carregar esta capa</span>'">`:'<span><i class="fa-solid fa-film"></i> Pré-visualização do trailer</span>';}
   function renderAdminTrailerBoardList(){const box=$('adminTrailerBoardList');if(!box)return;const list=[...allTrailers()].sort((a,b)=>(Number(a.order??100)-Number(b.order??100))||(Number(b.updatedAt||0)-Number(a.updatedAt||0)));if(!list.length){box.innerHTML='<div class="trailer-admin-empty">Ainda não adicionaste trailers. Preenche o formulário para criar o primeiro.</div>';return;}box.innerHTML=list.map(item=>`<div class="series-admin-item"><img class="series-admin-item-cover" src="${escapeHtml(safeHttpUrl(item.coverUrl)||'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2280%22%3E%3Crect width=%2260%22 height=%2280%22 fill=%22%23151b17%22/%3E%3Ctext x=%2230%22 y=%2245%22 fill=%22%23aaa%22 font-size=%2224%22 text-anchor=%22middle%22%3E%E2%96%B6%3C/text%3E%3C/svg%3E')}" alt=""><div class="series-admin-item-main"><div class="series-admin-item-title">${escapeHtml(item.title||'Trailer')}</div><div class="trailer-admin-item-meta">${escapeHtml(trailerAssociation(item))}<br>${item.published===false?'Oculto / rascunho':'Publicado na página inicial'} · ordem ${Number(item.order??100)}<br>Fonte: ${escapeHtml(item.videoUrl||'')}</div><div class="trailer-admin-item-actions"><button type="button" data-trailer-edit="${escapeHtml(item.id)}"><i class="fa-solid fa-pen"></i> Editar</button><button type="button" data-trailer-toggle="${escapeHtml(item.id)}">${item.published===false?'Publicar':'Ocultar'}</button><button type="button" data-trailer-test="${escapeHtml(item.id)}"><i class="fa-solid fa-play"></i> Testar</button><button type="button" data-trailer-delete="${escapeHtml(item.id)}"><i class="fa-solid fa-trash"></i> Apagar</button></div></div></div>`).join('');}
@@ -10987,7 +11007,8 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   async function changeAdminTrailer(id,action){if(typeof isAdminUser==='function'?!isAdminUser():!currentUser?.isAdmin)return alert('Sem acesso de administrador.');const current=allTrailers(),item=current.find(x=>String(x.id)===String(id));if(!item)return;if(action==='delete'&&!confirm(`Apagar o trailer “${item.title}”?`))return;const next=action==='delete'?current.filter(x=>String(x.id)!==String(id)):current.map(x=>String(x.id)===String(id)?{...x,published:x.published===false,updatedAt:Date.now()}:x);siteSettings={...siteSettings,trailerBoard:next};try{localStorage.setItem('cn_site_settings',JSON.stringify(siteSettings));}catch{}try{const result=typeof save==='function'?await save('cn_announcements',Array.isArray(announcements)?announcements:[]):{synced:false};renderTrailerBoard();renderAdminTrailerBoardList();const st=$('adminTrailerStatusMessage');if(st){st.className='admin-media-status active '+(result?.synced?'success':'');st.textContent=result?.synced?'Alteração guardada e sincronizada.':'Alteração guardada localmente; sincronização pendente.';}}catch(err){alert('Não foi possível atualizar o trailer: '+(err?.message||err));}}
   function playTrailerBoardItem(id){const item=allTrailers().find(x=>String(x.id)===String(id));if(!item)return alert('Este trailer já não existe.');if(item.published===false&&!(typeof isAdminUser==='function'&&isAdminUser()))return alert('Este trailer ainda não está publicado.');const url=safeHttpUrl(item.videoUrl);if(!url)return alert('O link do trailer é inválido.');let inlineMode=false;if(item.scope==='episode'&&typeof openEpisodeDetailRoute==='function'){openEpisodeDetailRoute(String(item.season||'1'),Math.max(0,Number(item.episodeIndex)||0));inlineMode=!!document.getElementById('episodeInlinePlayerMount');}const p=$('mainVideoPlayer'),modal=$('playerModal'),titleEl=$('modalEpTitle');if(!p||!modal)return alert('O player do BCG Hub não está disponível nesta página.');
     try{if(typeof activeHls!=='undefined'&&activeHls){activeHls.destroy();activeHls=null;}}catch{}try{p.pause();p.removeAttribute('src');$('videoSource')?.removeAttribute('src');p.load();}catch{}try{if(typeof clearEpisodeAudio==='function')clearEpisodeAudio();}catch{}try{if(typeof resetEpisodeSubtitleUi==='function')resetEpisodeSubtitleUi();}catch{}if(typeof currentPlayingEp!=='undefined')currentPlayingEp=null;window.__bcgPlayingTrailer=true;p.defaultPlaybackRate=1;p.playbackRate=1;p.onplay=p.onpause=p.onended=p.onseeked=p.ontimeupdate=null;p.onerror=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);if(typeof showPlayerError==='function')showPlayerError('O trailer não conseguiu carregar. Usa um link direto de vídeo MP4, WebM ou M3U8 e confirma as permissões/CORS do servidor.');};if(titleEl)titleEl.textContent=item.title||'Trailer';$('episodeAudioSelector')?.classList.add('hidden');$('seasonSevenReleaseCountdown')?.style.setProperty('display','none');const comments=$('playerCommentsMount');if(comments)comments.style.display='none';if(typeof hidePlayerError==='function')hidePlayerError();if(typeof setLiquidPlayerActive==='function')setLiquidPlayerActive(true);if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(true);if(inlineMode){modal.classList.remove('active');const mount=document.getElementById('episodeInlinePlayerMount');const shell=document.getElementById('videoShell');if(mount&&shell&&!mount.contains(shell))mount.appendChild(shell);const heading=mount?.querySelector('.episode-inline-placeholder');if(heading)heading.remove();}else{modal.classList.add('active');}modal.classList.remove('watch-room-active');
-    const play=()=>p.play().catch(()=>{if(typeof liquidStatus==='function')liquidStatus('Toca em reproduzir para iniciar o trailer');});if(/\.m3u8(?:[?#]|$)/i.test(url)&&typeof Hls!=='undefined'&&Hls&&Hls.isSupported()){activeHls=new Hls({enableWorker:true,lowLatencyMode:false,backBufferLength:30,maxBufferLength:30});activeHls.loadSource(url);activeHls.attachMedia(p);activeHls.on(Hls.Events.MANIFEST_PARSED,()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);play();});activeHls.on(Hls.Events.ERROR,(event,data)=>{if(data?.fatal){try{activeHls.destroy()}catch{}activeHls=null;p.onerror?.();}});}else{p.src=url;p.load();p.onloadedmetadata=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);};p.oncanplay=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);};p.onplaying=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);};play();}}  window.renderTrailerBoard=renderTrailerBoard;window.renderAdminTrailerBoardList=renderAdminTrailerBoardList;window.saveAdminTrailerBoardItem=saveAdminTrailerBoardItem;window.resetAdminTrailerBoardForm=resetAdminTrailerBoardForm;window.updateAdminTrailerAssociationFields=updateAdminTrailerAssociationFields;window.populateAdminTrailerEpisodeSelect=populateAdminTrailerEpisodeSelect;window.playTrailerBoardItem=playTrailerBoardItem;
+    const play=()=>p.play().catch(()=>{if(typeof liquidStatus==='function')liquidStatus('Toca em reproduzir para iniciar o trailer');});if(/\.m3u8(?:[?#]|$)/i.test(url)&&typeof Hls!=='undefined'&&Hls&&Hls.isSupported()){activeHls=new Hls({enableWorker:true,lowLatencyMode:false,backBufferLength:30,maxBufferLength:30});activeHls.loadSource(url);activeHls.attachMedia(p);activeHls.on(Hls.Events.MANIFEST_PARSED,()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);play();});activeHls.on(Hls.Events.ERROR,(event,data)=>{if(data?.fatal){try{activeHls.destroy()}catch{}activeHls=null;p.onerror?.();}});}else{p.src=url;p.load();p.onloadedmetadata=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);};p.oncanplay=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);};p.onplaying=()=>{if(typeof setEpisodePlayerLoading==='function')setEpisodePlayerLoading(false);};play();}}
+  window.renderTrailerBoard=renderTrailerBoard;window.renderAdminTrailerBoardList=renderAdminTrailerBoardList;window.saveAdminTrailerBoardItem=saveAdminTrailerBoardItem;window.resetAdminTrailerBoardForm=resetAdminTrailerBoardForm;window.updateAdminTrailerAssociationFields=updateAdminTrailerAssociationFields;window.populateAdminTrailerEpisodeSelect=populateAdminTrailerEpisodeSelect;window.playTrailerBoardItem=playTrailerBoardItem;
   $('adminTrailerBoardList')?.addEventListener('click',event=>{const b=event.target.closest('button');if(!b)return;const id=b.dataset.trailerEdit||b.dataset.trailerToggle||b.dataset.trailerDelete||b.dataset.trailerTest;if(!id)return;if(b.dataset.trailerEdit)editAdminTrailerBoardItem(id);else if(b.dataset.trailerToggle)changeAdminTrailer(id,'toggle');else if(b.dataset.trailerDelete)changeAdminTrailer(id,'delete');else if(b.dataset.trailerTest)playTrailerBoardItem(id);});
   $('adminTrailerCoverUrl')?.addEventListener('input',previewAdminTrailer);
   const oldSwitch=window.switchAdminTab;if(typeof oldSwitch==='function'&&!oldSwitch.__bcgTrailerWrapped){const wrapped=function(id,...args){const r=oldSwitch.call(this,id,...args);if(id==='trailers')renderAdminTrailerBoardList();return r;};wrapped.__bcgTrailerWrapped=true;window.switchAdminTab=wrapped;}
@@ -11209,5 +11230,24 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
     const wrapped=function(...args){const r=oldUpdate.apply(this,args);startInviteRealtime();ensureInviteButton();return r};
     wrapped.__wpInviteUserWrapped=true;window.updateUserUI=wrapped;
   }
+})();
+</script>
+
+<script id="bcg-subtitle-button-visibility-guard">
+(function(){
+  const ensureSubtitleButton=()=>{
+    const b=document.getElementById('liquidSubtitleBtn');
+    if(!b)return;
+    if(b.style.getPropertyValue('display')!=='inline-flex'||b.style.getPropertyPriority('display')!=='important')b.style.setProperty('display','inline-flex','important');
+    if(b.style.getPropertyValue('visibility')!=='visible'||b.style.getPropertyPriority('visibility')!=='important')b.style.setProperty('visibility','visible','important');
+    if(!b.title)b.title='Legendas (CC)';
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensureSubtitleButton,{once:true});
+  else ensureSubtitleButton();
+  const shell=document.getElementById('videoShell');
+  if(shell&&typeof MutationObserver!=='undefined'){
+    new MutationObserver(ensureSubtitleButton).observe(shell,{subtree:true,childList:true,attributes:true,attributeFilter:['style','class']});
+  }
+  window.addEventListener('pageshow',ensureSubtitleButton);
 })();
 </script>
