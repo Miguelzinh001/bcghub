@@ -2207,7 +2207,7 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
         <section id="page-profile" class="page-section">
             <div class="profile-hero">
                 <div class="profile-media-wrap"><div id="profileBannerPreview" class="profile-banner"></div><button type="button" class="profile-media-pencil profile-banner-pencil" onclick="document.getElementById('profileBannerFile').click()" title="Alterar banner"><i class="fa-solid fa-pencil"></i></button><input id="profileBannerFile" class="profile-file-input" type="file" accept="image/*" onchange="handleProfileImageUpload(this,'banner')"></div>
-                <div class="profile-media-wrap profile-avatar-media-wrap"><div id="profileAvatarMusicNote" class="profile-avatar-note-mount"></div><div id="profileAvatarPremiumWrap"><img id="profileAvatarPreview" class="avatar-lg" src="" alt="Perfil"></div><button type="button" class="profile-media-pencil profile-avatar-pencil" onclick="document.getElementById('profileAvatarFile').click()" title="Alterar foto de perfil"><i class="fa-solid fa-pencil"></i></button><input id="profileAvatarFile" class="profile-file-input" type="file" accept="image/*,video/mp4,video/webm,video/quicktime" onchange="handleProfileImageUpload(this,'avatar')"></div>
+                <div class="profile-media-wrap profile-avatar-media-wrap"><div id="profileAvatarPremiumWrap"><img id="profileAvatarPreview" class="avatar-lg" src="" alt="Perfil"></div><button type="button" class="profile-media-pencil profile-avatar-pencil" onclick="document.getElementById('profileAvatarFile').click()" title="Alterar foto de perfil"><i class="fa-solid fa-pencil"></i></button><input id="profileAvatarFile" class="profile-file-input" type="file" accept="image/*,video/mp4,video/webm,video/quicktime" onchange="handleProfileImageUpload(this,'avatar')"></div>
                 <h3 id="currentUserName">Visitante</h3>
                 <div id="profileStatusLine" class="status-line"><span class="status-dot offline"></span> Offline</div>
                 <div id="profileMusicPreview"></div>
@@ -2353,6 +2353,7 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
                 <h3 style="color:var(--accent-green);display:flex;align-items:center;gap:8px;margin-bottom:8px"><i class="fa-solid fa-shield-halved"></i> Painel de Administração</h3>
                 <p class="small-note" style="margin-bottom:14px">Gerir episódios, novidades, trailers, votações, aparência e transmissões. As configurações do site sincronizam-se com o Supabase quando a ligação está disponível.</p>
                 <div class="admin-tabs">
+                    <button class="admin-tab" data-admin-tab="createepisode" onclick="switchAdminTab('createepisode')"><i class="fa-solid fa-circle-plus"></i> Criar episódio</button>
                     <button class="admin-tab active" data-admin-tab="media" onclick="switchAdminTab('media')">Vídeos</button>
                     <button class="admin-tab" data-admin-tab="series" onclick="switchAdminTab('series')"><i class="fa-solid fa-clapperboard"></i> Séries / Temporadas</button>
                     <button class="admin-tab" data-admin-tab="trailers" onclick="switchAdminTab('trailers')"><i class="fa-solid fa-film"></i> Trailers</button>
@@ -2382,6 +2383,19 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
                     <button class="admin-tab" data-admin-tab="live" onclick="switchAdminTab('live')"><i class="fa-solid fa-signal"></i> Ao vivo</button>
                 </div>
 
+                <div id="admin-tab-createepisode" class="admin-tab-panel">
+                  <div class="sub-admin-card">
+                    <h4><i class="fa-solid fa-clapperboard"></i> Criar / configurar episódio</h4>
+                    <p class="small-note">Escolhe a temporada, o episódio e o nome. Depois podes adicionar vídeo, áudio e legendas na aba Vídeos.</p>
+                    <div class="form-row-2">
+                      <div class="form-group"><label for="bcgCreateSeason">Temporada</label><select id="bcgCreateSeason" class="form-control"><option value="1">Temporada 1</option><option value="2">Temporada 2</option><option value="3">Temporada 3</option><option value="4">Temporada 4</option><option value="5">Temporada 5</option><option value="6">Temporada 6</option><option value="7">Temporada 7</option><option value="specials">Especiais</option></select></div>
+                      <div class="form-group"><label for="bcgCreateEpisode">Número do episódio</label><select id="bcgCreateEpisode" class="form-control"></select></div>
+                    </div>
+                    <div class="form-group"><label for="bcgCreateTitle">Nome do episódio</label><input id="bcgCreateTitle" class="form-control" placeholder="Ex.: Replay Value"></div>
+                    <button type="button" class="btn-green" style="width:100%;justify-content:center" onclick="bcgSaveEpisodeQuick()"><i class="fa-solid fa-floppy-disk"></i> Guardar episódio</button>
+                    <div id="bcgCreateEpisodeStatus" class="admin-media-status"></div>
+                  </div>
+                </div>
                 <div id="admin-tab-media" class="admin-tab-panel active">
                     <div style="background:var(--bg-card);padding:14px;border-radius:12px;border:1px solid var(--border-color)">
                         <h4 style="margin-bottom:10px">Gerir vídeo e legendas</h4>
@@ -2981,8 +2995,7 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
             <stop offset="1" stop-color="#50565b"/>
           </linearGradient>
           <linearGradient id="snowLeopardEarInner" x1="0" y1="0" x2=".8" y2="1">
-            <stop offset="0" stop-color="#fff"/>
-            <stop offset=".62" stop-color="#f3f3ef"/>
+            <stop offset="0" stop-color="#fff"/>            <stop offset=".62" stop-color="#f3f3ef"/>
             <stop offset="1" stop-color="#c9cbd0"/>
           </linearGradient>
           <linearGradient id="snowLeopardTailSilver" x1="0" y1="0" x2="0" y2="1">
@@ -2995,7 +3008,8 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
           <radialGradient id="snowLeopardOrb" cx="35%" cy="27%" r="80%">
             <stop offset="0" stop-color="#fcf7ff"/>
             <stop offset=".53" stop-color="#e9e3f1"/>
-            <stop offset=".8" stop-color="#d7ccdf"/>            <stop offset="1" stop-color="#b8adca"/>
+            <stop offset=".8" stop-color="#d7ccdf"/>
+            <stop offset="1" stop-color="#b8adca"/>
           </radialGradient>
           <radialGradient id="snowLeopardOrbGlow" cx="55%" cy="65%" r="62%">
             <stop offset="0" stop-color="#f5d6e7" stop-opacity=".62"/>
@@ -3366,10 +3380,7 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                 <div class="room-tools">
                     <button type="button" class="room-tool-btn" onclick="openWatchRoomSettings()"><i class="fa-solid fa-list-check"></i> Episódios da sala</button>
                     <button type="button" class="room-tool-btn" onclick="copyWatchRoomCode()"><i class="fa-solid fa-copy"></i> Copiar código</button>
-                    <button type="button" class="room-tool-btn" id="roomSubtitleUploadBtn" onclick="document.getElementById('roomSubtitleFileInput')?.click()"><i class="fa-solid fa-closed-captioning"></i> Enviar legendas .SRT</button>
-                    <input type="file" id="roomSubtitleFileInput" accept=".srt,text/srt" style="display:none" onchange="handleRoomSubtitleUpload(this)">
                 </div>
-                <div id="roomSubtitleStatus" class="small-note" style="margin:7px 0 10px;"></div>
                 <div id="watchRoomQueueSection" class="room-queue"></div>
                 <div class="chat-box" id="chatBox"></div>
                 <div class="chat-input-row">
@@ -3983,8 +3994,7 @@ function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_
           method:'POST',
           headers:{
             apikey:SUPABASE_PUBLISHABLE_KEY,
-            Authorization:`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
-            'x-upsert':'true',
+            Authorization:`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,            'x-upsert':'true',
             'Content-Type':mime,
             'Cache-Control':'3600'
           },
@@ -3994,7 +4004,8 @@ function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_
           const body=await response.text().catch(()=> '');
           throw new Error(`HTTP ${response.status}${body?`: ${body}`:''}`);
         }
-        const {data}=bucket.getPublicUrl(path);        if(data?.publicUrl){await verifyPublicMediaUrl(data.publicUrl);return data.publicUrl;}
+        const {data}=bucket.getPublicUrl(path);
+        if(data?.publicUrl){await verifyPublicMediaUrl(data.publicUrl);return data.publicUrl;}
         throw new Error('Upload concluído, mas o URL público não foi obtido.');
       }catch(fallbackError){
         if(fallbackError?.code==='MEDIA_NOT_PUBLIC')throw fallbackError;
@@ -4982,8 +4993,7 @@ function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_
       return a;
     }
     async function fetchDiscordUser(session){
-  const providerToken=session?.provider_token;
-  if(providerToken){
+  const providerToken=session?.provider_token;  if(providerToken){
     try{
       const res=await fetch('https://discord.com/api/v10/users/@me',{headers:{Authorization:`Bearer ${providerToken}`}});
       if(res.ok)return await res.json();
@@ -4993,7 +5003,8 @@ function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_
   const identity=session?.user?.identities?.find(i=>i.provider==='discord')||{};
   const imeta=identity?.identity_data||{};
   const id=String(imeta.provider_id||imeta.id||imeta.sub||meta.provider_id||meta.sub||meta.discord_id||'');
-  const username=String(imeta.username||imeta.global_name||meta.full_name||meta.name||meta.preferred_username||meta.user_name||'');  const avatar=String(imeta.avatar_url||imeta.picture||meta.avatar_url||meta.picture||'');
+  const username=String(imeta.username||imeta.global_name||meta.full_name||meta.name||meta.preferred_username||meta.user_name||'');
+  const avatar=String(imeta.avatar_url||imeta.picture||meta.avatar_url||meta.picture||'');
   return id?{id,username,global_name:String(imeta.global_name||meta.full_name||meta.name||username),avatar}:null;
 }
 function discordAssetUrls(d){
@@ -5733,7 +5744,7 @@ async function applyProfileMusicSelection(track){
       const banner=a.animatedBanner||a.banner||'';
       const bannerHtml=banner?(a.animatedBanner?`<div class="profile-banner" style="margin:-16px -16px 18px"><img src="${esc(banner)}" alt="Banner"></div>`:`<div class="profile-banner" style="margin:-16px -16px 18px;background-image:url('${esc(banner)}')"></div>`):'';
       document.getElementById('genericModalTitle').textContent=`Perfil de ${a.displayName||a.username} · @${a.username}`;
-      document.getElementById('genericModalBody').innerHTML=`<div style="text-align:center;background:${esc(normalizeProfileBackground(a.profileBackground||'#0b100d'))};border-radius:16px;padding:16px;color:#fff">${bannerHtml}<div class="profile-public-avatar-wrap"><div class="profile-avatar-note-mount">${profileMusicNoteMarkup(a)}</div>${premiumAvatarMarkup(a,'lg')}</div><h3>${styledProfileNameMarkup(a,true)} ${a.isAdmin?' <span class="badge-admin"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> ADMIN</span>':''}${hasPremium(a)?' <span class="premium-chip"><i class="fa-solid fa-crown"></i> PREMIUM</span>':''}</h3><div class="status-line"><span class="status-dot ${statusLabel(a,false).type}"></span>${esc(statusLabel(a,false).label)}</div>${spotifyPresenceMarkup(a)}${favoriteShowMarkup(a.favoriteShow)||''}<p class="profile-quote">${esc(cleanPremiumBio(a.quote)||'Sem frase de perfil.')}</p>${a.instagram||a.tiktok||a.watchData?.socials?.tiktok?`<div class="social-links">${a.instagram?`<a class="social-link-btn" target="_blank" rel="noopener" href="${esc(a.instagram)}"><i class="fa-brands fa-instagram"></i> Instagram</a>`:''}${a.tiktok||a.watchData?.socials?.tiktok?`<a class="social-link-btn" target="_blank" rel="noopener" href="${esc(a.tiktok||a.watchData.socials.tiktok)}"><i class="fa-brands fa-tiktok"></i> TikTok</a>`:''}</div>`:''}${discordProfileUrl(a)?`<a class="discord-public-link" target="_blank" rel="noopener" href="${esc(discordProfileUrl(a))}"><i class="fa-brands fa-discord"></i> ${esc(a.discord?.username?`@${a.discord.username}`:'Discord')}</a>`:''}<div class="profile-dashboard-card" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-heart" style="color:#ff5c7a"></i> Favoritos</h4><span class="small-note">${normalizeWatchData(a.watchData||{}).favorites.length}</span></div><div class="profile-episode-list">${normalizeWatchData(a.watchData||{}).favorites.slice(0,8).map(k=>{const [s,i]=String(k).split('_');return `<div class="profile-episode-row" onclick="closeGenericModal();openEpisodeDetailRoute('${esc(s)}',${Number(i)})"><img src="${esc(getEpisodeThumbnail(s,Number(i)))}" alt=""><div class="profile-episode-main"><div class="profile-episode-title">${esc(episodeTitle(s,Number(i)))}</div><div class="profile-episode-sub">T${esc(s)}E${Number(i)+1}</div></div></div>`}).join('')||'<div class="small-note">Sem favoritos.</div>'}</div></div><div class="profile-dashboard-card" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-clock-rotate-left" style="color:var(--accent-green)"></i> Últimos episódios vistos</h4></div><div class="profile-episode-list">${normalizeWatchData(a.watchData||{}).history.slice(0,8).map(x=>`<div class="profile-episode-row" onclick="closeGenericModal();openEpisodeDetailRoute('${esc(String(x.season))}',${Number(x.epIndex)})"><img src="${esc(getEpisodeThumbnail(String(x.season),Number(x.epIndex)))}" alt=""><div class="profile-episode-main"><div class="profile-episode-title">${esc(x.title||episodeTitle(String(x.season),Number(x.epIndex)))}</div><div class="profile-episode-sub">T${esc(String(x.season))}E${Number(x.epIndex)+1}</div></div></div>`).join('')||'<div class="small-note">Sem histórico.</div>'}</div></div><div class="profile-dashboard-card profile-public-leak-panel" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-retweet"></i> Republicações</h4></div><div id="publicProfileReposts" class="profile-leak-list"></div></div></div>`;
+      document.getElementById('genericModalBody').innerHTML=`<div style="text-align:center;background:${esc(normalizeProfileBackground(a.profileBackground||'#0b100d'))};border-radius:16px;padding:16px;color:#fff">${bannerHtml}<div class="profile-public-avatar-wrap">${premiumAvatarMarkup(a,'lg')}</div><h3>${styledProfileNameMarkup(a,true)} ${a.isAdmin?' <span class="badge-admin"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> ADMIN</span>':''}${hasPremium(a)?' <span class="premium-chip"><i class="fa-solid fa-crown"></i> PREMIUM</span>':''}</h3><div class="status-line"><span class="status-dot ${statusLabel(a,false).type}"></span>${esc(statusLabel(a,false).label)}</div>${spotifyPresenceMarkup(a)}${favoriteShowMarkup(a.favoriteShow)||''}<p class="profile-quote">${esc(cleanPremiumBio(a.quote)||'Sem frase de perfil.')}</p>${a.instagram||a.tiktok||a.watchData?.socials?.tiktok?`<div class="social-links">${a.instagram?`<a class="social-link-btn" target="_blank" rel="noopener" href="${esc(a.instagram)}"><i class="fa-brands fa-instagram"></i> Instagram</a>`:''}${a.tiktok||a.watchData?.socials?.tiktok?`<a class="social-link-btn" target="_blank" rel="noopener" href="${esc(a.tiktok||a.watchData.socials.tiktok)}"><i class="fa-brands fa-tiktok"></i> TikTok</a>`:''}</div>`:''}${discordProfileUrl(a)?`<a class="discord-public-link" target="_blank" rel="noopener" href="${esc(discordProfileUrl(a))}"><i class="fa-brands fa-discord"></i> ${esc(a.discord?.username?`@${a.discord.username}`:'Discord')}</a>`:''}<div class="profile-dashboard-card" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-heart" style="color:#ff5c7a"></i> Favoritos</h4><span class="small-note">${normalizeWatchData(a.watchData||{}).favorites.length}</span></div><div class="profile-episode-list">${normalizeWatchData(a.watchData||{}).favorites.slice(0,8).map(k=>{const [s,i]=String(k).split('_');return `<div class="profile-episode-row" onclick="closeGenericModal();openEpisodeDetailRoute('${esc(s)}',${Number(i)})"><img src="${esc(getEpisodeThumbnail(s,Number(i)))}" alt=""><div class="profile-episode-main"><div class="profile-episode-title">${esc(episodeTitle(s,Number(i)))}</div><div class="profile-episode-sub">T${esc(s)}E${Number(i)+1}</div></div></div>`}).join('')||'<div class="small-note">Sem favoritos.</div>'}</div></div><div class="profile-dashboard-card" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-clock-rotate-left" style="color:var(--accent-green)"></i> Últimos episódios vistos</h4></div><div class="profile-episode-list">${normalizeWatchData(a.watchData||{}).history.slice(0,8).map(x=>`<div class="profile-episode-row" onclick="closeGenericModal();openEpisodeDetailRoute('${esc(String(x.season))}',${Number(x.epIndex)})"><img src="${esc(getEpisodeThumbnail(String(x.season),Number(x.epIndex)))}" alt=""><div class="profile-episode-main"><div class="profile-episode-title">${esc(x.title||episodeTitle(String(x.season),Number(x.epIndex)))}</div><div class="profile-episode-sub">T${esc(String(x.season))}E${Number(x.epIndex)+1}</div></div></div>`).join('')||'<div class="small-note">Sem histórico.</div>'}</div></div><div class="profile-dashboard-card profile-public-leak-panel" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-retweet"></i> Republicações</h4></div><div id="publicProfileReposts" class="profile-leak-list"></div></div></div>`;
       activePublicProfileUsername=String(a.username);
       document.getElementById('genericModal').classList.add('active');
       renderProfileLeaks(a.username,'publicProfileOwnLeaks','publicProfileReposts');
@@ -5981,8 +5992,7 @@ async function applyProfileMusicSelection(track){
     function setupLeakMentionAutocomplete(){
       const input=document.getElementById('leakTextInput');if(!input||input.dataset.mentionBound)return;input.dataset.mentionBound='1';
       const wrap=input.parentElement;wrap.style.position='relative';const menu=document.createElement('div');menu.className='leak-mention-menu';menu.hidden=true;wrap.appendChild(menu);
-      let active=0,current=null;
-      function close(){menu.hidden=true;menu.innerHTML='';current=null;active=0;}
+      let active=0,current=null;      function close(){menu.hidden=true;menu.innerHTML='';current=null;active=0;}
       function render(){const pos=input.selectionStart,text=input.value.slice(0,pos),match=text.match(/(^|\s)@([\p{L}\p{N}_.-]*)$/u);if(!match){close();return;}const query=match[2]||'',start=pos-query.length-1,items=leakMentionOptions(query);if(!items.length){close();return;}current={start,end:pos,items};active=0;menu.innerHTML=items.map((x,i)=>`<button type="button" class="leak-mention-option ${i===0?'active':''}" data-index="${i}"><span class="leak-mention-option-kind">${esc(x.kind)}</span><strong>${esc(x.label)}</strong><small>${esc(x.detail)}</small></button>`).join('');menu.hidden=false;}
       function choose(index){if(!current)return;const item=current.items[index];if(!item)return;const before=input.value.slice(0,current.start),after=input.value.slice(current.end);input.value=before+item.token+' '+after;const caret=(before+item.token+' ').length;input.focus();input.setSelectionRange(caret,caret);close();}
       input.addEventListener('input',render);input.addEventListener('click',render);input.addEventListener('keyup',e=>{if(!['ArrowUp','ArrowDown','Enter','Escape'].includes(e.key))render();});
@@ -5992,7 +6002,8 @@ async function applyProfileMusicSelection(track){
     document.addEventListener('DOMContentLoaded',setupLeakMentionAutocomplete);
     function leakCardMarkup(post,opts={}){
       const id=String(post.id),user=String(post.author||String(post.handle||'').replace(/^@/, '')||'Utilizador'),avatar=post.avatar||commentAvatar(user);
-      let media='';const url=String(post.mediaUrl||leakMediaObjectUrls.get(id)||'');      if(url&&post.mediaType==='video')media=`<div class="tweet-media"><video src="${esc(url)}" controls playsinline preload="metadata"></video></div>`;
+      let media='';const url=String(post.mediaUrl||leakMediaObjectUrls.get(id)||'');
+      if(url&&post.mediaType==='video')media=`<div class="tweet-media"><video src="${esc(url)}" controls playsinline preload="metadata"></video></div>`;
       else if(url&&post.mediaType==='image')media=`<div class="tweet-media"><img src="${esc(url)}" alt="Multimédia da publicação" loading="lazy"></div>`;
       const liked=leakLikedByMe(id),reposted=leakRepostedByMe(id);
       return `<article class="tweet-card profile-leak-item" data-leak-id="${esc(id)}"><img class="tweet-avatar" src="${esc(avatar)}" alt="Foto de @${esc(user)}" onclick='openProfile(${JSON.stringify(user)})' loading="lazy"><div class="tweet-content"><div class="tweet-header"><button type="button" class="leak-author-button" onclick='openProfile(${JSON.stringify(user)})'>${esc(post.displayName||user)}</button>${post.isOfficial||post.authorIsAdmin?'<i class="fa-solid fa-circle-check tweet-badge-verified" title="Conta oficial"></i>':''}<span class="tweet-handle">@${esc(user)}</span><span class="tweet-handle">·</span><span class="tweet-time">${leakTimeLabel(post)}</span>${opts.reposted?'<span class="leak-reposted-label"><i class="fa-solid fa-retweet"></i> Republicou</span>':''}</div><div class="tweet-text">${leakTextMarkup(post.text||'')}</div>${media}<div class="tweet-actions"><button type="button" class="tweet-action-btn" onclick='openLeakComments(${JSON.stringify(id)})' title="Comentários"><i class="fa-regular fa-comment"></i><span>${leakCommentsCount(post)}</span></button><button type="button" class="tweet-action-btn ${reposted?'reposted':''}" onclick='toggleRepostLeak(${JSON.stringify(id)})' title="Republicar"><i class="fa-solid fa-retweet"></i><span>${leakRepostsCount(post)}</span></button><button type="button" class="tweet-action-btn ${liked?'liked':''}" onclick='toggleLikeLeak(${JSON.stringify(id)})' title="Gostar"><i class="${liked?'fa-solid':'fa-regular'} fa-heart"></i><span>${leakLikesCount(post)}</span></button><button type="button" class="tweet-action-btn" onclick='shareLeakPost(${JSON.stringify(id)})' title="Partilhar"><i class="fa-regular fa-share-from-square"></i></button></div></div></article>`;
@@ -6515,13 +6526,17 @@ async function applyProfileMusicSelection(track){
       return s.split('\n').map(x=>x.trim()).filter(Boolean).join('<br>');
     }
     function parseSubCues(raw){
-      const tc=v=>{const p=String(v).replace(',','.').split(':').map(Number);return p.length===3?p[0]*3600+p[1]*60+p[2]:p[0]*60+p[1]};
-      const cues=[];
-      for(const block of String(raw||'').replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n').split(/\n{2,}/)){
-        const L=block.split('\n'),i=L.findIndex(x=>x.includes('-->'));if(i<0)continue;
-        const m=L[i].match(/((?:\d+:)?\d{1,2}:\d{2}[.,]\d{1,3})\s*-->\s*((?:\d+:)?\d{1,2}:\d{2}[.,]\d{1,3})/);if(!m)continue;
-        const start=tc(m[1]),end=tc(m[2]),html=cueToHtml(L.slice(i+1).join('\n'));
-        if(Number.isFinite(start)&&Number.isFinite(end)&&end>start&&html)cues.push({start,end,html,text:html.replace(/<br>/g,'\n').replace(/<[^>]+>/g,'').replace(/&lt;/g,'<').replace(/&amp;/g,'&')});
+      const tc=v=>{const z=String(v||'').trim().replace(',','.').split(':').map(Number);if(z.some(n=>!Number.isFinite(n)))return NaN;return z.length===3?z[0]*3600+z[1]*60+z[2]:z.length===2?z[0]*60+z[1]:NaN};
+      const lines=String(raw||'').replace(/^\\uFEFF/,'').replace(/\\r\\n?/g,'\\n').replace(/^WEBVTT[^\\n]*\\n+/i,'').split('\\n'),cues=[];
+      for(let i=0;i<lines.length;i++){
+        const line=lines[i].trim();if(!line.includes('-->'))continue;
+        const m=line.match(/((?:\\d{1,2}:)?\\d{1,2}:\\d{2}[.,]\\d{1,3})\\s*-->\\s*((?:\\d{1,2}:)?\\d{1,2}:\\d{2}[.,]\\d{1,3})/);
+        if(!m)continue;
+        const start=tc(m[1]),end=tc(m[2]);let body=[];
+        for(let j=i+1;j<lines.length&&lines[j].trim()!=='';j++)body.push(lines[j]);
+        const html=cueToHtml(body.join('\\n'));
+        if(Number.isFinite(start)&&Number.isFinite(end)&&end>start&&html)cues.push({start,end,html,text:html.replace(/<br>/g,'\\n').replace(/<[^>]+>/g,'').replace(/&lt;/g,'<').replace(/&amp;/g,'&')});
+        i+=body.length;
       }
       return cues.sort((a,b)=>a.start-b.start);
     }
@@ -6531,7 +6546,7 @@ async function applyProfileMusicSelection(track){
       return {count:cues.length,blob:new Blob([`WEBVTT\n\n${body}\n`],{type:'text/vtt;charset=utf-8'})};
     }
     function getEpisodeSubTracks(d){
-      const t=(Array.isArray(d?.subtitleTracks)?d.subtitleTracks:[]).filter(x=>x&&x.url).map(x=>({...x}));
+      const t=(Array.isArray(d?.subtitleTracks)?d.subtitleTracks:[]).filter(x=>x&&(x.url||x.path||x.storagePath)).map(x=>({...x,path:x.path||x.storagePath||''}));
       if(d?.subUrl&&!t.some(x=>x.url===d.subUrl))t.unshift({id:'legacy',lang:'pt-PT',label:'Português',url:d.subUrl,path:d.subStoragePath||'',offset:0,isDefault:!t.some(x=>x.isDefault)});
       return t;
     }
@@ -6976,8 +6991,7 @@ async function applyProfileMusicSelection(track){
       const p=document.getElementById('mainVideoPlayer');
       try{
         if(document.pictureInPictureElement)await document.exitPictureInPicture();
-        else if(document.pictureInPictureEnabled&&p.requestPictureInPicture)await p.requestPictureInPicture();
-        else liquidStatus('Picture-in-Picture não é suportado neste navegador');
+        else if(document.pictureInPictureEnabled&&p.requestPictureInPicture)await p.requestPictureInPicture();        else liquidStatus('Picture-in-Picture não é suportado neste navegador');
       }catch(e){console.warn('PiP:',e);liquidStatus('Picture-in-Picture indisponível')}
     }
     async function toggleLiquidFullscreen(){
@@ -6991,7 +7005,8 @@ async function applyProfileMusicSelection(track){
     }
     function liquidPlayerEventBindings(){
       const p=document.getElementById('mainVideoPlayer');if(!p||p.dataset.liquidBound==='1')return;p.dataset.liquidBound='1';
-      ['play','pause','timeupdate','loadedmetadata','durationchange','volumechange','ratechange','progress','emptied'].forEach(ev=>p.addEventListener(ev,syncLiquidPlayerUI));      p.addEventListener('play',()=>showLiquidControls(true));
+      ['play','pause','timeupdate','loadedmetadata','durationchange','volumechange','ratechange','progress','emptied'].forEach(ev=>p.addEventListener(ev,syncLiquidPlayerUI));
+      p.addEventListener('play',()=>showLiquidControls(true));
       p.addEventListener('pause',()=>showLiquidControls(false));
       p.addEventListener('ended',()=>showLiquidControls(false));
       p.addEventListener('click',handleLiquidVideoTap);
@@ -7465,7 +7480,14 @@ function commentLikedByMe(id){return !!currentUser&&episodeCommentLikes.some(x=>
       p.onpause=()=>{if(activeAudioTrack){const ae=document.getElementById('episodeAudioPlayer');ae?.pause();}syncLiquidPlayerUI();if(activeWatchPartyRoom&&isRoomHost()&&!watchPartyIgnoreSync)publishRoomState({position:p.currentTime,playing:false});if(currentUser){setUserStatus('online','');setProfileStatusLine('online','');if(p.duration&&Number.isFinite(p.duration)){updateContinueWatchState(season,idx,title,p.currentTime,p.duration);queueWatchDataCloudSync(true);renderContinueWatching();renderProfileWatchSections();}}};
       p.onended=()=>{if(currentUser&&p.duration&&Number.isFinite(p.duration)){updateContinueWatchState(season,idx,title,p.duration,p.duration);queueWatchDataCloudSync(true);renderContinueWatching();renderProfileWatchSections();}handleWatchPartyEpisodeEnded()};
       p.onseeked=()=>{if(activeAudioTrack){const ae=document.getElementById('episodeAudioPlayer');if(ae&&Number.isFinite(ae.duration)){try{ae.currentTime=Math.min(p.currentTime,ae.duration)}catch{}if(!p.paused)ae.play().catch(()=>{})}}syncLiquidPlayerUI();if(activeWatchPartyRoom&&isRoomHost()&&!watchPartyIgnoreSync)publishRoomState({position:p.currentTime,playing:!p.paused});if(currentUser&&p.duration&&Number.isFinite(p.duration)){updateContinueWatchState(season,idx,title,p.currentTime,p.duration);queueWatchDataCloudSync(true);}};
-      p.ontimeupdate=()=>{if(activeAudioTrack){const ae=document.getElementById('episodeAudioPlayer');if(ae&&Number.isFinite(ae.duration)&&Math.abs(ae.currentTime-p.currentTime)>.45){try{ae.currentTime=Math.min(p.currentTime,ae.duration)}catch{}}if(!p.paused&&ae?.paused)ae.play().catch(()=>{});}syncLiquidPlayerUI();if(!getAdminFeatureState().rememberProgress)return;if(currentUser&&currentPlayingEp&&p.duration&&Number.isFinite(p.duration)){updateContinueWatchState(season,idx,title,p.currentTime,p.duration);queueWatchDataCloudSync(false);if(p.currentTime>1)setUserStatus('watching',title)}else if(currentPlayingEp&&p.duration&&Number.isFinite(p.duration)){const ep=Number(idx);const obj={season:Number(season),epIndex:ep,title,positionSeconds:p.currentTime,progress:`${fmtTime(p.currentTime)} / ${fmtTime(p.duration)}`,progressPercent:Math.round(p.currentTime/p.duration*100)};continueWatching=[...continueWatching.filter(x=>!(Number(x.season)===Number(season)&&Number(x.epIndex)===ep)),obj].slice(-20);localStorage.setItem('cn_continue_watching',JSON.stringify(continueWatching));}};
+      p.ontimeupdate=()=>{if(activeAudioTrack){const ae=document.getElementById('episodeAudioPlayer');if(ae&&Number.isFinite(ae.duration)&&Math.abs(ae.currentTime-p.currentTime)>.45){try{ae.currentTime=Math.min(p.currentTime,ae.duration)}catch{}}if(!p.paused&&ae?.paused)ae.play().catch(()=>{});}syncLiquidPlayerUI();
+        if(activeWatchPartyRoom&&isRoomHost()&&!watchPartyIgnoreSync&&Date.now()-(window.__wpLastLiveTick||0)>1400){
+          window.__wpLastLiveTick=Date.now();
+          const live={...activeWatchPartyRoom,position:p.currentTime,playing:!p.paused,updatedAt:Date.now()};
+          activeWatchPartyRoom=live;
+          try{watchPartyChannel?.send({type:'broadcast',event:'state',payload:{room:live}})}catch(e){}
+        }
+        if(!getAdminFeatureState().rememberProgress)return;if(currentUser&&currentPlayingEp&&p.duration&&Number.isFinite(p.duration)){updateContinueWatchState(season,idx,title,p.currentTime,p.duration);queueWatchDataCloudSync(false);if(p.currentTime>1)setUserStatus('watching',title)}else if(currentPlayingEp&&p.duration&&Number.isFinite(p.duration)){const ep=Number(idx);const obj={season:Number(season),epIndex:ep,title,positionSeconds:p.currentTime,progress:`${fmtTime(p.currentTime)} / ${fmtTime(p.duration)}`,progressPercent:Math.round(p.currentTime/p.duration*100)};continueWatching=[...continueWatching.filter(x=>!(Number(x.season)===Number(season)&&Number(x.epIndex)===ep)),obj].slice(-20);localStorage.setItem('cn_continue_watching',JSON.stringify(continueWatching));}};
       if(subUrl){try{oldTrack.track.mode='disabled'}catch(e){}}
       syncLiquidPlayerUI();
       // Carrega as legendas no próprio fluxo do player. A página de episódio
@@ -7968,8 +7990,7 @@ async function renderAdminAccounts(){
             if((data||[]).some(r=>String(r.id)===wanted)) return true;
           }
         }
-        if(error) throw error;
-      }catch(err){
+        if(error) throw error;      }catch(err){
         throw new Error(`${table}: não foi possível remover o registo. ${restMessage?`REST: ${restMessage}. `:''}SDK: ${err?.message||err}`);
       }
       throw new Error(`${table}: o registo ${wanted} ainda existe.`);
@@ -7990,7 +8011,8 @@ async function renderAdminAccounts(){
       if(!isAdminUser())return alert('Sem acesso de administrador.');
       const post=leakPosts.find(p=>String(p.id)===String(id)); if(!post)return alert('Publicação não encontrada.');
       if(!confirm(`Remover a publicação de ${post.author || post.handle || 'utilizador'}?`))return;
-      try{        if(post.mediaStoragePath) await deleteCloudMedia(post.mediaStoragePath);
+      try{
+        if(post.mediaStoragePath) await deleteCloudMedia(post.mediaStoragePath);
         if(post.mediaBlobKey) await deleteMedia(post.mediaBlobKey);
         await deleteCloudRow('leak_posts',post.id);
         leakPosts=leakPosts.filter(p=>String(p.id)!==String(id));
@@ -8861,6 +8883,19 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
     let watchPartyMembers={};
     let watchChatSeen=new Set();
 
+    function showWatchPartyPlayerNotice(kind,username){
+      const shell=document.getElementById('videoShell');if(!shell||!activeWatchPartyRoom)return;
+      let box=document.getElementById('watchPartyPlayerPresenceOverlay');
+      if(!box){box=document.createElement('div');box.id='watchPartyPlayerPresenceOverlay';box.setAttribute('aria-live','polite');shell.appendChild(box);}
+      const account=typeof getAccount==='function'?getAccount(username):null;
+      const avatar=String(account?.avatar||account?.avatarUrl||`https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(username||'BCG')}`);
+      const row=document.createElement('div');row.className='wp-presence-toast '+(kind==='leave'?'leaving':'joining');
+      const img=document.createElement('img');img.src=avatar;img.alt='';img.onerror=()=>{img.onerror=null;img.src=`https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(username||'BCG')}`};
+      const label=document.createElement('span');label.textContent=`${username} ${kind==='leave'?'saiu da sala':'entrou na sala'}`;
+      row.append(img,label);box.appendChild(row);
+      while(box.children.length>3)box.firstElementChild.remove();
+      setTimeout(()=>{row.classList.add('out');setTimeout(()=>row.remove(),350)},3600);
+    }
     function setupWatchPartyChannel(code){
       if(watchPartyReconnectTimer){clearTimeout(watchPartyReconnectTimer);watchPartyReconnectTimer=null}
       if(watchPartyChannel&&supabaseClient){try{supabaseClient.removeChannel(watchPartyChannel)}catch(e){}watchPartyChannel=null}
@@ -8882,7 +8917,7 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
         .on('presence',{event:'sync'},()=>refreshWatchRoomMembers())
         .on('presence',{event:'join'},({key,newPresences})=>{
           const user=presenceUsername(key,newPresences);
-          if(user)refreshWatchRoomMembers();
+          if(user){refreshWatchRoomMembers();if(user.toLowerCase()!==String(currentUser?.username||'').toLowerCase())showWatchPartyPlayerNotice('join',user);}
         })
         .on('presence',{event:'leave'},({key,leftPresences})=>{
           const user=presenceUsername(key,leftPresences);
@@ -8890,6 +8925,7 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
           if(user&&user!==currentUser?.username){
             const id=`leave-${roomCode}-${user}-${Date.now()}`;
             addSystemChatMessage(`@${user} saiu da sala.`,id);
+            showWatchPartyPlayerNotice('leave',user);
           }
         })
         .subscribe(async (status)=>{
@@ -8953,8 +8989,7 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
       if(!q.length){box.innerHTML='<div class="small-note">Nenhum episódio selecionado.</div>';return}
       const current=roomQueueIndex(activeWatchPartyRoom);
       box.innerHTML=q.map((ep,i)=>`<div class="room-queue-item ${i===current?'current':''}"><div class="room-queue-index">${i+1}</div><div class="room-queue-main"><div class="room-queue-title">${i===current?'▶️ ':''}${esc(ep.title||`${Number(ep.idx)+1} - Episódio`)}</div><div class="room-queue-meta">${ep.season==='specials'?'Especial':`Temporada ${esc(ep.season)}`} · Episódio ${Number(ep.idx)+1}</div></div></div>`).join('');
-    }
-    function updateWatchRoomUI(){
+    }    function updateWatchRoomUI(){
       const modal=document.getElementById('playerModal');
       modal?.classList.toggle('watch-room-active',!!activeWatchPartyRoom);
       const title=document.getElementById('watchPartyRoomTitle');
@@ -8989,7 +9024,8 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
       sel.innerHTML='';
       for(let i=1;i<=Math.min(30,available.length);i++){const o=document.createElement('option');o.value=String(i);o.textContent=`${i} ${i===1?'episódio':'episódios'}`;if(i===currentCount)o.selected=true;sel.appendChild(o)}
     }
-    function renderRoomEpisodePicker(){      const box=document.getElementById('roomEpisodePicker'),countEl=document.getElementById('roomPickerCount');if(!box)return;
+    function renderRoomEpisodePicker(){
+      const box=document.getElementById('roomEpisodePicker'),countEl=document.getElementById('roomPickerCount');if(!box)return;
       const target=Number(document.getElementById('roomEpisodeCount')?.value||1);
       const selectedKeys=new Set((activeWatchPartyRoom?.queue||[]).map(q=>`${q.season}_${q.idx}`));
       const available=getAvailableRoomEpisodes();
@@ -9199,14 +9235,22 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
         const liveRoom=activeWatchPartyRoom;
         if(!liveRoom||String(liveRoom.code||'').toUpperCase()!==roomCode)return false;
         if(currentPlayingEp&&(String(currentPlayingEp.season)!==String(liveRoom.season)||Number(currentPlayingEp.idx)!==Number(liveRoom.epIndex)))return false;
-        const target=Number.isFinite(Number(liveRoom.position))?Math.max(0,Number(liveRoom.position)):0;
+        const basePosition=Number.isFinite(Number(liveRoom.position))?Math.max(0,Number(liveRoom.position)):0;
+        const stateAge=Math.max(0,Math.min(8,(Date.now()-Number(liveRoom.updatedAt||Date.now()))/1000));
+        const target=basePosition+(liveRoom.playing?stateAge:0);
         watchPartyIgnoreSync=true;
         try{
-          if(Math.abs((Number(player.currentTime)||0)-target)>0.35){
+          const drift=target-(Number(player.currentTime)||0);
+          if(Math.abs(drift)>0.8){
             const safeTarget=Number.isFinite(player.duration)&&player.duration>0?Math.min(target,Math.max(0,player.duration-0.05)):target;
             player.currentTime=safeTarget;
             refreshRoomSubtitleAfterSeek();
-          }
+          }else if(Math.abs(drift)>0.12&&liveRoom.playing){
+            const normalRate=Number(player.playbackRate)||1;
+            player.playbackRate=Math.max(.92,Math.min(1.08,normalRate+(drift>0?.06:-.06)));
+            clearTimeout(window.__wpDriftRateTimer);
+            window.__wpDriftRateTimer=setTimeout(()=>{try{player.playbackRate=1}catch{}},2200);
+          }else{try{player.playbackRate=1}catch{}}
           const shouldPlay=options.autoplay===true||!!liveRoom.playing;
           if(shouldPlay){
             try{await player.play();hidePlayerError();}
@@ -9490,7 +9534,7 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
       clearInterval(window.__noirPresenceHeartbeat);
       window.__noirPresenceHeartbeat=setInterval(()=>{if(currentUser)window.__noirUpdatePresence()},20000);
     };
-    function renderCommunity(){const c=document.getElementById('communityGrid');if(!c)return;const q=(document.getElementById('communitySearch')?.value||'').toLowerCase();const list=[...accounts].filter(a=>!q||String(a.username||'').toLowerCase().includes(q)).sort((a,b)=>{const ap=a.communityPinned===true?1:0,bp=b.communityPinned===true?1:0;if(ap!==bp)return bp-ap;return String(a.displayName||a.username).localeCompare(String(b.displayName||b.username));});c.innerHTML=list.length?list.map(a=>{const isStale=!a.lastSeen||Date.now()-a.lastSeen>90000;const st=statusLabel(a,isStale);const banner=a.animatedBanner||a.banner||'';return `<div class="user-card" onclick="openProfile('${esc(a.username)}')" style="${banner?`background-image:linear-gradient(rgba(10,16,12,.76),rgba(10,16,12,.96)),url('${esc(banner)}');background-size:cover;background-position:center`:''}">${premiumAvatarMarkup(a,'sm')}<div class="user-name">${styledProfileNameMarkup(a,true)} ${a.isAdmin?' <span class="badge-admin"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> ADMIN</span>':''}${hasPremium(a)?' <span class="premium-chip"><i class="fa-solid fa-crown"></i> PREMIUM</span>':''}</div><div class="status-line"><span class="status-dot ${st.type}"></span>${esc(st.label)}</div><div class="small-note" style="text-align:center;margin-top:8px">${esc(cleanPremiumBio(a.quote)||'Sem frase de perfil.')}</div>${profileMusicNoteMarkup(a)}${spotifyPresenceMarkup(a,{compact:true})}${favoriteShowMarkup(a.favoriteShow,{compact:true})}</div>`}).join(''):'<p style="color:var(--text-muted)">Ainda não existem outros perfis.</p>';}
+    function renderCommunity(){const c=document.getElementById('communityGrid');if(!c)return;const q=(document.getElementById('communitySearch')?.value||'').toLowerCase();const list=[...accounts].filter(a=>!q||String(a.username||'').toLowerCase().includes(q)).sort((a,b)=>{const ap=a.communityPinned===true?1:0,bp=b.communityPinned===true?1:0;if(ap!==bp)return bp-ap;return String(a.displayName||a.username).localeCompare(String(b.displayName||b.username));});c.innerHTML=list.length?list.map(a=>{const isStale=!a.lastSeen||Date.now()-a.lastSeen>90000;const st=statusLabel(a,isStale);const banner=a.animatedBanner||a.banner||'';return `<div class="user-card" onclick="openProfile('${esc(a.username)}')" style="${banner?`background-image:linear-gradient(rgba(10,16,12,.76),rgba(10,16,12,.96)),url('${esc(banner)}');background-size:cover;background-position:center`:''}">${premiumAvatarMarkup(a,'sm')}<div class="user-name">${styledProfileNameMarkup(a,true)} ${a.isAdmin?' <span class="badge-admin"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> ADMIN</span>':''}${hasPremium(a)?' <span class="premium-chip"><i class="fa-solid fa-crown"></i> PREMIUM</span>':''}</div><div class="status-line"><span class="status-dot ${st.type}"></span>${esc(st.label)}</div><div class="small-note" style="text-align:center;margin-top:8px">${esc(cleanPremiumBio(a.quote)||'Sem frase de perfil.')}</div>${spotifyPresenceMarkup(a,{compact:true})}${favoriteShowMarkup(a.favoriteShow,{compact:true})}</div>`}).join(''):'<p style="color:var(--text-muted)">Ainda não existem outros perfis.</p>';}
     
     async function hydrateMissedNotifications(silent=true){
       if(!currentUser||!supabaseClient)return;
@@ -9944,8 +9988,7 @@ function renderSpotifyConnectionUI(){
   if(editor)editor.innerHTML=p?`<div class="spotify-editor-row">${p.albumImageUrl?`<img class="spotify-editor-cover" src="${esc(p.albumImageUrl)}" alt="">`:''}<div style="min-width:0;flex:1"><div style="font-size:.68rem;color:#8cf6a4;text-transform:uppercase;font-weight:900">${p.isPlaying?'A ouvir agora':'Spotify'}</div><div style="font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.trackName)}</div><div class="small-note">${esc(p.artistName)}</div></div></div>`:'';
   const hero=document.getElementById('profileSpotifyPreview');if(hero)hero.innerHTML=p?spotifyPresenceMarkup(a):'';
 }
-function syncSpotifyAdminForm(){const input=document.getElementById('spotifyClientIdInput'),uri=document.getElementById('spotifyRedirectUriValue'),gif=document.getElementById('giphyApiKeyInput');if(input)input.value=spotifyClientId();if(uri)uri.textContent=spotifyRedirectUri();if(gif)gif.value=String(siteSettings?.giphyApiKey||'');}
-async function copySpotifyRedirectUri(){const value=spotifyRedirectUri();try{await navigator.clipboard.writeText(value);const st=document.getElementById('spotifyAdminStatus');if(st){st.className='admin-media-status active success';st.textContent='✓ Redirect URI copiado.';setTimeout(()=>{st.className='admin-media-status';st.textContent=''},1800)}}catch{prompt('Copia o Redirect URI:',value)}}
+function syncSpotifyAdminForm(){const input=document.getElementById('spotifyClientIdInput'),uri=document.getElementById('spotifyRedirectUriValue'),gif=document.getElementById('giphyApiKeyInput');if(input)input.value=spotifyClientId();if(uri)uri.textContent=spotifyRedirectUri();if(gif)gif.value=String(siteSettings?.giphyApiKey||'');}async function copySpotifyRedirectUri(){const value=spotifyRedirectUri();try{await navigator.clipboard.writeText(value);const st=document.getElementById('spotifyAdminStatus');if(st){st.className='admin-media-status active success';st.textContent='✓ Redirect URI copiado.';setTimeout(()=>{st.className='admin-media-status';st.textContent=''},1800)}}catch{prompt('Copia o Redirect URI:',value)}}
 async function saveSpotifyAdminSettings(){
   if(!isAdminUser())return alert('Sem acesso de administrador.');
   const id=String(document.getElementById('spotifyClientIdInput')?.value||'').trim();if(id.length<10)return alert('Coloca um Spotify Client ID válido.');
@@ -9988,7 +10031,8 @@ window.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>initSpotifyIntegr
 .dm-nickname-chip{font-size:.65rem;color:var(--text-muted);margin-left:5px}.dm-nickname-btn{width:28px;height:28px;border-radius:9px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.05);color:#fff;cursor:pointer}.dm-nickname-btn:hover{border-color:var(--accent-green);color:var(--accent-green)}
 @media(max-width:620px){.dm-gif-picker{bottom:76px}.dm-gif-results{grid-template-columns:1fr 1fr}.dm-gif-item img{height:110px}}
 </style>
-<style id="noir-dm-upgrade-css">.dm-upgrade-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px 0}
+<style id="noir-dm-upgrade-css">
+.dm-upgrade-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px 0}
 .dm-tool-btn{width:34px;height:34px;border-radius:11px;border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.055);color:#fff;cursor:pointer;display:grid;place-items:center}
 .dm-tool-btn:hover{border-color:var(--accent-green);color:var(--accent-green);transform:translateY(-1px)}
 .dm-tool-btn.recording{border-color:rgba(255,77,77,.55);color:#ff9191;background:rgba(255,77,77,.1);animation:dmPulse 1s infinite}
@@ -10853,6 +10897,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   function parseSubtitleFile(raw){return parseSubCues(raw);}
   function updateEpisodeSubtitleOverlay(){
     const p=$('mainVideoPlayer'),el=$('episodeSubtitleOverlay');if(!p||!el||window.__clipBusy)return;
+    if(window.__bcgNativeSubtitleTrack&&window.__bcgNativeSubtitleTrack.mode==='showing'){el.classList.remove('show');return;}
     if(!subtitleEnabled||!subtitleCues.length||!Number.isFinite(p.currentTime)){el.classList.remove('show');if(subtitleLastText){el.textContent='';subtitleLastText='';}return;}
     const offset=Math.max(-30,Math.min(30,Number((typeof customVideos!=='undefined'?customVideos?.[`${currentPlayingEp?.season}_${currentPlayingEp?.idx}`]?.subtitleOffset:0))||0));
     const time=p.currentTime-offset-(Number(window.__activeSubOffset)||0);
@@ -10861,6 +10906,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   }
   function resetEpisodeSubtitleUi(){
     subtitleCues=[];subtitleLastText='';
+    try{if(window.__bcgNativeSubtitleTrack)window.__bcgNativeSubtitleTrack.mode='disabled'}catch{}window.__bcgNativeSubtitleTrack=null;
     const el=$('episodeSubtitleOverlay');if(el){el.textContent='';el.classList.remove('show');}
     const btn=$('liquidSubtitleBtn');if(btn){btn.style.display='inline-flex';btn.disabled=false;btn.classList.remove('active');btn.setAttribute('aria-pressed','false');btn.title='Legendas (CC) — a verificar disponibilidade';btn.setAttribute('aria-label','Legendas (CC)');}
     const track=$('videoTrack');if(track){try{track.track.mode='disabled'}catch{}track.removeAttribute('src');track.default=false;}
@@ -10901,6 +10947,16 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
     if(token!==subtitleFetchToken||subKey!==key)return false;
     if(!cues.length)throw new Error(storageError?'Não foi possível ler um ficheiro de legendas válido.':'O ficheiro não contém legendas válidas (SRT/VTT).');
     subtitleCues=cues;subActiveId=t.id;window.__activeSubOffset=Number(t.offset)||0;
+    const p=$('mainVideoPlayer');
+    if(p){
+      try{
+        const native=p.addTextTrack('subtitles',String(t.label||t.lang||'Legendas'),String(t.lang||'pt').slice(0,2));
+        native.mode='showing';
+        const Cue=window.VTTCue||window.TextTrackCue;
+        if(Cue)for(const c of cues){try{native.addCue(new Cue(c.start,c.end,c.text))}catch{}}
+        window.__bcgNativeSubtitleTrack=native;
+      }catch(nativeErr){console.warn('TextTrack nativo indisponível; a usar sobreposição:',nativeErr)}
+    }
     if(tr){tr.removeAttribute('src');tr.default=false;try{tr.track.mode='disabled'}catch{}}
     return true;
   }
@@ -10931,8 +10987,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
     m.innerHTML=subTracks.map(t=>`<button type="button" data-sub="${esc(t.id)}">${esc(t.label||t.lang)}</button>`).join('')+'<button type="button" data-sub="off">Desativar</button>';
     return m;
   }
-  async function selectSubTrack(id){
-    closeSubMenu();const btn=$('liquidSubtitleBtn'),tr=$('videoTrack');
+  async function selectSubTrack(id){    closeSubMenu();const btn=$('liquidSubtitleBtn'),tr=$('videoTrack');
     if(id==='off'){subtitleEnabled=false;setSubPref('off');try{if(tr)tr.track.mode='disabled'}catch{}updateEpisodeSubtitleOverlay();paintSubButton();return}
     const t=subTracks.find(x=>x.id===id);if(!t)return;
     try{if(btn)btn.disabled=true;if(t.id!==subActiveId||!subtitleCues.length)await activateSubTrack(t,subKey);subtitleEnabled=true;setSubPref(t.lang)}catch(err){console.warn(err);alert('Não foi possível carregar esta legenda.')}
@@ -10943,7 +10998,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
     if(!subTracks.length){if(typeof liquidStatus==='function')liquidStatus('Este episódio ainda não tem legendas disponíveis.');return;}
     if(subTracks.length>1){buildSubMenu().classList.toggle('open');paintSubButton();return}
     const track=$('videoTrack');
-    if(subtitleCues.length){subtitleEnabled=!subtitleEnabled;setSubPref(subtitleEnabled?(subTracks[0]?.lang||''):'off');updateEpisodeSubtitleOverlay()}
+    if(subtitleCues.length){subtitleEnabled=!subtitleEnabled;setSubPref(subtitleEnabled?(subTracks.find(x=>x.id===subActiveId)?.lang||subTracks[0]?.lang||''):'off');try{if(window.__bcgNativeSubtitleTrack)window.__bcgNativeSubtitleTrack.mode=subtitleEnabled?'showing':'disabled'}catch{}updateEpisodeSubtitleOverlay()}
     else if(track){try{track.track.mode=track.track.mode==='showing'?'disabled':'showing';setSubPref(track.track.mode==='showing'?(subTracks[0]?.lang||''):'off')}catch{}}
     paintSubButton();
   }
@@ -10987,7 +11042,8 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   const $=id=>document.getElementById(id);
   const text=v=>String(v??'').trim();
   const escapeHtml=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  function safeHttpUrl(raw){const v=text(raw);if(!v)return '';try{const u=new URL(v,location.origin);return ['http:','https:'].includes(u.protocol)?u.href:'';}catch{return ''}}  function allTrailers(){return Array.isArray(siteSettings?.trailerBoard)?siteSettings.trailerBoard:[];}
+  function safeHttpUrl(raw){const v=text(raw);if(!v)return '';try{const u=new URL(v,location.origin);return ['http:','https:'].includes(u.protocol)?u.href:'';}catch{return ''}}
+  function allTrailers(){return Array.isArray(siteSettings?.trailerBoard)?siteSettings.trailerBoard:[];}
   function trailerEpisodeTitle(season,index){try{return typeof episodeTitle==='function'?episodeTitle(String(season),Number(index)):`Episódio ${Number(index)+1}`;}catch{return `Episódio ${Number(index)+1}`}}
   function trailerAssociation(item){const season=String(item.season||'1');const seasonLabel=season==='specials'?'Especiais':`Temporada ${season}`;return item.scope==='episode'?`${seasonLabel} · E${Number(item.episodeIndex||0)+1} — ${trailerEpisodeTitle(season,Number(item.episodeIndex||0))}`:seasonLabel;}
   function visibleTrailers(){return allTrailers().filter(x=>x&&x.published!==false&&text(x.videoUrl)&&safeHttpUrl(x.videoUrl)).sort((a,b)=>(Number(a.order??100)-Number(b.order??100))||(Number(b.updatedAt||b.createdAt||0)-Number(a.updatedAt||a.createdAt||0))).slice(0,40)}
@@ -11264,5 +11320,51 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
     new MutationObserver(ensureSubtitleButton).observe(shell,{subtree:true,childList:true,attributes:true,attributeFilter:['style','class']});
   }
   window.addEventListener('pageshow',ensureSubtitleButton);
+})();
+</script>
+
+<style id="bcg-remove-profile-avatar-music-bubble">
+  #profileAvatarMusicNote,.profile-avatar-note-mount,.profile-avatar-music-note,.profile-music-note-add{display:none!important}
+</style>
+
+<style id="bcg-watchparty-presence-and-profile-fixes">
+#watchPartyPlayerPresenceOverlay{position:absolute;z-index:35;left:12px;top:58px;display:flex;flex-direction:column;gap:7px;max-width:min(75%,330px);pointer-events:none}
+.wp-presence-toast{display:flex;align-items:center;gap:9px;padding:7px 11px 7px 7px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(12,16,14,.82);backdrop-filter:blur(16px);color:#fff;font-size:12px;font-weight:800;box-shadow:0 6px 22px rgba(0,0,0,.3);animation:wpPresenceIn .22s ease-out;transition:opacity .3s,transform .3s}
+.wp-presence-toast img{width:28px;height:28px;border-radius:50%;object-fit:cover;flex:0 0 28px}
+.wp-presence-toast.leaving{border-color:rgba(255,190,140,.35)}
+.wp-presence-toast.out{opacity:0;transform:translateX(-12px)}
+@keyframes wpPresenceIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+#roomSubtitleUploadBtn,#roomSubtitleFileInput,#roomSubtitleStatus{display:none!important}
+#profileAvatarMusicNote,.profile-avatar-note-mount,.profile-avatar-music-note,.profile-music-note-add{display:none!important}
+</style>
+<script id="bcg-watchparty-admin-quick-create">
+(function(){
+  const $=id=>document.getElementById(id);
+  function fillEpisodeOptions(){
+    const season=$('bcgCreateSeason')?.value||'1',sel=$('bcgCreateEpisode');if(!sel)return;
+    const list=Array.isArray(EPISODES?.[season])?EPISODES[season]:[];
+    sel.innerHTML=list.map((_,i)=>`<option value="${i}">${i+1} — ${String(episodeTitle(season,i)||'Episódio '+(i+1))}</option>`).join('');
+    if(!list.length)sel.innerHTML='<option value="0">Episódio 1</option>';
+  }
+  window.bcgSaveEpisodeQuick=async function(){
+    if(!currentUser?.isAdmin)return alert('Sem acesso de administrador.');
+    const season=$('bcgCreateSeason')?.value||'1',idx=Number($('bcgCreateEpisode')?.value||0),title=String($('bcgCreateTitle')?.value||'').trim(),status=$('bcgCreateEpisodeStatus');
+    if(!title)return alert('Escreve o nome do episódio.');
+    const key=`${season}_${idx}`,previous=customVideos[key]||{};
+    customVideos[key]={...previous,title,episodeTitle:title,updatedAt:Date.now()};
+    try{
+      await save('cn_custom_videos_meta',customVideos);
+      if(status){status.className='admin-media-status active success';status.textContent=`✓ ${title} guardado em ${season==='specials'?'Especiais':'Temporada '+season}, episódio ${idx+1}.`;}
+      if($('adminSeasonSelect'))$('adminSeasonSelect').value=season;
+      if(typeof populateAdminEpDropdown==='function')populateAdminEpDropdown();
+      if($('adminEpSelect'))$('adminEpSelect').value=String(idx);
+      if($('adminEditSeasonSelect'))$('adminEditSeasonSelect').value=season;
+      if($('adminEditEpSelect'))$('adminEditEpSelect').value=String(idx);
+      if(typeof renderEpisodesList==='function')renderEpisodesList();
+      if(typeof renderRecentEpisodes==='function')renderRecentEpisodes();
+    }catch(e){customVideos[key]=previous;if(status){status.className='admin-media-status active error';status.textContent='Erro ao guardar: '+(e?.message||e);}console.error(e);}
+  };
+  function init(){ $('bcgCreateSeason')?.addEventListener('change',fillEpisodeOptions);fillEpisodeOptions(); }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 </script>
