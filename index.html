@@ -10881,10 +10881,25 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   }
   async function activateSubTrack(t,key){
     const token=++subtitleFetchToken,tr=$('videoTrack');
-    const res=await fetch(t.url,{cache:'no-store'});if(!res.ok)throw new Error(`HTTP ${res.status}`);
-    const cues=parseSubtitleFile(decodeSubBytes(await res.arrayBuffer()));
+    let rawText='',storageError=null;
+    // Para ficheiros enviados pelo painel, descarrega pelo SDK do Supabase.
+    // Isto evita que as regras CORS do URL público impeçam o browser de ler o VTT.
+    if(t.path&&typeof supabaseClient!=='undefined'&&supabaseClient?.storage){
+      try{
+        const {data,error}=await supabaseClient.storage.from(SUPABASE_MEDIA_BUCKET).download(t.path);
+        if(error)throw error;
+        if(!data)throw new Error('O Storage não devolveu o ficheiro.');
+        rawText=decodeSubBytes(await data.arrayBuffer());
+      }catch(err){storageError=err;console.warn('Download de legendas pelo Storage falhou; a tentar URL público:',err?.message||err)}
+    }
+    if(!rawText){
+      const url=String(t.url||'').trim();if(!url)throw new Error('Esta faixa não tem URL nem caminho de Storage.');
+      const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw new Error(`HTTP ${res.status}`);
+      rawText=decodeSubBytes(await res.arrayBuffer());
+    }
+    const cues=parseSubtitleFile(rawText);
     if(token!==subtitleFetchToken||subKey!==key)return false;
-    if(!cues.length)throw new Error('O ficheiro não contém legendas válidas.');
+    if(!cues.length)throw new Error(storageError?'Não foi possível ler um ficheiro de legendas válido.':'O ficheiro não contém legendas válidas (SRT/VTT).');
     subtitleCues=cues;subActiveId=t.id;window.__activeSubOffset=Number(t.offset)||0;
     if(tr){tr.removeAttribute('src');tr.default=false;try{tr.track.mode='disabled'}catch{}}
     return true;
@@ -10903,7 +10918,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
     }catch(err){
       console.warn('Legendas externas:',err?.message||err);
       // Fallback: track nativo quando o servidor bloqueia o fetch (CORS).
-      if(tr&&subKey===key){tr.src=t.url;tr.kind='subtitles';tr.srclang=(t.lang||'pt').slice(0,2);tr.label=t.label||'Português';tr.default=pref!=='off';try{tr.track.mode=pref==='off'?'disabled':'showing'}catch{}}
+      if(tr&&subKey===key&&t.url){tr.src=t.url;tr.kind='subtitles';tr.srclang=(t.lang||'pt').slice(0,2);tr.label=t.label||'Português';tr.default=pref!=='off';const nativeTrack=tr.track;const setNativeMode=()=>{try{nativeTrack.mode=pref==='off'?'disabled':'showing'}catch{}};tr.addEventListener('load',setNativeMode,{once:true});setNativeMode();}
       subtitleCues=[];subActiveId=t.id;const shell=$('videoShell');if(shell)shell.dataset.subtitleNativeFallback='1';
     }
     btn.disabled=false;updateEpisodeSubtitleOverlay();paintSubButton();
@@ -10972,8 +10987,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   const $=id=>document.getElementById(id);
   const text=v=>String(v??'').trim();
   const escapeHtml=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  function safeHttpUrl(raw){const v=text(raw);if(!v)return '';try{const u=new URL(v,location.origin);return ['http:','https:'].includes(u.protocol)?u.href:'';}catch{return ''}}
-  function allTrailers(){return Array.isArray(siteSettings?.trailerBoard)?siteSettings.trailerBoard:[];}
+  function safeHttpUrl(raw){const v=text(raw);if(!v)return '';try{const u=new URL(v,location.origin);return ['http:','https:'].includes(u.protocol)?u.href:'';}catch{return ''}}  function allTrailers(){return Array.isArray(siteSettings?.trailerBoard)?siteSettings.trailerBoard:[];}
   function trailerEpisodeTitle(season,index){try{return typeof episodeTitle==='function'?episodeTitle(String(season),Number(index)):`Episódio ${Number(index)+1}`;}catch{return `Episódio ${Number(index)+1}`}}
   function trailerAssociation(item){const season=String(item.season||'1');const seasonLabel=season==='specials'?'Especiais':`Temporada ${season}`;return item.scope==='episode'?`${seasonLabel} · E${Number(item.episodeIndex||0)+1} — ${trailerEpisodeTitle(season,Number(item.episodeIndex||0))}`:seasonLabel;}
   function visibleTrailers(){return allTrailers().filter(x=>x&&x.published!==false&&text(x.videoUrl)&&safeHttpUrl(x.videoUrl)).sort((a,b)=>(Number(a.order??100)-Number(b.order??100))||(Number(b.updatedAt||b.createdAt||0)-Number(a.updatedAt||a.createdAt||0))).slice(0,40)}
@@ -10987,7 +11001,8 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
     const list=(typeof EPISODES!=='undefined'?(EPISODES[season]||[]):[]);select.innerHTML='';
     if(!list.length){const o=document.createElement('option');o.value='0';o.textContent='Episódio 1';select.appendChild(o);return;}
     list.forEach((_,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=`E${i+1} — ${trailerEpisodeTitle(season,i)}`;select.appendChild(o)});
-    if(selected!==undefined&&[...select.options].some(o=>o.value===String(selected)))select.value=String(selected);  }
+    if(selected!==undefined&&[...select.options].some(o=>o.value===String(selected)))select.value=String(selected);
+  }
   function updateAdminTrailerAssociationFields(){const episode=text($('adminTrailerScope')?.value)==='episode';const field=$('adminTrailerEpisodeField');if(field)field.style.display=episode?'':'none';}
   function previewAdminTrailer(){const box=$('adminTrailerPreview');if(!box)return;const url=safeHttpUrl($('adminTrailerCoverUrl')?.value||'');box.innerHTML=url?`<img src="${escapeHtml(url)}" alt="Pré-visualização da capa" onerror="this.parentElement.innerHTML='<span>Não foi possível carregar esta capa</span>'">`:'<span><i class="fa-solid fa-film"></i> Pré-visualização do trailer</span>';}
   function renderAdminTrailerBoardList(){const box=$('adminTrailerBoardList');if(!box)return;const list=[...allTrailers()].sort((a,b)=>(Number(a.order??100)-Number(b.order??100))||(Number(b.updatedAt||0)-Number(a.updatedAt||0)));if(!list.length){box.innerHTML='<div class="trailer-admin-empty">Ainda não adicionaste trailers. Preenche o formulário para criar o primeiro.</div>';return;}box.innerHTML=list.map(item=>`<div class="series-admin-item"><img class="series-admin-item-cover" src="${escapeHtml(safeHttpUrl(item.coverUrl)||'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2280%22%3E%3Crect width=%2260%22 height=%2280%22 fill=%22%23151b17%22/%3E%3Ctext x=%2230%22 y=%2245%22 fill=%22%23aaa%22 font-size=%2224%22 text-anchor=%22middle%22%3E%E2%96%B6%3C/text%3E%3C/svg%3E')}" alt=""><div class="series-admin-item-main"><div class="series-admin-item-title">${escapeHtml(item.title||'Trailer')}</div><div class="trailer-admin-item-meta">${escapeHtml(trailerAssociation(item))}<br>${item.published===false?'Oculto / rascunho':'Publicado na página inicial'} · ordem ${Number(item.order??100)}<br>Fonte: ${escapeHtml(item.videoUrl||'')}</div><div class="trailer-admin-item-actions"><button type="button" data-trailer-edit="${escapeHtml(item.id)}"><i class="fa-solid fa-pen"></i> Editar</button><button type="button" data-trailer-toggle="${escapeHtml(item.id)}">${item.published===false?'Publicar':'Ocultar'}</button><button type="button" data-trailer-test="${escapeHtml(item.id)}"><i class="fa-solid fa-play"></i> Testar</button><button type="button" data-trailer-delete="${escapeHtml(item.id)}"><i class="fa-solid fa-trash"></i> Apagar</button></div></div></div>`).join('');}
