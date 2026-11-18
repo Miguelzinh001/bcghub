@@ -997,7 +997,8 @@
         }
 
         .modal-overlay.cinema-mode video {
-            max-height: 70vh;        }
+            max-height: 70vh;
+        }
 
         .inbox-item {
             background: var(--bg-card);
@@ -1811,13 +1812,6 @@ body.tv-navigation-active .tv-focus::after{content:'';position:absolute;pointer-
 .notification-list{display:flex;flex-direction:column;gap:9px}.notification-item{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:12px;cursor:pointer;transition:.16s}.notification-item:hover{border-color:var(--accent-green);transform:translateY(-1px)}.notification-item.unread{border-color:rgba(255,255,255,.55);box-shadow:0 0 0 1px rgba(255,255,255,.08)}.notification-head{display:flex;align-items:flex-start;gap:10px}.notification-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.25);color:var(--accent-green);flex:0 0 38px}.notification-main{min-width:0;flex:1}.notification-title{font-weight:850;font-size:.88rem}.notification-body{font-size:.78rem;color:var(--text-muted);line-height:1.4;margin-top:2px;white-space:pre-wrap;overflow-wrap:anywhere}.notification-meta{font-size:.67rem;color:rgba(255,255,255,.42);margin-top:6px}.notification-actions{display:flex;gap:7px;margin-top:9px}.notification-action{flex:1;border:1px solid var(--border-color);background:rgba(255,255,255,.05);color:#fff;border-radius:9px;padding:8px 10px;font-weight:800;cursor:pointer}.notification-action.primary{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.12);color:#baffcc}.notification-toolbar{display:flex;gap:7px;margin:-2px 0 12px}.notification-toolbar button{flex:1;border:1px solid var(--border-color);background:rgba(255,255,255,.04);color:#fff;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer}.notification-toolbar button:hover{border-color:var(--accent-green)}.notification-empty{padding:22px 12px;text-align:center;color:var(--text-muted);border:1px dashed var(--border-color);border-radius:13px}.realtime-toast{position:fixed;right:12px;top:68px;z-index:50000;width:min(360px,calc(100vw - 24px));background:rgba(18,25,20,.92);border:1px solid rgba(255,255,255,.48);box-shadow:0 18px 50px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-radius:15px;padding:12px;color:#fff;animation:rtToastIn .2s ease-out}.realtime-toast strong{display:block;font-size:.85rem}.realtime-toast span{display:block;margin-top:3px;font-size:.75rem;color:var(--text-muted);line-height:1.4}@keyframes rtToastIn{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}.room-directory-list{display:flex;flex-direction:column;gap:10px}.room-directory-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:12px}.room-directory-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.room-directory-title{font-weight:900}.room-directory-meta{font-size:.72rem;color:var(--text-muted);margin-top:3px;line-height:1.35}.room-directory-members{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.room-directory-user{font-size:.68rem;padding:4px 7px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--border-color)}.room-directory-action{width:100%;margin-top:10px}.admin-live-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:14px}.admin-live-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}.admin-live-head h4{margin:0 0 5px}.admin-live-head p{margin:0;color:var(--text-muted);font-size:.75rem;line-height:1.4}.admin-live-count{white-space:nowrap;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.10);color:#baffcc;border-radius:9px;padding:5px 8px;font-weight:900;font-size:.72rem}.admin-live-list{display:flex;flex-direction:column;gap:8px}.admin-live-user{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--border-color);background:rgba(255,255,255,.025);border-radius:12px}.admin-live-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid var(--border-color);background:#182018}.admin-live-main{min-width:0;flex:1}.admin-live-name{font-weight:850}.admin-live-status{font-size:.72rem;color:var(--text-muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.admin-live-room{font-size:.68rem;color:var(--accent-green);margin-top:3px}.admin-live-dot{width:8px;height:8px;border-radius:50%;background:var(--accent-green);box-shadow:0 0 12px rgba(255,255,255,.65);flex:0 0 8px}.admin-live-time{font-size:.65rem;color:rgba(255,255,255,.42);white-space:nowrap}.admin-live-empty{padding:18px 10px;text-align:center;color:var(--text-muted);border:1px dashed var(--border-color);border-radius:12px}.notification-badge-pulse{animation:notifPulse .7s ease-out}@keyframes notifPulse{0%{transform:scale(1)}45%{transform:scale(1.25)}100%{transform:scale(1)}}
 </style>
 <style id="subtitle-manager-styles">
-.liquid-top-actions{display:flex;align-items:center;gap:7px;flex:0 0 auto;position:relative;z-index:55;pointer-events:auto}
-.liquid-top .liquid-title{max-width:calc(100% - 100px);min-width:0}
-#liquidSubtitleBtn{display:inline-flex!important;min-width:46px;width:auto;height:38px;padding:0 9px;visibility:visible!important;opacity:1;pointer-events:auto}
-#liquidSubtitleBtn:disabled{opacity:.65;cursor:wait}
-.ep-sub-menu{top:56px;bottom:auto;right:10px;max-height:min(48vh,300px);overflow-y:auto;pointer-events:auto}
-.ep-sub-menu button{pointer-events:auto;min-height:40px}
-@media(max-width:600px){.liquid-top-actions{gap:6px}#liquidSubtitleBtn{min-width:42px;height:36px;padding:0 7px}.liquid-top .liquid-title{max-width:calc(100% - 91px)}.ep-sub-menu{top:50px;right:8px}}
 .sub-admin-card{background:rgba(255,255,255,.03);border:1px solid var(--border-color);border-radius:14px;padding:14px}
 .sub-admin-add{border-top:1px solid var(--border-color);padding-top:14px;margin-top:12px}
 .sub-admin-tag{font-size:.64rem;font-weight:900;color:#baffcc;border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:2px 6px;margin-left:6px}
@@ -1996,7 +1990,8 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
     <!-- OFFLINE PAGE -->
     <section id="offlinePage" class="offline-page" aria-live="polite">
         <div class="offline-inner">
-            <svg class="offline-illustration" viewBox="0 0 320 280" role="img" aria-label="Gato sentado em cima de uma bola de lã">                <defs><linearGradient id="yarnGrad" x1="0" x2="1"><stop offset="0" stop-color="#6ee7ff"/><stop offset="1" stop-color="#7c5cff"/></linearGradient></defs>
+            <svg class="offline-illustration" viewBox="0 0 320 280" role="img" aria-label="Gato sentado em cima de uma bola de lã">
+                <defs><linearGradient id="yarnGrad" x1="0" x2="1"><stop offset="0" stop-color="#6ee7ff"/><stop offset="1" stop-color="#7c5cff"/></linearGradient></defs>
                 <ellipse cx="160" cy="235" rx="95" ry="22" fill="rgba(0,0,0,.25)"/>
                 <path d="M83 212c0-45 35-78 77-78s77 33 77 78c0 22-15 34-77 34s-77-12-77-34Z" fill="url(#yarnGrad)" stroke="#fff" stroke-opacity=".2" stroke-width="3"/>
                 <path d="M108 172c28 18 51 20 85 5M96 193c38 21 83 22 126 1M105 214c37 19 73 18 109 2" fill="none" stroke="#fff" stroke-opacity=".23" stroke-width="7" stroke-linecap="round"/>
@@ -2100,7 +2095,7 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
                 </div>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
                     <button class="btn-small-outline" onclick="openCreateRoomModal()">Criar Sala</button>
-                    <button class="btn-small-outline" onclick="openJoinRoomModal()"><i class="fa-solid fa-right-to-bracket"></i> Entrar por Código</button>
+                    <button class="btn-small-outline" onclick="openRoomDirectoryModal()"><i class="fa-solid fa-earth-europe"></i> Salas públicas</button><button class="btn-small-outline" onclick="openJoinRoomModal()"><i class="fa-solid fa-right-to-bracket"></i> Entrar por Código</button>
                 </div>
             </div>
 
@@ -2207,9 +2202,9 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
         <section id="page-profile" class="page-section">
             <div class="profile-hero">
                 <div class="profile-media-wrap"><div id="profileBannerPreview" class="profile-banner"></div><button type="button" class="profile-media-pencil profile-banner-pencil" onclick="document.getElementById('profileBannerFile').click()" title="Alterar banner"><i class="fa-solid fa-pencil"></i></button><input id="profileBannerFile" class="profile-file-input" type="file" accept="image/*" onchange="handleProfileImageUpload(this,'banner')"></div>
-                <div class="profile-media-wrap profile-avatar-media-wrap"><div id="profileAvatarPremiumWrap"><img id="profileAvatarPreview" class="avatar-lg" src="" alt="Perfil"></div><button type="button" class="profile-media-pencil profile-avatar-pencil" onclick="document.getElementById('profileAvatarFile').click()" title="Alterar foto de perfil"><i class="fa-solid fa-pencil"></i></button><input id="profileAvatarFile" class="profile-file-input" type="file" accept="image/*,video/mp4,video/webm,video/quicktime" onchange="handleProfileImageUpload(this,'avatar')"></div>
+                <div class="profile-media-wrap profile-avatar-media-wrap"><div id="profileAvatarMusicNote" class="profile-avatar-note-mount"></div><div id="profileAvatarPremiumWrap"><img id="profileAvatarPreview" class="avatar-lg" src="" alt="Perfil"></div><button type="button" class="profile-media-pencil profile-avatar-pencil" onclick="document.getElementById('profileAvatarFile').click()" title="Alterar foto de perfil"><i class="fa-solid fa-pencil"></i></button><input id="profileAvatarFile" class="profile-file-input" type="file" accept="image/*,video/mp4,video/webm,video/quicktime" onchange="handleProfileImageUpload(this,'avatar')"></div>
                 <h3 id="currentUserName">Visitante</h3>
-                <div id="profileStatusLine" class="status-line"><span class="status-dot offline"></span> Offline</div>
+                <div id="profileStatusLine" class="status-line"><span class="status-dot offline"></span> Offline</div><div id="profileRegisteredDays" class="profile-registered-days"></div>
                 <div id="profileMusicPreview"></div>
                 <div id="profileSpotifyPreview" class="profile-spotify-presence-wrap"></div>
                 <div id="profileFavoriteShowPreview" class="profile-favorite-show" style="display:none"></div>
@@ -2353,7 +2348,6 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
                 <h3 style="color:var(--accent-green);display:flex;align-items:center;gap:8px;margin-bottom:8px"><i class="fa-solid fa-shield-halved"></i> Painel de Administração</h3>
                 <p class="small-note" style="margin-bottom:14px">Gerir episódios, novidades, trailers, votações, aparência e transmissões. As configurações do site sincronizam-se com o Supabase quando a ligação está disponível.</p>
                 <div class="admin-tabs">
-                    <button class="admin-tab" data-admin-tab="createepisode" onclick="switchAdminTab('createepisode')"><i class="fa-solid fa-circle-plus"></i> Criar episódio</button>
                     <button class="admin-tab active" data-admin-tab="media" onclick="switchAdminTab('media')">Vídeos</button>
                     <button class="admin-tab" data-admin-tab="series" onclick="switchAdminTab('series')"><i class="fa-solid fa-clapperboard"></i> Séries / Temporadas</button>
                     <button class="admin-tab" data-admin-tab="trailers" onclick="switchAdminTab('trailers')"><i class="fa-solid fa-film"></i> Trailers</button>
@@ -2383,19 +2377,6 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
                     <button class="admin-tab" data-admin-tab="live" onclick="switchAdminTab('live')"><i class="fa-solid fa-signal"></i> Ao vivo</button>
                 </div>
 
-                <div id="admin-tab-createepisode" class="admin-tab-panel">
-                  <div class="sub-admin-card">
-                    <h4><i class="fa-solid fa-clapperboard"></i> Criar / configurar episódio</h4>
-                    <p class="small-note">Escolhe a temporada, o episódio e o nome. Depois podes adicionar vídeo, áudio e legendas na aba Vídeos.</p>
-                    <div class="form-row-2">
-                      <div class="form-group"><label for="bcgCreateSeason">Temporada</label><select id="bcgCreateSeason" class="form-control"><option value="1">Temporada 1</option><option value="2">Temporada 2</option><option value="3">Temporada 3</option><option value="4">Temporada 4</option><option value="5">Temporada 5</option><option value="6">Temporada 6</option><option value="7">Temporada 7</option><option value="specials">Especiais</option></select></div>
-                      <div class="form-group"><label for="bcgCreateEpisode">Número do episódio</label><select id="bcgCreateEpisode" class="form-control"></select></div>
-                    </div>
-                    <div class="form-group"><label for="bcgCreateTitle">Nome do episódio</label><input id="bcgCreateTitle" class="form-control" placeholder="Ex.: Replay Value"></div>
-                    <button type="button" class="btn-green" style="width:100%;justify-content:center" onclick="bcgSaveEpisodeQuick()"><i class="fa-solid fa-floppy-disk"></i> Guardar episódio</button>
-                    <div id="bcgCreateEpisodeStatus" class="admin-media-status"></div>
-                  </div>
-                </div>
                 <div id="admin-tab-media" class="admin-tab-panel active">
                     <div style="background:var(--bg-card);padding:14px;border-radius:12px;border:1px solid var(--border-color)">
                         <h4 style="margin-bottom:10px">Gerir vídeo e legendas</h4>
@@ -2725,6 +2706,7 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                         </div>
                     </div>
                     <div id="adminProfilesList"></div>
+                    <div class="bcg-admin-reports-card"><div class="bcg-admin-reports-head"><div><h4><i class="fa-solid fa-flag"></i> Relatórios de vídeo</h4><p class="small-note">Problemas enviados pelos utilizadores.</p></div><button type="button" class="btn-small-outline" onclick="renderAdminVideoReports()"><i class="fa-solid fa-rotate"></i> Atualizar</button></div><div id="bcgAdminVideoReports"></div></div>
                 </div>
                 <div id="admin-tab-navigation" class="admin-tab-panel">
                     <div style="background:var(--bg-card);padding:14px;border-radius:12px;border:1px solid var(--border-color)">
@@ -2995,7 +2977,8 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
             <stop offset="1" stop-color="#50565b"/>
           </linearGradient>
           <linearGradient id="snowLeopardEarInner" x1="0" y1="0" x2=".8" y2="1">
-            <stop offset="0" stop-color="#fff"/>            <stop offset=".62" stop-color="#f3f3ef"/>
+            <stop offset="0" stop-color="#fff"/>
+            <stop offset=".62" stop-color="#f3f3ef"/>
             <stop offset="1" stop-color="#c9cbd0"/>
           </linearGradient>
           <linearGradient id="snowLeopardTailSilver" x1="0" y1="0" x2="0" y2="1">
@@ -3231,10 +3214,7 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                 <div class="liquid-player" id="liquidPlayer" aria-label="Player Liquid Glass">
                     <div class="liquid-top">
                         <div class="liquid-title" id="liquidPlayerTitle">Vídeo</div>
-                        <div class="liquid-top-actions">
-                            <button class="glass-btn liquid-subtitle-btn" type="button" id="liquidSubtitleBtn" onclick="toggleEpisodeSubtitles()" title="Legendas (CC)" aria-label="Legendas (CC)" aria-pressed="false"><i class="fa-solid fa-closed-captioning"></i><span class="cc-label">CC</span></button>
-                            <button class="glass-btn" type="button" onclick="toggleLiquidSettings(event)" title="Definições" aria-label="Definições"><i class="fa-solid fa-gear"></i></button>
-                        </div>
+                        <button class="glass-btn" type="button" onclick="toggleLiquidSettings(event)" title="Definições" aria-label="Definições"><i class="fa-solid fa-gear"></i></button>
                     </div>
                     <div class="liquid-status" id="liquidStatus"></div>
                     <div class="liquid-bottom">
@@ -3246,6 +3226,7 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                                 <button class="glass-btn" type="button" id="liquidMuteBtn" onclick="toggleLiquidMute()" title="Volume" aria-label="Volume"><i class="fa-solid fa-volume-high"></i></button>
                                 <input id="liquidVolume" type="range" min="0" max="1" value="1" step="0.01" aria-label="Volume" oninput="setLiquidVolume(this.value)">
                             </div>
+                            <button class="glass-btn" type="button" id="liquidSubtitleBtn" onclick="toggleEpisodeSubtitles()" title="Ativar/desativar legendas" aria-label="Ativar/desativar legendas" aria-pressed="false" style="display:none"><i class="fa-solid fa-closed-captioning"></i><span class="cc-label">CC</span></button>
                             <div class="liquid-time"><span id="liquidCurrentTime">0:00</span> / <span id="liquidDuration">0:00</span></div>
                             <div class="liquid-spacer"></div>
                             <button class="glass-btn" type="button" onclick="takeLiquidScreenshot()" title="Tirar print em alta qualidade" aria-label="Tirar print em alta qualidade"><i class="fa-solid fa-camera"></i></button>
@@ -3267,7 +3248,7 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
             </div>
             <div id="playerError" class="player-error"></div>
 
-            <div id="playerCommentsMount"></div>
+            <div id="playerCommentsMount"></div><div id="bcgPlayerReportAction" class="bcg-player-report-action"><button type="button" class="btn-small-outline" onclick="openBcgVideoReport()"><i class="fa-solid fa-flag"></i> Reportar vídeo com problemas</button></div>
             <!-- EPISODE COMMENTS — GLOBAL / SUPABASE -->
             <section class="episode-comments-v2" id="episodeCommentsSection" aria-label="Comentários do episódio">
                 <div class="episode-comments-v2-head">
@@ -3380,7 +3361,10 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                 <div class="room-tools">
                     <button type="button" class="room-tool-btn" onclick="openWatchRoomSettings()"><i class="fa-solid fa-list-check"></i> Episódios da sala</button>
                     <button type="button" class="room-tool-btn" onclick="copyWatchRoomCode()"><i class="fa-solid fa-copy"></i> Copiar código</button>
+                    <button type="button" class="room-tool-btn" id="roomSubtitleUploadBtn" onclick="document.getElementById('roomSubtitleFileInput')?.click()"><i class="fa-solid fa-closed-captioning"></i> Enviar legendas .SRT</button>
+                    <input type="file" id="roomSubtitleFileInput" accept=".srt,text/srt" style="display:none" onchange="handleRoomSubtitleUpload(this)">
                 </div>
+                <div id="roomSubtitleStatus" class="small-note" style="margin:7px 0 10px;"></div>
                 <div id="watchRoomQueueSection" class="room-queue"></div>
                 <div class="chat-box" id="chatBox"></div>
                 <div class="chat-input-row">
@@ -3406,10 +3390,10 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
       <div class="modal-box">
         <button class="modal-close" onclick="closeRoomDirectoryModal()"><i class="fa-solid fa-xmark"></i></button>
         <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding-right:38px;margin-bottom:6px">
-          <h3><i class="fa-solid fa-users-viewfinder"></i> Salas ao vivo</h3>
+          <h3><i class="fa-solid fa-earth-europe"></i> Salas públicas ao vivo</h3>
           <button type="button" class="btn-small-outline" onclick="refreshRoomDirectory()"><i class="fa-solid fa-rotate"></i></button>
         </div>
-        <p class="small-note" style="margin-bottom:12px">Vê quem está dentro de cada sala e envia um pedido para entrar.</p>
+        <p class="small-note" style="margin-bottom:12px">Descobre salas públicas ativas, vê quem está a assistir e pede para entrar.</p>
         <div id="roomDirectoryList"></div>
       </div>
     </div>
@@ -3717,7 +3701,9 @@ ${err?.message||err}`)}}
     function normalizeNameStyle(style){const src=style&&typeof style==='object'?style:{};return {font:NAME_STYLE_FONTS[src.font]?src.font:NAME_STYLE_DEFAULT.font,glow:NAME_STYLE_GLOWS[src.glow]?src.glow:NAME_STYLE_DEFAULT.glow};}
     function nameStyleFromBio(bio){const m=String(bio||'').match(/\[\[NOIR_NAME_STYLE:([^\]]+)\]\]/);if(!m)return null;const [font,glow]=m[1].split('|').map(x=>x.trim());return normalizeNameStyle({font,glow});}
     function nameStyleClasses(a){const st=normalizeNameStyle(a?.nameStyle);return `font-${st.font} glow-${st.glow}`;}
-    function styledProfileNameMarkup(a,withHandle=false){const name=esc(a?.displayName||a?.username||'');const handle=withHandle&&a?.username?` <span class="small-note">@${esc(a.username)}</span>`:'';return `<span class="styled-profile-name ${nameStyleClasses(a)}">${name}</span>${handle}`;}
+    function normalizeNameTag(v){const x=v&&typeof v==='object'?v:{};const text=String(x.text||'').trim().replace(/[\[\]<>]/g,'').slice(0,16);const color=/^#[0-9a-f]{6}$/i.test(String(x.color||''))?String(x.color):'#ffffff';const background=/^#[0-9a-f]{6}$/i.test(String(x.background||''))?String(x.background):'#30343b';return {text,color,background};}
+    function nameTagMarkup(a){const t=normalizeNameTag(a?.nameTag||{});return t.text?` <span class="bcg-name-tag" style="--bcg-tag-color:${t.color};--bcg-tag-bg:${t.background}">[${esc(t.text)}]</span>`:'';}
+    function styledProfileNameMarkup(a,withHandle=false){const name=esc(a?.displayName||a?.username||'');const handle=withHandle&&a?.username?` <span class="small-note">@${esc(a.username)}</span>`:'';return `<span class="styled-profile-name ${nameStyleClasses(a)}">${name}</span>${nameTagMarkup(a)}${handle}`;}
     function previewProfileNameStyle(){const out=document.getElementById('profileNameStylePreview');if(!out)return;const st=normalizeNameStyle({font:document.getElementById('profileNameFontInput')?.value,glow:document.getElementById('profileNameGlowInput')?.value});out.className=`styled-profile-name font-${st.font} glow-${st.glow}`;out.textContent=document.getElementById('globalNameInput')?.value.trim()||currentProfile()?.displayName||currentProfile()?.username||'O teu nome';}
     const PREMIUM_BIO_MARKER='[[NOIR_PREMIUM:';
     const PREMIUM_DECORATIONS={
@@ -3794,9 +3780,22 @@ const SITE_FONT_MAP={system:'Sistema',serif:'Serifada',mono:'Monoespaçada',roun
 function normalizeProfileBackground(v){const x=String(v||'').trim();return /^#[0-9a-f]{6}$/i.test(x)?x:'#0b100d';}
 function normalizeProfileMusicNote(v){const x=v&&typeof v==='object'?v:{};const color=/^#[0-9a-f]{6}$/i.test(String(x.color||''))?String(x.color):'#30343b';const emoji=Array.from(String(x.emoji||'🎵').trim()).slice(0,4).join('')||'🎵';const mode=x.mode==='text'?'text':'music';const text=String(x.text||'').trim().slice(0,160);const enabled=x.enabled===true;return {color,emoji,mode,text,enabled};}
 function normalizeSitePreferences(v){const x=v&&typeof v==='object'?v:{};const font=SITE_FONT_MAP[x.font]?x.font:'system';const accent=/^#[0-9a-f]{6}$/i.test(String(x.accent||''))?String(x.accent):'#ffffff';return {font,accent};}
-function normalizeWatchData(v){const x=v&&typeof v==='object'?v:{};const cont=Array.isArray(x.continueWatching)?x.continueWatching.filter(i=>i&&i.season!==undefined&&i.epIndex!==undefined).slice(-20):[];const hist=Array.isArray(x.history)?x.history.filter(i=>i&&i.season!==undefined&&i.epIndex!==undefined).slice(0,60):[];const fav=Array.isArray(x.favorites)?Array.from(new Set(x.favorites.map(String).filter(k=>/^([^_]+)_\d+$/.test(k)))).slice(0,100):[];const socials=x.socials&&typeof x.socials==='object'?{instagram:String(x.socials.instagram||'').trim(),tiktok:String(x.socials.tiktok||'').trim()}:{instagram:'',tiktok:''};const siteVisits=Math.max(0,Math.floor(Number(x.siteVisits)||0)),lastVisitAt=Math.max(0,Number(x.lastVisitAt)||0);return {continueWatching:cont,history:hist,favorites:fav,socials,siteVisits,lastVisitAt};}
-function profileConfigFromBio(bio){const m=String(bio||'').match(/\[\[NOIR_PROFILE_CONFIG:(.*?)\]\]/);if(!m)return null;try{const x=JSON.parse(m[1]);return {favoriteShow:normalizeFavoriteShow(x.favoriteShow),profileBackground:normalizeProfileBackground(x.profileBackground),sitePreferences:normalizeSitePreferences(x.sitePreferences||{}),musicNote:normalizeProfileMusicNote(x.musicNote||{}),bannedUntil:Number(x.bannedUntil||0)||0,banPermanent:x.banPermanent===true,banReason:String(x.banReason||'').trim().slice(0,180),watchData:normalizeWatchData(x.watchData),socials:normalizeWatchData({socials:x.socials}).socials}}catch{return null;}}
-function profileConfigForAccount(a){const watchData=normalizeWatchData(a?.watchData||{});watchData.socials={instagram:String(a?.instagram||watchData.socials.instagram||''),tiktok:String(a?.tiktok||watchData.socials.tiktok||'')};const cfg={favoriteShow:favoriteShowData(a)||null,profileBackground:normalizeProfileBackground(a?.profileBackground||'#0b100d'),sitePreferences:normalizeSitePreferences(a?.sitePreferences||{}),musicNote:normalizeProfileMusicNote(a?.musicNote||{}),bannedUntil:Number(a?.bannedUntil||0)||0,banPermanent:a?.banPermanent===true,banReason:String(a?.banReason||'').trim().slice(0,180),watchData,socials:watchData.socials};const nonDefault=!!cfg.favoriteShow||cfg.profileBackground!=='#0b100d'||cfg.sitePreferences.font!=='system'||cfg.sitePreferences.accent.toLowerCase()!=='#ffffff'||cfg.musicNote.color!=='#30343b'||cfg.musicNote.emoji!=='🎵'||cfg.musicNote.mode!=='music'||!!cfg.musicNote.text||cfg.musicNote.enabled===false||cfg.bannedUntil>0||cfg.banPermanent||cfg.banReason||cfg.watchData.continueWatching.length||cfg.watchData.history.length||cfg.watchData.favorites.length||cfg.watchData.siteVisits>0||cfg.socials.instagram||cfg.socials.tiktok;return nonDefault?cfg:null;}
+function normalizeWatchData(v){
+  const x=v&&typeof v==='object'?v:{};
+  const cont=Array.isArray(x.continueWatching)?x.continueWatching.filter(i=>i&&i.season!==undefined&&i.epIndex!==undefined).slice(-20):[];
+  const hist=Array.isArray(x.history)?x.history.filter(i=>i&&i.season!==undefined&&i.epIndex!==undefined).slice(0,60):[];
+  const fav=Array.isArray(x.favorites)?Array.from(new Set(x.favorites.map(String).filter(k=>/^([^_]+)_\d+$/.test(k)))).slice(0,100):[];
+  const socials=x.socials&&typeof x.socials==='object'?{instagram:String(x.socials.instagram||'').trim(),tiktok:String(x.socials.tiktok||'').trim()}:{instagram:'',tiktok:''};
+  const reviews=Array.isArray(x.reviews)?x.reviews.filter(r=>r&&/^([^_]+)_\d+$/.test(String(r.episodeKey||''))).slice(-100).map(r=>({id:String(r.id||''),episodeKey:String(r.episodeKey),rating:Math.max(1,Math.min(5,Math.round(Number(r.rating)||1))),text:String(r.text||'').slice(0,600),createdAt:Number(r.createdAt)||Date.now()})):[];
+  const videoReports=Array.isArray(x.videoReports)?x.videoReports.filter(r=>r&&r.episodeKey).slice(-50).map(r=>({id:String(r.id||''),episodeKey:String(r.episodeKey),title:String(r.title||'Vídeo'),category:String(r.category||'Outro').slice(0,60),message:String(r.message||'').slice(0,800),createdAt:Number(r.createdAt)||Date.now(),resolved:!!r.resolved})):[];
+  const pp=x.playerPreferences&&typeof x.playerPreferences==='object'?x.playerPreferences:{};
+  const audioByEpisode={};Object.entries(pp.audioByEpisode&&typeof pp.audioByEpisode==='object'?pp.audioByEpisode:{}).slice(-80).forEach(([k,val])=>{if(/^[a-z0-9_-]+_\d+$/i.test(k))audioByEpisode[k]=String(val||'').slice(0,60)});
+  const playerPreferences={audioByEpisode,subtitleLang:String(pp.subtitleLang||'').slice(0,30)};
+  const siteVisits=Math.max(0,Math.floor(Number(x.siteVisits)||0)),lastVisitAt=Math.max(0,Number(x.lastVisitAt)||0);
+  return {continueWatching:cont,history:hist,favorites:fav,socials,siteVisits,lastVisitAt,reviews,videoReports,playerPreferences};
+}
+function profileConfigFromBio(bio){const m=String(bio||'').match(/\[\[NOIR_PROFILE_CONFIG:(.*?)\]\]/);if(!m)return null;try{const x=JSON.parse(m[1]);return {favoriteShow:normalizeFavoriteShow(x.favoriteShow),profileBackground:normalizeProfileBackground(x.profileBackground),sitePreferences:normalizeSitePreferences(x.sitePreferences||{}),musicNote:normalizeProfileMusicNote(x.musicNote||{}),nameTag:normalizeNameTag(x.nameTag||{}),registeredAt:Number(x.registeredAt)||0,bannedUntil:Number(x.bannedUntil||0)||0,banPermanent:x.banPermanent===true,banReason:String(x.banReason||'').trim().slice(0,180),watchData:normalizeWatchData(x.watchData),socials:normalizeWatchData({socials:x.socials}).socials}}catch{return null;}}
+function profileConfigForAccount(a){const watchData=normalizeWatchData(a?.watchData||{});watchData.socials={instagram:String(a?.instagram||watchData.socials.instagram||''),tiktok:String(a?.tiktok||watchData.socials.tiktok||'')};const cfg={favoriteShow:favoriteShowData(a)||null,profileBackground:normalizeProfileBackground(a?.profileBackground||'#0b100d'),sitePreferences:normalizeSitePreferences(a?.sitePreferences||{}),musicNote:normalizeProfileMusicNote(a?.musicNote||{}),nameTag:normalizeNameTag(a?.nameTag||{}),registeredAt:Number(a?.createdAt||a?.registeredAt)||0,bannedUntil:Number(a?.bannedUntil||0)||0,banPermanent:a?.banPermanent===true,banReason:String(a?.banReason||'').trim().slice(0,180),watchData,socials:watchData.socials};const nonDefault=!!cfg.favoriteShow||cfg.profileBackground!=='#0b100d'||cfg.sitePreferences.font!=='system'||cfg.sitePreferences.accent.toLowerCase()!=='#ffffff'||cfg.musicNote.color!=='#30343b'||cfg.musicNote.emoji!=='🎵'||cfg.musicNote.mode!=='music'||!!cfg.musicNote.text||cfg.musicNote.enabled===false||!!cfg.nameTag.text||cfg.registeredAt>0||cfg.bannedUntil>0||cfg.banPermanent||cfg.banReason||cfg.watchData.continueWatching.length||cfg.watchData.history.length||cfg.watchData.favorites.length||cfg.watchData.reviews.length||cfg.watchData.videoReports.length||Object.keys(cfg.watchData.playerPreferences.audioByEpisode).length||cfg.watchData.playerPreferences.subtitleLang||cfg.watchData.siteVisits>0||cfg.socials.instagram||cfg.socials.tiktok;return nonDefault?cfg:null;}
 function profileConfigMarkerForAccount(a){const cfg=profileConfigForAccount(a);return cfg?` ${PROFILE_CONFIG_MARKER}${JSON.stringify(cfg)}]]`:'';}
 function profileConfigIsBanned(a){return !!(a&&(a.banPermanent===true||Number(a.bannedUntil||0)>Date.now()));}
 function profileBanLabel(a){if(!profileConfigIsBanned(a))return '';if(a.banPermanent)return 'Ban permanente';const d=new Date(Number(a.bannedUntil));return `Banido até ${d.toLocaleString('pt-PT',{dateStyle:'short',timeStyle:'short'})}`;}
@@ -3994,7 +3993,8 @@ function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_
           method:'POST',
           headers:{
             apikey:SUPABASE_PUBLISHABLE_KEY,
-            Authorization:`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,            'x-upsert':'true',
+            Authorization:`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+            'x-upsert':'true',
             'Content-Type':mime,
             'Cache-Control':'3600'
           },
@@ -4188,7 +4188,7 @@ function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_
           const remoteHash=authHashFromBio(r.bio||'');
           const remoteAdmin=adminStateFromBio(r.bio||'');
           const remoteNameStyle=nameStyleFromBio(r.bio||''); const remoteDiscord=discordDataFromBio(r.bio||''); const remoteMusic=profileMusicFromBio(r.bio||''); const remoteConfig=profileConfigFromBio(r.bio||'');
-          byName.set(String(r.username).toLowerCase(),{...old,username:r.username,displayName:globalNameMap.get(String(r.username).toLowerCase())||String(r.display_name||'').trim()||old.displayName||r.username,passwordHash:remoteHash||old.passwordHash||'',isAdmin:remoteAdmin===null?!!old.isAdmin:remoteAdmin,avatar:r.avatar_url||old.avatar||'',banner:r.banner_url||old.banner||'',instagram:r.instagram_url||old.instagram||'',quote:cleanCloudProfileBio(r.bio||old.quote||''),premiumDecorations:premiumItemsFromBio(r.bio||'').length?premiumItemsFromBio(r.bio||''):(old.premiumDecorations||[]),activePremiumDecoration:activeFrameFromBio(r.bio||'')||old.activePremiumDecoration||'',nameStyle:remoteNameStyle||old.nameStyle||{...NAME_STYLE_DEFAULT},music:remoteMusic?.url?remoteMusic:normalizeProfileMusic(old.music||{}),discord:remoteDiscord?{...remoteDiscord,linkUrl:String(remoteDiscord.linkUrl||remoteDiscord.profileUrl||'')}:old.discord||null,favoriteShow:remoteConfig?.favoriteShow!==undefined?normalizeFavoriteShow(remoteConfig.favoriteShow):(old.favoriteShow||''),profileBackground:remoteConfig?.profileBackground||old.profileBackground||'#0b100d',sitePreferences:remoteConfig?.sitePreferences||old.sitePreferences||normalizeSitePreferences({}),musicNote:remoteConfig?.musicNote?normalizeProfileMusicNote(remoteConfig.musicNote):normalizeProfileMusicNote(old.musicNote||{}),watchData:remoteConfig?.watchData?normalizeWatchData(remoteConfig.watchData):(old.watchData||normalizeWatchData({})),tiktok:remoteConfig?.socials?.tiktok||old.tiktok||'',bannedUntil:remoteConfig?.bannedUntil!==undefined?remoteConfig.bannedUntil:(old.bannedUntil||0),banPermanent:remoteConfig?.banPermanent===true?true:!!old.banPermanent,banReason:remoteConfig?.banReason!==undefined?remoteConfig.banReason:(old.banReason||''),communityPinned:old.communityPinned===true,status:r.status||old.status||'offline',watchingTitle:r.watching_title||old.watchingTitle||'',lastSeen:r.last_seen?new Date(r.last_seen).getTime():old.lastSeen||0});
+          byName.set(String(r.username).toLowerCase(),{...old,username:r.username,displayName:globalNameMap.get(String(r.username).toLowerCase())||String(r.display_name||'').trim()||old.displayName||r.username,passwordHash:remoteHash||old.passwordHash||'',isAdmin:remoteAdmin===null?!!old.isAdmin:remoteAdmin,avatar:r.avatar_url||old.avatar||'',banner:r.banner_url||old.banner||'',instagram:r.instagram_url||old.instagram||'',quote:cleanCloudProfileBio(r.bio||old.quote||''),premiumDecorations:premiumItemsFromBio(r.bio||'').length?premiumItemsFromBio(r.bio||''):(old.premiumDecorations||[]),activePremiumDecoration:activeFrameFromBio(r.bio||'')||old.activePremiumDecoration||'',nameStyle:remoteNameStyle||old.nameStyle||{...NAME_STYLE_DEFAULT},music:remoteMusic?.url?remoteMusic:normalizeProfileMusic(old.music||{}),discord:remoteDiscord?{...remoteDiscord,linkUrl:String(remoteDiscord.linkUrl||remoteDiscord.profileUrl||'')}:old.discord||null,favoriteShow:remoteConfig?.favoriteShow!==undefined?normalizeFavoriteShow(remoteConfig.favoriteShow):(old.favoriteShow||''),profileBackground:remoteConfig?.profileBackground||old.profileBackground||'#0b100d',sitePreferences:remoteConfig?.sitePreferences||old.sitePreferences||normalizeSitePreferences({}),musicNote:remoteConfig?.musicNote?normalizeProfileMusicNote(remoteConfig.musicNote):normalizeProfileMusicNote(old.musicNote||{}),nameTag:remoteConfig?.nameTag?normalizeNameTag(remoteConfig.nameTag):normalizeNameTag(old.nameTag||{}),createdAt:Number(old.createdAt||remoteConfig?.registeredAt||(r.created_at?new Date(r.created_at).getTime():0))||0,watchData:remoteConfig?.watchData?normalizeWatchData(remoteConfig.watchData):(old.watchData||normalizeWatchData({})),tiktok:remoteConfig?.socials?.tiktok||old.tiktok||'',bannedUntil:remoteConfig?.bannedUntil!==undefined?remoteConfig.bannedUntil:(old.bannedUntil||0),banPermanent:remoteConfig?.banPermanent===true?true:!!old.banPermanent,banReason:remoteConfig?.banReason!==undefined?remoteConfig.banReason:(old.banReason||''),communityPinned:old.communityPinned===true,status:r.status||old.status||'offline',watchingTitle:r.watching_title||old.watchingTitle||'',lastSeen:r.last_seen?new Date(r.last_seen).getTime():old.lastSeen||0});
         }
         accounts=[...byName.values()];
         // Nunca remover a conta atualmente autenticada por causa de um snapshot
@@ -4986,14 +4986,15 @@ function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_
     function isAdminUser(){ return !!(currentUser && (currentUser.isAdmin === true || currentProfile()?.isAdmin === true)); }
     function ensureAccount(u,p,isAdmin=false){
       let a=getAccount(u);
-      if(!a){a={username:u,password:p,passwordHash:'',isAdmin,avatar:'',quote:'',instagram:'',banner:'',animatedBanner:'',status:'offline',watchingTitle:'',lastSeen:0,premiumDecorations:[],music:{title:'',artist:'',url:'',cover:''},discord:null};accounts.push(a);}
+      if(!a){a={username:u,password:p,passwordHash:'',isAdmin,createdAt:Date.now(),avatar:'',quote:'',instagram:'',banner:'',animatedBanner:'',status:'offline',watchingTitle:'',lastSeen:0,premiumDecorations:[],music:{title:'',artist:'',url:'',cover:''},discord:null};accounts.push(a);}
       else {if(p && !a.password)a.password=p;if(isAdmin)a.isAdmin=true;}
       const finalize=async()=>{if(p&&!a.passwordHash)a.passwordHash=await hashPassword(p);await save('cn_accounts',accounts);return a;};
       Object.defineProperty(a,'__ensurePromise',{value:finalize(),writable:true,configurable:true,enumerable:false});
       return a;
     }
     async function fetchDiscordUser(session){
-  const providerToken=session?.provider_token;  if(providerToken){
+  const providerToken=session?.provider_token;
+  if(providerToken){
     try{
       const res=await fetch('https://discord.com/api/v10/users/@me',{headers:{Authorization:`Bearer ${providerToken}`}});
       if(res.ok)return await res.json();
@@ -5183,7 +5184,7 @@ async function login(){
         previewProfileNameStyle();
         const avatarWrap=document.getElementById('profileAvatarPremiumWrap');if(avatarWrap)avatarWrap.innerHTML=premiumAvatarMarkup(a,'lg');else document.getElementById('profileAvatarPreview').src=a.avatar||`https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(a.username)}`;
         const banner=document.getElementById('profileBannerPreview'); banner.innerHTML=a.animatedBanner?`<img src="${esc(a.animatedBanner)}" alt="Banner animado">`:''; banner.style.backgroundImage=a.animatedBanner?'none':`url("${esc(a.banner||'')}")`;
-        const cleanQuote=cleanPremiumBio(a.quote||''); document.getElementById('profileQuotePreview').textContent=cleanQuote||'Ainda não tens uma frase de perfil.'; const pmPreview=document.getElementById('profileMusicPreview');if(pmPreview)pmPreview.innerHTML='';const noteMount=document.getElementById('profileAvatarMusicNote');if(noteMount)noteMount.innerHTML=profileMusicNoteMarkup(a);const noteModeInput=document.getElementById('profileMusicNoteModeInput');if(noteModeInput)noteModeInput.value=normalizeProfileMusicNote(a.musicNote||{}).mode;const noteTextInput=document.getElementById('profileMusicNoteTextInput');if(noteTextInput)noteTextInput.value=normalizeProfileMusicNote(a.musicNote||{}).text;const noteEnabledInput=document.getElementById('profileMusicNoteEnabledInput');if(noteEnabledInput)noteEnabledInput.checked=normalizeProfileMusicNote(a.musicNote||{}).enabled;const noteColorInput=document.getElementById('profileMusicNoteColorInput');if(noteColorInput)noteColorInput.value=normalizeProfileMusicNote(a.musicNote||{}).color;const noteEmojiInput=document.getElementById('profileMusicNoteEmojiInput');if(noteEmojiInput)noteEmojiInput.value=normalizeProfileMusicNote(a.musicNote||{}).emoji;
+        const cleanQuote=cleanPremiumBio(a.quote||''); document.getElementById('profileQuotePreview').textContent=cleanQuote||'Ainda não tens uma frase de perfil.'; const pmPreview=document.getElementById('profileMusicPreview');if(pmPreview)pmPreview.innerHTML=profileMusicMarkup(a);const noteMount=document.getElementById('profileAvatarMusicNote');if(noteMount)noteMount.innerHTML='';const noteModeInput=document.getElementById('profileMusicNoteModeInput');if(noteModeInput)noteModeInput.value=normalizeProfileMusicNote(a.musicNote||{}).mode;const noteTextInput=document.getElementById('profileMusicNoteTextInput');if(noteTextInput)noteTextInput.value=normalizeProfileMusicNote(a.musicNote||{}).text;const noteEnabledInput=document.getElementById('profileMusicNoteEnabledInput');if(noteEnabledInput)noteEnabledInput.checked=normalizeProfileMusicNote(a.musicNote||{}).enabled;const noteColorInput=document.getElementById('profileMusicNoteColorInput');if(noteColorInput)noteColorInput.value=normalizeProfileMusicNote(a.musicNote||{}).color;const noteEmojiInput=document.getElementById('profileMusicNoteEmojiInput');if(noteEmojiInput)noteEmojiInput.value=normalizeProfileMusicNote(a.musicNote||{}).emoji;
         const ig=document.getElementById('profileInstagramLink'); if(a.instagram){ig.href=a.instagram;ig.style.display='inline-flex'}else ig.style.display='none'; let tk=document.getElementById('profileTikTokLink'); if(!tk){tk=document.createElement('a');tk.id='profileTikTokLink';tk.className='profile-instagram';tk.target='_blank';tk.rel='noopener';ig?.insertAdjacentElement('afterend',tk);} if(a.tiktok||a.watchData?.socials?.tiktok){tk.href=a.tiktok||a.watchData.socials.tiktok;tk.innerHTML='<i class="fa-brands fa-tiktok"></i> TikTok';tk.style.display='inline-flex'}else tk.style.display='none';
         document.getElementById('profileInstagramInput').value=a.instagram||''; const tikInput=document.getElementById('profileTikTokInput'); if(tikInput)tikInput.value=a.tiktok||a.watchData?.socials?.tiktok||''; document.getElementById('profileQuoteInput').value=cleanQuote; document.getElementById('profileStatusInput').value=a.status||'online';
         const favShowEl=document.getElementById('profileFavoriteShowPreview');if(favShowEl){favShowEl.style.display=a.favoriteShow?'inline-flex':'none';favShowEl.innerHTML=a.favoriteShow?`<i class="fa-solid fa-tv"></i> Série favorita: <strong>${esc(a.favoriteShow)}</strong>`:'';}
@@ -5744,7 +5745,7 @@ async function applyProfileMusicSelection(track){
       const banner=a.animatedBanner||a.banner||'';
       const bannerHtml=banner?(a.animatedBanner?`<div class="profile-banner" style="margin:-16px -16px 18px"><img src="${esc(banner)}" alt="Banner"></div>`:`<div class="profile-banner" style="margin:-16px -16px 18px;background-image:url('${esc(banner)}')"></div>`):'';
       document.getElementById('genericModalTitle').textContent=`Perfil de ${a.displayName||a.username} · @${a.username}`;
-      document.getElementById('genericModalBody').innerHTML=`<div style="text-align:center;background:${esc(normalizeProfileBackground(a.profileBackground||'#0b100d'))};border-radius:16px;padding:16px;color:#fff">${bannerHtml}<div class="profile-public-avatar-wrap">${premiumAvatarMarkup(a,'lg')}</div><h3>${styledProfileNameMarkup(a,true)} ${a.isAdmin?' <span class="badge-admin"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> ADMIN</span>':''}${hasPremium(a)?' <span class="premium-chip"><i class="fa-solid fa-crown"></i> PREMIUM</span>':''}</h3><div class="status-line"><span class="status-dot ${statusLabel(a,false).type}"></span>${esc(statusLabel(a,false).label)}</div>${spotifyPresenceMarkup(a)}${favoriteShowMarkup(a.favoriteShow)||''}<p class="profile-quote">${esc(cleanPremiumBio(a.quote)||'Sem frase de perfil.')}</p>${a.instagram||a.tiktok||a.watchData?.socials?.tiktok?`<div class="social-links">${a.instagram?`<a class="social-link-btn" target="_blank" rel="noopener" href="${esc(a.instagram)}"><i class="fa-brands fa-instagram"></i> Instagram</a>`:''}${a.tiktok||a.watchData?.socials?.tiktok?`<a class="social-link-btn" target="_blank" rel="noopener" href="${esc(a.tiktok||a.watchData.socials.tiktok)}"><i class="fa-brands fa-tiktok"></i> TikTok</a>`:''}</div>`:''}${discordProfileUrl(a)?`<a class="discord-public-link" target="_blank" rel="noopener" href="${esc(discordProfileUrl(a))}"><i class="fa-brands fa-discord"></i> ${esc(a.discord?.username?`@${a.discord.username}`:'Discord')}</a>`:''}<div class="profile-dashboard-card" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-heart" style="color:#ff5c7a"></i> Favoritos</h4><span class="small-note">${normalizeWatchData(a.watchData||{}).favorites.length}</span></div><div class="profile-episode-list">${normalizeWatchData(a.watchData||{}).favorites.slice(0,8).map(k=>{const [s,i]=String(k).split('_');return `<div class="profile-episode-row" onclick="closeGenericModal();openEpisodeDetailRoute('${esc(s)}',${Number(i)})"><img src="${esc(getEpisodeThumbnail(s,Number(i)))}" alt=""><div class="profile-episode-main"><div class="profile-episode-title">${esc(episodeTitle(s,Number(i)))}</div><div class="profile-episode-sub">T${esc(s)}E${Number(i)+1}</div></div></div>`}).join('')||'<div class="small-note">Sem favoritos.</div>'}</div></div><div class="profile-dashboard-card" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-clock-rotate-left" style="color:var(--accent-green)"></i> Últimos episódios vistos</h4></div><div class="profile-episode-list">${normalizeWatchData(a.watchData||{}).history.slice(0,8).map(x=>`<div class="profile-episode-row" onclick="closeGenericModal();openEpisodeDetailRoute('${esc(String(x.season))}',${Number(x.epIndex)})"><img src="${esc(getEpisodeThumbnail(String(x.season),Number(x.epIndex)))}" alt=""><div class="profile-episode-main"><div class="profile-episode-title">${esc(x.title||episodeTitle(String(x.season),Number(x.epIndex)))}</div><div class="profile-episode-sub">T${esc(String(x.season))}E${Number(x.epIndex)+1}</div></div></div>`).join('')||'<div class="small-note">Sem histórico.</div>'}</div></div><div class="profile-dashboard-card profile-public-leak-panel" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-retweet"></i> Republicações</h4></div><div id="publicProfileReposts" class="profile-leak-list"></div></div></div>`;
+      document.getElementById('genericModalBody').innerHTML=`<div style="text-align:center;background:${esc(normalizeProfileBackground(a.profileBackground||'#0b100d'))};border-radius:16px;padding:16px;color:#fff">${bannerHtml}<div class="profile-public-avatar-wrap">${premiumAvatarMarkup(a,'lg')}</div><h3>${styledProfileNameMarkup(a,true)} ${a.isAdmin?' <span class="badge-admin"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> ADMIN</span>':''}${hasPremium(a)?' <span class="premium-chip"><i class="fa-solid fa-crown"></i> PREMIUM</span>':''}</h3><div class="status-line"><span class="status-dot ${statusLabel(a,false).type}"></span>${esc(statusLabel(a,false).label)}</div>${registrationAgeMarkup(a)}${profileMusicMarkup(a)}${spotifyPresenceMarkup(a)}${favoriteShowMarkup(a.favoriteShow)||''}<p class="profile-quote">${esc(cleanPremiumBio(a.quote)||'Sem frase de perfil.')}</p>${a.instagram||a.tiktok||a.watchData?.socials?.tiktok?`<div class="social-links">${a.instagram?`<a class="social-link-btn" target="_blank" rel="noopener" href="${esc(a.instagram)}"><i class="fa-brands fa-instagram"></i> Instagram</a>`:''}${a.tiktok||a.watchData?.socials?.tiktok?`<a class="social-link-btn" target="_blank" rel="noopener" href="${esc(a.tiktok||a.watchData.socials.tiktok)}"><i class="fa-brands fa-tiktok"></i> TikTok</a>`:''}</div>`:''}${discordProfileUrl(a)?`<a class="discord-public-link" target="_blank" rel="noopener" href="${esc(discordProfileUrl(a))}"><i class="fa-brands fa-discord"></i> ${esc(a.discord?.username?`@${a.discord.username}`:'Discord')}</a>`:''}<div class="profile-dashboard-card" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-heart" style="color:#ff5c7a"></i> Favoritos</h4><span class="small-note">${normalizeWatchData(a.watchData||{}).favorites.length}</span></div><div class="profile-episode-list">${normalizeWatchData(a.watchData||{}).favorites.slice(0,8).map(k=>{const [s,i]=String(k).split('_');return `<div class="profile-episode-row" onclick="closeGenericModal();openEpisodeDetailRoute('${esc(s)}',${Number(i)})"><img src="${esc(getEpisodeThumbnail(s,Number(i)))}" alt=""><div class="profile-episode-main"><div class="profile-episode-title">${esc(episodeTitle(s,Number(i)))}</div><div class="profile-episode-sub">T${esc(s)}E${Number(i)+1}</div></div></div>`}).join('')||'<div class="small-note">Sem favoritos.</div>'}</div></div><div class="profile-dashboard-card" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-clock-rotate-left" style="color:var(--accent-green)"></i> Últimos episódios vistos</h4></div><div class="profile-episode-list">${normalizeWatchData(a.watchData||{}).history.slice(0,8).map(x=>`<div class="profile-episode-row" onclick="closeGenericModal();openEpisodeDetailRoute('${esc(String(x.season))}',${Number(x.epIndex)})"><img src="${esc(getEpisodeThumbnail(String(x.season),Number(x.epIndex)))}" alt=""><div class="profile-episode-main"><div class="profile-episode-title">${esc(x.title||episodeTitle(String(x.season),Number(x.epIndex)))}</div><div class="profile-episode-sub">T${esc(String(x.season))}E${Number(x.epIndex)+1}</div></div></div>`).join('')||'<div class="small-note">Sem histórico.</div>'}</div></div><div class="profile-dashboard-card profile-public-leak-panel" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-retweet"></i> Republicações</h4></div><div id="publicProfileReposts" class="profile-leak-list"></div></div></div>`;
       activePublicProfileUsername=String(a.username);
       document.getElementById('genericModal').classList.add('active');
       renderProfileLeaks(a.username,'publicProfileOwnLeaks','publicProfileReposts');
@@ -5992,7 +5993,8 @@ async function applyProfileMusicSelection(track){
     function setupLeakMentionAutocomplete(){
       const input=document.getElementById('leakTextInput');if(!input||input.dataset.mentionBound)return;input.dataset.mentionBound='1';
       const wrap=input.parentElement;wrap.style.position='relative';const menu=document.createElement('div');menu.className='leak-mention-menu';menu.hidden=true;wrap.appendChild(menu);
-      let active=0,current=null;      function close(){menu.hidden=true;menu.innerHTML='';current=null;active=0;}
+      let active=0,current=null;
+      function close(){menu.hidden=true;menu.innerHTML='';current=null;active=0;}
       function render(){const pos=input.selectionStart,text=input.value.slice(0,pos),match=text.match(/(^|\s)@([\p{L}\p{N}_.-]*)$/u);if(!match){close();return;}const query=match[2]||'',start=pos-query.length-1,items=leakMentionOptions(query);if(!items.length){close();return;}current={start,end:pos,items};active=0;menu.innerHTML=items.map((x,i)=>`<button type="button" class="leak-mention-option ${i===0?'active':''}" data-index="${i}"><span class="leak-mention-option-kind">${esc(x.kind)}</span><strong>${esc(x.label)}</strong><small>${esc(x.detail)}</small></button>`).join('');menu.hidden=false;}
       function choose(index){if(!current)return;const item=current.items[index];if(!item)return;const before=input.value.slice(0,current.start),after=input.value.slice(current.end);input.value=before+item.token+' '+after;const caret=(before+item.token+' ').length;input.focus();input.setSelectionRange(caret,caret);close();}
       input.addEventListener('input',render);input.addEventListener('click',render);input.addEventListener('keyup',e=>{if(!['ArrowUp','ArrowDown','Enter','Escape'].includes(e.key))render();});
@@ -6262,7 +6264,7 @@ async function applyProfileMusicSelection(track){
       select.innerHTML='<option value="original">Original do vídeo</option>'+
         uniqueVideos.map(v=>`<option value="episode:${esc(v.code)}">Episódio completo · ${esc(v.flag||'')} ${esc(v.label||v.code)}</option>`).join('')+
         uniqueAudio.map(v=>`<option value="audio:${esc(v.code)}">Faixa de áudio · ${esc(v.flag||'')} ${esc(v.label||v.code)}</option>`).join('');
-      const desired=String(defaultAudioCode||'');
+      const desired=String(currentProfile()?.watchData?.playerPreferences?.audioByEpisode?.[`${currentPlayingEp?.season}_${currentPlayingEp?.idx}`]||defaultAudioCode||'');
       const optionValue=desired?(uniqueAudio.some(v=>v.code===desired)?`audio:${desired}`:uniqueVideos.some(v=>v.code===desired)?`episode:${desired}`:'original'):'original';
       select.value=optionValue;
       const hint=document.getElementById('liquidAudioHint');
@@ -6526,17 +6528,13 @@ async function applyProfileMusicSelection(track){
       return s.split('\n').map(x=>x.trim()).filter(Boolean).join('<br>');
     }
     function parseSubCues(raw){
-      const tc=v=>{const z=String(v||'').trim().replace(',','.').split(':').map(Number);if(z.some(n=>!Number.isFinite(n)))return NaN;return z.length===3?z[0]*3600+z[1]*60+z[2]:z.length===2?z[0]*60+z[1]:NaN};
-      const lines=String(raw||'').replace(/^\\uFEFF/,'').replace(/\\r\\n?/g,'\\n').replace(/^WEBVTT[^\\n]*\\n+/i,'').split('\\n'),cues=[];
-      for(let i=0;i<lines.length;i++){
-        const line=lines[i].trim();if(!line.includes('-->'))continue;
-        const m=line.match(/((?:\\d{1,2}:)?\\d{1,2}:\\d{2}[.,]\\d{1,3})\\s*-->\\s*((?:\\d{1,2}:)?\\d{1,2}:\\d{2}[.,]\\d{1,3})/);
-        if(!m)continue;
-        const start=tc(m[1]),end=tc(m[2]);let body=[];
-        for(let j=i+1;j<lines.length&&lines[j].trim()!=='';j++)body.push(lines[j]);
-        const html=cueToHtml(body.join('\\n'));
-        if(Number.isFinite(start)&&Number.isFinite(end)&&end>start&&html)cues.push({start,end,html,text:html.replace(/<br>/g,'\\n').replace(/<[^>]+>/g,'').replace(/&lt;/g,'<').replace(/&amp;/g,'&')});
-        i+=body.length;
+      const tc=v=>{const p=String(v).replace(',','.').split(':').map(Number);return p.length===3?p[0]*3600+p[1]*60+p[2]:p[0]*60+p[1]};
+      const cues=[];
+      for(const block of String(raw||'').replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n').split(/\n{2,}/)){
+        const L=block.split('\n'),i=L.findIndex(x=>x.includes('-->'));if(i<0)continue;
+        const m=L[i].match(/((?:\d+:)?\d{1,2}:\d{2}[.,]\d{1,3})\s*-->\s*((?:\d+:)?\d{1,2}:\d{2}[.,]\d{1,3})/);if(!m)continue;
+        const start=tc(m[1]),end=tc(m[2]),html=cueToHtml(L.slice(i+1).join('\n'));
+        if(Number.isFinite(start)&&Number.isFinite(end)&&end>start&&html)cues.push({start,end,html,text:html.replace(/<br>/g,'\n').replace(/<[^>]+>/g,'').replace(/&lt;/g,'<').replace(/&amp;/g,'&')});
       }
       return cues.sort((a,b)=>a.start-b.start);
     }
@@ -6546,7 +6544,7 @@ async function applyProfileMusicSelection(track){
       return {count:cues.length,blob:new Blob([`WEBVTT\n\n${body}\n`],{type:'text/vtt;charset=utf-8'})};
     }
     function getEpisodeSubTracks(d){
-      const t=(Array.isArray(d?.subtitleTracks)?d.subtitleTracks:[]).filter(x=>x&&(x.url||x.path||x.storagePath)).map(x=>({...x,path:x.path||x.storagePath||''}));
+      const t=(Array.isArray(d?.subtitleTracks)?d.subtitleTracks:[]).filter(x=>x&&x.url).map(x=>({...x}));
       if(d?.subUrl&&!t.some(x=>x.url===d.subUrl))t.unshift({id:'legacy',lang:'pt-PT',label:'Português',url:d.subUrl,path:d.subStoragePath||'',offset:0,isDefault:!t.some(x=>x.isDefault)});
       return t;
     }
@@ -6991,7 +6989,8 @@ async function applyProfileMusicSelection(track){
       const p=document.getElementById('mainVideoPlayer');
       try{
         if(document.pictureInPictureElement)await document.exitPictureInPicture();
-        else if(document.pictureInPictureEnabled&&p.requestPictureInPicture)await p.requestPictureInPicture();        else liquidStatus('Picture-in-Picture não é suportado neste navegador');
+        else if(document.pictureInPictureEnabled&&p.requestPictureInPicture)await p.requestPictureInPicture();
+        else liquidStatus('Picture-in-Picture não é suportado neste navegador');
       }catch(e){console.warn('PiP:',e);liquidStatus('Picture-in-Picture indisponível')}
     }
     async function toggleLiquidFullscreen(){
@@ -7462,7 +7461,7 @@ function commentLikedByMe(id){return !!currentUser&&episodeCommentLikes.some(x=>
           autoAudioApplied=true;
           setTimeout(()=>{
             if(!currentPlayingEp||String(currentPlayingEp.season)!==String(season)||Number(currentPlayingEp.idx)!==Number(idx)||currentEpisodeVersionCode)return;
-            const selected=String(d.defaultAudioCode);
+            const selected=String(currentProfile()?.watchData?.playerPreferences?.audioByEpisode?.[`${season}_${idx}`]||d.defaultAudioCode);
             const choice=selected.startsWith('audio:')?selected:((['pt-BR','en','pt-PT'].includes(selected)&&findEpisodeAudioTrack(selected))?`audio:${selected}`:`episode:${selected}`);
             selectEpisodePlayerAudio(choice);
           },40);
@@ -7480,21 +7479,9 @@ function commentLikedByMe(id){return !!currentUser&&episodeCommentLikes.some(x=>
       p.onpause=()=>{if(activeAudioTrack){const ae=document.getElementById('episodeAudioPlayer');ae?.pause();}syncLiquidPlayerUI();if(activeWatchPartyRoom&&isRoomHost()&&!watchPartyIgnoreSync)publishRoomState({position:p.currentTime,playing:false});if(currentUser){setUserStatus('online','');setProfileStatusLine('online','');if(p.duration&&Number.isFinite(p.duration)){updateContinueWatchState(season,idx,title,p.currentTime,p.duration);queueWatchDataCloudSync(true);renderContinueWatching();renderProfileWatchSections();}}};
       p.onended=()=>{if(currentUser&&p.duration&&Number.isFinite(p.duration)){updateContinueWatchState(season,idx,title,p.duration,p.duration);queueWatchDataCloudSync(true);renderContinueWatching();renderProfileWatchSections();}handleWatchPartyEpisodeEnded()};
       p.onseeked=()=>{if(activeAudioTrack){const ae=document.getElementById('episodeAudioPlayer');if(ae&&Number.isFinite(ae.duration)){try{ae.currentTime=Math.min(p.currentTime,ae.duration)}catch{}if(!p.paused)ae.play().catch(()=>{})}}syncLiquidPlayerUI();if(activeWatchPartyRoom&&isRoomHost()&&!watchPartyIgnoreSync)publishRoomState({position:p.currentTime,playing:!p.paused});if(currentUser&&p.duration&&Number.isFinite(p.duration)){updateContinueWatchState(season,idx,title,p.currentTime,p.duration);queueWatchDataCloudSync(true);}};
-      p.ontimeupdate=()=>{if(activeAudioTrack){const ae=document.getElementById('episodeAudioPlayer');if(ae&&Number.isFinite(ae.duration)&&Math.abs(ae.currentTime-p.currentTime)>.45){try{ae.currentTime=Math.min(p.currentTime,ae.duration)}catch{}}if(!p.paused&&ae?.paused)ae.play().catch(()=>{});}syncLiquidPlayerUI();
-        if(activeWatchPartyRoom&&isRoomHost()&&!watchPartyIgnoreSync&&Date.now()-(window.__wpLastLiveTick||0)>1400){
-          window.__wpLastLiveTick=Date.now();
-          const live={...activeWatchPartyRoom,position:p.currentTime,playing:!p.paused,updatedAt:Date.now()};
-          activeWatchPartyRoom=live;
-          try{watchPartyChannel?.send({type:'broadcast',event:'state',payload:{room:live}})}catch(e){}
-        }
-        if(!getAdminFeatureState().rememberProgress)return;if(currentUser&&currentPlayingEp&&p.duration&&Number.isFinite(p.duration)){updateContinueWatchState(season,idx,title,p.currentTime,p.duration);queueWatchDataCloudSync(false);if(p.currentTime>1)setUserStatus('watching',title)}else if(currentPlayingEp&&p.duration&&Number.isFinite(p.duration)){const ep=Number(idx);const obj={season:Number(season),epIndex:ep,title,positionSeconds:p.currentTime,progress:`${fmtTime(p.currentTime)} / ${fmtTime(p.duration)}`,progressPercent:Math.round(p.currentTime/p.duration*100)};continueWatching=[...continueWatching.filter(x=>!(Number(x.season)===Number(season)&&Number(x.epIndex)===ep)),obj].slice(-20);localStorage.setItem('cn_continue_watching',JSON.stringify(continueWatching));}};
+      p.ontimeupdate=()=>{if(activeAudioTrack){const ae=document.getElementById('episodeAudioPlayer');if(ae&&Number.isFinite(ae.duration)&&Math.abs(ae.currentTime-p.currentTime)>.45){try{ae.currentTime=Math.min(p.currentTime,ae.duration)}catch{}}if(!p.paused&&ae?.paused)ae.play().catch(()=>{});}syncLiquidPlayerUI();if(!getAdminFeatureState().rememberProgress)return;if(currentUser&&currentPlayingEp&&p.duration&&Number.isFinite(p.duration)){updateContinueWatchState(season,idx,title,p.currentTime,p.duration);queueWatchDataCloudSync(false);if(p.currentTime>1)setUserStatus('watching',title)}else if(currentPlayingEp&&p.duration&&Number.isFinite(p.duration)){const ep=Number(idx);const obj={season:Number(season),epIndex:ep,title,positionSeconds:p.currentTime,progress:`${fmtTime(p.currentTime)} / ${fmtTime(p.duration)}`,progressPercent:Math.round(p.currentTime/p.duration*100)};continueWatching=[...continueWatching.filter(x=>!(Number(x.season)===Number(season)&&Number(x.epIndex)===ep)),obj].slice(-20);localStorage.setItem('cn_continue_watching',JSON.stringify(continueWatching));}};
       if(subUrl){try{oldTrack.track.mode='disabled'}catch(e){}}
       syncLiquidPlayerUI();
-      // Carrega as legendas no próprio fluxo do player. A página de episódio
-      // chama esta função lexicalmente (não através de window.openPlayerModal).
-      if(typeof window.__bcgLoadEpisodeSubtitles==='function'){
-        window.__bcgLoadEpisodeSubtitles({...d,subUrl:subUrl||d.subUrl||''},key).catch(err=>console.warn('Legendas do episódio:',err));
-      }
     }
     function closePlayerModal(updateUrl=true){
       clearSeasonSevenCountdown();
@@ -7990,7 +7977,8 @@ async function renderAdminAccounts(){
             if((data||[]).some(r=>String(r.id)===wanted)) return true;
           }
         }
-        if(error) throw error;      }catch(err){
+        if(error) throw error;
+      }catch(err){
         throw new Error(`${table}: não foi possível remover o registo. ${restMessage?`REST: ${restMessage}. `:''}SDK: ${err?.message||err}`);
       }
       throw new Error(`${table}: o registo ${wanted} ainda existe.`);
@@ -8883,19 +8871,6 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
     let watchPartyMembers={};
     let watchChatSeen=new Set();
 
-    function showWatchPartyPlayerNotice(kind,username){
-      const shell=document.getElementById('videoShell');if(!shell||!activeWatchPartyRoom)return;
-      let box=document.getElementById('watchPartyPlayerPresenceOverlay');
-      if(!box){box=document.createElement('div');box.id='watchPartyPlayerPresenceOverlay';box.setAttribute('aria-live','polite');shell.appendChild(box);}
-      const account=typeof getAccount==='function'?getAccount(username):null;
-      const avatar=String(account?.avatar||account?.avatarUrl||`https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(username||'BCG')}`);
-      const row=document.createElement('div');row.className='wp-presence-toast '+(kind==='leave'?'leaving':'joining');
-      const img=document.createElement('img');img.src=avatar;img.alt='';img.onerror=()=>{img.onerror=null;img.src=`https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(username||'BCG')}`};
-      const label=document.createElement('span');label.textContent=`${username} ${kind==='leave'?'saiu da sala':'entrou na sala'}`;
-      row.append(img,label);box.appendChild(row);
-      while(box.children.length>3)box.firstElementChild.remove();
-      setTimeout(()=>{row.classList.add('out');setTimeout(()=>row.remove(),350)},3600);
-    }
     function setupWatchPartyChannel(code){
       if(watchPartyReconnectTimer){clearTimeout(watchPartyReconnectTimer);watchPartyReconnectTimer=null}
       if(watchPartyChannel&&supabaseClient){try{supabaseClient.removeChannel(watchPartyChannel)}catch(e){}watchPartyChannel=null}
@@ -8917,7 +8892,7 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
         .on('presence',{event:'sync'},()=>refreshWatchRoomMembers())
         .on('presence',{event:'join'},({key,newPresences})=>{
           const user=presenceUsername(key,newPresences);
-          if(user){refreshWatchRoomMembers();if(user.toLowerCase()!==String(currentUser?.username||'').toLowerCase())showWatchPartyPlayerNotice('join',user);}
+          if(user)refreshWatchRoomMembers();
         })
         .on('presence',{event:'leave'},({key,leftPresences})=>{
           const user=presenceUsername(key,leftPresences);
@@ -8925,7 +8900,6 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
           if(user&&user!==currentUser?.username){
             const id=`leave-${roomCode}-${user}-${Date.now()}`;
             addSystemChatMessage(`@${user} saiu da sala.`,id);
-            showWatchPartyPlayerNotice('leave',user);
           }
         })
         .subscribe(async (status)=>{
@@ -8989,7 +8963,8 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
       if(!q.length){box.innerHTML='<div class="small-note">Nenhum episódio selecionado.</div>';return}
       const current=roomQueueIndex(activeWatchPartyRoom);
       box.innerHTML=q.map((ep,i)=>`<div class="room-queue-item ${i===current?'current':''}"><div class="room-queue-index">${i+1}</div><div class="room-queue-main"><div class="room-queue-title">${i===current?'▶️ ':''}${esc(ep.title||`${Number(ep.idx)+1} - Episódio`)}</div><div class="room-queue-meta">${ep.season==='specials'?'Especial':`Temporada ${esc(ep.season)}`} · Episódio ${Number(ep.idx)+1}</div></div></div>`).join('');
-    }    function updateWatchRoomUI(){
+    }
+    function updateWatchRoomUI(){
       const modal=document.getElementById('playerModal');
       modal?.classList.toggle('watch-room-active',!!activeWatchPartyRoom);
       const title=document.getElementById('watchPartyRoomTitle');
@@ -9235,22 +9210,14 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
         const liveRoom=activeWatchPartyRoom;
         if(!liveRoom||String(liveRoom.code||'').toUpperCase()!==roomCode)return false;
         if(currentPlayingEp&&(String(currentPlayingEp.season)!==String(liveRoom.season)||Number(currentPlayingEp.idx)!==Number(liveRoom.epIndex)))return false;
-        const basePosition=Number.isFinite(Number(liveRoom.position))?Math.max(0,Number(liveRoom.position)):0;
-        const stateAge=Math.max(0,Math.min(8,(Date.now()-Number(liveRoom.updatedAt||Date.now()))/1000));
-        const target=basePosition+(liveRoom.playing?stateAge:0);
+        const target=Number.isFinite(Number(liveRoom.position))?Math.max(0,Number(liveRoom.position)):0;
         watchPartyIgnoreSync=true;
         try{
-          const drift=target-(Number(player.currentTime)||0);
-          if(Math.abs(drift)>0.8){
+          if(Math.abs((Number(player.currentTime)||0)-target)>0.35){
             const safeTarget=Number.isFinite(player.duration)&&player.duration>0?Math.min(target,Math.max(0,player.duration-0.05)):target;
             player.currentTime=safeTarget;
             refreshRoomSubtitleAfterSeek();
-          }else if(Math.abs(drift)>0.12&&liveRoom.playing){
-            const normalRate=Number(player.playbackRate)||1;
-            player.playbackRate=Math.max(.92,Math.min(1.08,normalRate+(drift>0?.06:-.06)));
-            clearTimeout(window.__wpDriftRateTimer);
-            window.__wpDriftRateTimer=setTimeout(()=>{try{player.playbackRate=1}catch{}},2200);
-          }else{try{player.playbackRate=1}catch{}}
+          }
           const shouldPlay=options.autoplay===true||!!liveRoom.playing;
           if(shouldPlay){
             try{await player.play();hidePlayerError();}
@@ -9534,7 +9501,7 @@ function switchAdminTab(id){document.querySelectorAll('.admin-tab').forEach(x=>x
       clearInterval(window.__noirPresenceHeartbeat);
       window.__noirPresenceHeartbeat=setInterval(()=>{if(currentUser)window.__noirUpdatePresence()},20000);
     };
-    function renderCommunity(){const c=document.getElementById('communityGrid');if(!c)return;const q=(document.getElementById('communitySearch')?.value||'').toLowerCase();const list=[...accounts].filter(a=>!q||String(a.username||'').toLowerCase().includes(q)).sort((a,b)=>{const ap=a.communityPinned===true?1:0,bp=b.communityPinned===true?1:0;if(ap!==bp)return bp-ap;return String(a.displayName||a.username).localeCompare(String(b.displayName||b.username));});c.innerHTML=list.length?list.map(a=>{const isStale=!a.lastSeen||Date.now()-a.lastSeen>90000;const st=statusLabel(a,isStale);const banner=a.animatedBanner||a.banner||'';return `<div class="user-card" onclick="openProfile('${esc(a.username)}')" style="${banner?`background-image:linear-gradient(rgba(10,16,12,.76),rgba(10,16,12,.96)),url('${esc(banner)}');background-size:cover;background-position:center`:''}">${premiumAvatarMarkup(a,'sm')}<div class="user-name">${styledProfileNameMarkup(a,true)} ${a.isAdmin?' <span class="badge-admin"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> ADMIN</span>':''}${hasPremium(a)?' <span class="premium-chip"><i class="fa-solid fa-crown"></i> PREMIUM</span>':''}</div><div class="status-line"><span class="status-dot ${st.type}"></span>${esc(st.label)}</div><div class="small-note" style="text-align:center;margin-top:8px">${esc(cleanPremiumBio(a.quote)||'Sem frase de perfil.')}</div>${spotifyPresenceMarkup(a,{compact:true})}${favoriteShowMarkup(a.favoriteShow,{compact:true})}</div>`}).join(''):'<p style="color:var(--text-muted)">Ainda não existem outros perfis.</p>';}
+    function renderCommunity(){const c=document.getElementById('communityGrid');if(!c)return;const q=(document.getElementById('communitySearch')?.value||'').toLowerCase();const list=[...accounts].filter(a=>!q||String(a.username||'').toLowerCase().includes(q)).sort((a,b)=>{const ap=a.communityPinned===true?1:0,bp=b.communityPinned===true?1:0;if(ap!==bp)return bp-ap;return String(a.displayName||a.username).localeCompare(String(b.displayName||b.username));});c.innerHTML=list.length?list.map(a=>{const isStale=!a.lastSeen||Date.now()-a.lastSeen>90000;const st=statusLabel(a,isStale);const banner=a.animatedBanner||a.banner||'';return `<div class="user-card" onclick="openProfile('${esc(a.username)}')" style="${banner?`background-image:linear-gradient(rgba(10,16,12,.76),rgba(10,16,12,.96)),url('${esc(banner)}');background-size:cover;background-position:center`:''}">${premiumAvatarMarkup(a,'sm')}<div class="user-name">${styledProfileNameMarkup(a,true)} ${a.isAdmin?' <span class="badge-admin"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> ADMIN</span>':''}${hasPremium(a)?' <span class="premium-chip"><i class="fa-solid fa-crown"></i> PREMIUM</span>':''}</div><div class="status-line"><span class="status-dot ${st.type}"></span>${esc(st.label)}</div><div class="small-note" style="text-align:center;margin-top:8px">${esc(cleanPremiumBio(a.quote)||'Sem frase de perfil.')}</div>${profileMusicMarkup(a,{compact:true})}${spotifyPresenceMarkup(a,{compact:true})}${favoriteShowMarkup(a.favoriteShow,{compact:true})}</div>`}).join(''):'<p style="color:var(--text-muted)">Ainda não existem outros perfis.</p>';}
     
     async function hydrateMissedNotifications(silent=true){
       if(!currentUser||!supabaseClient)return;
@@ -9988,7 +9955,8 @@ function renderSpotifyConnectionUI(){
   if(editor)editor.innerHTML=p?`<div class="spotify-editor-row">${p.albumImageUrl?`<img class="spotify-editor-cover" src="${esc(p.albumImageUrl)}" alt="">`:''}<div style="min-width:0;flex:1"><div style="font-size:.68rem;color:#8cf6a4;text-transform:uppercase;font-weight:900">${p.isPlaying?'A ouvir agora':'Spotify'}</div><div style="font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.trackName)}</div><div class="small-note">${esc(p.artistName)}</div></div></div>`:'';
   const hero=document.getElementById('profileSpotifyPreview');if(hero)hero.innerHTML=p?spotifyPresenceMarkup(a):'';
 }
-function syncSpotifyAdminForm(){const input=document.getElementById('spotifyClientIdInput'),uri=document.getElementById('spotifyRedirectUriValue'),gif=document.getElementById('giphyApiKeyInput');if(input)input.value=spotifyClientId();if(uri)uri.textContent=spotifyRedirectUri();if(gif)gif.value=String(siteSettings?.giphyApiKey||'');}async function copySpotifyRedirectUri(){const value=spotifyRedirectUri();try{await navigator.clipboard.writeText(value);const st=document.getElementById('spotifyAdminStatus');if(st){st.className='admin-media-status active success';st.textContent='✓ Redirect URI copiado.';setTimeout(()=>{st.className='admin-media-status';st.textContent=''},1800)}}catch{prompt('Copia o Redirect URI:',value)}}
+function syncSpotifyAdminForm(){const input=document.getElementById('spotifyClientIdInput'),uri=document.getElementById('spotifyRedirectUriValue'),gif=document.getElementById('giphyApiKeyInput');if(input)input.value=spotifyClientId();if(uri)uri.textContent=spotifyRedirectUri();if(gif)gif.value=String(siteSettings?.giphyApiKey||'');}
+async function copySpotifyRedirectUri(){const value=spotifyRedirectUri();try{await navigator.clipboard.writeText(value);const st=document.getElementById('spotifyAdminStatus');if(st){st.className='admin-media-status active success';st.textContent='✓ Redirect URI copiado.';setTimeout(()=>{st.className='admin-media-status';st.textContent=''},1800)}}catch{prompt('Copia o Redirect URI:',value)}}
 async function saveSpotifyAdminSettings(){
   if(!isAdminUser())return alert('Sem acesso de administrador.');
   const id=String(document.getElementById('spotifyClientIdInput')?.value||'').trim();if(id.length<10)return alert('Coloca um Spotify Client ID válido.');
@@ -10897,84 +10865,46 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   function parseSubtitleFile(raw){return parseSubCues(raw);}
   function updateEpisodeSubtitleOverlay(){
     const p=$('mainVideoPlayer'),el=$('episodeSubtitleOverlay');if(!p||!el||window.__clipBusy)return;
-    if(window.__bcgNativeSubtitleTrack&&window.__bcgNativeSubtitleTrack.mode==='showing'){el.classList.remove('show');return;}
     if(!subtitleEnabled||!subtitleCues.length||!Number.isFinite(p.currentTime)){el.classList.remove('show');if(subtitleLastText){el.textContent='';subtitleLastText='';}return;}
     const offset=Math.max(-30,Math.min(30,Number((typeof customVideos!=='undefined'?customVideos?.[`${currentPlayingEp?.season}_${currentPlayingEp?.idx}`]?.subtitleOffset:0))||0));
     const time=p.currentTime-offset-(Number(window.__activeSubOffset)||0);
     const visible=[];for(const cue of subtitleCues){if(cue.start>time)break;if(cue.end>time)visible.push(cue.html||cue.text);}
     const text=visible.join('<br>');if(text!==subtitleLastText){subtitleLastText=text;el.innerHTML=text;el.classList.toggle('show',!!text);}
   }
-  function resetEpisodeSubtitleUi(){
-    subtitleCues=[];subtitleLastText='';
-    try{if(window.__bcgNativeSubtitleTrack)window.__bcgNativeSubtitleTrack.mode='disabled'}catch{}window.__bcgNativeSubtitleTrack=null;
-    const el=$('episodeSubtitleOverlay');if(el){el.textContent='';el.classList.remove('show');}
-    const btn=$('liquidSubtitleBtn');if(btn){btn.style.display='inline-flex';btn.disabled=false;btn.classList.remove('active');btn.setAttribute('aria-pressed','false');btn.title='Legendas (CC) — a verificar disponibilidade';btn.setAttribute('aria-label','Legendas (CC)');}
-    const track=$('videoTrack');if(track){try{track.track.mode='disabled'}catch{}track.removeAttribute('src');track.default=false;}
-    const p=$('mainVideoPlayer');if(p){p.querySelectorAll('track[data-bcg-episode-subtitle]').forEach(x=>x.remove());}
-  }
+  function resetEpisodeSubtitleUi(){subtitleCues=[];subtitleLastText='';const el=$('episodeSubtitleOverlay');if(el){el.textContent='';el.classList.remove('show');}const btn=$('liquidSubtitleBtn');if(btn){btn.style.display='none';btn.classList.remove('active');btn.setAttribute('aria-pressed','false');btn.title='Sem legendas para este episódio';}const track=$('videoTrack');if(track){try{track.track.mode='disabled'}catch{}track.removeAttribute('src');track.default=false;}const p=$('mainVideoPlayer');if(p){p.querySelectorAll('track[data-bcg-episode-subtitle]').forEach(x=>x.remove());}}
   let subTracks=[],subActiveId='',subKey='';
   const subPref=()=>{try{return localStorage.getItem('cn_sub_pref')||''}catch{return ''}};
   const setSubPref=v=>{try{localStorage.setItem('cn_sub_pref',v)}catch{}};
   function paintSubButton(){
     const btn=$('liquidSubtitleBtn');if(!btn)return;
-    btn.style.display='inline-flex';btn.disabled=false;
-    if(!subTracks.length){btn.classList.remove('active');btn.setAttribute('aria-pressed','false');btn.title='Este episódio não tem legendas configuradas';btn.setAttribute('aria-label','Legendas (sem faixas disponíveis)');return;}
     const on=!!(subtitleCues.length?subtitleEnabled:$('videoTrack')?.track?.mode==='showing'),cur=subTracks.find(t=>t.id===subActiveId);
     btn.classList.toggle('active',on);btn.setAttribute('aria-pressed',String(on));
     btn.title=subTracks.length>1?`Legendas${on&&cur?': '+(cur.label||cur.lang):' desligadas'} — escolher idioma`:(on?'Legendas ativas — tocar para desativar':'Legendas desativadas — tocar para ativar');
-    btn.setAttribute('aria-label',btn.title);
     $('episodeSubMenu')?.querySelectorAll('button').forEach(b=>b.classList.toggle('active',on?b.dataset.sub===subActiveId:b.dataset.sub==='off'));
   }
   async function activateSubTrack(t,key){
     const token=++subtitleFetchToken,tr=$('videoTrack');
-    let rawText='',storageError=null;
-    // Para ficheiros enviados pelo painel, descarrega pelo SDK do Supabase.
-    // Isto evita que as regras CORS do URL público impeçam o browser de ler o VTT.
-    if(t.path&&typeof supabaseClient!=='undefined'&&supabaseClient?.storage){
-      try{
-        const {data,error}=await supabaseClient.storage.from(SUPABASE_MEDIA_BUCKET).download(t.path);
-        if(error)throw error;
-        if(!data)throw new Error('O Storage não devolveu o ficheiro.');
-        rawText=decodeSubBytes(await data.arrayBuffer());
-      }catch(err){storageError=err;console.warn('Download de legendas pelo Storage falhou; a tentar URL público:',err?.message||err)}
-    }
-    if(!rawText){
-      const url=String(t.url||'').trim();if(!url)throw new Error('Esta faixa não tem URL nem caminho de Storage.');
-      const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw new Error(`HTTP ${res.status}`);
-      rawText=decodeSubBytes(await res.arrayBuffer());
-    }
-    const cues=parseSubtitleFile(rawText);
+    const res=await fetch(t.url,{cache:'no-store'});if(!res.ok)throw new Error(`HTTP ${res.status}`);
+    const cues=parseSubtitleFile(decodeSubBytes(await res.arrayBuffer()));
     if(token!==subtitleFetchToken||subKey!==key)return false;
-    if(!cues.length)throw new Error(storageError?'Não foi possível ler um ficheiro de legendas válido.':'O ficheiro não contém legendas válidas (SRT/VTT).');
+    if(!cues.length)throw new Error('O ficheiro não contém legendas válidas.');
     subtitleCues=cues;subActiveId=t.id;window.__activeSubOffset=Number(t.offset)||0;
-    const p=$('mainVideoPlayer');
-    if(p){
-      try{
-        const native=p.addTextTrack('subtitles',String(t.label||t.lang||'Legendas'),String(t.lang||'pt').slice(0,2));
-        native.mode='showing';
-        const Cue=window.VTTCue||window.TextTrackCue;
-        if(Cue)for(const c of cues){try{native.addCue(new Cue(c.start,c.end,c.text))}catch{}}
-        window.__bcgNativeSubtitleTrack=native;
-      }catch(nativeErr){console.warn('TextTrack nativo indisponível; a usar sobreposição:',nativeErr)}
-    }
     if(tr){tr.removeAttribute('src');tr.default=false;try{tr.track.mode='disabled'}catch{}}
     return true;
   }
   async function loadEpisodeSubtitleForPlayer(d,key){
     resetEpisodeSubtitleUi();subKey=key;subActiveId='';window.__activeSubOffset=0;closeSubMenu();
     subTracks=getEpisodeSubTracks(typeof d==='string'?{subUrl:d}:d);
-    const btn=$('liquidSubtitleBtn'),tr=$('videoTrack');if(!btn)return;
-    btn.style.display='inline-flex';btn.disabled=false;
-    if(!subTracks.length){paintSubButton();return;}
-    const pref=subPref(),t=subTracks.find(x=>x.lang===pref)||subTracks.find(x=>x.isDefault)||subTracks[0];
-    btn.disabled=true;btn.title='A carregar legendas…';
+    const btn=$('liquidSubtitleBtn'),tr=$('videoTrack');if(!btn||!subTracks.length)return;
+    const pref=String(currentProfile()?.watchData?.playerPreferences?.subtitleLang||subPref()),t=subTracks.find(x=>x.lang===pref)||subTracks.find(x=>x.isDefault)||subTracks[0];
+    btn.style.display='inline-flex';btn.disabled=true;btn.title='A carregar legendas…';
     try{
       if(await activateSubTrack(t,key)===false)return;
       subtitleEnabled=pref!=='off';
     }catch(err){
       console.warn('Legendas externas:',err?.message||err);
       // Fallback: track nativo quando o servidor bloqueia o fetch (CORS).
-      if(tr&&subKey===key&&t.url){tr.src=t.url;tr.kind='subtitles';tr.srclang=(t.lang||'pt').slice(0,2);tr.label=t.label||'Português';tr.default=pref!=='off';const nativeTrack=tr.track;const setNativeMode=()=>{try{nativeTrack.mode=pref==='off'?'disabled':'showing'}catch{}};tr.addEventListener('load',setNativeMode,{once:true});setNativeMode();}
+      if(tr&&subKey===key){tr.src=t.url;tr.kind='subtitles';tr.srclang=(t.lang||'pt').slice(0,2);tr.label=t.label||'Português';tr.default=pref!=='off';try{tr.track.mode=pref==='off'?'disabled':'showing'}catch{}}
       subtitleCues=[];subActiveId=t.id;const shell=$('videoShell');if(shell)shell.dataset.subtitleNativeFallback='1';
     }
     btn.disabled=false;updateEpisodeSubtitleOverlay();paintSubButton();
@@ -10987,7 +10917,8 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
     m.innerHTML=subTracks.map(t=>`<button type="button" data-sub="${esc(t.id)}">${esc(t.label||t.lang)}</button>`).join('')+'<button type="button" data-sub="off">Desativar</button>';
     return m;
   }
-  async function selectSubTrack(id){    closeSubMenu();const btn=$('liquidSubtitleBtn'),tr=$('videoTrack');
+  async function selectSubTrack(id){
+    closeSubMenu();const btn=$('liquidSubtitleBtn'),tr=$('videoTrack');
     if(id==='off'){subtitleEnabled=false;setSubPref('off');try{if(tr)tr.track.mode='disabled'}catch{}updateEpisodeSubtitleOverlay();paintSubButton();return}
     const t=subTracks.find(x=>x.id===id);if(!t)return;
     try{if(btn)btn.disabled=true;if(t.id!==subActiveId||!subtitleCues.length)await activateSubTrack(t,subKey);subtitleEnabled=true;setSubPref(t.lang)}catch(err){console.warn(err);alert('Não foi possível carregar esta legenda.')}
@@ -10995,19 +10926,19 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   }
   function toggleEpisodeSubtitles(){
     const btn=$('liquidSubtitleBtn');if(!btn||btn.disabled)return;
-    if(!subTracks.length){if(typeof liquidStatus==='function')liquidStatus('Este episódio ainda não tem legendas disponíveis.');return;}
     if(subTracks.length>1){buildSubMenu().classList.toggle('open');paintSubButton();return}
     const track=$('videoTrack');
-    if(subtitleCues.length){subtitleEnabled=!subtitleEnabled;setSubPref(subtitleEnabled?(subTracks.find(x=>x.id===subActiveId)?.lang||subTracks[0]?.lang||''):'off');try{if(window.__bcgNativeSubtitleTrack)window.__bcgNativeSubtitleTrack.mode=subtitleEnabled?'showing':'disabled'}catch{}updateEpisodeSubtitleOverlay()}
+    if(subtitleCues.length){subtitleEnabled=!subtitleEnabled;setSubPref(subtitleEnabled?(subTracks[0]?.lang||''):'off');updateEpisodeSubtitleOverlay()}
     else if(track){try{track.track.mode=track.track.mode==='showing'?'disabled':'showing';setSubPref(track.track.mode==='showing'?(subTracks[0]?.lang||''):'off')}catch{}}
     paintSubButton();
   }
   document.addEventListener('click',e=>{if(!e.target.closest('#episodeSubMenu,#liquidSubtitleBtn'))closeSubMenu()});
   window.toggleEpisodeSubtitles=toggleEpisodeSubtitles;
   let subtitleAnimationFrame=0;function subtitleFramePump(){updateEpisodeSubtitleOverlay();const p=$('mainVideoPlayer');if(p&&!p.paused&&!p.ended)subtitleAnimationFrame=requestAnimationFrame(subtitleFramePump);else subtitleAnimationFrame=0;}const player=$('mainVideoPlayer');if(player){['timeupdate','seeking','seeked','loadedmetadata','ratechange','play','pause'].forEach(name=>player.addEventListener(name,updateEpisodeSubtitleOverlay));player.addEventListener('play',()=>{if(!subtitleAnimationFrame)subtitleAnimationFrame=requestAnimationFrame(subtitleFramePump);});player.addEventListener('pause',()=>{if(subtitleAnimationFrame)cancelAnimationFrame(subtitleAnimationFrame);subtitleAnimationFrame=0;updateEpisodeSubtitleOverlay();});player.addEventListener('emptied',()=>{subtitleFetchToken++;if(subtitleAnimationFrame)cancelAnimationFrame(subtitleAnimationFrame);subtitleAnimationFrame=0;resetEpisodeSubtitleUi();});}
-  // Ponte global chamada diretamente pela função lexical openPlayerModal.
-  window.__bcgLoadEpisodeSubtitles=loadEpisodeSubtitleForPlayer;
-  window.__bcgResetEpisodeSubtitleUi=resetEpisodeSubtitleUi;
+  const originalOpenPlayer=window.openPlayerModal;
+  if(typeof originalOpenPlayer==='function'&&!originalOpenPlayer.__bcgSubtitleWrapped){
+    const wrapped=async function(season,idx,...args){const res=await originalOpenPlayer.call(this,season,idx,...args);const key=`${season}_${idx}`,d=(typeof customVideos!=='undefined'?customVideos?.[key]:{})||{};if(!d.videoUrl&&!d.blobKey){resetEpisodeSubtitleUi();return res;}await loadEpisodeSubtitleForPlayer(d,key);return res;};wrapped.__bcgSubtitleWrapped=true;window.openPlayerModal=wrapped;
+  }
   // Guardar/mostrar el desfase al seleccionar otro episodio en el panel de mídia.
   function loadSubtitleOffsetField(){const s=$('adminSeasonSelect')?.value,idx=$('adminEpSelect')?.value;if(s==null||idx==null)return;const d=(typeof customVideos!=='undefined'?customVideos?.[`${s}_${idx}`]:{})||{};if($('adminSubtitleOffsetInput'))$('adminSubtitleOffsetInput').value=String(Number(d.subtitleOffset)||0);}
   $('adminSeasonSelect')?.addEventListener('change',()=>setTimeout(loadSubtitleOffsetField,0));$('adminEpSelect')?.addEventListener('change',loadSubtitleOffsetField);
@@ -11304,67 +11235,126 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
 })();
 </script>
 
-<script id="bcg-subtitle-button-visibility-guard">
-(function(){
-  const ensureSubtitleButton=()=>{
-    const b=document.getElementById('liquidSubtitleBtn');
-    if(!b)return;
-    if(b.style.getPropertyValue('display')!=='inline-flex'||b.style.getPropertyPriority('display')!=='important')b.style.setProperty('display','inline-flex','important');
-    if(b.style.getPropertyValue('visibility')!=='visible'||b.style.getPropertyPriority('visibility')!=='important')b.style.setProperty('visibility','visible','important');
-    if(!b.title)b.title='Legendas (CC)';
-  };
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensureSubtitleButton,{once:true});
-  else ensureSubtitleButton();
-  const shell=document.getElementById('videoShell');
-  if(shell&&typeof MutationObserver!=='undefined'){
-    new MutationObserver(ensureSubtitleButton).observe(shell,{subtree:true,childList:true,attributes:true,attributeFilter:['style','class']});
-  }
-  window.addEventListener('pageshow',ensureSubtitleButton);
-})();
-</script>
 
-<style id="bcg-remove-profile-avatar-music-bubble">
-  #profileAvatarMusicNote,.profile-avatar-note-mount,.profile-avatar-music-note,.profile-music-note-add{display:none!important}
+<style id="bcg-requested-features-style">
+/* Music: keep the original Liquid Glass music card/player, remove the avatar bubble UI. */
+.profile-avatar-note-mount,.profile-music-note-customizer{display:none!important}
+.profile-music-preview{display:block}
+.profile-registered-days{margin-top:6px;color:var(--text-muted);font-size:.72rem;text-align:center}
+.bcg-name-tag{display:inline-flex;vertical-align:2px;align-items:center;margin-left:5px;padding:2px 6px;border-radius:6px;background:var(--bcg-tag-bg,#30343b);color:var(--bcg-tag-color,#fff);border:1px solid color-mix(in srgb,var(--bcg-tag-color,#fff) 45%,transparent);font-size:.62em;font-weight:950;line-height:1.35;letter-spacing:.01em;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.22)}
+.bcg-player-report-action{display:flex;justify-content:flex-end;margin:10px 0 14px}.bcg-player-report-action button{width:100%;justify-content:center}
+.bcg-admin-reports-card{margin-top:16px;padding:14px;border:1px solid var(--border-color);border-radius:14px;background:rgba(255,255,255,.025)}.bcg-admin-reports-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.bcg-admin-report{padding:11px;margin:8px 0;border:1px solid var(--border-color);border-radius:12px;background:var(--bg-card)}.bcg-admin-report-title{font-weight:850}.bcg-admin-report-meta{font-size:.68rem;color:var(--text-muted);margin-top:4px}.bcg-admin-report-body{font-size:.8rem;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:7px}.bcg-admin-tag-editor{display:grid;grid-template-columns:minmax(0,1.5fr) 1fr 1fr;gap:8px;margin-top:10px;padding:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.035)}.bcg-admin-tag-editor .form-group{margin:0}.bcg-admin-tag-editor input[type=color]{height:42px;padding:4px}.bcg-review-panel{margin:18px 0;padding:16px;border:1px solid var(--border-color);border-radius:18px;background:var(--bg-card)}.bcg-review-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.bcg-review-score{font-size:1.25rem;font-weight:950}.bcg-review-stars{display:flex;align-items:center;gap:5px;margin:10px 0}.bcg-review-star{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#ffc94a;border-radius:9px;width:38px;height:38px;font-size:1.12rem;cursor:pointer}.bcg-review-star.active{background:rgba(255,201,74,.16);border-color:rgba(255,201,74,.65)}.bcg-review-text{width:100%;min-height:78px;resize:vertical;background:rgba(255,255,255,.055);border:1px solid var(--border-color);border-radius:12px;padding:11px;color:#fff;font:inherit;outline:none}.bcg-review-item{padding:10px 0;border-top:1px solid rgba(255,255,255,.08)}.bcg-review-item:first-child{margin-top:10px}.bcg-review-item-head{display:flex;gap:8px;align-items:center;justify-content:space-between;font-size:.76rem}.bcg-review-item-stars{color:#ffc94a;letter-spacing:1px}.bcg-review-item-text{font-size:.8rem;line-height:1.45;white-space:pre-wrap;margin-top:5px;color:rgba(255,255,255,.86)}
+.bcg-report-modal{position:fixed;inset:0;z-index:50000;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.78);backdrop-filter:blur(12px)}.bcg-report-modal.open{display:flex}.bcg-report-box{position:relative;width:min(480px,100%);max-height:88vh;overflow:auto;padding:20px;border:1px solid rgba(255,255,255,.2);border-radius:20px;background:rgba(18,25,20,.96);box-shadow:0 24px 80px rgba(0,0,0,.55)}.bcg-report-box h3{margin:0 38px 8px 0}.bcg-report-box textarea{width:100%;min-height:100px;resize:vertical;background:rgba(255,255,255,.06);border:1px solid var(--border-color);border-radius:11px;color:#fff;padding:10px;font:inherit}.bcg-report-actions{display:flex;gap:8px;margin-top:12px}.bcg-report-actions>*{flex:1;justify-content:center}
+.bcg-player-nav-button{min-width:38px;height:38px;padding:0 10px;border-radius:13px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.11);color:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:auto;backdrop-filter:blur(18px) saturate(150%)}.bcg-player-navigator{display:none;position:absolute;z-index:50;top:56px;left:10px;width:min(330px,calc(100% - 20px));padding:13px;border:1px solid rgba(255,255,255,.22);border-radius:18px;background:rgba(15,20,18,.9);box-shadow:0 18px 50px rgba(0,0,0,.48);backdrop-filter:blur(24px) saturate(160%);pointer-events:auto}.bcg-player-navigator.open{display:block}.bcg-player-navigator label{display:block;font-size:.68rem;color:rgba(255,255,255,.7);margin:7px 0 5px}.bcg-player-navigator select{width:100%;min-height:40px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:10px;color:#fff;padding:8px}.bcg-player-navigator select option{background:#151a17;color:#fff}.bcg-player-nav-play{width:100%;margin-top:10px;justify-content:center}
+.bcg-timeline-preview{display:none;position:absolute;z-index:70;bottom:78px;left:50%;transform:translateX(-50%);width:164px;padding:6px;border:1px solid rgba(255,255,255,.25);border-radius:12px;background:rgba(12,16,14,.9);box-shadow:0 10px 28px rgba(0,0,0,.45);backdrop-filter:blur(16px);pointer-events:none;text-align:center}.bcg-timeline-preview.show{display:block}.bcg-timeline-preview img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:7px;background:#000}.bcg-timeline-preview span{display:block;font-size:.65rem;color:#fff;margin-top:4px;font-variant-numeric:tabular-nums}
+.bcg-next-episode{position:absolute;z-index:85;inset:auto 10px 72px auto;width:min(300px,calc(100% - 20px));padding:13px;border:1px solid rgba(255,255,255,.25);border-radius:16px;background:rgba(12,16,14,.9);box-shadow:0 16px 45px rgba(0,0,0,.5);backdrop-filter:blur(22px);color:#fff;pointer-events:auto}.bcg-next-episode strong{display:block;font-size:.82rem}.bcg-next-episode small{display:block;color:rgba(255,255,255,.68);font-size:.68rem;margin:4px 0 10px}.bcg-next-actions{display:flex;gap:7px}.bcg-next-actions button{flex:1;min-height:36px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.10);color:#fff;font-weight:800;font-size:.72rem}.bcg-next-actions button.primary{background:#fff;color:#111;border-color:#fff}
+@media(max-width:620px){.bcg-admin-tag-editor{grid-template-columns:1fr 1fr}.bcg-admin-tag-editor .form-group:first-child{grid-column:1/-1}.bcg-timeline-preview{width:132px;bottom:70px}.bcg-next-episode{bottom:68px;right:7px;width:min(270px,calc(100% - 14px))}.bcg-player-navigator{top:50px;left:7px}}
 </style>
-
-<style id="bcg-watchparty-presence-and-profile-fixes">
-#watchPartyPlayerPresenceOverlay{position:absolute;z-index:35;left:12px;top:58px;display:flex;flex-direction:column;gap:7px;max-width:min(75%,330px);pointer-events:none}
-.wp-presence-toast{display:flex;align-items:center;gap:9px;padding:7px 11px 7px 7px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(12,16,14,.82);backdrop-filter:blur(16px);color:#fff;font-size:12px;font-weight:800;box-shadow:0 6px 22px rgba(0,0,0,.3);animation:wpPresenceIn .22s ease-out;transition:opacity .3s,transform .3s}
-.wp-presence-toast img{width:28px;height:28px;border-radius:50%;object-fit:cover;flex:0 0 28px}
-.wp-presence-toast.leaving{border-color:rgba(255,190,140,.35)}
-.wp-presence-toast.out{opacity:0;transform:translateX(-12px)}
-@keyframes wpPresenceIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
-#roomSubtitleUploadBtn,#roomSubtitleFileInput,#roomSubtitleStatus{display:none!important}
-#profileAvatarMusicNote,.profile-avatar-note-mount,.profile-avatar-music-note,.profile-music-note-add{display:none!important}
-</style>
-<script id="bcg-watchparty-admin-quick-create">
+<div class="bcg-report-modal" id="bcgVideoReportModal" aria-hidden="true" onclick="if(event.target===this)closeBcgVideoReport()">
+  <div class="bcg-report-box" role="dialog" aria-modal="true" aria-label="Reportar problema no vídeo">
+    <button class="modal-close" type="button" onclick="closeBcgVideoReport()"><i class="fa-solid fa-xmark"></i></button>
+    <h3><i class="fa-solid fa-flag"></i> Reportar vídeo</h3>
+    <p class="small-note" id="bcgVideoReportEpisode" style="margin-bottom:12px">Ajuda-nos a corrigir este episódio.</p>
+    <div class="form-group"><label for="bcgVideoReportCategory">Tipo de problema</label><select id="bcgVideoReportCategory" class="form-control"><option>O vídeo não carrega</option><option>Imagem preta ou bloqueada</option><option>Áudio não funciona</option><option>Áudio dessincronizado</option><option>Legendas incorretas</option><option>Qualidade muito baixa</option><option>O episódio está errado</option><option>Outro</option></select></div>
+    <div class="form-group"><label for="bcgVideoReportMessage">Detalhes (opcional)</label><textarea id="bcgVideoReportMessage" maxlength="800" placeholder="Explica o que aconteceu…"></textarea></div>
+    <div class="bcg-report-actions"><button class="btn-small-outline" type="button" onclick="closeBcgVideoReport()">Cancelar</button><button class="btn-green" type="button" onclick="submitBcgVideoReport()">Enviar relatório</button></div>
+  </div>
+</div>
+<script id="bcg-requested-features-js">
 (function(){
+  'use strict';
   const $=id=>document.getElementById(id);
-  function fillEpisodeOptions(){
-    const season=$('bcgCreateSeason')?.value||'1',sel=$('bcgCreateEpisode');if(!sel)return;
-    const list=Array.isArray(EPISODES?.[season])?EPISODES[season]:[];
-    sel.innerHTML=list.map((_,i)=>`<option value="${i}">${i+1} — ${String(episodeTitle(season,i)||'Episódio '+(i+1))}</option>`).join('');
-    if(!list.length)sel.innerHTML='<option value="0">Episódio 1</option>';
+  const escHtml=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  function ageText(a){const at=Number(a?.createdAt||a?.registeredAt)||0;if(!at)return 'Data de registo indisponível';const days=Math.max(0,Math.floor((Date.now()-at)/86400000));return days===0?'Registado hoje':days===1?'No BCG Hub há 1 dia':`No BCG Hub há ${days} dias`;}
+  function registrationAgeMarkup(a){return `<div class="profile-registered-days"><i class="fa-regular fa-calendar"></i> ${escHtml(ageText(a))}</div>`;}
+  window.registrationAgeMarkup=registrationAgeMarkup;
+  function renderOwnRegistrationAge(){const el=$('profileRegisteredDays');if(el)el.innerHTML=currentUser?`<i class="fa-regular fa-calendar"></i> ${escHtml(ageText(currentProfile()))}`:'';}
+  function currentKey(){return currentPlayingEp?`${currentPlayingEp.season}_${currentPlayingEp.idx}`:'';}
+  function userWatchData(){const a=currentProfile();if(!a)return null;a.watchData=normalizeWatchData(a.watchData||{});return a.watchData;}
+  function persistWatchData(extraRender=true){const a=currentProfile();if(!a)return; a.watchData=normalizeWatchData(a.watchData||{});try{localStorage.setItem('cn_accounts',JSON.stringify(accounts));}catch{} if(typeof queueWatchDataCloudSync==='function')queueWatchDataCloudSync(true);else if(typeof save==='function')save('cn_accounts',accounts).catch(()=>{});if(extraRender){try{renderCommunity()}catch{}}}
+
+  // Own profile displays the previous Liquid Glass music card instead of a speech bubble.
+  const oldUpdateUserUI=window.updateUserUI;
+  if(typeof oldUpdateUserUI==='function'&&!oldUpdateUserUI.__bcgRequestedWrapped){
+    const wrapped=function(...args){const result=oldUpdateUserUI.apply(this,args);try{renderOwnRegistrationAge();const a=currentProfile();if(a&&$('profileMusicPreview'))$('profileMusicPreview').innerHTML=profileMusicMarkup(a);if($('profileAvatarMusicNote'))$('profileAvatarMusicNote').innerHTML='';}catch(e){console.warn('BCG profile extras:',e)}return result;};
+    wrapped.__bcgRequestedWrapped=true;window.updateUserUI=wrapped;
   }
-  window.bcgSaveEpisodeQuick=async function(){
-    if(!currentUser?.isAdmin)return alert('Sem acesso de administrador.');
-    const season=$('bcgCreateSeason')?.value||'1',idx=Number($('bcgCreateEpisode')?.value||0),title=String($('bcgCreateTitle')?.value||'').trim(),status=$('bcgCreateEpisodeStatus');
-    if(!title)return alert('Escreve o nome do episódio.');
-    const key=`${season}_${idx}`,previous=customVideos[key]||{};
-    customVideos[key]={...previous,title,episodeTitle:title,updatedAt:Date.now()};
-    try{
-      await save('cn_custom_videos_meta',customVideos);
-      if(status){status.className='admin-media-status active success';status.textContent=`✓ ${title} guardado em ${season==='specials'?'Especiais':'Temporada '+season}, episódio ${idx+1}.`;}
-      if($('adminSeasonSelect'))$('adminSeasonSelect').value=season;
-      if(typeof populateAdminEpDropdown==='function')populateAdminEpDropdown();
-      if($('adminEpSelect'))$('adminEpSelect').value=String(idx);
-      if($('adminEditSeasonSelect'))$('adminEditSeasonSelect').value=season;
-      if($('adminEditEpSelect'))$('adminEditEpSelect').value=String(idx);
-      if(typeof renderEpisodesList==='function')renderEpisodesList();
-      if(typeof renderRecentEpisodes==='function')renderRecentEpisodes();
-    }catch(e){customVideos[key]=previous;if(status){status.className='admin-media-status active error';status.textContent='Erro ao guardar: '+(e?.message||e);}console.error(e);}
-  };
-  function init(){ $('bcgCreateSeason')?.addEventListener('change',fillEpisodeOptions);fillEpisodeOptions(); }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+  const oldRenderCommunity=window.renderCommunity;
+  if(typeof oldRenderCommunity==='function'&&!oldRenderCommunity.__bcgRequestedWrapped){
+    const wrapped=function(...args){const r=oldRenderCommunity.apply(this,args);try{document.querySelectorAll('.profile-avatar-note-mount').forEach(x=>x.remove());}catch{}return r;};wrapped.__bcgRequestedWrapped=true;window.renderCommunity=wrapped;
+  }
+
+  // Profile-name label manager: [label] with custom foreground/background, managed by an admin.
+  const oldRenderAdminProfiles=window.renderAdminProfiles;
+  if(typeof oldRenderAdminProfiles==='function'&&!oldRenderAdminProfiles.__bcgRequestedWrapped){
+    const wrapped=function(...args){const r=oldRenderAdminProfiles.apply(this,args);try{
+      document.querySelectorAll('#adminProfilesList .discord-admin-row').forEach(row=>{
+        if(row.querySelector('.bcg-admin-tag-editor'))return;
+        const a=getAccount(row.dataset.adminProfileUsername||'');if(!a)return;const tag=normalizeNameTag(a.nameTag||{});
+        const grid=row.querySelector('.discord-admin-grid:last-of-type')||row.querySelector('.discord-admin-grid');if(!grid)return;
+        const editor=document.createElement('div');editor.className='bcg-admin-tag-editor';
+        editor.innerHTML=`<div class="form-group"><label>Etiqueta personalizada [ ]</label><input class="form-control bcg-admin-tag-text" maxlength="16" value="${escHtml(tag.text)}" placeholder="Ex.: goat"></div><div class="form-group"><label>Cor do texto</label><input class="form-control bcg-admin-tag-color" type="color" value="${tag.color}"></div><div class="form-group"><label>Cor do fundo</label><input class="form-control bcg-admin-tag-bg" type="color" value="${tag.background}"></div>`;
+        grid.appendChild(editor);
+      });
+    }catch(e){console.warn('Admin name tags:',e)}return r;};wrapped.__bcgRequestedWrapped=true;window.renderAdminProfiles=wrapped;
+  }
+  const oldSaveAdminProfile=window.saveAdminProfileMedia;
+  if(typeof oldSaveAdminProfile==='function'&&!oldSaveAdminProfile.__bcgRequestedWrapped){
+    const wrapped=async function(button){const row=button?.closest?.('.discord-admin-row'),a=row?getAccount(row.dataset.adminProfileUsername||''):null;if(a){const text=String(row.querySelector('.bcg-admin-tag-text')?.value||'').trim();a.nameTag=normalizeNameTag({text,color:row.querySelector('.bcg-admin-tag-color')?.value,background:row.querySelector('.bcg-admin-tag-bg')?.value});}const r=await oldSaveAdminProfile.call(this,button);try{renderCommunity();}catch{}return r;};wrapped.__bcgRequestedWrapped=true;window.saveAdminProfileMedia=wrapped;
+  }
+
+  // Report problem on this episode. Reports live in the user's profile config and sync through site_profiles.
+  window.openBcgVideoReport=function(){if(!currentPlayingEp)return alert('Abre primeiro um episódio.');if(!currentUser)return alert('Inicia sessão para reportar um vídeo.');const title=currentPlayingEp.title||episodeTitle(currentPlayingEp.season,currentPlayingEp.idx);$('bcgVideoReportEpisode').textContent=`${title} · Temporada ${currentPlayingEp.season==='specials'?'Especiais':currentPlayingEp.season}`;$('bcgVideoReportMessage').value='';$('bcgVideoReportModal').classList.add('open');$('bcgVideoReportModal').setAttribute('aria-hidden','false');};
+  window.closeBcgVideoReport=function(){$('bcgVideoReportModal')?.classList.remove('open');$('bcgVideoReportModal')?.setAttribute('aria-hidden','true');};
+  window.submitBcgVideoReport=async function(){if(!currentUser||!currentPlayingEp)return alert('Inicia sessão e abre um episódio primeiro.');const d=userWatchData();if(!d)return;const key=currentKey(),category=$('bcgVideoReportCategory')?.value||'Outro',message=String($('bcgVideoReportMessage')?.value||'').trim();d.videoReports.push({id:typeof cloudUuid==='function'?cloudUuid():`${Date.now()}`,episodeKey:key,title:currentPlayingEp.title||episodeTitle(currentPlayingEp.season,currentPlayingEp.idx),category,message,createdAt:Date.now(),resolved:false});d.videoReports=d.videoReports.slice(-50);persistWatchData();window.closeBcgVideoReport();if($('bcgVideoReportMessage'))$('bcgVideoReportMessage').value='';alert('Relatório enviado. Obrigado por ajudares a melhorar o BCG Hub.');};
+
+  // Admin view of video reports collected from user profile records.
+  window.renderAdminVideoReports=function(){const box=$('bcgAdminVideoReports');if(!box)return;if(!isAdminUser()){box.innerHTML='<div class="small-note">Sem acesso de administrador.</div>';return;}const rows=(accounts||[]).flatMap(a=>(normalizeWatchData(a.watchData||{}).videoReports||[]).map(r=>({...r,username:a.username}))).sort((a,b)=>Number(b.createdAt)-Number(a.createdAt));if(!rows.length){box.innerHTML='<div class="small-note">Ainda não foram enviados relatórios.</div>';return;}box.innerHTML=rows.slice(0,100).map(r=>`<div class="bcg-admin-report"><div class="bcg-admin-report-title">${escHtml(r.title)} · ${escHtml(r.category)} ${r.resolved?'<span class="badge">Resolvido</span>':''}</div><div class="bcg-admin-report-meta">@${escHtml(r.username)} · ${escHtml(new Date(r.createdAt||Date.now()).toLocaleString('pt-PT'))} · ${escHtml(r.episodeKey)}</div><div class="bcg-admin-report-body">${escHtml(r.message||'Sem detalhes adicionais.')}</div></div>`).join('');};
+  const oldSwitchAdmin=window.switchAdminTab;if(typeof oldSwitchAdmin==='function'&&!oldSwitchAdmin.__bcgRequestedWrapped){const wrapped=function(id,...args){const r=oldSwitchAdmin.call(this,id,...args);if(id==='profiles')window.renderAdminVideoReports();return r;};wrapped.__bcgRequestedWrapped=true;window.switchAdminTab=wrapped;}
+
+  // Episode rating + community reviews are part of each user's cloud-synced watch data.
+  let bcgDraftRating=0;
+  function episodeReviews(key){return (accounts||[]).flatMap(a=>(normalizeWatchData(a.watchData||{}).reviews||[]).filter(r=>r.episodeKey===key).map(r=>({...r,username:a.username,displayName:a.displayName||a.username}))).sort((a,b)=>Number(b.createdAt)-Number(a.createdAt));}
+  window.bcgSetReviewRating=function(n){bcgDraftRating=Math.max(1,Math.min(5,Number(n)||1));$('bcgReviewStars')?.querySelectorAll('button').forEach((b,i)=>b.classList.toggle('active',i<bcgDraftRating));};
+  window.saveBcgEpisodeReview=async function(season,idx){if(!currentUser)return alert('Inicia sessão para avaliar o episódio.');const key=`${season}_${idx}`,d=userWatchData();if(!d)return;const rating=bcgDraftRating||Number(d.reviews.find(r=>r.episodeKey===key)?.rating)||0;if(!rating)return alert('Escolhe uma classificação de 1 a 5 estrelas.');const text=String($('bcgReviewText')?.value||'').trim().slice(0,600);const existing=d.reviews.find(r=>r.episodeKey===key);const item={id:existing?.id||(typeof cloudUuid==='function'?cloudUuid():String(Date.now())),episodeKey:key,rating,text,createdAt:Date.now()};d.reviews=d.reviews.filter(r=>r.episodeKey!==key);d.reviews.push(item);d.reviews=d.reviews.slice(-100);persistWatchData();window.renderBcgEpisodeReviews(season,idx);alert('A tua avaliação foi guardada.');};
+  window.renderBcgEpisodeReviews=function(season,idx){const key=`${season}_${idx}`;let box=$('bcgEpisodeRatings');if(!box){const host=$('episodeDetailContainer');if(!host)return;box=document.createElement('section');box.id='bcgEpisodeRatings';box.className='bcg-review-panel';host.appendChild(box);}const rows=episodeReviews(key),avg=rows.length?rows.reduce((n,x)=>n+Number(x.rating||0),0)/rows.length:0,mine=currentUser?userWatchData()?.reviews.find(r=>r.episodeKey===key):null;bcgDraftRating=Number(mine?.rating)||0;box.innerHTML=`<div class="bcg-review-head"><div><h3 style="font-size:1rem;margin:0"><i class="fa-solid fa-star" style="color:#ffc94a"></i> Avaliações da comunidade</h3><div class="small-note">${rows.length} ${rows.length===1?'avaliação':'avaliações'}</div></div><div class="bcg-review-score">${rows.length?avg.toFixed(1)+'/5':'—/5'} <span style="color:#ffc94a">★</span></div></div><div class="bcg-review-stars" id="bcgReviewStars">${[1,2,3,4,5].map(n=>`<button type="button" class="bcg-review-star ${n<=bcgDraftRating?'active':''}" onclick="bcgSetReviewRating(${n})" aria-label="${n} estrelas">★</button>`).join('')}</div><textarea id="bcgReviewText" class="bcg-review-text" maxlength="600" placeholder="Escreve uma crítica sobre este episódio…">${escHtml(mine?.text||'')}</textarea><button type="button" class="btn-green" style="margin-top:9px" onclick="saveBcgEpisodeReview('${escHtml(String(season))}',${Number(idx)})">${mine?'Atualizar avaliação':'Publicar avaliação'}</button><div id="bcgReviewList">${rows.length?rows.map(r=>`<div class="bcg-review-item"><div class="bcg-review-item-head"><strong>${escHtml(r.displayName||r.username)}</strong><span class="bcg-review-item-stars">${'★'.repeat(Number(r.rating)||0)}${'☆'.repeat(5-(Number(r.rating)||0))}</span></div><div class="bcg-review-item-text">${escHtml(r.text||'Sem texto.')}</div></div>`).join(''):'<div class="small-note" style="margin-top:12px">Ainda não existem críticas para este episódio.</div>'}</div>`;};
+  const oldRenderEpisodeDetail=window.renderEpisodeDetail;if(typeof oldRenderEpisodeDetail==='function'&&!oldRenderEpisodeDetail.__bcgRequestedWrapped){const wrapped=function(season,idx,...args){const r=oldRenderEpisodeDetail.call(this,season,idx,...args);try{window.renderBcgEpisodeReviews(season,idx);}catch(e){console.warn('Episode ratings:',e)}return r;};wrapped.__bcgRequestedWrapped=true;window.renderEpisodeDetail=wrapped;}
+
+  // Player navigator: change season and episode without leaving the current player/detail page.
+  function ensurePlayerNavigator(){const player=$('liquidPlayer'),top=player?.querySelector('.liquid-top');if(!player||!top||$('bcgPlayerNavToggle'))return;const btn=document.createElement('button');btn.type='button';btn.id='bcgPlayerNavToggle';btn.className='bcg-player-nav-button';btn.title='Escolher temporada e episódio';btn.setAttribute('aria-label',btn.title);btn.innerHTML='<i class="fa-solid fa-list"></i>';btn.addEventListener('click',()=>{$('bcgPlayerNavigator')?.classList.toggle('open');populatePlayerNavigator()});const settings=top.querySelector('button');top.insertBefore(btn,settings||null);const panel=document.createElement('div');panel.id='bcgPlayerNavigator';panel.className='bcg-player-navigator';panel.innerHTML='<strong style="font-size:.86rem">Ir para episódio</strong><label for="bcgPlayerSeasonSelect">Temporada</label><select id="bcgPlayerSeasonSelect"></select><label for="bcgPlayerEpisodeSelect">Episódio</label><select id="bcgPlayerEpisodeSelect"></select><button type="button" class="btn-green bcg-player-nav-play" id="bcgPlayerNavPlay"><i class="fa-solid fa-play"></i> Reproduzir</button>';player.appendChild(panel);$('bcgPlayerSeasonSelect').addEventListener('change',populatePlayerEpisodes);$('bcgPlayerNavPlay').addEventListener('click',()=>{const s=String($('bcgPlayerSeasonSelect').value),i=Number($('bcgPlayerEpisodeSelect').value);const title=`${i+1} - ${episodeTitle(s,i)}`;$('bcgPlayerNavigator').classList.remove('open');window.openPlayerModal(s,i,title,false);});}
+  function populatePlayerEpisodes(){const s=String($('bcgPlayerSeasonSelect')?.value||currentPlayingEp?.season||'1'),sel=$('bcgPlayerEpisodeSelect');if(!sel)return;const base=Array.isArray(EPISODES[s])?EPISODES[s]:[],indices=new Set(base.map((_,i)=>i));Object.keys(customVideos||{}).forEach(k=>{const m=k.match(new RegExp('^'+s.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')+'_(\\d+)$'));if(m)indices.add(Number(m[1]));});const sorted=[...indices].filter(Number.isFinite).sort((a,b)=>a-b);sel.innerHTML=sorted.map(i=>`<option value="${i}">${i+1} — ${escHtml(episodeTitle(s,i))}</option>`).join('');if(currentPlayingEp&&String(currentPlayingEp.season)===s)sel.value=String(currentPlayingEp.idx);}
+  function populatePlayerNavigator(){const sel=$('bcgPlayerSeasonSelect');if(!sel)return;const seasons=Object.keys(EPISODES||{}).filter(s=>Array.isArray(EPISODES[s])||s==='specials').sort((a,b)=>a==='specials'?1:b==='specials'?-1:Number(a)-Number(b));sel.innerHTML=seasons.map(s=>`<option value="${escHtml(s)}">${s==='specials'?'Especiais':`Temporada ${s}`}</option>`).join('');sel.value=String(currentPlayingEp?.season||'1');populatePlayerEpisodes();}
+
+  // Timeline frame previews: a separate muted preview element avoids seeking the real player while the user hovers.
+  let previewVideo=null,previewHls=null,previewTimer=null,previewSource='';
+  function previewFallback(){return currentPlayingEp?getEpisodeThumbnail(currentPlayingEp.season,currentPlayingEp.idx):'';}
+  function hideTimelinePreview(){$('bcgTimelinePreview')?.classList.remove('show');}
+  function showTimelinePreview(url,time){const box=$('bcgTimelinePreview'),img=$('bcgTimelinePreviewImage'),label=$('bcgTimelinePreviewTime');if(!box||!img)return;if(url)img.src=url;label.textContent=fmtPlayerTime(time);box.classList.add('show');}
+  function cleanPreviewVideo(){clearTimeout(previewTimer);if(previewHls){try{previewHls.destroy()}catch{}previewHls=null;}if(previewVideo){try{previewVideo.pause();previewVideo.removeAttribute('src');previewVideo.load()}catch{}previewVideo=null;}previewSource='';}
+  function ensurePreviewSource(){const p=$('mainVideoPlayer');let source=String(window.__bcgCurrentVideoSource||p?.currentSrc||p?.src||'');if(!source)return null;if(source===previewSource&&previewVideo)return previewVideo;cleanPreviewVideo();previewSource=source;const v=document.createElement('video');v.crossOrigin='anonymous';v.muted=true;v.playsInline=true;v.preload='auto';v.style.cssText='position:fixed;left:-10000px;top:-10000px;width:2px;height:2px;opacity:0;pointer-events:none';document.body.appendChild(v);previewVideo=v;const hls=/\.m3u8(?:[?#]|$)/i.test(source);if(hls&&window.Hls&&Hls.isSupported()){previewHls=new Hls({enableWorker:true,lowLatencyMode:false,maxBufferLength:8,maxMaxBufferLength:12});previewHls.loadSource(source);previewHls.attachMedia(v);}else{v.src=source;v.load();}return v;}
+  function captureTimelineFrame(target){const v=ensurePreviewSource();if(!v)return;const showFallback=()=>showTimelinePreview(previewFallback(),target);if(!Number.isFinite(v.duration)||v.duration<=0){showFallback();return;}const seekTo=Math.max(0,Math.min(v.duration-.15,target));const draw=()=>{try{const canvas=document.createElement('canvas');canvas.width=240;canvas.height=135;canvas.getContext('2d').drawImage(v,0,0,240,135);showTimelinePreview(canvas.toDataURL('image/jpeg',.72),target);}catch(e){showFallback();}};if(Math.abs(v.currentTime-seekTo)<.15&&v.readyState>=2){draw();return;}const done=()=>{v.removeEventListener('seeked',done);draw()};v.addEventListener('seeked',done,{once:true});try{v.currentTime=seekTo;}catch{v.removeEventListener('seeked',done);showFallback();}setTimeout(()=>{if(!$('bcgTimelinePreview')?.classList.contains('show'))showFallback()},1100);}
+  function ensureTimelinePreview(){const player=$('liquidPlayer'),slider=$('liquidProgress');if(!player||!slider||$('bcgTimelinePreview'))return;const box=document.createElement('div');box.id='bcgTimelinePreview';box.className='bcg-timeline-preview';box.innerHTML='<img id="bcgTimelinePreviewImage" alt="Pré-visualização do episódio"><span id="bcgTimelinePreviewTime">0:00</span>';player.appendChild(box);const onMove=e=>{const duration=Number($('mainVideoPlayer')?.duration||0);if(!duration)return;const rect=slider.getBoundingClientRect(),x=Math.max(0,Math.min(rect.width,e.clientX-rect.left)),fraction=rect.width?x/rect.width:0,target=duration*fraction;const p=$('mainVideoPlayer');showTimelinePreview(previewFallback(),target);clearTimeout(previewTimer);previewTimer=setTimeout(()=>captureTimelineFrame(target),220);};slider.addEventListener('pointermove',onMove);slider.addEventListener('pointerleave',()=>{hideTimelinePreview();clearTimeout(previewTimer)});slider.addEventListener('touchend',()=>setTimeout(hideTimelinePreview,800),{passive:true});}
+
+  // Standard autoplay-next episode for solo playback; Watch Party keeps its existing queue/autoplay logic.
+  let nextEpisodeTimer=null;
+  function findNextAvailableEpisode(season,idx){const seasons=Object.keys(EPISODES||{}).filter(s=>s!=='specials').sort((a,b)=>Number(a)-Number(b));let start=seasons.indexOf(String(season));if(start<0)start=0;for(let si=start;si<seasons.length;si++){const s=seasons[si],count=Math.max((EPISODES[s]||[]).length,...Object.keys(customVideos||{}).filter(k=>k.startsWith(s+'_')).map(k=>Number(k.split('_')[1])+1),0);const begin=si===start?Number(idx)+1:0;for(let i=begin;i<count;i++){const d=customVideos[`${s}_${i}`]||{};let has=!!(d.videoUrl||d.blobKey);try{has=has||allEpisodeLanguageVersions(s,i).some(v=>v.url)}catch{}if(has)return {season:s,idx:i,title:`${i+1} - ${episodeTitle(s,i)}`};}}return null;}
+  function closeNextEpisode(){clearInterval(nextEpisodeTimer);nextEpisodeTimer=null;$('bcgNextEpisode')?.remove();}
+  function scheduleSoloNextEpisode(){closeNextEpisode();if(!currentPlayingEp)return;const next=findNextAvailableEpisode(currentPlayingEp.season,currentPlayingEp.idx);if(!next)return;const shell=$('videoShell');if(!shell)return;let count=8;const panel=document.createElement('div');panel.id='bcgNextEpisode';panel.className='bcg-next-episode';panel.innerHTML=`<strong>Próximo episódio</strong><small id="bcgNextCountdown">${escHtml(next.title)} · começa em ${count}s</small><div class="bcg-next-actions"><button type="button" class="primary" id="bcgNextPlay">Reproduzir agora</button><button type="button" id="bcgNextCancel">Cancelar</button></div>`;shell.appendChild(panel);const go=()=>{closeNextEpisode();window.openPlayerModal(next.season,next.idx,next.title,false)};$('bcgNextPlay').addEventListener('click',go);$('bcgNextCancel').addEventListener('click',closeNextEpisode);nextEpisodeTimer=setInterval(()=>{count--;const el=$('bcgNextCountdown');if(el)el.textContent=`${next.title} · começa em ${Math.max(0,count)}s`;if(count<=0)go()},1000);}
+  const oldWatchPartyEnded=window.handleWatchPartyEpisodeEnded;if(typeof oldWatchPartyEnded==='function'&&!oldWatchPartyEnded.__bcgRequestedWrapped){const wrapped=function(...args){if(activeWatchPartyRoom)return oldWatchPartyEnded.apply(this,args);scheduleSoloNextEpisode();};wrapped.__bcgRequestedWrapped=true;window.handleWatchPartyEpisodeEnded=wrapped;}
+
+  // Save progress before tab close/backgrounding; the core player already updates the same cross-device profile field.
+  function flushCurrentProgress(){try{const p=$('mainVideoPlayer');if(currentUser&&currentPlayingEp&&p&&Number.isFinite(p.duration)&&p.duration>0&&typeof updateContinueWatchState==='function'){updateContinueWatchState(currentPlayingEp.season,currentPlayingEp.idx,currentPlayingEp.title,p.currentTime,p.duration);queueWatchDataCloudSync(true);renderContinueWatching();}}catch(e){console.warn('Progress flush:',e)}}
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flushCurrentProgress()});window.addEventListener('pagehide',flushCurrentProgress);
+
+  // Store audio/subtitle preferences per account so they follow the user to another device.
+  const oldSelectAudio=window.selectEpisodePlayerAudio;if(typeof oldSelectAudio==='function'&&!oldSelectAudio.__bcgRequestedWrapped){const wrapped=async function(value,...args){const r=await oldSelectAudio.call(this,value,...args);try{if(currentUser&&currentPlayingEp){const d=userWatchData();const key=currentKey();d.playerPreferences.audioByEpisode[key]=String($('liquidAudioSelect')?.value||value||'original');persistWatchData(false);}}catch(e){console.warn('Audio preference:',e)}return r;};wrapped.__bcgRequestedWrapped=true;window.selectEpisodePlayerAudio=wrapped;}
+  const oldSelectSub=window.selectSubTrack;if(typeof oldSelectSub==='function'&&!oldSelectSub.__bcgRequestedWrapped){const wrapped=async function(id,...args){const r=await oldSelectSub.call(this,id,...args);try{if(currentUser){const d=userWatchData();d.playerPreferences.subtitleLang=String(localStorage.getItem('cn_sub_pref')||'');persistWatchData(false);}}catch(e){console.warn('Subtitle preference:',e)}return r;};wrapped.__bcgRequestedWrapped=true;window.selectSubTrack=wrapped;}
+  const oldToggleSubs=window.toggleEpisodeSubtitles;if(typeof oldToggleSubs==='function'&&!oldToggleSubs.__bcgRequestedWrapped){const wrapped=function(...args){const r=oldToggleSubs.apply(this,args);try{if(currentUser){const d=userWatchData();d.playerPreferences.subtitleLang=String(localStorage.getItem('cn_sub_pref')||'');persistWatchData(false);}}catch(e){console.warn('Subtitle preference:',e)}return r;};wrapped.__bcgRequestedWrapped=true;window.toggleEpisodeSubtitles=wrapped;}
+
+  // A new player session resets the preview/nav, preserves the Liquid Glass styling and resumes saved progress.
+  const oldOpenPlayer=window.openPlayerModal;if(typeof oldOpenPlayer==='function'&&!oldOpenPlayer.__bcgRequestedWrapped){const wrapped=async function(...args){closeNextEpisode();const result=await oldOpenPlayer.apply(this,args);try{ensurePlayerNavigator();ensureTimelinePreview();populatePlayerNavigator();cleanPreviewVideo();const p=$('mainVideoPlayer');window.__bcgCurrentVideoSource=String(customVideos?.[`${args[0]}_${args[1]}`]?.videoUrl||p?.currentSrc||p?.src||'');$('bcgPlayerNavigator')?.classList.remove('open');}catch(e){console.warn('Player controls:',e)}return result;};wrapped.__bcgRequestedWrapped=true;window.openPlayerModal=wrapped;}
+
+  function installExtras(){try{renderOwnRegistrationAge();if($('profileMusicPreview')&&currentUser)$('profileMusicPreview').innerHTML=profileMusicMarkup(currentProfile());if($('profileAvatarMusicNote'))$('profileAvatarMusicNote').innerHTML='';if(isAdminUser())window.renderAdminVideoReports();}catch(e){} }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installExtras,{once:true});else installExtras();
 })();
 </script>
