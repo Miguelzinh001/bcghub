@@ -5932,7 +5932,8 @@ async function applyProfileMusicSelection(track){
       rows.sort((a,b)=>b.views-a.views);
       if(!rows.length){section.style.display='none';container.innerHTML='';return}
       section.style.display='flex';
-      container.innerHTML=rows.slice(0,8).map((item,i)=>{const thumb=esc(getEpisodeThumbnail(item.season,item.idx));return '<article class="trending-episode-card" role="button" tabindex="0" onclick="openEpisodeDetailRoute(\\''+item.season+'\\','+item.idx+')" onkeydown="if(event.key===\\'Enter\\')openEpisodeDetailRoute(\\''+item.season+'\\','+item.idx+')"><div class="trending-episode-thumb" style="background-image:url(\\''+thumb+'\\')"><span class="trending-episode-rank">'+(i+1)+'</span></div><div class="trending-episode-copy"><div class="trending-episode-title">'+esc(item.title)+'</div><div class="trending-episode-meta"><i class="fa-solid fa-eye"></i> '+item.views.toLocaleString('pt-PT')+' visualizações <span>·</span> T'+esc(item.season)+'</div></div></article>'}).join('');
+      container.innerHTML=rows.slice(0,8).map((item,i)=>{const thumb=esc(getEpisodeThumbnail(item.season,item.idx));return '<article class="trending-episode-card" role="button" tabindex="0" data-trending-season="'+esc(item.season)+'" data-trending-idx="'+item.idx+'"><div class="trending-episode-thumb" style="background-image:url('+JSON.stringify(thumb)+')"><span class="trending-episode-rank">'+(i+1)+'</span></div><div class="trending-episode-copy"><div class="trending-episode-title">'+esc(item.title)+'</div><div class="trending-episode-meta"><i class="fa-solid fa-eye"></i> '+item.views.toLocaleString('pt-PT')+' visualizações <span>·</span> T'+esc(item.season)+'</div></div></article>'}).join('');
+      container.querySelectorAll('[data-trending-season]').forEach(card=>{const openEpisode=()=>openEpisodeDetailRoute(card.dataset.trendingSeason,Number(card.dataset.trendingIdx));card.addEventListener('click',openEpisode);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openEpisode()}})});
     }
 
     let continueRemoveTarget=null;
@@ -8522,7 +8523,7 @@ async function sendAdminBroadcastMail(){
       {id:'barkk',name:'Barkk',glyph:'🐶',color:'#d5c5a5'},{id:'ziggy',name:'Ziggy',glyph:'🐐',color:'#c5e8b7'},
       {id:'roaar',name:'Roaar',glyph:'🐯',color:'#ff9b50'},{id:'orikko',name:'Orikko',glyph:'🐓',color:'#ffd16e'}
     ];
-    let bcgYoyoState={first:'tikki',second:'nooroo',unification:false,focus:'first',pattern:'both',colors:'mix',background:'violet',texture:'dots'};
+    let bcgYoyoState={first:'tikki',second:'nooroo',unification:false,focus:'first',pattern:'first',colors:'mix',background:'violet',texture:'dots'};
     let bcgYoyoLoaded=false;
     function getBcgYoyoSymbol(id){return BCG_YOYO_SYMBOLS.find(x=>x.id===id)||BCG_YOYO_SYMBOLS[0]}
     function getBcgYoyoVisibleSymbols(){const a=getBcgYoyoSymbol(bcgYoyoState.first),b=getBcgYoyoSymbol(bcgYoyoState.second);if(!bcgYoyoState.unification)return[a];if(bcgYoyoState.pattern==='first')return[a];if(bcgYoyoState.pattern==='second')return[b];return[a,b]}
@@ -8556,7 +8557,7 @@ async function sendAdminBroadcastMail(){
     }
     function switchBcgYoyoTab(tab){document.querySelectorAll('[data-yoyo-tab]').forEach(b=>b.classList.toggle('active',b.dataset.yoyoTab===tab));document.querySelectorAll('[data-yoyo-panel]').forEach(p=>p.classList.toggle('active',p.dataset.yoyoPanel===tab))}
     function setBcgYoyoFocus(which){bcgYoyoState.focus=which==='second'?'second':'first';renderBcgYoyoLab()}
-    function toggleBcgYoyoUnification(enabled){bcgYoyoState.unification=!!enabled;if(!enabled)bcgYoyoState.focus='first';renderBcgYoyoLab()}
+    function toggleBcgYoyoUnification(enabled){bcgYoyoState.unification=!!enabled;if(enabled)bcgYoyoState.pattern='both';else{bcgYoyoState.focus='first';bcgYoyoState.pattern='first';if(bcgYoyoState.colors==='second')bcgYoyoState.colors='first'}renderBcgYoyoLab()}
     function setBcgYoyoPattern(mode){bcgYoyoState.pattern=['first','second','both'].includes(mode)?mode:'both';renderBcgYoyoLab()}
     function setBcgYoyoColors(mode){bcgYoyoState.colors=['first','second','mix'].includes(mode)?mode:'mix';renderBcgYoyoLab()}
     function setBcgYoyoBackground(mode){bcgYoyoState.background=['violet','midnight','rose','blue'].includes(mode)?mode:'violet';renderBcgYoyoLab()}
@@ -8567,17 +8568,15 @@ async function sendAdminBroadcastMail(){
       const colors=bcgYoyoState.colors==='first'?[first.color]:bcgYoyoState.colors==='second'?[second.color]:[first.color,second.color],a=visible[0]||first,b=visible[1]||a;
       const svg='<svg xmlns="http://www.w3.org/2000/svg" width="190" height="190" viewBox="0 0 190 190"><g opacity=".18" font-size="38" text-anchor="middle" dominant-baseline="middle"><text x="45" y="45" fill="'+colors[0]+'">'+a.glyph+'</text><text x="142" y="142" fill="'+(colors[1]||colors[0])+'">'+(visible.length>1?b.glyph:a.glyph)+'</text><text x="142" y="45" fill="'+colors[0]+'">'+a.glyph+'</text><text x="45" y="142" fill="'+(colors[1]||colors[0])+'">'+(visible.length>1?b.glyph:a.glyph)+'</text></g></svg>';
       const encoded='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
-      if(!body.dataset.bcgYoyoOriginalImage)body.dataset.bcgYoyoOriginalImage=body.style.backgroundImage||'';
-      if(!body.dataset.bcgYoyoOriginalSize)body.dataset.bcgYoyoOriginalSize=body.style.backgroundSize||'';
-      if(!body.dataset.bcgYoyoOriginalRepeat)body.dataset.bcgYoyoOriginalRepeat=body.style.backgroundRepeat||'';
-      if(!body.dataset.bcgYoyoOriginalPosition)body.dataset.bcgYoyoOriginalPosition=body.style.backgroundPosition||'';
+      if(body.dataset.bcgYoyoApplied==='1'){body.style.backgroundImage=body.dataset.bcgYoyoOriginalImage||'';body.style.backgroundSize=body.dataset.bcgYoyoOriginalSize||'';body.style.backgroundRepeat=body.dataset.bcgYoyoOriginalRepeat||'';body.style.backgroundPosition=body.dataset.bcgYoyoOriginalPosition||'';delete body.dataset.bcgYoyoApplied}
+      if(!body.dataset.bcgYoyoBaselineSaved){body.dataset.bcgYoyoOriginalImage=body.style.backgroundImage||'';body.dataset.bcgYoyoOriginalSize=body.style.backgroundSize||'';body.dataset.bcgYoyoOriginalRepeat=body.style.backgroundRepeat||'';body.dataset.bcgYoyoOriginalPosition=body.style.backgroundPosition||'';body.dataset.bcgYoyoBaselineSaved='1'}
       const computed=getComputedStyle(body),baseImage=computed.backgroundImage==='none'?'none':computed.backgroundImage,baseSize=computed.backgroundSize||'auto',baseRepeat=computed.backgroundRepeat||'repeat',basePosition=computed.backgroundPosition||'0 0';
       body.style.backgroundImage='url("'+encoded+'"), '+baseImage;body.style.backgroundSize='190px 190px, '+baseSize;body.style.backgroundRepeat='repeat, '+baseRepeat;body.style.backgroundPosition='0 0, '+basePosition;body.dataset.bcgYoyoApplied='1';
     }
     function applyBcgYoyoTheme(){applyBcgYoyoWallpaperOnly();try{localStorage.setItem('bcg_yoyo_applied_theme',JSON.stringify({...bcgYoyoState}))}catch(e){}}
     function resetBcgYoyoTheme(){
       const body=document.body;
-      if(body?.dataset.bcgYoyoApplied){body.style.backgroundImage=body.dataset.bcgYoyoOriginalImage||'';body.style.backgroundSize=body.dataset.bcgYoyoOriginalSize||'';body.style.backgroundRepeat=body.dataset.bcgYoyoOriginalRepeat||'';body.style.backgroundPosition=body.dataset.bcgYoyoOriginalPosition||'';delete body.dataset.bcgYoyoApplied;delete body.dataset.bcgYoyoOriginalImage;delete body.dataset.bcgYoyoOriginalSize;delete body.dataset.bcgYoyoOriginalRepeat;delete body.dataset.bcgYoyoOriginalPosition}
+      if(body?.dataset.bcgYoyoApplied){body.style.backgroundImage=body.dataset.bcgYoyoOriginalImage||'';body.style.backgroundSize=body.dataset.bcgYoyoOriginalSize||'';body.style.backgroundRepeat=body.dataset.bcgYoyoOriginalRepeat||'';body.style.backgroundPosition=body.dataset.bcgYoyoOriginalPosition||'';delete body.dataset.bcgYoyoApplied;delete body.dataset.bcgYoyoBaselineSaved;delete body.dataset.bcgYoyoOriginalImage;delete body.dataset.bcgYoyoOriginalSize;delete body.dataset.bcgYoyoOriginalRepeat;delete body.dataset.bcgYoyoOriginalPosition}
       try{localStorage.removeItem('bcg_yoyo_applied_theme')}catch(e){}
     }
 
