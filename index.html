@@ -2036,6 +2036,29 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
 .profile-personal-settings,.profile-show-editor,.profile-music-editor{border-color:rgba(185,143,255,.22)!important}
 .profile-quick-btn{border-color:rgba(185,143,255,.2)!important}
 </style>
+<style id="bcg-yoyo-admin-polish">
+.bcg-yoyo-symbol{appearance:none;-webkit-appearance:none;-webkit-tap-highlight-color:transparent;outline:0!important;box-shadow:none;position:relative;isolation:isolate}
+.bcg-yoyo-symbol:focus,.bcg-yoyo-symbol:focus-visible,.bcg-yoyo-symbol:active{outline:0!important}
+.bcg-yoyo-symbol:focus-visible{box-shadow:0 0 0 2px rgba(203,154,255,.8),0 0 20px rgba(173,120,245,.25)!important}
+.bcg-yoyo-symbol span{width:46px;height:46px;display:grid;place-items:center;flex:0 0 46px;line-height:0;color:var(--symbol-color,#fff);margin:auto}
+.bcg-yoyo-symbol span svg{display:block;width:100%;height:100%;overflow:visible;pointer-events:none}
+.bcg-yoyo-symbol small{display:block;text-align:center;width:100%;line-height:1.15}
+.bcg-yoyo-center{display:flex;align-items:center;justify-content:center;gap:2px}.bcg-yoyo-center>span{display:grid;place-items:center;width:58px;height:58px}.bcg-yoyo-center>span svg{width:100%;height:100%;filter:drop-shadow(0 0 12px currentColor)}
+.bcg-yoyo-center-pair{width:44px!important;height:44px!important}.bcg-yoyo-pattern>span{display:grid;place-items:center}.bcg-yoyo-pattern>span svg{width:25px;height:25px}
+.bcg-admin-calendar-wrap{padding:14px;border:1px solid rgba(189,140,255,.2);border-radius:18px;background:rgba(20,16,29,.7)}
+.bcg-admin-calendar-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.bcg-admin-calendar-toolbar h4{font-size:1rem;margin-bottom:4px}.bcg-admin-calendar-actions{display:flex;gap:6px}
+.bcg-admin-calendar-month{text-align:center;font-weight:900;text-transform:capitalize;margin:8px 0 12px}.bcg-admin-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.bcg-admin-calendar-dow{text-align:center;font-size:.68rem;color:var(--text-muted);font-weight:850;padding:5px 0}
+.bcg-admin-calendar-day{min-height:82px;min-width:0;padding:6px;border:1px solid rgba(255,255,255,.09);border-radius:11px;background:rgba(255,255,255,.025);color:#fff;text-align:left;position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.bcg-admin-calendar-day.empty{background:transparent;border-color:transparent}.bcg-admin-calendar-day.today{border-color:var(--accent-green)}
+.bcg-admin-calendar-day-number{font-size:.72rem;font-weight:900;color:#cfc5dd;background:transparent;border:0;padding:0;cursor:pointer}
+.bcg-admin-calendar-event{display:block;width:100%;margin-top:5px;padding:5px 4px;border:1px solid rgba(189,140,255,.28);border-radius:7px;background:rgba(126,75,173,.2);color:#fff;font-size:.58rem;line-height:1.25;text-align:left;overflow-wrap:anywhere;touch-action:pan-y}
+.bcg-admin-calendar-event:active{background:rgba(189,140,255,.35)}.bcg-admin-calendar-event small{display:block;color:#d8c5ed;margin-top:2px}
+.bcg-calendar-delete-backdrop{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}.bcg-calendar-delete-backdrop[hidden]{display:none}
+.bcg-calendar-delete-dialog{width:min(100%,360px);padding:20px;border:1px solid rgba(189,140,255,.42);border-radius:18px;background:#171321;box-shadow:0 20px 70px rgba(0,0,0,.55)}
+.bcg-calendar-delete-dialog h3{margin-bottom:8px}.bcg-calendar-delete-dialog p{color:#bcb3c8;font-size:.88rem;line-height:1.45}.bcg-calendar-delete-actions{display:flex;gap:9px;margin-top:18px}.bcg-calendar-delete-actions button{flex:1}
+@media(max-width:520px){.bcg-admin-calendar-wrap{padding:9px}.bcg-admin-calendar-grid{gap:3px}.bcg-admin-calendar-day{min-height:67px;padding:4px;border-radius:8px}.bcg-admin-calendar-event{font-size:.51rem;padding:4px 3px}.bcg-admin-calendar-dow{font-size:.59rem}}
+</style>
 </head>
 <body>
     <div id="bcgStartupLoader" role="status" aria-live="polite" aria-label="A carregar BCG Hub">
@@ -2142,25 +2165,13 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
             </div>
             <div class="horizontal-scroll" id="continueWatchingContainer"></div>
 
-            <!-- Trending / Recent Episodes -->
-            <div class="section-header">
-                <h3><i class="fa-solid fa-fire" style="color:var(--accent-green); margin-right:6px;"></i> Episódios mais recentes</h3>
-            </div>
-            <div class="horizontal-scroll" id="recentEpisodesContainer"></div>
-
-<div class="section-header" id="trendingEpisodesSection" style="display:none"><h3><i class="fa-solid fa-ranking-star" style="color:#bd8cff;margin-right:6px"></i> Episódios em tendência</h3><span class="small-note">Mais vistos</span></div>
-<div class="trending-episodes-track" id="trendingEpisodesContainer"></div>
+            <div class="section-header" id="trendingEpisodesSection"><h3><i class="fa-solid fa-ranking-star" style="color:#bd8cff;margin-right:6px"></i> Episódios em tendência</h3><span class="small-note">Mais vistos</span></div>
+            <div class="trending-episodes-track" id="trendingEpisodesContainer"></div>
 
 <div class="section-header" style="margin-top:28px"><h3><i class="fa-solid fa-calendar-days" style="color:#bd8cff;margin-right:6px"></i> Calendário</h3><button type="button" class="btn-small-outline" onclick="switchPage('calendar')">Abrir calendário</button></div>
 <div id="homeReleaseCalendarContainer"></div>
 
-            <div class="home-quick-grid">
-                <div class="home-quick-card"><strong><i class="fa-solid fa-calendar-days"></i> Próximos episódios</strong><span>Datas, horas e countdown.</span><button type="button" class="btn-small-outline" onclick="switchPage('upcoming')">Ver estreias</button></div>
-                <div class="home-quick-card"><strong><i class="fa-solid fa-calendar-week"></i> Calendário</strong><span>Organizado por dia.</span><button type="button" class="btn-small-outline" onclick="switchPage('calendar')">Abrir calendário</button></div>
-                <div class="home-quick-card"><strong><i class="fa-solid fa-clock-rotate-left"></i> Histórico</strong><span>Os episódios que já viste.</span><button type="button" class="btn-small-outline" onclick="switchPage('profile')">Ver no perfil</button></div>
-            </div>
-
-            <div class="section-header" style="margin-top:2px"><h3><i class="fa-solid fa-calendar-clock" style="color:var(--accent-green);margin-right:6px"></i> Próximos episódios</h3><button type="button" class="btn-small-outline" onclick="switchPage('upcoming')">Ver todos</button></div>
+remove home quick cards            <div class="section-header" style="margin-top:2px"><h3><i class="fa-solid fa-calendar-clock" style="color:var(--accent-green);margin-right:6px"></i> Próximos episódios</h3><button type="button" class="btn-small-outline" onclick="switchPage('upcoming')">Ver todos</button></div>
             <div id="upcomingHomeContainer" class="upcoming-grid"></div>
 
             <div class="section-header"><h3><i class="fa-solid fa-bullhorn" style="color:var(--accent-green);margin-right:6px"></i> Anúncios</h3></div>
@@ -2478,7 +2489,7 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
         <div class="bcg-yoyo-rail-wrap"><button class="bcg-yoyo-scroll" type="button" onclick="scrollBcgYoyoSymbols(-1)" aria-label="Símbolos anteriores"><i class="fa-solid fa-chevron-left"></i></button><div class="bcg-yoyo-symbol-rail" id="bcgYoyoSymbolRail" aria-label="Desliza para escolher símbolos"></div><button class="bcg-yoyo-scroll" type="button" onclick="scrollBcgYoyoSymbols(1)" aria-label="Símbolos seguintes"><i class="fa-solid fa-chevron-right"></i></button></div>
         <div class="bcg-yoyo-device-wrap"><div class="bcg-yoyo-beam"></div><div class="bcg-yoyo-device"><div class="bcg-yoyo-base"></div><div class="bcg-yoyo-face"><div class="bcg-yoyo-center" id="bcgYoyoCenterSymbol">🐞</div></div></div></div>
         <div class="bcg-yoyo-selected-name" id="bcgYoyoSelectedName">Tikki</div><div class="bcg-yoyo-selected-kwami" id="bcgYoyoSelectedKwami">Kwami: Tikki</div>
-        <div class="bcg-yoyo-stage-footer"><button type="button" onclick="scrollBcgYoyoSymbols(-1)" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button><button type="button" onclick="applyBcgYoyoTheme()"><i class="fa-solid fa-wand-magic-sparkles"></i> Aplicar tema de teste</button><button type="button" onclick="scrollBcgYoyoSymbols(1)" aria-label="Seguinte"><i class="fa-solid fa-chevron-right"></i></button></div>
+        <div class="bcg-yoyo-stage-footer"><button type="button" onclick="scrollBcgYoyoSymbols(-1)" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button><button type="button" onclick="applyBcgYoyoTheme()"><i class="fa-solid fa-wand-magic-sparkles"></i> Aplicar tema</button><button type="button" onclick="resetBcgYoyoTheme()"><i class="fa-solid fa-rotate-left"></i> Repor tema</button><button type="button" onclick="scrollBcgYoyoSymbols(1)" aria-label="Seguinte"><i class="fa-solid fa-chevron-right"></i></button></div>
       </div>
       <aside class="bcg-yoyo-controls">
         <div class="bcg-yoyo-control-tabs"><button type="button" class="active" data-yoyo-tab="background" onclick="switchBcgYoyoTab('background')">Fundo</button><button type="button" data-yoyo-tab="symbols" onclick="switchBcgYoyoTab('symbols')">Símbolos</button><button type="button" data-yoyo-tab="texture" onclick="switchBcgYoyoTab('texture')">Textura</button></div>
@@ -2924,6 +2935,11 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                         </div>
                         <button type="button" class="btn-green" style="width:100%;justify-content:center" onclick="createScheduledItem()"><i class="fa-solid fa-calendar-plus"></i> Agendar</button>
                         <div id="schedulerStatus" class="admin-media-status"></div>
+                    </div>
+                    <div class="bcg-admin-calendar-wrap" style="margin-top:16px">
+                      <div class="bcg-admin-calendar-toolbar"><div><h4><i class="fa-solid fa-calendar-days"></i> Calendário de gestão</h4><p class="small-note">Toca numa data vazia para preparar um episódio. Mantém o dedo sobre um episódio para o apagar.</p></div><div class="bcg-admin-calendar-actions"><button type="button" class="btn-small-outline" onclick="shiftBcgAdminCalendar(-1)" aria-label="Mês anterior"><i class="fa-solid fa-chevron-left"></i></button><button type="button" class="btn-small-outline" onclick="shiftBcgAdminCalendar(1)" aria-label="Mês seguinte"><i class="fa-solid fa-chevron-right"></i></button></div></div>
+                      <div id="bcgAdminCalendarMonth" class="bcg-admin-calendar-month"></div><div id="bcgAdminCalendarGrid" class="bcg-admin-calendar-grid"></div>
+                      <button type="button" class="btn-green" style="width:100%;justify-content:center;margin-top:12px" onclick="saveBcgAdminCalendarChanges()"><i class="fa-solid fa-floppy-disk"></i> Guardar alterações do calendário</button><div id="bcgAdminCalendarStatus" class="admin-media-status"></div>
                     </div>
                     <div style="margin-top:12px" id="adminScheduleList"></div>
                 </div>
@@ -5914,40 +5930,15 @@ async function applyProfileMusicSelection(track){
     function renderReleaseCalendar(){const containers=['releaseCalendarContainer','homeReleaseCalendarContainer'].map(id=>document.getElementById(id)).filter(Boolean);if(!containers.length)return;const items=upcomingEpisodeItems();const byDay=new Map();items.forEach(x=>{const key=`${x.date.getFullYear()}-${x.date.getMonth()}-${x.date.getDate()}`;if(!byDay.has(key))byDay.set(key,[]);byDay.get(key).push(x);});const y=releaseCalendarBase.getFullYear(),m=releaseCalendarBase.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0),start=(first.getDay()+6)%7;let cells='';for(let i=0;i<start;i++)cells+='<div class="calendar-cell empty"></div>';for(let d=1;d<=last.getDate();d++){const key=`${y}-${m}-${d}`,events=byDay.get(key)||[],today=new Date();const isToday=today.getFullYear()===y&&today.getMonth()===m&&today.getDate()===d;const eventHtml=events.sort((a,b)=>a.date-b.date).map(event=>{const flags=({'BR':'🇧🇷','FR':'🇫🇷','PT':'🇵🇹','US':'🇺🇸','GB':'🇬🇧','ES':'🇪🇸','IT':'🇮🇹','DE':'🇩🇪','CA':'🇨🇦','JP':'🇯🇵','KR':'🇰🇷','AU':'🇦🇺','CH':'🇨🇭'});const flag=flags[String(event.country||'').toUpperCase()]||'🌍';return `<button class="calendar-event" onclick="openEpisodeDetailRoute('${esc(event.season)}',${event.idx})"><b>${flag} S${esc(event.season)}E${event.idx+1}</b><span>${esc(event.channelName||event.title)}</span><span>${esc(event.date.toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'}))}</span><small class="calendar-countdown" data-countdown-date="${event.date.toISOString()}">${esc(formatCountdownTo(event.date))}</small></button>`}).join('');cells+=`<div class="calendar-cell ${isToday?'today':''}"><div class="calendar-day-number">${d}</div>${eventHtml}</div>`;}const markup=`<div class="calendar-shell"><div class="calendar-head"><button class="btn-small-outline" onclick="releaseCalendarShift(-1)"><i class="fa-solid fa-chevron-left"></i></button><div class="calendar-title">${esc(new Date(y,m,1).toLocaleDateString('pt-PT',{month:'long',year:'numeric'}))}</div><button class="btn-small-outline" onclick="releaseCalendarShift(1)"><i class="fa-solid fa-chevron-right"></i></button></div><div class="calendar-grid">${['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'].map(x=>`<div class="calendar-dow">${x}</div>`).join('')}${cells}</div></div>`;containers.forEach(c=>c.innerHTML=markup);}
     function releaseCalendarShift(delta){releaseCalendarBase=new Date(releaseCalendarBase.getFullYear(),releaseCalendarBase.getMonth()+Number(delta),1);renderReleaseCalendar();}
     function renderFeaturedHome(){const c=document.getElementById('featuredEpisodeHome');if(!c)return;const key=String(featuredEpisodeKey||'');if(!key){c.innerHTML='';return;}const [s,iRaw]=key.split('_'),i=Number(iRaw);if(!s||!Number.isInteger(i)||(EPISODES[s]||[]).length<=i){c.innerHTML='';return;}const title=episodeTitle(s,i),thumb=getEpisodeThumbnail(s,i),d=customVideos[key]||{},hasVideo=!!(d.videoUrl||d.blobKey||allEpisodeLanguageVersions(s,i).some(v=>v.url));c.innerHTML=`<div class="featured-home"><img src="${esc(thumb)}" alt=""><div><span class="featured-badge"><i class="fa-solid fa-star"></i> Episódio em destaque</span><h3>${esc(title)}</h3><div class="small-note">Temporada ${esc(s)} · Episódio ${i+1}</div><div class="episode-detail-actions"><button class="episode-detail-action primary" ${hasVideo?'':'disabled'} onclick="openPlayerRouteFromDetail('${esc(s)}',${i})"><i class="fa-solid fa-play"></i> Assistir</button><button class="episode-detail-action" onclick="openEpisodeDetailRoute('${esc(s)}',${i})"><i class="fa-solid fa-circle-info"></i> Ver detalhes</button></div></div></div>`;}
-    function renderRecentEpisodes(){
-      const c=document.getElementById('recentEpisodesContainer');
-      if(!c)return;
-      c.innerHTML='';
-      const selection=normalizeRecentEpisodesSelection(recentEpisodesSelection);
-      selection.forEach(key=>{
-        const [season,idxRaw]=String(key).split('_');
-        const idx=Number(idxRaw);
-        const list=EPISODES[season]||[];
-        const title=episodeTitle(season,idx);
-        if(!list[idx] && !customVideos[key])return;
-        const card=document.createElement('div');
-        card.className='ep-card';
-        card.dataset.episodeKey=key;
-        card.dataset.episodeTitle=`${idx+1} - ${title}`;
-        card.addEventListener('click',(event)=>{
-          event.preventDefault(); event.stopPropagation();
-          openEpisodeDetailRoute(season,idx,`${idx+1} - ${title}`);
-        });
-        const fallback='https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&auto=format&fit=crop&q=80';
-        card.innerHTML=`<div class="ep-thumb" style="background-image:url('${esc(getEpisodeThumbnail(season,idx,fallback))}')"><span class="badge-recent">S${esc(season)}</span></div><div class="ep-info"><div class="ep-title">${esc(title)}</div><div class="ep-num">Temporada ${esc(season)}</div></div>`;
-        c.appendChild(card);
-      });
-      if(!c.children.length)c.innerHTML='<p class="small-note" style="padding:12px">Ainda não foram selecionados episódios recentes.</p>';
-      renderTrendingEpisodes();
-    }
+    function renderRecentEpisodes(){renderTrendingEpisodes();}
 
 
     function renderTrendingEpisodes(){
       const section=document.getElementById('trendingEpisodesSection'),container=document.getElementById('trendingEpisodesContainer');if(!section||!container)return;
-      const rows=[];
-      Object.entries(customVideos||{}).forEach(([key,meta])=>{const match=String(key).match(/^([^_]+)_(\d+)$/);if(!match)return;const season=match[1],idx=Number(match[2]),views=Math.max(0,Number(meta?.viewCount)||0);if(views>0&&((EPISODES[season]||[])[idx]||meta?.title))rows.push({season,idx,views,title:episodeTitle(season,idx)})});
-      rows.sort((a,b)=>b.views-a.views);
-      if(!rows.length){section.style.display='none';container.innerHTML='';return}
+      const selected=normalizeRecentEpisodesSelection(recentEpisodesSelection),source=selected.length?selected:Object.keys(customVideos||{}).filter(k=>Math.max(0,Number(customVideos[k]?.viewCount)||0)>0);
+      const rows=source.map((key,index)=>{const match=String(key).match(/^([^_]+)_(\d+)$/);if(!match)return null;const season=match[1],idx=Number(match[2]),meta=customVideos[key]||{};if(!((EPISODES[season]||[])[idx]||meta.title))return null;return {season,idx,views:Math.max(0,Number(meta.viewCount)||0),title:episodeTitle(season,idx),order:index}}).filter(Boolean);
+      rows.sort((a,b)=>b.views-a.views||a.order-b.order);
+      if(!rows.length){section.style.display='flex';container.innerHTML='<p class="small-note" style="padding:12px">Seleciona episódios na aba «Mais recentes» do painel de administração para os destacar aqui.</p>';return}
       section.style.display='flex';
       container.innerHTML=rows.slice(0,8).map((item,i)=>{const thumb=esc(getEpisodeThumbnail(item.season,item.idx));return '<article class="trending-episode-card" role="button" tabindex="0" data-trending-season="'+esc(item.season)+'" data-trending-idx="'+item.idx+'"><div class="trending-episode-thumb" style="background-image:url('+JSON.stringify(thumb)+')"><span class="trending-episode-rank">'+(i+1)+'</span></div><div class="trending-episode-copy"><div class="trending-episode-title">'+esc(item.title)+'</div><div class="trending-episode-meta"><i class="fa-solid fa-eye"></i> '+item.views.toLocaleString('pt-PT')+' visualizações <span>·</span> T'+esc(item.season)+'</div></div></article>'}).join('');
       container.querySelectorAll('[data-trending-season]').forEach(card=>{const openEpisode=()=>openEpisodeDetailRoute(card.dataset.trendingSeason,Number(card.dataset.trendingIdx));card.addEventListener('click',openEpisode);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openEpisode()}})});
@@ -8338,7 +8329,7 @@ async function renderAdminAccounts(){
     function populateScheduleEpisodeDropdown(){const season=String(document.getElementById('scheduleSeasonSelect')?.value||1),sel=document.getElementById('scheduleEpisodeSelect');if(!sel)return;sel.innerHTML='';(EPISODES[season]||[]).forEach((_,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${i+1} - ${episodeTitle(season,i)}`;sel.appendChild(o)});}
     function updateSchedulerFields(){const type=document.getElementById('scheduleTypeSelect')?.value||'episode';['episode','announcement','banner'].forEach(t=>document.getElementById(`schedule${t[0].toUpperCase()+t.slice(1)}Fields`)?.classList.toggle('active',type===t));if(type==='episode')populateScheduleEpisodeDropdown();}
     function setSchedulerStatus(msg,type=''){const el=document.getElementById('schedulerStatus');if(!el)return;el.className=`admin-media-status active ${type}`;el.textContent=msg;clearTimeout(window.__schedulerStatusTimer);window.__schedulerStatusTimer=setTimeout(()=>{el.className='admin-media-status';el.textContent=''},3000);}
-    async function persistScheduledItems(){localStorage.setItem('cn_scheduled_items',JSON.stringify(scheduledItems));await save('cn_announcements',announcements);renderAdminScheduleList();renderHomeExtras();startCountdownTimer(true);}
+    async function persistScheduledItems(){localStorage.setItem('cn_scheduled_items',JSON.stringify(scheduledItems));await save('cn_announcements',announcements);renderAdminScheduleList();renderBcgAdminSchedulerCalendar();renderHomeExtras();startCountdownTimer(true);}
     async function createScheduledItem(){
       if(!isAdminUser())return alert('Sem acesso de administrador.');
       const type=document.getElementById('scheduleTypeSelect')?.value||'episode';const raw=document.getElementById('scheduleDateInput')?.value||'';const when=new Date(raw).getTime();
@@ -8478,7 +8469,13 @@ async function renderAdminAccounts(){
       try{const old=items[index],paths=[];const d=customVideos[season7EpisodeKey(index)]||{};if(d.thumbnailStoragePath)paths.push(d.thumbnailStoragePath);delete customVideos[season7EpisodeKey(index)];const nextItems=items.slice();nextItems.splice(index,1);const rebuilt={};Object.entries(customVideos).forEach(([key,val])=>{if(!key.startsWith('7_')){rebuilt[key]=val;return;}const i=Number(key.split('_')[1]);if(i>index)rebuilt[season7EpisodeKey(i-1)]=val;else if(i<index)rebuilt[key]=val;});customVideos=rebuilt;season7Config={...season7Config,episodes:nextItems};await save('cn_custom_videos_meta',customVideos);await persistSeason7Config();for(const path of paths)await deleteCloudMedia(path);await addAdminLog(`apagou S7E${index+1} · ${old?.title||'episódio'}`);renderSeason7AdminList();renderEpisodesList();renderUpcomingEpisodes('upcomingHomeContainer');renderReleaseCalendar();setSeason7AdminStatus(`✓ S7E${index+1} removido.`,'success');}catch(err){setSeason7AdminStatus(`Erro: ${err?.message||err}`,'error');alert(`Não foi possível remover o episódio.\n\n${err?.message||err}`)}
     }
 
-    function initAdminAppearanceAndScheduler(){populateScheduleEpisodeDropdown();updateSchedulerFields();renderAdminScheduleList();syncSiteAppearanceForm();renderSeason7AdminList();}
+    let bcgAdminCalendarMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1),bcgCalendarLongPressTimer=null,bcgCalendarSuppressClick=false;
+    function shiftBcgAdminCalendar(delta){bcgAdminCalendarMonth=new Date(bcgAdminCalendarMonth.getFullYear(),bcgAdminCalendarMonth.getMonth()+Number(delta),1);renderBcgAdminSchedulerCalendar();}
+    function adminCalendarPickDate(day){if(!isAdminUser())return;const d=new Date(bcgAdminCalendarMonth.getFullYear(),bcgAdminCalendarMonth.getMonth(),Number(day),18,0),pad=n=>String(n).padStart(2,'0'),input=document.getElementById('scheduleDateInput');if(input)input.value=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes());const type=document.getElementById('scheduleTypeSelect');if(type){type.value='episode';updateSchedulerFields()}input?.scrollIntoView({behavior:'smooth',block:'center'});}
+    function openBcgCalendarDeleteConfirm(id,title){let modal=document.getElementById('bcgCalendarDeleteModal');if(!modal){modal=document.createElement('div');modal.id='bcgCalendarDeleteModal';modal.className='bcg-calendar-delete-backdrop';modal.hidden=true;modal.innerHTML='<div class="bcg-calendar-delete-dialog" role="dialog" aria-modal="true" aria-labelledby="bcgCalendarDeleteTitle"><h3 id="bcgCalendarDeleteTitle">Apagar episódio?</h3><p id="bcgCalendarDeleteText"></p><div class="bcg-calendar-delete-actions"><button type="button" class="btn-small-outline" id="bcgCalendarDeleteCancel">Cancelar</button><button type="button" class="btn-danger-small" id="bcgCalendarDeleteConfirm">Apagar episódio</button></div></div>';document.body.appendChild(modal);modal.addEventListener('click',e=>{if(e.target===modal)modal.hidden=true});modal.querySelector('#bcgCalendarDeleteCancel').addEventListener('click',()=>modal.hidden=true);}modal.querySelector('#bcgCalendarDeleteText').textContent='Pretendes apagar «'+String(title||'este episódio')+'» do calendário? Esta ação será sincronizada com o site.';modal.querySelector('#bcgCalendarDeleteConfirm').onclick=async()=>{if(!isAdminUser())return alert('Sem acesso de administrador.');const before=scheduledItems.slice();scheduledItems=scheduledItems.filter(x=>String(x.id)!==String(id));try{await persistScheduledItems();modal.hidden=true;const st=document.getElementById('bcgAdminCalendarStatus');if(st){st.className='admin-media-status active success';st.textContent='✓ Episódio removido do calendário.'}}catch(err){scheduledItems=before;alert('Não foi possível apagar: '+(err?.message||err));}};modal.hidden=false;}
+    function renderBcgAdminSchedulerCalendar(){const grid=document.getElementById('bcgAdminCalendarGrid'),label=document.getElementById('bcgAdminCalendarMonth');if(!grid||!label)return;const y=bcgAdminCalendarMonth.getFullYear(),m=bcgAdminCalendarMonth.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0),start=(first.getDay()+6)%7;label.textContent=first.toLocaleDateString('pt-PT',{month:'long',year:'numeric'});const eventsByDay=new Map();(scheduledItems||[]).filter(x=>x&&x.status!=='cancelled').forEach(item=>{const date=new Date(scheduleDateMs(item));if(!Number.isFinite(date.getTime())||date.getFullYear()!==y||date.getMonth()!==m)return;const key=date.getDate();if(!eventsByDay.has(key))eventsByDay.set(key,[]);eventsByDay.get(key).push(item)});const heads=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'].map(x=>'<div class="bcg-admin-calendar-dow">'+x+'</div>').join('');let cells='';for(let i=0;i<start;i++)cells+='<div class="bcg-admin-calendar-day empty"></div>';const now=new Date();for(let day=1;day<=last.getDate();day++){const items=eventsByDay.get(day)||[],today=now.getFullYear()===y&&now.getMonth()===m&&now.getDate()===day;const eventMarkup=items.sort((a,b)=>scheduleDateMs(a)-scheduleDateMs(b)).map(item=>{const isEp=item.type==='episode',p=item.payload||{},title=isEp?'T'+p.season+' · E'+(Number(p.idx||0)+1):(p.title||scheduledTypeLabel(item.type)),time=new Date(scheduleDateMs(item)).toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'});return '<button type="button" class="bcg-admin-calendar-event" data-admin-calendar-event="'+esc(String(item.id))+'" data-calendar-title="'+esc(title)+'"><b>'+esc(title)+'</b><small>'+time+(isEp?' · segurar para apagar':'')+'</small></button>'}).join('');cells+='<div class="bcg-admin-calendar-day '+(today?'today':'')+'"><button type="button" class="bcg-admin-calendar-day-number" onclick="adminCalendarPickDate('+day+')">'+day+'</button>'+eventMarkup+'</div>';}grid.innerHTML=heads+cells;grid.querySelectorAll('[data-admin-calendar-event]').forEach(btn=>{const id=btn.dataset.adminCalendarEvent,title=btn.dataset.calendarTitle;btn.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;bcgCalendarSuppressClick=false;clearTimeout(bcgCalendarLongPressTimer);bcgCalendarLongPressTimer=setTimeout(()=>{bcgCalendarSuppressClick=true;openBcgCalendarDeleteConfirm(id,title)},560)});['pointerup','pointerleave','pointercancel'].forEach(name=>btn.addEventListener(name,()=>clearTimeout(bcgCalendarLongPressTimer)));btn.addEventListener('contextmenu',e=>e.preventDefault());btn.addEventListener('click',e=>{e.preventDefault();if(bcgCalendarSuppressClick){bcgCalendarSuppressClick=false;return;}editScheduledItem(id)});});}
+    async function saveBcgAdminCalendarChanges(){if(!isAdminUser())return alert('Sem acesso de administrador.');const btn=document.querySelector('.bcg-admin-calendar-wrap .btn-green');if(btn){btn.disabled=true;btn.style.opacity='.65'}try{await persistScheduledItems();const st=document.getElementById('bcgAdminCalendarStatus');if(st){st.className='admin-media-status active success';st.textContent='✓ Todas as alterações do calendário foram guardadas e sincronizadas.'}}catch(e){const st=document.getElementById('bcgAdminCalendarStatus');if(st){st.className='admin-media-status active error';st.textContent='Erro ao guardar: '+(e?.message||e)}}finally{if(btn){btn.disabled=false;btn.style.opacity=''}}}
+    function initAdminAppearanceAndScheduler(){populateScheduleEpisodeDropdown();updateSchedulerFields();renderAdminScheduleList();renderBcgAdminSchedulerCalendar();syncSiteAppearanceForm();renderSeason7AdminList();}
 
     let adminCommentsCache=[];
     async function loadAdminComments(){if(!isAdminUser())return;const list=document.getElementById('adminCommentsList'),st=document.getElementById('adminCommentsStatus');if(list)list.innerHTML='<div class="small-note">A carregar…</div>';try{await waitForSupabase();const {data,error}=await supabaseClient.from('episode_comments').select('id,episode_key,username,html,media_url,media_type,spoiler,parent_id,created_at').order('created_at',{ascending:false}).limit(300);if(error)throw error;adminCommentsCache=(data||[]).map(r=>({id:r.id,episodeKey:r.episode_key,username:r.username||'Utilizador',html:r.html||'',mediaUrl:r.media_url||'',mediaType:r.media_type||'',spoiler:!!r.spoiler,parentId:r.parent_id||'',createdAt:new Date(r.created_at||Date.now()).getTime()}));if(st){st.className='admin-media-status active success';st.textContent=`✓ ${adminCommentsCache.length} comentário(s) carregado(s).`;setTimeout(()=>{st.className='admin-media-status';st.textContent=''},2200)}renderAdminComments();}catch(err){if(st){st.className='admin-media-status active error';st.textContent=`Erro: ${err?.message||err}`}if(list)list.innerHTML='<div class="comment-empty">Não foi possível carregar os comentários.</div>'}}
@@ -8530,16 +8527,29 @@ async function sendAdminBroadcastMail(){
 
     /* Laboratório de temas do YoYo */
     const BCG_YOYO_SYMBOLS=[
-      {id:'tikki',name:'Tikki',glyph:'🐞',color:'#ff6584'},{id:'plagg',name:'Plagg',glyph:'🐈‍⬛',color:'#c9b9df'},
-      {id:'nooroo',name:'Nooroo',glyph:'🦋',color:'#8bb6ff'},{id:'trixx',name:'Trixx',glyph:'🦊',color:'#ffae65'},
-      {id:'wayzz',name:'Wayzz',glyph:'🐢',color:'#79e29b'},{id:'pollen',name:'Pollen',glyph:'🐝',color:'#ffe277'},
-      {id:'duusu',name:'Duusu',glyph:'🦚',color:'#8dcfff'},{id:'mullo',name:'Mullo',glyph:'🐭',color:'#e4b6ff'},
-      {id:'sass',name:'Sass',glyph:'🐍',color:'#8de0c0'},{id:'longg',name:'Longg',glyph:'🐉',color:'#ff7474'},
-      {id:'kaalki',name:'Kaalki',glyph:'🐴',color:'#d8d2ff'},{id:'fluff',name:'Fluff',glyph:'🐇',color:'#f5d4ff'},
-      {id:'xuppu',name:'Xuppu',glyph:'🐒',color:'#ffc36b'},{id:'daizzi',name:'Daizzi',glyph:'🐷',color:'#ff9ecb'},
-      {id:'barkk',name:'Barkk',glyph:'🐶',color:'#d5c5a5'},{id:'ziggy',name:'Ziggy',glyph:'🐐',color:'#c5e8b7'},
-      {id:'roaar',name:'Roaar',glyph:'🐯',color:'#ff9b50'},{id:'orikko',name:'Orikko',glyph:'🐓',color:'#ffd16e'}
+      {id:'tikki',name:'Tikki',glyph:'ladybug',color:'#e83b50'},{id:'plagg',name:'Plagg',glyph:'cat',color:'#30343b'},{id:'nooroo',name:'Nooroo',glyph:'butterfly',color:'#8b6bd6'},{id:'trixx',name:'Trixx',glyph:'fox',color:'#f28b32'},{id:'wayzz',name:'Wayzz',glyph:'turtle',color:'#39b978'},{id:'pollen',name:'Pollen',glyph:'bee',color:'#e9c832'},{id:'duusu',name:'Duusu',glyph:'peacock',color:'#399ed6'},{id:'mullo',name:'Mullo',glyph:'mouse',color:'#d86db6'},{id:'sass',name:'Sass',glyph:'snake',color:'#9b4b53'},{id:'longg',name:'Longg',glyph:'dragon',color:'#d64b4b'},{id:'kaalki',name:'Kaalki',glyph:'horse',color:'#d87832'},{id:'fluff',name:'Fluff',glyph:'rabbit',color:'#a7a7b5'},{id:'xuppu',name:'Xuppu',glyph:'monkey',color:'#7863bd'},{id:'daizzi',name:'Daizzi',glyph:'pig',color:'#d978a9'},{id:'barkk',name:'Barkk',glyph:'paw',color:'#49a66d'},{id:'ziggy',name:'Ziggy',glyph:'goat',color:'#9d9c9b'},{id:'roaar',name:'Roaar',glyph:'tiger',color:'#e78a31'},{id:'orikko',name:'Orikko',glyph:'rooster',color:'#e5b52d'},{id:'liiri',name:'Liiri',glyph:'eagle',color:'#4bbbd1'}
     ];
+    function bcgYoyoSymbolGraphic(id){const shapes={
+      ladybug:'<path d="M50 12c-22 0-37 17-37 39 0 22 15 37 37 37s37-15 37-37C87 29 72 12 50 12Z"/><path fill="#15131b" d="M46 14h8v72h-8z"/><g fill="#15131b"><circle cx="31" cy="36" r="7"/><circle cx="68" cy="36" r="7"/><circle cx="29" cy="62" r="7"/><circle cx="70" cy="62" r="7"/></g>',
+      cat:'<path d="M18 37 14 10l25 16q11-5 22 0l25-16-4 29q9 29-7 44-25 18-50 0-16-15-7-46Z"/><path fill="#fff" opacity=".65" d="m35 57 15 8 15-8-5 17H40z"/>',
+      butterfly:'<path d="M48 48C31 5 5 15 12 48c3 16 17 22 36 5-8 30-1 38 2 38s10-8 2-38c19 17 33 11 36-5C95 15 69 5 52 48Z"/><path fill="none" stroke="#fff" stroke-width="4" d="M50 18v66"/>',
+      fox:'<path d="m50 8 42 28-11 43-31 13-31-13L8 36z"/><path fill="#fff" d="m50 51 26-14-8 30-18 16-18-16-8-30z"/>',
+      turtle:'<path d="M50 9 82 27 82 65 50 91 18 65 18 27Z"/><path fill="none" stroke="#fff" stroke-width="4" d="M50 10v80M18 27l64 38M82 27 18 65M18 27l32 19 32-19M18 65l32-19 32 19"/>',
+      bee:'<ellipse cx="31" cy="38" rx="18" ry="25"/><ellipse cx="69" cy="38" rx="18" ry="25"/><path d="M50 25c-15 0-22 13-22 32s10 30 22 30 22-11 22-30S65 25 50 25Z"/><path fill="#fff" d="M31 48h38v9H31z"/>',
+      peacock:'<path d="M50 12c-10-14-29-7-28 9 1 12 12 17 28 28 16-11 27-16 28-28 1-16-18-23-28-9Z"/><path d="M50 49c-26 0-35 20-25 35 8 12 21 8 25-1 4 9 17 13 25 1 10-15 1-35-25-35Z"/>',
+      mouse:'<circle cx="27" cy="27" r="19"/><circle cx="73" cy="27" r="19"/><path d="M50 30c-23 0-34 17-29 39 4 18 16 25 29 25s25-7 29-25c5-22-6-39-29-39Z"/>',
+      snake:'<path fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="round" d="M74 19C35 2 14 29 31 48c11 12 38-2 40 15 2 18-28 24-47 8"/><circle cx="76" cy="19" r="8"/>',
+      dragon:'<path d="M18 20 43 29 50 10 58 29 83 20 72 45 91 60 62 62 50 91 38 62 9 60 28 45Z"/>',
+      horse:'<path d="M28 10 47 23 70 14 84 34 76 57 83 82 58 91 42 68 25 62 18 40Z"/><path fill="none" stroke="#fff" stroke-width="4" d="M38 34q18 15 32 4"/>',
+      rabbit:'<path d="M31 51 22 5q-3-9 6-5 17 9 22 39 5-30 22-39 9-4 6 5l-9 46q12 12 8 29-5 20-27 20T23 80q-4-17 8-29Z"/>',
+      monkey:'<circle cx="50" cy="50" r="15"/><ellipse cx="23" cy="50" rx="14" ry="22"/><ellipse cx="77" cy="50" rx="14" ry="22"/><ellipse cx="50" cy="23" rx="22" ry="14"/><ellipse cx="50" cy="77" rx="22" ry="14"/>',
+      pig:'<path d="M16 42 10 18l25 8q15-8 30 0l25-8-6 24q7 35-34 45-41-10-34-45Z"/><ellipse cx="50" cy="57" rx="21" ry="14" fill="#fff" opacity=".55"/><circle cx="42" cy="57" r="4"/><circle cx="58" cy="57" r="4"/>',
+      paw:'<ellipse cx="50" cy="66" rx="25" ry="20"/><ellipse cx="23" cy="36" rx="10" ry="15"/><ellipse cx="42" cy="22" rx="10" ry="15"/><ellipse cx="62" cy="22" rx="10" ry="15"/><ellipse cx="80" cy="36" rx="10" ry="15"/>',
+      goat:'<path d="M22 35 8 8l27 15q15-8 30 0L92 8 78 35q12 34-28 57Q10 69 22 35Z"/>',
+      tiger:'<path d="M50 8 89 29 83 73 50 93 17 73 11 29Z"/><path fill="none" stroke="#17131b" stroke-width="9" d="m27 25 15 19-17 3m48-22L58 44l17 3M31 70l14-11m24 11L55 59"/>',
+      rooster:'<path d="M50 18c-9-17 10-25 16-9 14-8 23 7 12 18 16 8 7 26-9 24-2 23-12 35-19 43-7-8-17-20-19-43-16 2-25-16-9-24-11-11-2-26 12-18 6-16 25-8 16 9Z"/>',
+      eagle:'<path d="M50 15 8 35l28 8-22 24 36-11 36 11-22-24 28-8Z"/><path d="M43 48h14l-7 42Z"/>'
+    };return '<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor">'+(shapes[id]||shapes.ladybug)+'</g></svg>'}
     let bcgYoyoState={first:'tikki',second:'nooroo',unification:false,focus:'first',pattern:'first',colors:'mix',background:'violet',texture:'dots'};
     let bcgYoyoLoaded=false;
     function getBcgYoyoSymbol(id){return BCG_YOYO_SYMBOLS.find(x=>x.id===id)||BCG_YOYO_SYMBOLS[0]}
@@ -8547,9 +8557,9 @@ async function sendAdminBroadcastMail(){
     function initBcgYoyoLab(){
       if(!bcgYoyoLoaded){try{const saved=JSON.parse(localStorage.getItem('bcg_yoyo_lab_state')||'null');if(saved)bcgYoyoState={...bcgYoyoState,...saved}}catch(e){}bcgYoyoLoaded=true}
       const rail=document.getElementById('bcgYoyoSymbolRail');
-      if(rail&&!rail.dataset.ready){rail.dataset.ready='1';rail.innerHTML=BCG_YOYO_SYMBOLS.map(x=>'<button type="button" class="bcg-yoyo-symbol" data-yoyo-symbol="'+x.id+'" aria-label="Selecionar '+x.name+'"><span>'+x.glyph+'</span><small>'+x.name+'</small></button>').join('');rail.addEventListener('click',function(e){const b=e.target.closest('[data-yoyo-symbol]');if(!b)return;if(bcgYoyoState.unification&&bcgYoyoState.focus==='second')bcgYoyoState.second=b.dataset.yoyoSymbol;else bcgYoyoState.first=b.dataset.yoyoSymbol;renderBcgYoyoLab()})}
+      if(rail&&!rail.dataset.ready){rail.dataset.ready='1';rail.innerHTML=BCG_YOYO_SYMBOLS.map(x=>'<button type="button" class="bcg-yoyo-symbol" data-yoyo-symbol="'+x.id+'" aria-label="Selecionar '+x.name+'"><span style="color:'+x.color+'">'+bcgYoyoSymbolGraphic(x.id)+'</span><small>'+x.name+'</small></button>').join('');rail.addEventListener('click',function(e){const b=e.target.closest('[data-yoyo-symbol]');if(!b)return;if(bcgYoyoState.unification&&bcgYoyoState.focus==='second')bcgYoyoState.second=b.dataset.yoyoSymbol;else bcgYoyoState.first=b.dataset.yoyoSymbol;renderBcgYoyoLab()})}
       renderBcgYoyoLab();
-      try{const applied=JSON.parse(localStorage.getItem('bcg_yoyo_applied_theme')||'null');if(applied&&!document.body.dataset.bcgYoyoApplied){bcgYoyoState={...bcgYoyoState,...applied};applyBcgYoyoWallpaperOnly()}}catch(e){}
+      try{const applied=JSON.parse(localStorage.getItem('bcg_yoyo_applied_theme')||'null');if(applied&&!document.body.dataset.bcgYoyoApplied){bcgYoyoState={...bcgYoyoState,...applied};applyBcgYoyoWallpaperOnly();applyBcgYoyoAccent()}}catch(e){}
     }
     function scrollBcgYoyoSymbols(direction){const rail=document.getElementById('bcgYoyoSymbolRail');if(rail)rail.scrollBy({left:direction*190,behavior:'smooth'})}
     function renderBcgYoyoLab(){
@@ -8559,7 +8569,7 @@ async function sendAdminBroadcastMail(){
       const label=document.getElementById('bcgYoyoSelectedName'),kwami=document.getElementById('bcgYoyoSelectedKwami'),center=document.getElementById('bcgYoyoCenterSymbol');
       if(label)label.textContent=bcgYoyoState.unification?first.name+' + '+second.name:focus.name;
       if(kwami)kwami.textContent=bcgYoyoState.unification?'Unificação de dois kwamis':'Kwami: '+focus.name;
-      if(center)center.textContent=bcgYoyoState.unification?first.glyph+' '+second.glyph:first.glyph;
+      if(center)center.innerHTML=bcgYoyoState.unification?'<span class="bcg-yoyo-center-pair" style="color:'+first.color+'">'+bcgYoyoSymbolGraphic(first.id)+'</span><span class="bcg-yoyo-center-pair" style="color:'+second.color+'">'+bcgYoyoSymbolGraphic(second.id)+'</span>':'<span style="color:'+focus.color+'">'+bcgYoyoSymbolGraphic(focus.id)+'</span>';
       const toggle=document.getElementById('bcgYoyoUnification');if(toggle)toggle.checked=!!bcgYoyoState.unification;
       document.querySelectorAll('[data-yoyo-focus]').forEach(b=>{b.classList.toggle('active',b.dataset.yoyoFocus===bcgYoyoState.focus);if(b.dataset.yoyoFocus==='second')b.disabled=!bcgYoyoState.unification});
       document.querySelectorAll('[data-yoyo-pattern]').forEach(b=>{b.classList.toggle('active',b.dataset.yoyoPattern===bcgYoyoState.pattern);b.disabled=!bcgYoyoState.unification&&b.dataset.yoyoPattern!=='first'});
@@ -8569,7 +8579,7 @@ async function sendAdminBroadcastMail(){
       const themes={violet:'linear-gradient(145deg,#43215e,#21142f 75%)',midnight:'linear-gradient(145deg,#25213f,#0e1020 75%)',rose:'linear-gradient(145deg,#622b59,#291629 75%)',blue:'linear-gradient(145deg,#1e4568,#151b35 75%)'};
       const preview=document.getElementById('bcgYoyoThemePreview');if(preview)preview.style.background=themes[bcgYoyoState.background]||themes.violet;
       const grid=document.getElementById('bcgYoyoPatternPreview');
-      if(grid){grid.className='bcg-yoyo-pattern'+(bcgYoyoState.texture==='none'?'':' texture-'+bcgYoyoState.texture);const visible=getBcgYoyoVisibleSymbols(),colors=bcgYoyoState.colors==='first'?[first.color]:bcgYoyoState.colors==='second'?[second.color]:[first.color,second.color];grid.innerHTML=Array.from({length:30},(_,i)=>{const symbol=visible[i%visible.length],color=bcgYoyoState.colors==='mix'?colors[i%colors.length]:colors[0];return '<span style="color:'+color+'">'+symbol.glyph+'</span>'}).join('')}
+      if(grid){grid.className='bcg-yoyo-pattern'+(bcgYoyoState.texture==='none'?'':' texture-'+bcgYoyoState.texture);const visible=getBcgYoyoVisibleSymbols(),colors=bcgYoyoState.colors==='first'?[first.color]:bcgYoyoState.colors==='second'?[second.color]:[first.color,second.color];grid.innerHTML=Array.from({length:30},(_,i)=>{const symbol=visible[i%visible.length],color=bcgYoyoState.colors==='mix'?colors[i%colors.length]:colors[0];return '<span style="color:'+color+'">'+bcgYoyoSymbolGraphic(symbol.id)+'</span>'}).join('')}
       try{localStorage.setItem('bcg_yoyo_lab_state',JSON.stringify(bcgYoyoState))}catch(e){}
     }
     function switchBcgYoyoTab(tab){document.querySelectorAll('[data-yoyo-tab]').forEach(b=>b.classList.toggle('active',b.dataset.yoyoTab===tab));document.querySelectorAll('[data-yoyo-panel]').forEach(p=>p.classList.toggle('active',p.dataset.yoyoPanel===tab))}
@@ -8583,17 +8593,20 @@ async function sendAdminBroadcastMail(){
       const body=document.body;if(!body)return;
       const visible=getBcgYoyoVisibleSymbols(),first=getBcgYoyoSymbol(bcgYoyoState.first),second=getBcgYoyoSymbol(bcgYoyoState.second);
       const colors=bcgYoyoState.colors==='first'?[first.color]:bcgYoyoState.colors==='second'?[second.color]:[first.color,second.color],a=visible[0]||first,b=visible[1]||a;
-      const svg='<svg xmlns="http://www.w3.org/2000/svg" width="190" height="190" viewBox="0 0 190 190"><g opacity=".18" font-size="38" text-anchor="middle" dominant-baseline="middle"><text x="45" y="45" fill="'+colors[0]+'">'+a.glyph+'</text><text x="142" y="142" fill="'+(colors[1]||colors[0])+'">'+(visible.length>1?b.glyph:a.glyph)+'</text><text x="142" y="45" fill="'+colors[0]+'">'+a.glyph+'</text><text x="45" y="142" fill="'+(colors[1]||colors[0])+'">'+(visible.length>1?b.glyph:a.glyph)+'</text></g></svg>';
+      const inner=(id)=>bcgYoyoSymbolGraphic(id).replace('<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">','').replace('</svg>','');
+      const svg='<svg xmlns="http://www.w3.org/2000/svg" width="190" height="190" viewBox="0 0 190 190"><g opacity=".18" color="'+colors[0]+'" transform="translate(20 20) scale(.55)">'+inner(a.id)+'</g><g opacity=".18" color="'+(colors[1]||colors[0])+'" transform="translate(110 110) scale(.55)">'+inner(visible.length>1?b.id:a.id)+'</g><g opacity=".18" color="'+colors[0]+'" transform="translate(110 20) scale(.42)">'+inner(a.id)+'</g><g opacity=".18" color="'+(colors[1]||colors[0])+'" transform="translate(20 110) scale(.42)">'+inner(visible.length>1?b.id:a.id)+'</g></svg>';
       const encoded='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
       if(body.dataset.bcgYoyoApplied==='1'){body.style.backgroundImage=body.dataset.bcgYoyoOriginalImage||'';body.style.backgroundSize=body.dataset.bcgYoyoOriginalSize||'';body.style.backgroundRepeat=body.dataset.bcgYoyoOriginalRepeat||'';body.style.backgroundPosition=body.dataset.bcgYoyoOriginalPosition||'';delete body.dataset.bcgYoyoApplied}
       if(!body.dataset.bcgYoyoBaselineSaved){body.dataset.bcgYoyoOriginalImage=body.style.backgroundImage||'';body.dataset.bcgYoyoOriginalSize=body.style.backgroundSize||'';body.dataset.bcgYoyoOriginalRepeat=body.style.backgroundRepeat||'';body.dataset.bcgYoyoOriginalPosition=body.style.backgroundPosition||'';body.dataset.bcgYoyoBaselineSaved='1'}
       const computed=getComputedStyle(body),baseImage=computed.backgroundImage==='none'?'none':computed.backgroundImage,baseSize=computed.backgroundSize||'auto',baseRepeat=computed.backgroundRepeat||'repeat',basePosition=computed.backgroundPosition||'0 0';
-      body.style.backgroundImage='url("'+encoded+'"), '+baseImage;body.style.backgroundSize='190px 190px, '+baseSize;body.style.backgroundRepeat='repeat, '+baseRepeat;body.style.backgroundPosition='0 0, '+basePosition;body.dataset.bcgYoyoApplied='1';
+      body.style.backgroundImage='url("'+encoded+'"), '+baseImage;body.style.backgroundSize='190px 190px, '+baseSize;body.style.backgroundRepeat='repeat, '+baseRepeat;body.style.backgroundPosition='0 0, '+basePosition;body.dataset.bcgYoyoApplied='1';applyBcgYoyoAccent();
     }
-    function applyBcgYoyoTheme(){applyBcgYoyoWallpaperOnly();try{localStorage.setItem('bcg_yoyo_applied_theme',JSON.stringify({...bcgYoyoState}))}catch(e){}}
+    function applyBcgYoyoAccent(){const root=document.documentElement,first=getBcgYoyoSymbol(bcgYoyoState.first),second=getBcgYoyoSymbol(bcgYoyoState.second),accent=bcgYoyoState.colors==='second'?second.color:first.color;if(!root.dataset.bcgYoyoAccentSaved){['--accent-green','--accent-green-dark','--border-color'].forEach((k,i)=>root.dataset['bcgYoyoVar'+i]=root.style.getPropertyValue(k));root.dataset.bcgYoyoAccentSaved='1'}root.style.setProperty('--accent-green',accent);root.style.setProperty('--accent-green-dark','color-mix(in srgb, '+accent+' 72%, #000)');root.style.setProperty('--border-color','color-mix(in srgb, '+accent+' 26%, #1f2b22)');root.style.setProperty('--bg-card-hover','color-mix(in srgb, '+accent+' 13%, #1a241d)')}
+    function applyBcgYoyoTheme(){applyBcgYoyoWallpaperOnly();applyBcgYoyoAccent();try{localStorage.setItem('bcg_yoyo_applied_theme',JSON.stringify({...bcgYoyoState}))}catch(e){}}
     function resetBcgYoyoTheme(){
       const body=document.body;
       if(body?.dataset.bcgYoyoApplied){body.style.backgroundImage=body.dataset.bcgYoyoOriginalImage||'';body.style.backgroundSize=body.dataset.bcgYoyoOriginalSize||'';body.style.backgroundRepeat=body.dataset.bcgYoyoOriginalRepeat||'';body.style.backgroundPosition=body.dataset.bcgYoyoOriginalPosition||'';delete body.dataset.bcgYoyoApplied;delete body.dataset.bcgYoyoBaselineSaved;delete body.dataset.bcgYoyoOriginalImage;delete body.dataset.bcgYoyoOriginalSize;delete body.dataset.bcgYoyoOriginalRepeat;delete body.dataset.bcgYoyoOriginalPosition}
+      const root=document.documentElement;if(root.dataset.bcgYoyoAccentSaved){['--accent-green','--accent-green-dark','--border-color'].forEach((k,i)=>{const v=root.dataset['bcgYoyoVar'+i];if(v)root.style.setProperty(k,v);else root.style.removeProperty(k)});root.style.removeProperty('--bg-card-hover');delete root.dataset.bcgYoyoAccentSaved;delete root.dataset.bcgYoyoVar0;delete root.dataset.bcgYoyoVar1;delete root.dataset.bcgYoyoVar2}
       try{localStorage.removeItem('bcg_yoyo_applied_theme')}catch(e){}
     }
 
@@ -10626,7 +10639,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
     const key=`${String(season)}_${Number(idx)}`;let seen=[];try{seen=JSON.parse(sessionStorage.getItem('cn_episode_detail_seen')||'[]')}catch{}
     if(seen.includes(key))return;
     seen.push(key);sessionStorage.setItem('cn_episode_detail_seen',JSON.stringify(seen.slice(-100)));
-    try{const d=customVideos[key]||(customVideos[key]={});d.viewCount=Math.max(0,Number(d.viewCount)||0)+1;localStorage.setItem('cn_custom_videos_meta',JSON.stringify(customVideos));Promise.resolve(save('cn_custom_videos_meta',customVideos)).catch(e=>console.warn('Guardar visualização:',e))}catch(e){console.warn('Contar visualização:',e)}
+    try{const d=customVideos[key]||(customVideos[key]={});d.viewCount=Math.max(0,Number(d.viewCount)||0)+1;localStorage.setItem('cn_custom_videos_meta',JSON.stringify(customVideos));Promise.resolve(save('cn_custom_videos_meta',customVideos)).catch(e=>console.warn('Guardar visualização:',e));if(typeof renderTrendingEpisodes==='function')renderTrendingEpisodes()}catch(e){console.warn('Contar visualização:',e)}
   }
   function releaseDateLabel(raw){if(!raw)return 'Data não definida';const d=new Date(String(raw).length===10?raw+'T12:00:00':raw);return Number.isFinite(d.getTime())?d.toLocaleDateString('pt-PT',{day:'numeric',month:'long',year:'numeric'}):String(raw)}
   const RELEASE_COUNTRIES={BR:{flag:'🇧🇷',name:'Brasil'},FR:{flag:'🇫🇷',name:'França'},US:{flag:'🇺🇸',name:'Estados Unidos'},PT:{flag:'🇵🇹',name:'Portugal'},GB:{flag:'🇬🇧',name:'Reino Unido'},ES:{flag:'🇪🇸',name:'Espanha'},IT:{flag:'🇮🇹',name:'Itália'},DE:{flag:'🇩🇪',name:'Alemanha'},CA:{flag:'🇨🇦',name:'Canadá'},JP:{flag:'🇯🇵',name:'Japão'},KR:{flag:'🇰🇷',name:'Coreia do Sul'},AU:{flag:'🇦🇺',name:'Austrália'},CN:{flag:'🇨🇳',name:'China'}};
