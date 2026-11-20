@@ -1977,7 +1977,7 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
 #trendingEpisodesSection{margin-top:24px}
 .trending-episodes-track{display:flex;gap:15px;overflow-x:auto;padding:8px 2px 15px;scroll-snap-type:x mandatory}
 .trending-episode-card{position:relative;flex:0 0 235px;min-width:0;overflow:hidden;cursor:pointer;border:1px solid rgba(205,174,255,.17);border-radius:19px;background:linear-gradient(145deg,rgba(47,31,65,.94),rgba(25,20,36,.96));box-shadow:0 10px 28px rgba(0,0,0,.2);scroll-snap-align:start}
-.trending-episode-thumb{height:132px;background-size:cover;background-position:center;position:relative}
+ .trending-episode-thumb{height:132px;background-size:cover;background-position:center;position:relative;overflow:hidden;background-color:#21172c}.trending-episode-thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 .trending-episode-rank{position:absolute;left:9px;top:8px;width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,#b77cff,#7540c9);color:#fff;font-size:1.08rem;font-weight:950;border:1px solid rgba(255,255,255,.27)}
 .trending-episode-copy{padding:12px}.trending-episode-title{font-weight:850;font-size:.92rem;line-height:1.3;min-height:36px}.trending-episode-meta{display:flex;gap:7px;align-items:center;color:#c5b9d4;font-size:.73rem;margin-top:9px}.trending-episode-meta i{color:#c18cff}
 .bcg-yoyo-shell{padding:clamp(13px,2.2vw,22px);border:1px solid rgba(185,143,255,.24);border-radius:22px;background:rgba(19,14,29,.74);box-shadow:0 12px 34px rgba(0,0,0,.2)}
@@ -2172,7 +2172,7 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
 <div class="section-header" style="margin-top:28px"><h3><i class="fa-solid fa-calendar-days" style="color:#bd8cff;margin-right:6px"></i> Calendário</h3><button type="button" class="btn-small-outline" onclick="switchPage('calendar')">Abrir calendário</button></div>
 <div id="homeReleaseCalendarContainer"></div>
 
-remove home quick cards            <div class="section-header" style="margin-top:2px"><h3><i class="fa-solid fa-calendar-clock" style="color:var(--accent-green);margin-right:6px"></i> Próximos episódios</h3><button type="button" class="btn-small-outline" onclick="switchPage('upcoming')">Ver todos</button></div>
+            <div class="section-header" style="margin-top:2px"><h3><i class="fa-solid fa-calendar-clock" style="color:var(--accent-green);margin-right:6px"></i> Próximos episódios</h3><button type="button" class="btn-small-outline" onclick="switchPage('upcoming')">Ver todos</button></div>
             <div id="upcomingHomeContainer" class="upcoming-grid"></div>
 
             <div class="section-header"><h3><i class="fa-solid fa-bullhorn" style="color:var(--accent-green);margin-right:6px"></i> Anúncios</h3></div>
@@ -4249,7 +4249,7 @@ function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_
           nextVideos[r.episode_key]={
             title:r.title||'', videoUrl:r.video_url||'', subUrl:r.subtitles_url||'',
             storagePath:r.media_path||'', subStoragePath:r.subtitles_path||'',
-            thumbnailUrl:r.thumbnail_url||'', thumbnailStoragePath:r.thumbnail_path||'',
+            thumbnailUrl:r.thumbnail_url||localMeta.thumbnailUrl||localMeta.thumbnail_url||'', thumbnailStoragePath:r.thumbnail_path||localMeta.thumbnailStoragePath||localMeta.thumbnail_path||'',
             langType:r.language||'PT-PT', quality:r.quality||'', synopsis:cloudSynopsis||localMeta.synopsis||'',
             originalTitle:meta.originalTitle||localMeta.originalTitle||'',
             imdbRating:meta.imdbRating!==''?meta.imdbRating:(localMeta.imdbRating??''),
@@ -5868,16 +5868,16 @@ async function applyProfileMusicSelection(track){
     const DEFAULT_MIRACULOUS_THUMBNAIL = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360"%3E%3Crect width="640" height="360" fill="%23000000"/%3E%3C/svg%3E';
     function getEpisodeThumbnail(season, idx, fallback='https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&auto=format&fit=crop&q=80'){
       const d = customVideos[`${season}_${idx}`] || {};
-      // A thumbnail guardada no Storage pode ter thumbnail_path mesmo quando
-      // thumbnail_url não foi persistido. Nesse caso construímos o URL público.
-      if(d.thumbnailUrl) return String(d.thumbnailUrl);
-      if(d.thumbnailStoragePath && supabaseClient){
+      const direct=d.thumbnailUrl||d.thumbnail_url||d.thumbnail||d.posterUrl||'';
+      if(direct) return String(direct);
+      const path=d.thumbnailStoragePath||d.thumbnail_path||'';
+      if(path && supabaseClient){
         try{
-          const {data}=supabaseClient.storage.from(SUPABASE_MEDIA_BUCKET).getPublicUrl(d.thumbnailStoragePath);
+          const {data}=supabaseClient.storage.from(SUPABASE_MEDIA_BUCKET).getPublicUrl(path);
           if(data?.publicUrl) return data.publicUrl;
         }catch(e){ console.warn('Thumbnail Storage:',e); }
       }
-      return DEFAULT_MIRACULOUS_THUMBNAIL;
+      return fallback||DEFAULT_MIRACULOUS_THUMBNAIL;
     }
 
     function addAdminLog(action){
@@ -5918,7 +5918,7 @@ async function applyProfileMusicSelection(track){
       rows.sort((a,b)=>b.views-a.views||a.order-b.order);
       if(!rows.length){section.style.display='flex';container.innerHTML='<p class="small-note" style="padding:12px">Seleciona episódios na aba «Mais recentes» do painel de administração para os destacar aqui.</p>';return}
       section.style.display='flex';
-      container.innerHTML=rows.slice(0,8).map((item,i)=>{const thumb=esc(getEpisodeThumbnail(item.season,item.idx));return '<article class="trending-episode-card" role="button" tabindex="0" data-trending-season="'+esc(item.season)+'" data-trending-idx="'+item.idx+'"><div class="trending-episode-thumb" style="background-image:url('+JSON.stringify(thumb)+')"><span class="trending-episode-rank">'+(i+1)+'</span></div><div class="trending-episode-copy"><div class="trending-episode-title">'+esc(item.title)+'</div><div class="trending-episode-meta"><i class="fa-solid fa-eye"></i> '+item.views.toLocaleString('pt-PT')+' visualizações <span>·</span> T'+esc(item.season)+'</div></div></article>'}).join('');
+      container.innerHTML=rows.slice(0,8).map((item,i)=>{const thumb=esc(getEpisodeThumbnail(item.season,item.idx));return '<article class="trending-episode-card" role="button" tabindex="0" data-trending-season="'+esc(item.season)+'" data-trending-idx="'+item.idx+'"><div class="trending-episode-thumb"><img src="'+thumb+'" alt="Thumbnail de '+esc(item.title)+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&auto=format&fit=crop&q=80\'"><span class="trending-episode-rank">'+(i+1)+'</span></div><div class="trending-episode-copy"><div class="trending-episode-title">'+esc(item.title)+'</div><div class="trending-episode-meta"><i class="fa-solid fa-eye"></i> '+item.views.toLocaleString('pt-PT')+' visualizações <span>·</span> T'+esc(item.season)+'</div></div></article>'}).join('');
       container.querySelectorAll('[data-trending-season]').forEach(card=>{const openEpisode=()=>openEpisodeDetailRoute(card.dataset.trendingSeason,Number(card.dataset.trendingIdx));card.addEventListener('click',openEpisode);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openEpisode()}})});
     }
 
