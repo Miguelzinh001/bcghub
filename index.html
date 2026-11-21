@@ -11582,7 +11582,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
 (function(){
 'use strict';
 const $=id=>document.getElementById(id),safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const BUILD='2026.11.21.1';
+const BUILD='2026.11.21.2';
 window.renderEpisodesList=function(){
  const c=$('episodesListVertical');if(!c)return;
  const season=String($('seasonSelect')?.value||'1'),lang=String($('langFilterSelect')?.value||'all'),q=String($('epSearchInput')?.value||'').trim().toLowerCase();
