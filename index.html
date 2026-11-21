@@ -11558,7 +11558,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
 
 
 <style id="bcg-vnext-episodes-style">
-#episodesListVertical{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+#episodesListVertical{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
 #episodesListVertical .ep-row-card{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:0;border:0;border-radius:18px;overflow:hidden;background:#11131a;min-width:0;box-shadow:0 8px 24px rgba(0,0,0,.2);transition:transform .18s ease,box-shadow .18s ease}
 #episodesListVertical .ep-row-card:hover{transform:translateY(-2px);border-color:transparent}
 #episodesListVertical .ep-row-thumb{position:relative;width:100%;height:auto;aspect-ratio:16/9;border-radius:0;flex:none;overflow:hidden;background:#090b10}
@@ -11572,7 +11572,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
 #episodesListVertical .ep-vnext-number{margin-left:auto;background:#30323b;color:#fff;border-radius:8px;padding:4px 8px;font-variant-numeric:tabular-nums}
 #episodesListVertical .ep-vnext-runtime{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.86);padding:3px 7px;border-radius:6px;color:white;font-size:.75rem;font-weight:800}
 @media(max-width:380px){#episodesListVertical{gap:11px}#episodesListVertical .ep-row-details{padding:9px}#episodesListVertical .ep-vnext-meta{gap:6px;font-size:.72rem}}
-@media(min-width:760px){#episodesListVertical{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:760px){#episodesListVertical{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .bcg-update-available{position:fixed;z-index:99999;left:14px;right:14px;bottom:calc(86px + env(safe-area-inset-bottom));max-width:560px;margin:auto;display:flex;align-items:center;gap:12px;padding:13px 14px;border:1px solid rgba(255,255,255,.18);border-radius:16px;background:rgba(20,22,29,.97);box-shadow:0 14px 40px rgba(0,0,0,.45);color:#fff;backdrop-filter:blur(18px)}
 .bcg-update-available .bcg-update-copy{flex:1;min-width:0;font-size:.83rem;line-height:1.35}
 .bcg-update-available button{border:0;border-radius:10px;background:#fff;color:#111;padding:9px 12px;font-weight:900;white-space:nowrap}
