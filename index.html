@@ -11711,7 +11711,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
 (function(){
 'use strict';
 const $=id=>document.getElementById(id),safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const BUILD='2026.11.22.1';
+const BUILD='2026.11.22.2';
 // Remove the room SRT upload UI and disable its old handler; episode subtitles remain untouched.
 window.handleRoomSubtitleUpload=function(){return false;};
 function removeRoomSrt(){ $('roomSubtitleUploadBtn')?.remove();$('roomSubtitleFileInput')?.remove();$('roomSubtitleStatus')?.remove();document.querySelectorAll('#watchPartyChatSection button').forEach(b=>{if(/srt|enviar legendas/i.test(b.textContent||''))b.remove();});}
