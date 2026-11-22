@@ -3080,17 +3080,10 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                         <button type="button" class="btn-green premium-gift-btn" onclick="grantPremiumDecoration()"><i class="fa-solid fa-gift"></i> Dar Premium</button>
                         <div id="premiumGrantStatus" class="admin-media-status"></div>
                         <div class="admin-frame-upload">
-                          <strong><i class="fa-solid fa-border-all"></i> Molduras de banner</strong>
-                          <p class="small-note">Envia a moldura “Sempre de Olho” para uma conta.</p>
-                          <div class="form-group"><label>Username</label><input id="bannerFrameReceiverInput" class="form-control" placeholder="Ex.: miguel"></div>
-                          <button type="button" class="btn-green" onclick="grantBannerFrame()"><i class="fa-solid fa-gift"></i> Enviar Sempre de Olho</button>
-                          <div id="bannerFrameGrantStatus" class="admin-media-status"></div>
-                        </div>
-                        <div class="admin-frame-upload">
                           <strong><i class="fa-solid fa-cloud-arrow-up"></i> Enviar moldura personalizada</strong>
                           <p class="small-note">Carrega uma moldura PNG/WebP transparente e atribui-a diretamente a um perfil.</p>
                           <div class="form-group"><label>Username de destino</label><input id="customFrameReceiverInput" class="form-control" placeholder="Ex.: miguel"></div>
-                          <div class="form-group"><label>Tipo de moldura</label><select id="customFrameTypeInput" class="form-control"><option value="profile">Moldura da foto de perfil</option><option value="banner">Moldura de banner</option></select></div>
+                          <div class="form-group"><label>Tipo de moldura</label><select id="customFrameTypeInput" class="form-control"><option value="profile">Moldura da foto de perfil</option></select></div>
                           <div class="form-group"><label>Ficheiro da moldura</label><input id="customFrameFileInput" class="form-control" type="file" accept="image/png,image/webp,image/gif"></div>
                           <button type="button" class="btn-green" onclick="adminUploadAndSendFrame()"><i class="fa-solid fa-upload"></i> Enviar moldura</button>
                           <div id="customFrameUploadStatus" class="admin-media-status"></div>
@@ -3223,18 +3216,9 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
       <div class="profile-frame-dialog" role="dialog" aria-modal="true" aria-labelledby="profileBannerEditorTitle">
         <button type="button" class="profile-frame-close" onclick="closeBannerEditor()" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
         <h3 id="profileBannerEditorTitle">Editar banner</h3>
-        <p class="small-note">Escolhe uma imagem da galeria ou aplica uma moldura ao teu banner.</p>
+        <p class="small-note">Escolhe uma imagem da galeria para o teu banner.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin:16px 0">
           <button type="button" class="btn-green" onclick="chooseBannerGallery()"><i class="fa-solid fa-images"></i> Ir para galeria</button>
-          <button type="button" class="btn-small-outline" onclick="showBannerFrameOptions()"><i class="fa-solid fa-border-all"></i> Moldura de banner</button>
-        </div>
-        <div id="bannerFramePickerArea" style="display:none">
-          <strong>Molduras disponíveis</strong>
-          <div id="bannerFrameOptions" class="banner-frame-grid"></div>
-          <div class="banner-frame-actions">
-            <button type="button" class="btn-small-outline" onclick="closeBannerEditor()">Cancelar</button>
-            <button type="button" class="btn-green" onclick="saveBannerFrameChoice()"><i class="fa-solid fa-check"></i> Aplicar</button>
-          </div>
         </div>
       </div>
     </div>
@@ -3868,9 +3852,8 @@ ${err?.message||err}`)}}
     function styledProfileNameMarkup(a,withHandle=false){const name=esc(a?.displayName||a?.username||'');const handle=withHandle&&a?.username?` <span class="small-note">@${esc(a.username)}</span>`:'';return `<span class="styled-profile-name ${nameStyleClasses(a)}">${name}</span>${nameTagMarkup(a)}${handle}`;}
     function previewProfileNameStyle(){const out=document.getElementById('profileNameStylePreview');if(!out)return;const st=normalizeNameStyle({font:document.getElementById('profileNameFontInput')?.value,glow:document.getElementById('profileNameGlowInput')?.value});out.className=`styled-profile-name font-${st.font} glow-${st.glow}`;out.textContent=document.getElementById('globalNameInput')?.value.trim()||currentProfile()?.displayName||currentProfile()?.username||'O teu nome';}
     const PREMIUM_BIO_MARKER='[[NOIR_PREMIUM:';
-    const PREMIUM_BANNER_FRAMES={always_watch:{name:'Sempre de Olho',desc:'Olhos ilustrados em preto e branco para o banner.',emoji:'👁️'}};
+    const PREMIUM_BANNER_FRAMES={};
     const BCG_FRAME_PIXEL='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
-    let PREMIUM_EYES_BANNER_FRAME=BCG_FRAME_PIXEL;
     let PREMIUM_ROSE_SHADOWS_FRAME=BCG_FRAME_PIXEL;
     async function loadBcgFrameAsset(path,kind){
       try{
@@ -3878,12 +3861,11 @@ ${err?.message||err}`)}}
         if(!response.ok)throw new Error('HTTP '+response.status);
         const encoded=(await response.text()).trim().replace(/\\s+/g,'');
         if(!/^[A-Za-z0-9+/]+={0,2}$/.test(encoded))throw new Error('Formato de moldura inválido');
-        const uri='data:image/webp;base64,'+encoded;
-        if(kind==='banner'){PREMIUM_EYES_BANNER_FRAME=uri;document.querySelectorAll('[data-bcg-frame-asset="always-watch"]').forEach(img=>img.src=uri);}
-        else{PREMIUM_ROSE_SHADOWS_FRAME=uri;document.querySelectorAll('[data-bcg-frame-asset="rose-shadows"]').forEach(img=>img.src=uri);}
+        const uri='data:image/svg+xml;base64,'+encoded;
+        PREMIUM_ROSE_SHADOWS_FRAME=uri;
+        document.querySelectorAll('[data-bcg-frame-asset="rose-shadows"]').forEach(img=>img.src=uri);
       }catch(error){console.warn('Não foi possível carregar a moldura '+kind,error);}
     }
-    loadBcgFrameAsset('/assets/always-watch-banner-frame.b64.txt','banner');
     loadBcgFrameAsset('/assets/rose-shadows-frame.b64.txt','rose-shadows');
     const PREMIUM_DECORATIONS={
       cat_ears:{name:'Orelhas de Coelho',emoji:'',desc:'Orelhas de coelho animadas.'},
@@ -3989,11 +3971,7 @@ function profileBioForCloud(a){
   if(items.length)out+=` ${PREMIUM_BIO_MARKER}${items.join(',')}]]`;
   if(style.font!==NAME_STYLE_DEFAULT.font||style.glow!==NAME_STYLE_DEFAULT.glow)out+=` ${NAME_STYLE_MARKER}${style.font}|${style.glow}]]`;
   if(frame)out+=` [[NOIR_ACTIVE_FRAME:${frame}]]`;
-  const bannerFrames=Array.isArray(a?.bannerFrames)?a.bannerFrames.filter(x=>PREMIUM_BANNER_FRAMES[x]):[];
-  if(bannerFrames.length)out+=` [[NOIR_BANNER_FRAMES:${bannerFrames.join(',')}]]`;
-  if(a?.activeBannerFrame&&PREMIUM_BANNER_FRAMES[a.activeBannerFrame])out+=` [[NOIR_ACTIVE_BANNER_FRAME:${a.activeBannerFrame}]]`;
   if(a?.customProfileFrameUrl)out+=` [[NOIR_CUSTOM_PROFILE_FRAME:${encodeURIComponent(a.customProfileFrameUrl)}]]`;
-  if(a?.customBannerFrameUrl)out+=` [[NOIR_CUSTOM_BANNER_FRAME:${encodeURIComponent(a.customBannerFrameUrl)}]]`;
   if(a?.passwordHash)out+=` [[NOIR_AUTH_V1:${a.passwordHash}]]`;
   out+=profileConfigMarkerForAccount(a);
   out+=profileMusicMarkerForAccount(a);
@@ -4002,10 +3980,10 @@ function profileBioForCloud(a){
   return out.trim();
 }
 function activeFrameFromBio(bio){const m=String(bio||'').match(/\[\[NOIR_ACTIVE_FRAME:([^\]]+)\]\]/);const key=m?m[1].trim():'';return PREMIUM_DECORATIONS[key]?key:'';}
-function bannerFramesFromBio(bio){const m=String(bio||'').match(/\[\[NOIR_BANNER_FRAMES:([^\]]+)\]\]/);return m?m[1].split(',').map(x=>x.trim()).filter(x=>PREMIUM_BANNER_FRAMES[x]):[];}
-function activeBannerFrameFromBio(bio){const m=String(bio||'').match(/\[\[NOIR_ACTIVE_BANNER_FRAME:([^\]]+)\]\]/);const key=m?m[1].trim():'';return PREMIUM_BANNER_FRAMES[key]?key:'';}
+function bannerFramesFromBio(){return [];}
+function activeBannerFrameFromBio(){return '';}
 function customFrameFromBio(bio,type){const name=type==='banner'?'NOIR_CUSTOM_BANNER_FRAME':'NOIR_CUSTOM_PROFILE_FRAME';const m=String(bio||'').match(new RegExp('\\[\\['+name+':([^\\]]+)\\]\\]'));try{return m?decodeURIComponent(m[1]):'';}catch{return '';}}
-function bannerFrameMarkup(a){const key=a?.activeBannerFrame;if(key==='always_watch'&&Array.isArray(a?.bannerFrames)&&a.bannerFrames.includes(key))return `<img class="profile-banner-frame" data-bcg-frame-asset="always-watch" src="${PREMIUM_EYES_BANNER_FRAME}" alt="Moldura Sempre de Olho">`;if(a?.customBannerFrameUrl)return `<img class="profile-banner-frame" src="${esc(a.customBannerFrameUrl)}" alt="Moldura de banner">`;return '';}
+function bannerFrameMarkup(){return '';}
 const ADMIN_BIO_MARKER='[[NOIR_ADMIN:';
 function adminStateFromBio(bio){const m=String(bio||'').match(/\[\[NOIR_ADMIN:(0|1)\]\]/);return m?m[1]==='1':null;}
 function cleanCloudProfileBio(bio){const s=String(bio||'').replace(/\s*\[\[NOIR_ADMIN:[01]\]\]/g,'').replace(/\s*\[\[NOIR_DISCORD:.*?\]\]/g,'').replace(/\s*\[\[NOIR_MUSIC:.*?\]\]/g,'').replace(/\s*\[\[NOIR_PROFILE_CONFIG:.*?\]\]/g,'');return cleanPremiumBio(cleanCloudAuthMarkers(s.replace(/\s*\[\[NOIR_ACTIVE_FRAME:[^\]]+\]\]/g,'').replace(/\s*\[\[NOIR_BANNER_FRAMES:[^\]]+\]\]/g,'').replace(/\s*\[\[NOIR_ACTIVE_BANNER_FRAME:[^\]]+\]\]/g,'').replace(/\s*\[\[NOIR_CUSTOM_PROFILE_FRAME:[^\]]+\]\]/g,'').replace(/\s*\[\[NOIR_CUSTOM_BANNER_FRAME:[^\]]+\]\]/g,'').trim()));}
@@ -5937,7 +5915,7 @@ async function applyProfileMusicSelection(track){
     function openProfile(username){
       const a=getAccount(username);if(!a)return;
       const banner=a.animatedBanner||a.banner||'';
-      const bannerHtml=(banner||a.activeBannerFrame||a.customBannerFrameUrl)?`<div class="profile-banner" style="margin:-16px -16px 18px;${banner&&!a.animatedBanner?`background-image:url('${esc(banner)}')`:''}">${a.animatedBanner?`<img src="${esc(banner)}" alt="Banner">`:''}${bannerFrameMarkup(a)}</div>`:'';
+      const bannerHtml=banner?`<div class="profile-banner" style="margin:-16px -16px 18px;${banner&&!a.animatedBanner?`background-image:url('${esc(banner)}')`:''}">${a.animatedBanner?`<img src="${esc(banner)}" alt="Banner">`:''}</div>`:'';
       document.getElementById('genericModalTitle').textContent=`Perfil de ${a.displayName||a.username} · @${a.username}`;
       document.getElementById('genericModalBody').innerHTML=`<div style="text-align:center;background:${esc(normalizeProfileBackground(a.profileBackground||'#0b100d'))};border-radius:16px;padding:16px;color:#fff">${bannerHtml}<div class="profile-public-avatar-wrap">${premiumAvatarMarkup(a,'lg')}</div><h3>${styledProfileNameMarkup(a,true)} ${a.isAdmin?' <span class="badge-admin"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> ADMIN</span>':''}${hasPremium(a)?' <span class="premium-chip"><i class="fa-solid fa-crown"></i> PREMIUM</span>':''}</h3><div class="status-line"><span class="status-dot ${statusLabel(a,false).type}"></span>${esc(statusLabel(a,false).label)}</div>${registrationAgeMarkup(a)}${profileMusicMarkup(a)}${spotifyPresenceMarkup(a)}${favoriteShowMarkup(a.favoriteShow)||''}<p class="profile-quote">${esc(cleanPremiumBio(a.quote)||'Sem frase de perfil.')}</p>${a.instagram||a.tiktok||a.watchData?.socials?.tiktok?`<div class="social-links">${a.instagram?`<a class="social-link-btn" target="_blank" rel="noopener" href="${esc(a.instagram)}"><i class="fa-brands fa-instagram"></i> Instagram</a>`:''}${a.tiktok||a.watchData?.socials?.tiktok?`<a class="social-link-btn" target="_blank" rel="noopener" href="${esc(a.tiktok||a.watchData.socials.tiktok)}"><i class="fa-brands fa-tiktok"></i> TikTok</a>`:''}</div>`:''}${discordProfileUrl(a)?`<a class="discord-public-link" target="_blank" rel="noopener" href="${esc(discordProfileUrl(a))}"><i class="fa-brands fa-discord"></i> ${esc(a.discord?.username?`@${a.discord.username}`:'Discord')}</a>`:''}<div class="profile-dashboard-card" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-heart" style="color:#ff5c7a"></i> Favoritos</h4><span class="small-note">${normalizeWatchData(a.watchData||{}).favorites.length}</span></div><div class="profile-episode-list">${normalizeWatchData(a.watchData||{}).favorites.slice(0,8).map(k=>{const [s,i]=String(k).split('_');return `<div class="profile-episode-row" onclick="closeGenericModal();openEpisodeDetailRoute('${esc(s)}',${Number(i)})"><img src="${esc(getEpisodeThumbnail(s,Number(i)))}" alt=""><div class="profile-episode-main"><div class="profile-episode-title">${esc(episodeTitle(s,Number(i)))}</div><div class="profile-episode-sub">T${esc(s)}E${Number(i)+1}</div></div></div>`}).join('')||'<div class="small-note">Sem favoritos.</div>'}</div></div><div class="profile-dashboard-card" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-clock-rotate-left" style="color:var(--accent-green)"></i> Últimos episódios vistos</h4></div><div class="profile-episode-list">${normalizeWatchData(a.watchData||{}).history.slice(0,8).map(x=>`<div class="profile-episode-row" onclick="closeGenericModal();openEpisodeDetailRoute('${esc(String(x.season))}',${Number(x.epIndex)})"><img src="${esc(getEpisodeThumbnail(String(x.season),Number(x.epIndex)))}" alt=""><div class="profile-episode-main"><div class="profile-episode-title">${esc(x.title||episodeTitle(String(x.season),Number(x.epIndex)))}</div><div class="profile-episode-sub">T${esc(String(x.season))}E${Number(x.epIndex)+1}</div></div></div>`).join('')||'<div class="small-note">Sem histórico.</div>'}</div></div><div class="profile-dashboard-card profile-public-leak-panel" style="text-align:left;margin-top:12px"><div class="profile-dashboard-head"><h4><i class="fa-solid fa-retweet"></i> Republicações</h4></div><div id="publicProfileReposts" class="profile-leak-list"></div></div></div>`;
       activePublicProfileUsername=String(a.username);
@@ -8036,7 +8014,10 @@ async function renderAdminAccounts(){
     function openBannerEditor(){if(!currentUser)return alert('Inicia sessão primeiro.');const m=document.getElementById('profileBannerEditor');m?.classList.add('open');m?.setAttribute('aria-hidden','false');}
     function closeBannerEditor(){const m=document.getElementById('profileBannerEditor');m?.classList.remove('open');m?.setAttribute('aria-hidden','true');}
     function chooseBannerGallery(){closeBannerEditor();document.getElementById('profileBannerFile')?.click();}
-    function showBannerFrameOptions(){const a=currentProfile();if(!a)return;const owned=Array.isArray(a.bannerFrames)?a.bannerFrames:[];pendingBannerFrame=a.activeBannerFrame||'';const area=document.getElementById('bannerFramePickerArea'),box=document.getElementById('bannerFrameOptions');if(!box)return;const options=['',...owned.filter(x=>PREMIUM_BANNER_FRAMES[x])];box.innerHTML=options.map(key=>{const d=key?PREMIUM_BANNER_FRAMES[key]:{name:'Sem moldura',desc:'Remover moldura do banner.'};const selected=key===pendingBannerFrame;const preview=key==='always_watch'?`<img data-bcg-frame-asset="always-watch" src="${PREMIUM_EYES_BANNER_FRAME}" alt="">`:'<div style="height:58px;display:grid;place-items:center;background:#111;border-radius:8px;margin-bottom:8px">○</div>';return `<button type="button" class="banner-frame-option ${selected?'selected':''}" data-banner-frame="${esc(key)}" onclick="selectBannerFrameOption(this,'${esc(key)}')">${preview}<strong>${esc(d.name)}</strong><div class="small-note">${esc(d.desc)}</div></button>`;}).join('');if(!options.length)box.innerHTML='<p class="small-note">Ainda não tens molduras de banner.</p>';area.style.display='block';}
+    function showBannerFrameOptions(){return;}
+    function selectBannerFrameOption(){return;}
+    async function saveBannerFrameChoice(){return;}
+    function legacyShowBannerFrameOptions(){const a=currentProfile();if(!a)return;const owned=Array.isArray(a.bannerFrames)?a.bannerFrames:[];pendingBannerFrame=a.activeBannerFrame||'';const area=document.getElementById('bannerFramePickerArea'),box=document.getElementById('bannerFrameOptions');if(!box)return;const options=['',...owned.filter(x=>PREMIUM_BANNER_FRAMES[x])];box.innerHTML=options.map(key=>{const d=key?PREMIUM_BANNER_FRAMES[key]:{name:'Sem moldura',desc:'Remover moldura do banner.'};const selected=key===pendingBannerFrame;const preview=key==='always_watch'?`<img data-bcg-frame-asset="always-watch" src="${PREMIUM_EYES_BANNER_FRAME}" alt="">`:'<div style="height:58px;display:grid;place-items:center;background:#111;border-radius:8px;margin-bottom:8px">○</div>';return `<button type="button" class="banner-frame-option ${selected?'selected':''}" data-banner-frame="${esc(key)}" onclick="selectBannerFrameOption(this,'${esc(key)}')">${preview}<strong>${esc(d.name)}</strong><div class="small-note">${esc(d.desc)}</div></button>`;}).join('');if(!options.length)box.innerHTML='<p class="small-note">Ainda não tens molduras de banner.</p>';area.style.display='block';}
     function selectBannerFrameOption(btn,key){pendingBannerFrame=key;document.querySelectorAll('.banner-frame-option').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');}
     async function saveBannerFrameChoice(){if(!currentUser)return;const a=currentProfile();const owned=Array.isArray(a.bannerFrames)?a.bannerFrames:[];if(pendingBannerFrame&&!owned.includes(pendingBannerFrame))return alert('Não tens esta moldura de banner.');const old=a.activeBannerFrame||'';a.activeBannerFrame=pendingBannerFrame||'';try{await save('cn_accounts',accounts);await syncProfileRecordToCloud(a);sessionStorage.setItem('cn_user',JSON.stringify(currentUser));updateUserUI();renderCommunity();closeBannerEditor();}catch(err){a.activeBannerFrame=old;alert('Não foi possível guardar a moldura: '+(err?.message||err));}}
     async function openProfileFramePicker(){
@@ -8085,8 +8066,9 @@ async function renderAdminAccounts(){
       }catch(err){alert(`Não foi possível guardar a moldura.\n\n${err?.message||err}`);}
     }
     
-    async function grantBannerFrame(){if(!isAdminUser())return alert('Sem acesso de administrador.');const input=document.getElementById('bannerFrameReceiverInput'),status=document.getElementById('bannerFrameGrantStatus'),username=String(input?.value||'').trim();if(!username)return alert('Escreve o username de destino.');const a=getAccount(username);if(!a)return alert('Conta não encontrada.');a.bannerFrames=Array.isArray(a.bannerFrames)?a.bannerFrames:[];if(!a.bannerFrames.includes('always_watch'))a.bannerFrames.push('always_watch');try{await save('cn_accounts',accounts);await syncProfileRecordToCloud(a);renderCommunity();renderAdminAccounts();if(status){status.className='admin-media-status active success';status.textContent='✓ Moldura Sempre de Olho enviada para @'+a.username+'.';}if(input)input.value='';}catch(err){a.bannerFrames=a.bannerFrames.filter(x=>x!=='always_watch');if(status){status.className='admin-media-status active error';status.textContent='Erro ao enviar: '+(err?.message||err);}return;} }
-    async function adminUploadAndSendFrame(){if(!isAdminUser())return alert('Sem acesso de administrador.');const username=String(document.getElementById('customFrameReceiverInput')?.value||'').trim(),file=document.getElementById('customFrameFileInput')?.files?.[0],type=document.getElementById('customFrameTypeInput')?.value||'profile',status=document.getElementById('customFrameUploadStatus');if(!username)return alert('Escreve o username de destino.');if(!file)return alert('Escolhe um ficheiro de moldura.');if(!/^image\/(png|webp|gif)$/.test(file.type))return alert('Usa uma moldura PNG, WebP ou GIF.');if(file.size>5*1024*1024)return alert('A moldura deve ter no máximo 5 MB.');const a=getAccount(username);if(!a)return alert('Conta não encontrada.');const old=type==='banner'?a.customBannerFrameUrl:a.customProfileFrameUrl;let path='';try{if(status){status.className='admin-media-status active';status.textContent='A enviar moldura…';}await waitForSupabase();path=cloudMediaPath('frames',a.username,file.name);const url=await uploadCloudMedia(path,file,file.type);if(type==='banner')a.customBannerFrameUrl=url;else a.customProfileFrameUrl=url;await save('cn_accounts',accounts);await syncProfileRecordToCloud(a);renderCommunity();renderAdminAccounts();if(status){status.className='admin-media-status active success';status.textContent='✓ Moldura enviada e atribuída a @'+a.username+'.';}document.getElementById('customFrameFileInput').value='';}catch(err){if(type==='banner')a.customBannerFrameUrl=old;else a.customProfileFrameUrl=old;if(status){status.className='admin-media-status active error';status.textContent='Não foi possível enviar: '+(err?.message||err);}return;}}
+    async function grantBannerFrame(){return alert('As molduras de banner foram removidas.');}
+    async function legacyGrantBannerFrame(){if(!isAdminUser())return alert('Sem acesso de administrador.');const input=document.getElementById('bannerFrameReceiverInput'),status=document.getElementById('bannerFrameGrantStatus'),username=String(input?.value||'').trim();if(!username)return alert('Escreve o username de destino.');const a=getAccount(username);if(!a)return alert('Conta não encontrada.');a.bannerFrames=Array.isArray(a.bannerFrames)?a.bannerFrames:[];if(!a.bannerFrames.includes('always_watch'))a.bannerFrames.push('always_watch');try{await save('cn_accounts',accounts);await syncProfileRecordToCloud(a);renderCommunity();renderAdminAccounts();if(status){status.className='admin-media-status active success';status.textContent='✓ Moldura Sempre de Olho enviada para @'+a.username+'.';}if(input)input.value='';}catch(err){a.bannerFrames=a.bannerFrames.filter(x=>x!=='always_watch');if(status){status.className='admin-media-status active error';status.textContent='Erro ao enviar: '+(err?.message||err);}return;} }
+    async function adminUploadAndSendFrame(){if(!isAdminUser())return alert('Sem acesso de administrador.');const username=String(document.getElementById('customFrameReceiverInput')?.value||'').trim(),file=document.getElementById('customFrameFileInput')?.files?.[0],type=document.getElementById('customFrameTypeInput')?.value||'profile',status=document.getElementById('customFrameUploadStatus');if(type==='banner')return alert('As molduras de banner foram removidas.');if(!username)return alert('Escreve o username de destino.');if(!file)return alert('Escolhe um ficheiro de moldura.');if(!/^image\/(png|webp|gif)$/.test(file.type))return alert('Usa uma moldura PNG, WebP ou GIF.');if(file.size>5*1024*1024)return alert('A moldura deve ter no máximo 5 MB.');const a=getAccount(username);if(!a)return alert('Conta não encontrada.');const old=type==='banner'?a.customBannerFrameUrl:a.customProfileFrameUrl;let path='';try{if(status){status.className='admin-media-status active';status.textContent='A enviar moldura…';}await waitForSupabase();path=cloudMediaPath('frames',a.username,file.name);const url=await uploadCloudMedia(path,file,file.type);a.customProfileFrameUrl=url;await save('cn_accounts',accounts);await syncProfileRecordToCloud(a);renderCommunity();renderAdminAccounts();if(status){status.className='admin-media-status active success';status.textContent='✓ Moldura enviada e atribuída a @'+a.username+'.';}document.getElementById('customFrameFileInput').value='';}catch(err){a.customProfileFrameUrl=old;if(status){status.className='admin-media-status active error';status.textContent='Não foi possível enviar: '+(err?.message||err);}return;}}
     async function grantPremiumDecoration(){if(!isAdminUser())return alert('Sem acesso de administrador.');const input=document.getElementById('premiumReceiverInput');const item=document.getElementById('premiumItemSelect')?.value||'cat_ears';const status=document.getElementById('premiumGrantStatus');const u=(input?.value||'').trim();if(!u)return alert('Escreve o username de quem vai receber.');const a=getAccount(u);if(!a)return alert(`A conta @${u} não existe.`);a.premiumDecorations=Array.isArray(a.premiumDecorations)?a.premiumDecorations:[];if(a.premiumDecorations.includes(item)){if(status){status.className='admin-media-status active';status.textContent='Esse utilizador já tem esta decoração Premium.';}return;}a.premiumDecorations.push(item);const oldActive=a.activePremiumDecoration||'';if(item==='rose_filigree'||item==='snow_leopard')a.activePremiumDecoration=item;try{await save('cn_accounts',accounts);await syncProfileRecordToCloud(a);renderCommunity();renderAdminAccounts();renderPremiumAdminList();if(status){status.className='admin-media-status active success';status.textContent=`✓ ${PREMIUM_DECORATIONS[item]?.name||'Decoração'} dada a @${a.username}.`; }if(input)input.value='';}catch(err){a.premiumDecorations=a.premiumDecorations.filter(x=>x!==item);a.activePremiumDecoration=oldActive;if(status){status.className='admin-media-status active error';status.textContent=`Erro ao guardar: ${err?.message||err}`;}throw err;}updateUserUI();}
 
     async function deleteAccountByUsername(username){
@@ -11711,7 +11693,7 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
 (function(){
 'use strict';
 const $=id=>document.getElementById(id),safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const BUILD='2026.11.22.3';
+const BUILD='2026.11.22.4';
 // Remove the room SRT upload UI and disable its old handler; episode subtitles remain untouched.
 window.handleRoomSubtitleUpload=function(){return false;};
 function removeRoomSrt(){ $('roomSubtitleUploadBtn')?.remove();$('roomSubtitleFileInput')?.remove();$('roomSubtitleStatus')?.remove();document.querySelectorAll('#watchPartyChatSection button').forEach(b=>{if(/srt|enviar legendas/i.test(b.textContent||''))b.remove();});}
