@@ -2486,7 +2486,7 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
                     <button class="admin-tab" data-admin-tab="comments" onclick="switchAdminTab('comments')"><i class="fa-solid fa-comments"></i> Comentários</button>
                     <button class="admin-tab" data-admin-tab="scheduler" onclick="switchAdminTab('scheduler')"><i class="fa-solid fa-calendar-days"></i> Calendário</button>
                     <button class="admin-tab" data-admin-tab="clips" onclick="switchAdminTab('clips')"><i class="fa-solid fa-scissors"></i> Clipes</button>
-                    <button class="admin-tab" data-admin-tab="appearance" onclick="switchAdminTab('appearance')"><i class="fa-solid fa-palette"></i> Aparência</button>
+                    <button class="admin-tab" data-admin-tab="downloads" onclick="switchAdminTab('downloads')"><i class="fa-solid fa-download"></i> Downloads</button><button class="admin-tab" data-admin-tab="appearance" onclick="switchAdminTab('appearance')"><i class="fa-solid fa-palette"></i> Aparência</button>
                     <button class="admin-tab" data-admin-tab="season7" onclick="switchAdminTab('season7')"><i class="fa-solid fa-calendar-day"></i> Temporada 7</button>
                      <button class="admin-tab" data-admin-tab="featured" onclick="switchAdminTab('featured')"><i class="fa-solid fa-star"></i> Destaque / Logs</button>
                     <button class="admin-tab" data-admin-tab="live" onclick="switchAdminTab('live')"><i class="fa-solid fa-signal"></i> Ao vivo</button>
@@ -2498,6 +2498,19 @@ body.theme-light .comments-sort-select{color:#111;background:#fff}
   <div class="bcg-yoyo-v5-wrap"><div class="bcg-yoyo-v5-intro"><strong>Yo-yo Miraculous V5</strong><span>Usa o carrossel 3D, escolhe os símbolos e aplica o tema ao site quando estiver pronto.</span><span id="bcgYoyoV5Status" aria-live="polite"></span></div><iframe id="bcgYoyoV5Frame" class="bcg-yoyo-v5-frame" src="./yo-yo-miraculous.html?embedded=1" title="Yo-yo Miraculous V5" loading="lazy"></iframe></div>
 </div>
 
+<div id="admin-tab-downloads" class="admin-tab-panel">
+  <div style="background:var(--bg-card);padding:16px;border-radius:14px;border:1px solid var(--border-color)">
+    <h4 style="margin-bottom:8px"><i class="fa-solid fa-download"></i> Downloads dos episódios</h4>
+    <p class="small-note" style="margin-bottom:14px">Controla se os utilizadores podem ver o botão de download no player.</p>
+    <label style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--border-color);border-radius:12px;background:rgba(255,255,255,.035)">
+      <input type="checkbox" id="bcgAdminDownloadsEnabled" style="width:18px;height:18px;accent-color:#fff">
+      <span><strong>Mostrar botão de download</strong><br><small class="small-note">Ativado: aparece no player para todos. Desativado: fica oculto.</small></span>
+    </label>
+    <button type="button" class="btn-green" style="margin-top:12px" onclick="saveBcgDownloadSetting()"><i class="fa-solid fa-floppy-disk"></i> Guardar configuração</button>
+    <div id="bcgAdminDownloadsStatus" class="admin-media-status" aria-live="polite"></div>
+    <p class="small-note" style="margin-top:10px">Nota: os ficheiros MP4 podem ser descarregados. Streams HLS (.m3u8) precisam de um ficheiro MP4 disponibilizado para download.</p>
+  </div>
+</div>
 <div id="admin-tab-media" class="admin-tab-panel active">
                     <div style="background:var(--bg-card);padding:14px;border-radius:12px;border:1px solid var(--border-color)">
                         <h4 style="margin-bottom:10px">Gerir vídeo e legendas</h4>
@@ -3362,7 +3375,7 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                 <div class="liquid-player" id="liquidPlayer" aria-label="Player Liquid Glass">
                     <div class="liquid-top">
                         <div class="liquid-title" id="liquidPlayerTitle">Vídeo</div>
-                        <button class="glass-btn" type="button" onclick="toggleLiquidSettings(event)" title="Definições" aria-label="Definições"><i class="fa-solid fa-gear"></i></button>
+                        <button class="glass-btn bcg-quality-shortcut" type="button" onclick="openBcgQualityMenu(event)" title="Qualidade do vídeo" aria-label="Qualidade do vídeo"><i class="fa-solid fa-display"></i><span>Qualidade</span></button><button class="glass-btn" type="button" onclick="toggleLiquidSettings(event)" title="Definições" aria-label="Definições"><i class="fa-solid fa-gear"></i></button>
                     </div>
                     <div class="liquid-status" id="liquidStatus"></div>
                     <div class="liquid-bottom">
@@ -3377,7 +3390,7 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                             <button class="glass-btn" type="button" id="liquidSubtitleBtn" onclick="toggleEpisodeSubtitles()" title="Ativar/desativar legendas" aria-label="Ativar/desativar legendas" aria-pressed="false" style="display:none"><i class="fa-solid fa-closed-captioning"></i><span class="cc-label">CC</span></button>
                             <div class="liquid-time"><span id="liquidCurrentTime">0:00</span> / <span id="liquidDuration">0:00</span></div>
                             <div class="liquid-spacer"></div>
-                            <button class="glass-btn" type="button" onclick="takeLiquidScreenshot()" title="Tirar print em alta qualidade" aria-label="Tirar print em alta qualidade"><i class="fa-solid fa-camera"></i></button>
+                            <button class="glass-btn bcg-download-episode" id="bcgDownloadEpisodeBtn" type="button" onclick="downloadBcgEpisode()" title="Descarregar episódio" aria-label="Descarregar episódio"><i class="fa-solid fa-download"></i></button><button class="glass-btn" type="button" onclick="takeLiquidScreenshot()" title="Tirar print em alta qualidade" aria-label="Tirar print em alta qualidade"><i class="fa-solid fa-camera"></i></button>
                             <button class="glass-btn" type="button" onclick="toggleLiquidPiP()" title="Picture-in-Picture" aria-label="Picture-in-Picture"><i class="fa-solid fa-clone"></i></button>
                             <button class="glass-btn" type="button" onclick="toggleLiquidFullscreen()" title="Ecrã inteiro" aria-label="Ecrã inteiro"><i class="fa-solid fa-expand"></i></button>
                             <div class="liquid-settings" id="liquidSettings" role="dialog" aria-label="Definições do player">
@@ -11747,6 +11760,100 @@ function installRooms(){
 let updateShown=false;
 async function checkVersion(){try{const r=await fetch('/version.json?check='+Date.now(),{cache:'no-store'});if(!r.ok)return;const d=await r.json();if(String(d.version||'')===BUILD||updateShown)return;updateShown=true;const bar=document.createElement('div');bar.className='bcg-update-available';bar.innerHTML='<div class="bcg-update-copy"><strong>Nova versão do BCG Hub disponível</strong><br>Atualiza para receber as últimas melhorias.</div><button type="button" id="bcgUpdateNow">Atualizar agora</button><button type="button" class="bcg-update-dismiss" id="bcgUpdateLater" aria-label="Fechar">×</button>';document.body.appendChild(bar);$('bcgUpdateNow')?.addEventListener('click',()=>{const u=new URL(location.href);u.searchParams.set('update',d.version);location.replace(u.toString());});$('bcgUpdateLater')?.addEventListener('click',()=>bar.remove());}catch(e){}}
 function boot(){installRooms();bindTimeline();const mo=new MutationObserver(()=>{installRooms();bindTimeline();});mo.observe(document.body,{childList:true,subtree:true});checkVersion();setInterval(checkVersion,90000);setTimeout(()=>window.renderEpisodesList?.(),350);}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
+</script>
+
+<style id="bcg-quality-download-v1">
+.bcg-quality-shortcut{gap:6px;padding-inline:10px;width:auto;min-width:42px}
+.bcg-quality-shortcut span{font-size:.68rem;font-weight:800}
+.bcg-download-episode{flex:0 0 38px}
+.bcg-download-episode[hidden]{display:none!important}
+#admin-tab-downloads .small-note{color:var(--text-muted);font-size:.76rem;line-height:1.45}
+@media(max-width:520px){.bcg-quality-shortcut span{display:none}}
+.watch-room-active #episodeCommentsSection,.watch-room-active .episode-comments,.watch-room-active #playerCommentsMount{display:none!important}
+</style>
+<script id="bcg-quality-download-v1">
+(function(){
+'use strict';
+const byId=id=>document.getElementById(id);
+function getSetting(){try{return siteSettings.downloadEnabled!==false}catch(e){return localStorage.getItem('cn_bcg_download_enabled')!=='false'}}
+function setDownloadVisibility(){const b=byId('bcgDownloadEpisodeBtn');if(b)b.hidden=!getSetting();}
+window.openBcgQualityMenu=function(ev){
+  ev?.stopPropagation?.();
+  const panel=byId('liquidSettings'),select=byId('liquidQualitySelect');
+  if(!panel||!select)return;
+  if(!panel.classList.contains('open'))panel.classList.add('open');
+  try{select.focus();select.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(e){}
+  if(typeof refreshLiquidQualityOptions==='function')refreshLiquidQualityOptions();
+};
+window.downloadBcgEpisode=async function(){
+  const p=byId('mainVideoPlayer');if(!p)return;
+  const d=(typeof customVideos!=='undefined'&&currentPlayingEp)?(customVideos[currentPlayingEp.season+'_'+currentPlayingEp.idx]||{}):{};
+  let url=String(p.currentSrc||p.src||d.videoUrl||'').trim();
+  const name=String(currentPlayingEp?.title||d.title||'Episodio BCG Hub').replace(/[^a-z0-9áéíóúàâêôãõç _-]/gi,'').trim().replace(/\s+/g,'-')||'Episodio';
+  try{
+    let blob=null;
+    if(d.blobKey&&typeof getMedia==='function'){blob=await getMedia(d.blobKey);}
+    if(!blob&&url){
+      if(/\.m3u8(?:[?#]|$)/i.test(url)){if(typeof liquidStatus==='function')liquidStatus('Este episódio está em streaming HLS. É necessário disponibilizar um MP4 para download.',3500);return;}
+      const response=await fetch(url,{mode:'cors'});
+      if(!response.ok)throw new Error('O servidor não permitiu descarregar este ficheiro.');
+      blob=await response.blob();
+    }
+    if(!blob)throw new Error('Não foi encontrado um ficheiro MP4 disponível para download.');
+    const objectUrl=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=objectUrl;a.download=name+'.mp4';document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(objectUrl),60000);
+    if(typeof liquidStatus==='function')liquidStatus('Download iniciado.');
+  }catch(e){if(typeof liquidStatus==='function')liquidStatus(e?.message||'Não foi possível descarregar o episódio.',3500);}
+};
+window.saveBcgDownloadSetting=async function(){
+  if(typeof isAdminUser==='function'&&!isAdminUser())return alert('Sem acesso de administrador.');
+  const enabled=!!byId('bcgAdminDownloadsEnabled')?.checked;
+  try{
+    siteSettings={...siteSettings,downloadEnabled:enabled};
+    localStorage.setItem('cn_site_settings',JSON.stringify(siteSettings));
+    localStorage.setItem('cn_bcg_download_enabled',String(enabled));
+    if(typeof save==='function'&&typeof announcements!=='undefined')await save('cn_announcements',announcements);
+    setDownloadVisibility();
+    const s=byId('bcgAdminDownloadsStatus');if(s){s.className='admin-media-status active success';s.textContent=enabled?'✓ Botão de download ativado para todos.':'✓ Botão de download ocultado para todos.';}
+  }catch(e){const s=byId('bcgAdminDownloadsStatus');if(s){s.className='admin-media-status active error';s.textContent='Não foi possível guardar a configuração: '+(e?.message||e);}}
+};
+function syncAdminDownloadControl(){const c=byId('bcgAdminDownloadsEnabled');if(c)c.checked=getSetting();}
+function installPlayerButtons(){
+  const top=document.querySelector('#liquidPlayer .liquid-top');
+  if(top&&!top.querySelector('.bcg-quality-shortcut')){
+    const gear=top.querySelector('button[onclick*="toggleLiquidSettings"]');
+    if(gear){const b=document.createElement('button');b.type='button';b.className='glass-btn bcg-quality-shortcut';b.title='Qualidade do vídeo';b.setAttribute('aria-label','Qualidade do vídeo');b.innerHTML='<i class="fa-solid fa-display"></i><span>Qualidade</span>';b.addEventListener('click',window.openBcgQualityMenu);gear.before(b);}
+  }
+  const row=document.querySelector('#liquidPlayer .liquid-row');
+  if(row&&!byId('bcgDownloadEpisodeBtn')){
+    const camera=row.querySelector('button[onclick*="takeLiquidScreenshot"]');
+    if(camera){const b=document.createElement('button');b.type='button';b.id='bcgDownloadEpisodeBtn';b.className='glass-btn bcg-download-episode';b.title='Descarregar episódio';b.setAttribute('aria-label','Descarregar episódio');b.innerHTML='<i class="fa-solid fa-download"></i>';b.addEventListener('click',window.downloadBcgEpisode);camera.before(b);}
+  }
+  setDownloadVisibility();
+}
+function installAdminTab(){
+  const tabs=document.querySelector('.admin-tabs'),media=byId('admin-tab-media');
+  if(tabs&&!tabs.querySelector('[data-admin-tab="downloads"]')){
+    const b=document.createElement('button');b.type='button';b.className='admin-tab';b.dataset.adminTab='downloads';b.innerHTML='<i class="fa-solid fa-download"></i> Downloads';
+    b.addEventListener('click',()=>{if(typeof switchAdminTab==='function')switchAdminTab('downloads');syncAdminDownloadControl();});
+    const appearance=tabs.querySelector('[data-admin-tab="appearance"]');(appearance||null)?.before(b);if(!appearance)tabs.appendChild(b);
+  }
+  if(media&&!byId('admin-tab-downloads')){
+    const panel=document.createElement('div');panel.id='admin-tab-downloads';panel.className='admin-tab-panel';
+    panel.innerHTML='<div style="background:var(--bg-card);padding:16px;border-radius:14px;border:1px solid var(--border-color)"><h4 style="margin-bottom:8px"><i class="fa-solid fa-download"></i> Downloads dos episódios</h4><p class="small-note" style="margin-bottom:14px">Controla se os utilizadores podem ver o botão de download no player.</p><label style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--border-color);border-radius:12px;background:rgba(255,255,255,.035)"><input type="checkbox" id="bcgAdminDownloadsEnabled" style="width:18px;height:18px;accent-color:#fff"><span><strong>Mostrar botão de download</strong><br><small class="small-note">Ativado: aparece no player para todos. Desativado: fica oculto.</small></span></label><button type="button" class="btn-green" style="margin-top:12px" onclick="saveBcgDownloadSetting()"><i class="fa-solid fa-floppy-disk"></i> Guardar configuração</button><div id="bcgAdminDownloadsStatus" class="admin-media-status" aria-live="polite"></div><p class="small-note" style="margin-top:10px">Streams HLS (.m3u8) necessitam de um ficheiro MP4 disponibilizado para download.</p></div>';
+    media.before(panel);
+  }
+  syncAdminDownloadControl();
+}
+function boot(){
+  if(typeof siteSettings==='object'&&typeof siteSettings.downloadEnabled!=='boolean')siteSettings.downloadEnabled=localStorage.getItem('cn_bcg_download_enabled')!=='false';
+  installPlayerButtons();installAdminTab();
+  const mo=new MutationObserver(()=>{installPlayerButtons();installAdminTab();});
+  mo.observe(document.body,{childList:true,subtree:true});
+}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
 </script>
