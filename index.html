@@ -7177,7 +7177,11 @@ async function applyProfileMusicSelection(track){
       const height=Number(target);let index=-1;
       activeHls.levels.forEach((level,i)=>{if(Number(level.height)===height&&(index<0||Number(level.bitrate||0)>Number(activeHls.levels[index].bitrate||0)))index=i;});
       if(index<0){refreshLiquidQualityOptions();liquidStatus(target+'p não está disponível nesta fonte.');return;}
-      activeHls.currentLevel=index;activeHls.nextLevel=index;liquidStatus('Qualidade '+target+'p');
+      // A seleção manual deve respeitar a resolução escolhida, mesmo em ecrãs grandes.
+      // Para 1080p escolhe o nível com maior bitrate disponível nessa resolução.
+      activeHls.autoLevelCapping=-1;
+      activeHls.currentLevel=index;activeHls.nextLevel=index;
+      liquidStatus('Qualidade '+target+'p · melhor bitrate disponível');
     }
     function toggleLiquidSettings(event){event?.stopPropagation();refreshLiquidQualityOptions();document.getElementById('liquidSettings')?.classList.toggle('open')}
     function toggleLiquidCaptions(){
