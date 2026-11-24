@@ -849,6 +849,9 @@
         .liquid-settings.open {display:block}
         .liquid-settings h4 {font-size:.82rem;margin-bottom:12px}
         .liquid-settings{z-index:30;max-height:min(60vh,340px);overflow:auto;width:min(280px,calc(100vw - 42px));padding:14px}
+        .liquid-quality-setting-row{display:flex;flex-direction:column;align-items:stretch;gap:8px;margin:0 0 12px!important}
+        .liquid-quality-setting-row label{display:flex;align-items:center;gap:8px;font-weight:800;color:#fff}
+        .liquid-quality-select{width:100%;max-width:none;min-height:42px;font-size:16px}
         .liquid-audio-setting-row{display:flex;flex-direction:column;align-items:stretch;gap:8px;margin-top:0!important}
         .liquid-audio-setting-row label{display:flex;align-items:center;gap:8px;font-weight:800;color:#fff}
         .liquid-audio-select{width:100%;max-width:none;min-height:42px;font-size:16px}
@@ -3379,6 +3382,16 @@ Uma URL por linha. Os ficheiros ficam alojados no URL indicado."></textarea></di
                             <button class="glass-btn" type="button" onclick="toggleLiquidFullscreen()" title="Ecrã inteiro" aria-label="Ecrã inteiro"><i class="fa-solid fa-expand"></i></button>
                             <div class="liquid-settings" id="liquidSettings" role="dialog" aria-label="Definições do player">
                                 <h4><i class="fa-solid fa-sliders"></i> Definições</h4>
+                                <div class="liquid-setting-row liquid-quality-setting-row">
+                                    <label for="liquidQualitySelect"><i class="fa-solid fa-display"></i> Qualidade</label>
+                                    <select id="liquidQualitySelect" class="liquid-select liquid-quality-select" aria-label="Selecionar qualidade" onchange="changeHlsQuality(this.value)">
+                                        <option value="auto">Automática</option>
+                                        <option value="1080" disabled>1080p — indisponível</option>
+                                        <option value="720" disabled>720p — indisponível</option>
+                                        <option value="480" disabled>480p — indisponível</option>
+                                    </select>
+                                </div>
+                                <div id="liquidQualityHint" class="liquid-hint">A qualidade disponível depende da resolução do vídeo original.</div>
                                 <div class="liquid-setting-row liquid-audio-setting-row">
                                     <label for="liquidAudioSelect"><i class="fa-solid fa-volume-high"></i> Áudio</label>
                                     <select id="liquidAudioSelect" class="liquid-select liquid-audio-select" aria-label="Selecionar áudio" onchange="selectEpisodePlayerAudio(this.value)">
@@ -6498,7 +6511,7 @@ async function applyProfileMusicSelection(track){
       const restore=()=>{if(restored)return;restored=true;try{if(Number.isFinite(p.duration)&&p.duration>0)p.currentTime=Math.min(position,p.duration);else if(position>0)p.currentTime=position;}catch(e){}if(wasPlaying)p.play().catch(()=>{});syncLiquidPlayerUI();};
       if(isHls&&window.Hls&&Hls.isSupported()){
         activeHls=new Hls({enableWorker:true,lowLatencyMode:false,backBufferLength:60,maxBufferLength:30,maxMaxBufferLength:60,capLevelToPlayerSize:true,startLevel:-1});
-        activeHls.attachMedia(p);activeHls.on(Hls.Events.MANIFEST_PARSED,()=>{restore();hidePlayerError();setEpisodePlayerLoading(false);});
+        activeHls.attachMedia(p);activeHls.on(Hls.Events.MANIFEST_PARSED,()=>{restore();hidePlayerError();setEpisodePlayerLoading(false);refreshLiquidQualityOptions();});
         activeHls.on(Hls.Events.ERROR,(event,data)=>{if(!data?.fatal)return;if(data.type===Hls.ErrorTypes.MEDIA_ERROR){try{activeHls.recoverMediaError();return}catch(e){}}showPlayerError('Não foi possível carregar o episódio original.');});
         activeHls.loadSource(url);
       }else{p.src=url;p.load();p.addEventListener('loadedmetadata',restore,{once:true});p.addEventListener('canplay',()=>{hidePlayerError();setEpisodePlayerLoading(false);syncLiquidPlayerUI()},{once:true});}
@@ -6526,7 +6539,7 @@ async function applyProfileMusicSelection(track){
       const restorePosition=()=>{if(restored)return;restored=true;try{if(Number.isFinite(p.duration)&&p.duration>0)p.currentTime=Math.min(position,p.duration);else if(position>0)p.currentTime=position;}catch(e){}if(wasPlaying)p.play().catch(()=>{});syncLiquidPlayerUI();};
       if(isHls&&window.Hls&&Hls.isSupported()){
         activeHls=new Hls({enableWorker:true,lowLatencyMode:false,backBufferLength:60,maxBufferLength:30,maxMaxBufferLength:60,capLevelToPlayerSize:true,startLevel:-1});
-        activeHls.attachMedia(p);activeHls.on(Hls.Events.MANIFEST_PARSED,()=>{restorePosition();hidePlayerError();setEpisodePlayerLoading(false);});
+        activeHls.attachMedia(p);activeHls.on(Hls.Events.MANIFEST_PARSED,()=>{restorePosition();hidePlayerError();setEpisodePlayerLoading(false);refreshLiquidQualityOptions();});
         activeHls.on(Hls.Events.ERROR,(event,data)=>{console.error('HLS idioma error',data);if(!data?.fatal)return;if(data.type===Hls.ErrorTypes.MEDIA_ERROR){try{activeHls.recoverMediaError();return}catch(e){}}showPlayerError('Não foi possível carregar o episódio deste idioma. Verifica se a URL é um stream HLS/Mux válido.');});activeHls.loadSource(url);
       }else{p.src=url;p.load();p.addEventListener('loadedmetadata',restorePosition,{once:true});p.addEventListener('canplay',()=>{hidePlayerError();setEpisodePlayerLoading(false);syncLiquidPlayerUI()},{once:true});}
       syncLiquidPlayerUI();
@@ -7133,7 +7146,27 @@ async function applyProfileMusicSelection(track){
     function setLiquidVolume(v){const p=document.getElementById('mainVideoPlayer'),a=document.getElementById('episodeAudioPlayer');if(!p)return;const vol=Math.max(0,Math.min(1,Number(v)));p.volume=vol;if(activeAudioTrack&&a){a.volume=vol;a.muted=vol===0;p.muted=true;}else p.muted=vol===0;syncLiquidPlayerUI()}
     function toggleLiquidMute(){const p=document.getElementById('mainVideoPlayer'),a=document.getElementById('episodeAudioPlayer');if(!p)return;if(activeAudioTrack&&a){a.muted=!a.muted;p.muted=true;}else p.muted=!p.muted;syncLiquidPlayerUI()}
     function changeLiquidSpeed(v){const p=document.getElementById('mainVideoPlayer');if(!p)return;p.playbackRate=parseFloat(v);liquidStatus(`Velocidade ${v}×`)}
-    function toggleLiquidSettings(event){event?.stopPropagation();document.getElementById('liquidSettings')?.classList.toggle('open')}
+    function refreshLiquidQualityOptions(){
+      const select=document.getElementById('liquidQualitySelect'),hint=document.getElementById('liquidQualityHint');if(!select)return;
+      const selected=String(select.value||'auto');
+      const levels=activeHls&&Array.isArray(activeHls.levels)?activeHls.levels:[];
+      const heights=[1080,720,480];
+      const available=heights.map(h=>({height:h,index:levels.reduce((best,level,i)=>Number(level.height)===h&&(best<0||Number(level.bitrate||0)>=Number(levels[best].bitrate||0))?i:best,-1)}));
+      for(const item of available){const option=select.querySelector('option[value="'+item.height+'"]');if(option){option.disabled=item.index<0;option.textContent=item.index<0?item.height+'p — indisponível':item.height+'p';}}
+      const auto=select.querySelector('option[value="auto"]');if(auto)auto.textContent=levels.length?'Automática':'Automática (nativa)';
+      if(levels.length){const current=activeHls.currentLevel>=0?levels[activeHls.currentLevel]:null;const label=current&&current.height?current.height+'p':'automática';if(available.some(x=>String(x.height)===selected&&x.index>=0))select.value=selected;else if(selected!=='auto')select.value='auto';if(hint)hint.textContent=levels.length+' níveis disponíveis · Reprodução atual: '+label+'. A resolução máxima depende da fonte.';}
+      else{select.value='auto';if(hint)hint.textContent='Este vídeo não disponibiliza várias resoluções HLS. Para escolher 1080p, 720p ou 480p, a fonte tem de fornecer essas versões.';}
+    }
+    function changeHlsQuality(value){
+      if(!activeHls||!Array.isArray(activeHls.levels)||!activeHls.levels.length){refreshLiquidQualityOptions();liquidStatus('Este vídeo não permite alterar a qualidade.');return;}
+      const target=String(value||'auto');
+      if(target==='auto'){activeHls.currentLevel=-1;activeHls.nextLevel=-1;liquidStatus('Qualidade automática');refreshLiquidQualityOptions();return;}
+      const height=Number(target);let index=-1;
+      activeHls.levels.forEach((level,i)=>{if(Number(level.height)===height&&(index<0||Number(level.bitrate||0)>Number(activeHls.levels[index].bitrate||0)))index=i;});
+      if(index<0){refreshLiquidQualityOptions();liquidStatus(target+'p não está disponível nesta fonte.');return;}
+      activeHls.currentLevel=index;activeHls.nextLevel=index;liquidStatus('Qualidade '+target+'p');
+    }
+    function toggleLiquidSettings(event){event?.stopPropagation();refreshLiquidQualityOptions();document.getElementById('liquidSettings')?.classList.toggle('open')}
     function toggleLiquidCaptions(){
       const p=document.getElementById('mainVideoPlayer');if(!p)return;
       if(activeWatchPartyRoom&&roomSubtitleCues.length){
@@ -7541,6 +7574,7 @@ function commentLikedByMe(id){return !!currentUser&&episodeCommentLikes.some(x=>
       p.defaultPlaybackRate=1;
       p.playbackRate=1;
       setLiquidPlayerActive(false);
+      const qualitySelect=document.getElementById('liquidQualitySelect');if(qualitySelect)qualitySelect.value='auto';refreshLiquidQualityOptions();
       // On the inline episode page, keep the custom controller visible while
       // an MP4 blob is being retrieved, instead of flashing native controls/black.
       if(window.__episodeInlinePlayer)setLiquidPlayerActive(true);
@@ -7595,6 +7629,7 @@ function commentLikedByMe(id){return !!currentUser&&episodeCommentLikes.some(x=>
           p.defaultPlaybackRate=1;
           p.playbackRate=1;
           syncLiquidPlayerUI();
+          refreshLiquidQualityOptions();
         });
         activeHls.on(Hls.Events.ERROR,(event,data)=>{
           console.error('HLS error',data);
