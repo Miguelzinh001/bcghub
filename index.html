@@ -11781,7 +11781,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 (function(){
 'use strict';
 const byId=id=>document.getElementById(id);
-function getSetting(){try{return siteSettings.downloadEnabled!==false}catch(e){return localStorage.getItem('cn_bcg_download_enabled')!=='false'}}
+function getSetting(){try{if(siteSettings.downloadEnabled===false)return false;if(siteSettings.downloadEnabled===true)return true;return localStorage.getItem('cn_bcg_download_enabled')!=='false'}catch(e){return localStorage.getItem('cn_bcg_download_enabled')!=='false'}}
 function setDownloadVisibility(){const b=byId('bcgDownloadEpisodeBtn');if(b)b.hidden=!getSetting();}
 window.openBcgQualityMenu=function(ev){
   ev?.stopPropagation?.();
@@ -11800,7 +11800,7 @@ window.downloadBcgEpisode=async function(){
     let blob=null;
     if(d.blobKey&&typeof getMedia==='function'){blob=await getMedia(d.blobKey);}
     if(!blob&&url){
-      if(/\.m3u8(?:[?#]|$)/i.test(url)){if(typeof liquidStatus==='function')liquidStatus('Este episódio está em streaming HLS. É necessário disponibilizar um MP4 para download.',3500);return;}
+      if(/\.m3u8(?:[?#]|$)/i.test(url)){const mux=url.match(/^https?:\/\/stream\.mux\.com\/([a-zA-Z0-9_-]+)\.m3u8(\?.*)?$/i);if(mux){url='https://stream.mux.com/'+mux[1]+'/high.mp4'+(mux[2]||'');}else{if(typeof liquidStatus==='function')liquidStatus('Este episódio está em streaming HLS. É necessário disponibilizar um MP4 para download.',3500);return;}}
       const response=await fetch(url,{mode:'cors'});
       if(!response.ok)throw new Error('O servidor não permitiu descarregar este ficheiro.');
       blob=await response.blob();
