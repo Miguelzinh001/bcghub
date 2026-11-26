@@ -6896,20 +6896,27 @@ async function applyProfileMusicSelection(track){
       const modal=document.getElementById('liquidClipModal');if(modal){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}
     }
     function liquidClipMimeType(){
+      // Android Chromium frequently supports WebM but not MP4 MediaRecorder.
       const options=[
         'video/mp4;codecs="avc1.640028,mp4a.40.2"',
         'video/mp4;codecs="avc1.4d0028,mp4a.40.2"',
-        'video/mp4;codecs="avc1.424028,mp4a.40.2"',
-        'video/mp4'
+        'video/mp4',
+        'video/webm;codecs=vp9,opus',
+        'video/webm;codecs=vp8,opus',
+        'video/webm'
       ];
       return options.find(x=>window.MediaRecorder?.isTypeSupported?.(x))||'';
     }
     async function prepareLiquidClip1080(p){
       if(!activeHls||!Array.isArray(activeHls.levels)||!activeHls.levels.length)return null;
       const previous={currentLevel:activeHls.currentLevel,autoLevelEnabled:activeHls.autoLevelEnabled,autoLevelCapping:activeHls.autoLevelCapping,capLevelToPlayerSize:activeHls.capLevelToPlayerSize};
-      const candidates=activeHls.levels.map((l,i)=>({i,h:Number(l.height||0),w:Number(l.width||0)})).filter(x=>x.h>0).sort((a,b)=>b.h-a.h);
-      const max=candidates[0]?.i ?? (activeHls.levels.length-1);
-      try{activeHls.capLevelToPlayerSize=false;activeHls.autoLevelCapping=-1;activeHls.autoLevelEnabled=false;activeHls.currentLevel=max;activeHls.nextLevel=max;await new Promise(r=>setTimeout(r,350));}catch(e){console.warn('1080 HLS:',e)}
+      const candidates=activeHls.levels.map((l,i)=>({i,h:Number(l.height||0),w:Number(l.width||0),bitrate:Number(l.bitrate||0)})).filter(x=>x.h>0);
+      // Prefer the sharpest stream up to Full HD. Avoid forcing 1440p/4K
+      // encodes on phones, which makes real-time clip recording stutter.
+      const atOrBelow1080=candidates.filter(x=>x.h<=1080).sort((a,b)=>b.h-a.h||b.bitrate-a.bitrate);
+      const chosen=atOrBelow1080[0]||candidates.sort((a,b)=>a.h-b.h||a.bitrate-b.bitrate)[0];
+      const max=chosen?.i ?? (activeHls.levels.length-1);
+      try{activeHls.capLevelToPlayerSize=false;activeHls.autoLevelCapping=-1;activeHls.autoLevelEnabled=false;activeHls.currentLevel=max;activeHls.nextLevel=max;await new Promise(r=>setTimeout(r,650));}catch(e){console.warn('1080 HLS:',e)}
       return previous;
     }
     function restoreLiquidHlsAfterClip(previous){if(!previous||!activeHls)return;try{activeHls.capLevelToPlayerSize=previous.capLevelToPlayerSize;activeHls.autoLevelCapping=previous.autoLevelCapping;activeHls.autoLevelEnabled=previous.autoLevelEnabled;activeHls.currentLevel=previous.currentLevel;activeHls.nextLevel=previous.currentLevel}catch(e){} }
@@ -6962,7 +6969,7 @@ async function applyProfileMusicSelection(track){
       resetLiquidClipPreview();
 
       const selectedMimeType=liquidClipMimeType();
-      if(!selectedMimeType)return alert('Este navegador não consegue criar MP4 diretamente. Usa Chrome/Brave atualizado.');
+      if(!selectedMimeType)return alert('Este navegador não suporta gravação de vídeo. Atualiza o Chrome/Brave ou experimenta outro navegador.');
 
       liquidClipRecording=true;if(btn)btn.disabled=true;liquidClipRestore={time:p.currentTime,paused:p.paused};liquidClipChunks=[];
       window.__clipBusy=true;let wakeLock=null,hlsPrev=null,onWait=null,onPlay=null;
@@ -7030,8 +7037,8 @@ async function applyProfileMusicSelection(track){
 
         const sourceWidth=p.videoWidth||1920,sourceHeight=p.videoHeight||1080;
         // Bitrate mais equilibrado para evitar engasgos do MediaRecorder em telemóveis.
-        const targetVideoBitrate=Math.min(8000000,Math.max(4000000,Math.round(sourceWidth*sourceHeight*0.0038)));
-        recorder=new MediaRecorder(stream,{mimeType:selectedMimeType,videoBitsPerSecond:targetVideoBitrate,audioBitsPerSecond:192000});
+        const targetVideoBitrate=sourceWidth>=1920?7500000:sourceWidth>=1280?5500000:3500000;
+        recorder=new MediaRecorder(stream,{mimeType:selectedMimeType,videoBitsPerSecond:targetVideoBitrate,audioBitsPerSecond:160000});
         liquidClipRecorder=recorder;
         recorder.ondataavailable=e=>{if(e.data&&e.data.size)liquidClipChunks.push(e.data)};
         const finished=new Promise((resolve,reject)=>{
@@ -7058,16 +7065,18 @@ async function applyProfileMusicSelection(track){
         },50);
         await finished;
 
-        const mp4=new Blob(liquidClipChunks,{type:'video/mp4'});
-        if(!mp4.size)throw new Error('O clip ficou vazio.');
-        liquidClipFinalBlob=mp4;liquidClipFinalUrl=URL.createObjectURL(mp4);
-        const base=(currentPlayingEp?.title||'Noir-Streaming-Clip').replace(/[^a-z0-9áéíóúàâêôãõç _-]/gi,'').trim().replace(/\s+/g,'-')||'Noir-Streaming-Clip';
-        liquidClipFinalFilename=`${base}_${fmtPlayerTime(start).replace(/:/g,'-')}-${fmtPlayerTime(end).replace(/:/g,'-')}_1080p.mp4`;
+        const outputMime=selectedMimeType.split(';')[0]||'video/webm';
+        const clipBlob=new Blob(liquidClipChunks,{type:outputMime});
+        if(!clipBlob.size)throw new Error('O clip ficou vazio.');
+        liquidClipFinalBlob=clipBlob;liquidClipFinalUrl=URL.createObjectURL(clipBlob);
+        const extension=outputMime.includes('mp4')?'mp4':'webm';
+        const base=(currentPlayingEp?.title||'BCG-Hub-Clip').replace(/[^a-z0-9áéíóúàâêôãõç _-]/gi,'').trim().replace(/\s+/g,'-')||'BCG-Hub-Clip';
+        liquidClipFinalFilename=`${base}_${fmtPlayerTime(start).replace(/:/g,'-')}-${fmtPlayerTime(end).replace(/:/g,'-')}_1080p.${extension}`;
         const preview=document.getElementById('liquidClipPreview'),pv=document.getElementById('liquidClipPreviewVideo');
         if(pv){pv.src=liquidClipFinalUrl;pv.load()}
         if(preview)preview.style.display='flex';const dl=document.getElementById('liquidClipDownloadBtn');if(dl)dl.style.display='block';
-        if(result){result.innerHTML=`✓ <b>MP4 pronto.</b><br>Pré-visualiza o clip depois de o criar.`;result.classList.add('show')}
-        liquidStatus('Clip MP4 pronto!',1800);
+        if(result){result.innerHTML=`✓ <b>Clip ${extension.toUpperCase()} pronto.</b><br>Pré-visualiza o clip e descarrega-o.`;result.classList.add('show')}
+        liquidStatus(`Clip ${extension.toUpperCase()} pronto!`,1800);
       }catch(err){
         console.error('createLiquidClip:',err);
         if(result){result.textContent=`Não foi possível criar o clip: ${err?.message||err}`;result.classList.add('show')}
@@ -11643,71 +11652,82 @@ window.addEventListener('DOMContentLoaded',()=>{addUpgradeUi();loadFriendNicknam
   function cleanPreviewVideo(){clearTimeout(previewTimer);previewRequestId++;if(previewHls){try{previewHls.destroy()}catch{}previewHls=null;}if(previewVideo){try{previewVideo.pause();previewVideo.removeAttribute('src');previewVideo.load();previewVideo.remove();}catch{}previewVideo=null;}previewSource='';}
   function ensurePreviewSource(){
     const p=$('mainVideoPlayer');
-    const source=String(window.__bcgCurrentVideoSource||p?.currentSrc||p?.src||'');
+    // Hls.js uses a blob currentSrc; its original playlist URL is required here.
+    const source=String(window.__bcgCurrentVideoSource||activeHls?.url||p?.currentSrc||p?.src||'');
     if(!source)return null;
     if(source===previewSource&&previewVideo)return previewVideo;
     cleanPreviewVideo();previewSource=source;
     const v=document.createElement('video');
-    v.crossOrigin='anonymous';v.muted=true;v.playsInline=true;v.preload='auto';
-    v.style.cssText='position:fixed;left:-10000px;top:-10000px;width:2px;height:2px;opacity:0;pointer-events:none';
+    v.crossOrigin='anonymous';v.muted=true;v.playsInline=true;v.preload='auto';v.setAttribute('playsinline','');
+    v.disablePictureInPicture=true;
+    v.style.cssText='position:fixed;left:-10000px;top:0;width:640px;height:360px;opacity:.01;pointer-events:none';
     document.body.appendChild(v);previewVideo=v;
     if(/\.m3u8(?:[?#]|$)/i.test(source)&&window.Hls&&Hls.isSupported()){
-      previewHls=new Hls({enableWorker:true,lowLatencyMode:false,maxBufferLength:20,maxMaxBufferLength:30});
+      previewHls=new Hls({enableWorker:true,lowLatencyMode:false,capLevelToPlayerSize:false,maxBufferLength:12,maxMaxBufferLength:24});
       previewHls.loadSource(source);previewHls.attachMedia(v);
     }else{v.src=source;v.load();}
     return v;
   }
   function captureTimelineFrame(target){
     const v=ensurePreviewSource();if(!v)return;
-    const request=++previewRequestId;
-    let finished=false;
-    const fail=()=>{if(request!==previewRequestId||finished)return;finished=true;const label=$('bcgTimelinePreviewTime');if(label)label.textContent=fmtPlayerTime(target)+' · imagem indisponível';};
+    const request=++previewRequestId;let finished=false;
+    const fail=()=>{if(request!==previewRequestId||finished)return;finished=true;const label=$('bcgTimelinePreviewTime');if(label)label.textContent=fmtPlayerTime(target)+' · pré-visualização indisponível';};
     const draw=()=>{
       if(request!==previewRequestId||finished)return;
-      if(v.readyState<2){v.addEventListener('loadeddata',draw,{once:true});return;}
+      if(v.readyState<2||!v.videoWidth||!v.videoHeight){requestAnimationFrame(()=>draw());return;}
       try{
-        const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;
-        const ctx=canvas.getContext('2d');ctx.drawImage(v,0,0,canvas.width,canvas.height);
-        const frame=canvas.toDataURL('image/jpeg',.82);
-        finished=true;showTimelinePreview(frame,target);
+        const ratio=v.videoWidth/v.videoHeight,canvas=document.createElement('canvas');
+        canvas.width=360;canvas.height=Math.max(120,Math.round(360/ratio));
+        const ctx=canvas.getContext('2d',{alpha:false});if(!ctx)throw new Error('Canvas indisponível');
+        ctx.drawImage(v,0,0,canvas.width,canvas.height);
+        finished=true;showTimelinePreview(canvas.toDataURL('image/jpeg',.86),target);
       }catch(e){fail();}
     };
     const seek=()=>{
       if(request!==previewRequestId||finished)return;
-      const duration=Number(v.duration);
-      if(!Number.isFinite(duration)||duration<=0){fail();return;}
+      const duration=Number(v.duration);if(!Number.isFinite(duration)||duration<=0){fail();return;}
       const seekTo=Math.max(0,Math.min(duration-.08,Number(target)||0));
-      if(Math.abs(v.currentTime-seekTo)<.04&&v.readyState>=2){draw();return;}
-      const onSeeked=()=>{v.removeEventListener('seeked',onSeeked);draw();};
+      if(Math.abs(v.currentTime-seekTo)<.04&&!v.seeking&&v.readyState>=2){draw();return;}
+      const onSeeked=()=>{
+        v.removeEventListener('seeked',onSeeked);if(request!==previewRequestId||finished)return;
+        if(typeof v.requestVideoFrameCallback==='function')v.requestVideoFrameCallback(()=>draw());else requestAnimationFrame(draw);
+      };
       v.addEventListener('seeked',onSeeked,{once:true});
       try{v.currentTime=seekTo;}catch(e){v.removeEventListener('seeked',onSeeked);fail();}
     };
     if(v.readyState>=1&&Number.isFinite(v.duration)&&v.duration>0)seek();
-    else{
-      const onMeta=()=>{v.removeEventListener('loadedmetadata',onMeta);seek();};
-      v.addEventListener('loadedmetadata',onMeta,{once:true});
-      v.addEventListener('error',fail,{once:true});
-    }
-    setTimeout(()=>{if(request===previewRequestId&&!finished)fail();},6500);
+    else{const onMeta=()=>{v.removeEventListener('loadedmetadata',onMeta);seek();};v.addEventListener('loadedmetadata',onMeta,{once:true});v.addEventListener('error',fail,{once:true});}
+    setTimeout(()=>{if(request===previewRequestId&&!finished)fail();},12000);
   }
   function ensureTimelinePreview(){
     const player=$('liquidPlayer'),slider=$('liquidProgress');if(!player||!slider||$('bcgTimelinePreview'))return;
     const box=document.createElement('div');box.id='bcgTimelinePreview';box.className='bcg-timeline-preview';
     box.innerHTML='<img id="bcgTimelinePreviewImage" alt="Imagem do instante selecionado"><span id="bcgTimelinePreviewTime">0:00</span>';
     player.appendChild(box);
+    const queue=target=>{
+      const duration=Number($('mainVideoPlayer')?.duration||0);if(!Number.isFinite(duration)||duration<=0||!Number.isFinite(target))return;
+      const safeTarget=Math.max(0,Math.min(duration,target)),label=$('bcgTimelinePreviewTime');if(label)label.textContent=fmtPlayerTime(safeTarget);
+      box.classList.add('show');clearTimeout(previewTimer);previewTimer=setTimeout(()=>captureTimelineFrame(safeTarget),180);
+    };
     const move=e=>{
       const duration=Number($('mainVideoPlayer')?.duration||0);if(!Number.isFinite(duration)||duration<=0)return;
       const rect=slider.getBoundingClientRect(),clientX=e.clientX??e.touches?.[0]?.clientX;
       if(!Number.isFinite(clientX)||rect.width<=0)return;
-      const x=Math.max(0,Math.min(rect.width,clientX-rect.left)),target=duration*x/rect.width;
-      const img=$('bcgTimelinePreviewImage');if(img)img.removeAttribute('src');
-      const label=$('bcgTimelinePreviewTime');if(label)label.textContent=fmtPlayerTime(target);
-      box.classList.add('show');clearTimeout(previewTimer);previewTimer=setTimeout(()=>captureTimelineFrame(target),140);
+      queue(duration*Math.max(0,Math.min(rect.width,clientX-rect.left))/rect.width);
     };
+    const fromValue=()=>{
+      const duration=Number($('mainVideoPlayer')?.duration||0),max=Number(slider.max)||100;
+      if(Number.isFinite(duration)&&duration>0)queue(duration*(Number(slider.value)||0)/max);
+    };
+    // Hover, drag/touch and keyboard input all update the frame without seeking
+    // the real playback element.
     slider.addEventListener('pointermove',move);
+    slider.addEventListener('pointerdown',move);
+    slider.addEventListener('input',fromValue);
     slider.addEventListener('touchmove',move,{passive:true});
     slider.addEventListener('pointerleave',()=>{hideTimelinePreview();clearTimeout(previewTimer);previewRequestId++;});
-    slider.addEventListener('touchend',()=>setTimeout(hideTimelinePreview,1000),{passive:true});
+    slider.addEventListener('touchend',()=>setTimeout(hideTimelinePreview,1200),{passive:true});
+    slider.addEventListener('pointerup',()=>setTimeout(hideTimelinePreview,1200));
   }
 
   // Standard autoplay-next episode for solo playback; Watch Party keeps its existing queue/autoplay logic.
